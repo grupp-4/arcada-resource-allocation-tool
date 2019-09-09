@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="JSX" pattern="file[ramverk-och-webbapplikationer]:pages//*||file[ramverk-och-webbapplikationer]:components//*" />
+</component>
