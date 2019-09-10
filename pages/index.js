@@ -1,8 +1,9 @@
 import ExampleComponent from "components/example-component";
-import HandelserComponent from "components/handelser.js"
-import HeaderComponent from "components/header.js"
-import ContentComponent from "components/content.js"
+import HandelserComponent from "components/handelser.js";
+import HeaderComponent from "components/header.js";
+import ContentComponent from "components/content.js";
 import styles from "../components/styles.scss";
+const uuidv4 = require('uuid');
 
 function Index() {
     return (

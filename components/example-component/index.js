@@ -1,10 +1,9 @@
 import styles from "../styles.scss"
+const uuidv4 = require('uuid');
 
 function ExampleComponent() {
     return (
-        <div className={`${styles.gridStyles} ${styles.gridHeader}`}>
-            <h1 className={styles.exampleClass}>This is the Example Component. asd</h1>
-        </div>
+        <ul key={uuidv4()}> This is the Example Component.</ul>
     )
 }
 
