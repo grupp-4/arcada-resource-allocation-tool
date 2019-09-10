@@ -1,0 +1,35 @@
+.exampleClass {
+    color: red;
+}
+
+
+// Grid systemet för appens main layout
+.gridContainer {
+  display: grid;
+  
+  width: 70%;
+  height: 80vh;
+  grid-template-areas: "head head"
+                       "handelser  main";
+  grid-template-rows: 1fr 5fr;
+  grid-template-columns: 150px 1fr;
+}
+.gridStyles {
+border: solid 5px gray;
+}
+.gridHeader {
+grid-area: head;
+background: salmon;
+}
+.gridHandelser {
+  grid-area: handelser;
+  background: dodgerblue;
+}
+.gridMain {
+  grid-area: main;
+  background: lime;
+}
+.gridFooter {
+  grid-area: foot;
+  background: pink;
+}
