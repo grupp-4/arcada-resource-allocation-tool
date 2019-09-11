@@ -1,3 +1,5 @@
+@import "default";
+
 .exampleClass {
     color: red;
 }
@@ -7,29 +9,51 @@
 .gridContainer {
   display: grid;
   
-  width: 70%;
+  width: 85%;
   height: 80vh;
   grid-template-areas: "head head"
                        "handelser  main";
   grid-template-rows: 1fr 5fr;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 250px 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
 }
 .gridStyles {
-border: solid 5px gray;
+border: solid 2px gray;
 }
 .gridHeader {
 grid-area: head;
-background: salmon;
 }
 .gridHandelser {
   grid-area: handelser;
-  background: dodgerblue;
 }
 .gridMain {
   grid-area: main;
-  background: lime;
 }
 .gridFooter {
   grid-area: foot;
-  background: pink;
+}
+
+// Button styles from demo at https://material-ui.com/guides/interoperability/#css-modules
+.submitFormButton {
+    background: $submitButtonGradient;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    height: 48px;
+    padding: 0 30px;
+    margin: 10px 10px;
+    box-shadow: $exampleButtonBoxShadow;
+    float: right;
+}
+.discardButton {
+    background: $discardButtonGradient;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    height: 48px;
+    margin: 10px 10px;
+    padding: 0 30px;
+    box-shadow: $exampleButtonBoxShadow;
+    float: right;
 }

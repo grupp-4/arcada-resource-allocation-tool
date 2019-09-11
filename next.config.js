@@ -9,6 +9,10 @@ module.exports = withSass({
     sassLoaderOptions: sassLoaderOptions, // Setting the SASS loader options defined in the `sass-loader.config.js` file
     webpack(config) {
         config.resolve.alias = {...config.resolve.alias, ...customPathAliases} // Adding the custom path aliases from the `resolve.alias.js` file
+    config.module.rules.push({      //Adds SVG loader
+	    test: /\.svg$/,
+            use: ['@svgr/webpack'],
+          });
         return config
     }
 })

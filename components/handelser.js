@@ -17,13 +17,6 @@ function HandelserComponent() {
         <>
             <div key={uuidv4()} className={`${styles.gridStyles} ${styles.gridHandelser}`}>
                 This is the handelser
-                <ExampleComponent />
-                <p />
-                <ExampleComponent />
-                <p />
-                <ExampleComponent />
-                <p />
-                <ExampleComponent />
                 {/*
             {loopComps()}
             <li>
