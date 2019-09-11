@@ -1,10 +1,11 @@
-import styles from "../styles.scss"
-const uuidv4 = require('uuid');
+import Button from "@material-ui/core/Button"
+
+import styles from "./styles.scss"
 
 function ExampleComponent() {
     return (
-        <ul key={uuidv4()}> This is the Example Component.</ul>
+        <Button className={styles.exampleButton}>Example button</Button>
     )
 }
 
-export default ExampleComponent;
+export default ExampleComponent
