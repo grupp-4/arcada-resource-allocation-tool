@@ -7,4 +7,3 @@ module.exports = {
     ],
     sourceMap: process.env.NODE_ENV === "development" // enables source maps if Node environment is set to "development"
 }
-

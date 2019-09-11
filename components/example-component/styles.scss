@@ -10,3 +10,22 @@
     padding: 0 30px;
     box-shadow: $exampleButtonBoxShadow;
 }
+
+.cog {
+    fill: gray;
+    filter: drop-shadow(0 2px 2px rgba(#000000, .5));
+
+}
+
+.cogRotating {
+    animation: cogRotating 1.5s infinite linear;
+}
+
+@keyframes cogRotating {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(180deg);
+    }
+}

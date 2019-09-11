@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Pages" pattern="file[ramverk-och-webbapplikationer]:pages//*" />
+</component>
