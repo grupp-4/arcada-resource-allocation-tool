@@ -1,8 +1,10 @@
+import Button from "@material-ui/core/Button"
+
 import styles from "./styles.scss"
 
 function ExampleComponent() {
     return (
-        <h1 className={styles.exampleClass}>This is the Example Component.</h1>
+        <Button className={styles.exampleButton}>Example button</Button>
     )
 }
 

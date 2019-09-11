@@ -1,11 +1,15 @@
 import __app from "next/app"
 
+import {StylesProvider} from "@material-ui/styles"
+
 import "styles/global.scss"
 
 class _app extends __app {
     render() {
         const {Component, pageProps} = this.props
-        return <Component {...pageProps} />
+        return <StylesProvider injectFirst>
+            <Component {...pageProps} />
+        </StylesProvider>
     }
 }
 
