@@ -16,7 +16,7 @@ function PersistentLayout({log, children}) {
     if (router.pathname === "/_error") {
         persistentLayout = (
             <div className={styles.root}>
-                <Grid container>
+                <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Header className={styles.paper}/>
                     </Grid>
@@ -29,15 +29,15 @@ function PersistentLayout({log, children}) {
     } else {
         persistentLayout = (
             <div className={styles.root}>
-                <Grid container>
+                <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <Header className={styles.paper}/>
+                        <Header/>
                     </Grid>
                     <Grid item xs={12}>
-                        <EventsFeed className={styles.root}/>
+                        <EventsFeed/>
                     </Grid>
                     <Grid item xs={12}>
-                        <CoursesOrTeachers className={styles.root}>
+                        <CoursesOrTeachers>
                             {children}
                         </CoursesOrTeachers>
                     </Grid>
