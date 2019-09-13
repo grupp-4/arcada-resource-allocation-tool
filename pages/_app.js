@@ -15,6 +15,10 @@ import theme from "theme"
 
 const log = isomorphic.getLogger("_app")
 
+/**
+ * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
+ */
+
 class _app extends __app {
 
     componentDidMount() {
