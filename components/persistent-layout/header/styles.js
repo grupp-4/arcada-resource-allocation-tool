@@ -2,8 +2,11 @@ import {makeStyles} from "@material-ui/core/styles"
 
 function styles(theme) {
     return {
-        root: {
-            flexGrow: 1,
+        appBar: {
+            background: theme.palette.primary.dark
+        },
+        menuButton: {
+            marginRight: theme.spacing(2)
         }
     }
 }

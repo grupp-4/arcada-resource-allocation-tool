@@ -2,48 +2,53 @@ import {withLogging} from "gillog"
 
 import {useRouter} from "next/router"
 
+import {useTheme} from "@material-ui/core/styles"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+
 import Grid from "@material-ui/core/Grid"
-import Header from "components/header"
+
+import Header from "components/persistent-layout/header"
 import EventsFeed from "components/events-feed"
 import CoursesOrTeachers from "components/courses-or-teachers"
 
-import useStyles from "./styles"
 
-function PersistentLayout({log, children}) {
+
+function PersistentLayout({log, appName, children}) {
+    const theme = useTheme()
+    const mobile = useMediaQuery(theme.breakpoints.down("md"))
     const router = useRouter()
-    const styles = useStyles()
     let persistentLayout;
     if (router.pathname === "/_error") {
         persistentLayout = (
-            <div className={styles.root}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <Header className={styles.paper}/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        {children}
-                    </Grid>
+            <Grid container spacing={3}>
+                <Header appName={appName} mobile={mobile}/>
+                <Grid item xs={12}>
+                    {children}
                 </Grid>
-            </div>
+            </Grid>
         )
     } else {
-        persistentLayout = (
-            <div className={styles.root}>
+        if (mobile) {
+            persistentLayout = (
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <Header/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <EventsFeed/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <CoursesOrTeachers>
-                            {children}
-                        </CoursesOrTeachers>
-                    </Grid>
+                    <Header appName={appName} mobile={mobile}/>
+                    <EventsFeed mobile={mobile}/>
+                    <CoursesOrTeachers>
+                        {children}
+                    </CoursesOrTeachers>
                 </Grid>
-            </div>
-        )
+            )
+        } else {
+            persistentLayout = (
+                <Grid container spacing={3}>
+                    <Header appName={appName} mobile={mobile}/>
+                    <EventsFeed mobile={mobile}/>
+                    <CoursesOrTeachers mobile={mobile}>
+                        {children}
+                    </CoursesOrTeachers>
+                </Grid>
+            )
+        }
     }
     return persistentLayout
 }

@@ -28,16 +28,17 @@ class _app extends __app {
     }
 
     render() {
+        const appName = "Kursallokering" // TODO: make a real implementation for the app's name/page title
         const {Component, pageProps} = this.props
         return (
             <Fragment>
                 <Head>
-                    <title>Kursallokering</title>
+                    <title>{appName}</title>
                 </Head>
                 <ThemeProvider theme={theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline/>
-                    <PersistentLayout>
+                    <PersistentLayout appName={appName}>
                         <Component {...pageProps}/>
                     </PersistentLayout>
                 </ThemeProvider>
