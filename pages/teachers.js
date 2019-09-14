@@ -1,3 +1,3 @@
-import Teachers from "components/courses-or-teachers/teachers"
+import Teachers from "components/teachers"
 
 export default Teachers

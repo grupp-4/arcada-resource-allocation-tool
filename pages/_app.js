@@ -28,7 +28,7 @@ class _app extends __app {
     }
 
     render() {
-        const appName = "Kursallokering" // TODO: make a real implementation for the app's name/page title
+        const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
         const {Component, pageProps} = this.props
         return (
             <Fragment>

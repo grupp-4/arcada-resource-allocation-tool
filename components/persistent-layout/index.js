@@ -1,5 +1,9 @@
 import {withLogging} from "gillog"
 
+import PropTypes from "prop-types"
+
+import {useState, useEffect} from "react"
+
 import {useRouter} from "next/router"
 
 import {useTheme} from "@material-ui/core/styles"
@@ -7,50 +11,35 @@ import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 import Grid from "@material-ui/core/Grid"
 
-import Header from "components/persistent-layout/header"
-import EventsFeed from "components/events-feed"
-import CoursesOrTeachers from "components/courses-or-teachers"
-
-
+import Header from "./header"
+import Main from "./main"
 
 function PersistentLayout({log, appName, children}) {
     const theme = useTheme()
-    const mobile = useMediaQuery(theme.breakpoints.down("md"))
-    const router = useRouter()
-    let persistentLayout;
-    if (router.pathname === "/_error") {
-        persistentLayout = (
-            <Grid container spacing={3}>
-                <Header appName={appName} mobile={mobile}/>
-                <Grid item xs={12}>
-                    {children}
-                </Grid>
-            </Grid>
-        )
-    } else {
-        if (mobile) {
-            persistentLayout = (
-                <Grid container spacing={3}>
-                    <Header appName={appName} mobile={mobile}/>
-                    <EventsFeed mobile={mobile}/>
-                    <CoursesOrTeachers>
-                        {children}
-                    </CoursesOrTeachers>
-                </Grid>
-            )
+    const mobile = useMediaQuery(theme.breakpoints.down("sm"))
+    const [initializedPL, setInitializedPL] = useState(false)
+    useEffect(() => {
+        if (initializedPL) {
+            log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
         } else {
-            persistentLayout = (
-                <Grid container spacing={3}>
-                    <Header appName={appName} mobile={mobile}/>
-                    <EventsFeed mobile={mobile}/>
-                    <CoursesOrTeachers mobile={mobile}>
-                        {children}
-                    </CoursesOrTeachers>
-                </Grid>
-            )
+            log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
+            setInitializedPL(true)
         }
-    }
-    return persistentLayout
+    }, [mobile])
+    const router = useRouter()
+    const pathname = router.pathname.slice(1)
+    return (
+        <Grid container spacing={2}>
+            <Header appName={appName} mobile={mobile} pathname={pathname}/>
+            {pathname === "_error"
+                ? <Grid item xs={12}>{children}</Grid>
+                : <Main mobile={mobile} pathname={pathname}>{children}</Main>}
+        </Grid>
+    )
+}
+
+PersistentLayout.propTypes = {
+    appName: PropTypes.string.isRequired
 }
 
 export default withLogging(PersistentLayout)

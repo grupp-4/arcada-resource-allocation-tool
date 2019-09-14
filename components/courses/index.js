@@ -4,13 +4,15 @@ import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function EventsFeed({log}) {
+function Courses({log}) {
     const typographyStyles = useTypographyStyles()
-    return(
+    return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
-            This is the events feed.
+            This is the courses component.
         </Typography>
     )
 }
 
-export default withLogging(EventsFeed)
+Courses.id = "courses"
+
+export default withLogging(Courses)

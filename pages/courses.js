@@ -1,3 +1,3 @@
-import Courses from "components/courses-or-teachers/courses"
+import Courses from "components/courses"
 
 export default Courses

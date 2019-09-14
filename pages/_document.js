@@ -1,6 +1,6 @@
-import Document, {Head, Html, Main, NextScript} from "next/document"
-
 import {Fragment} from "react"
+
+import Document, {Head, Html, Main, NextScript} from "next/document"
 
 import {ServerStyleSheets} from "@material-ui/styles"
 
