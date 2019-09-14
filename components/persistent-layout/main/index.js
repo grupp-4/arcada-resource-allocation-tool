@@ -28,30 +28,38 @@ function Main({log, mobile, pathname, children}) {
         // currentTab defaults to the first index (0).
         if (currentTab === -1) currentTab = 0
         return (
-            <Paper>
-                <TabView
-                    definitions={definitions}
-                    currentTab={currentTab}>
-                    {children}
-                </TabView>
-            </Paper>
+            <TabView
+                definitions={definitions}
+                currentTab={currentTab}>
+                {children}
+            </TabView>
         )
     }
     return (
-        <>
-            {mobile
-                ? <Grid item xs={12}><EventsFeed/></Grid>
-                : (
-                    <Grid item xs={4}>
-                        <Paper>
-                            <EventsFeed/>
-                        </Paper>
-                    </Grid>
-                )}
-            {mobile
-                ? <Grid item xs={12}>{children}</Grid>
-                : <Grid item xs={8}>{setupTabView()}</Grid>}
-        </>
+        <main>
+            {pathname === "_error" ? children : (
+                <Grid container spacing={2}>{mobile ? (
+                        <>
+                            <Grid item xs={12}><EventsFeed/></Grid>
+                            <Grid item xs={12}>{children}</Grid>
+                        </>
+                    ) : (
+                        <>
+                            <Grid item xs={4}>
+                                <Paper>
+                                    <EventsFeed/>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Paper>
+                                    {setupTabView()}
+                                </Paper>
+                            </Grid>
+                        </>
+                    )}
+                </Grid>
+            )}
+        </main>
     )
 }
 

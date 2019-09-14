@@ -9,8 +9,6 @@ import {useRouter} from "next/router"
 import {useTheme} from "@material-ui/core/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
 
-import Grid from "@material-ui/core/Grid"
-
 import Header from "./header"
 import Main from "./main"
 
@@ -29,12 +27,10 @@ function PersistentLayout({log, appName, children}) {
     const router = useRouter()
     const pathname = router.pathname.slice(1)
     return (
-        <Grid container spacing={2}>
+        <>
             <Header appName={appName} mobile={mobile} pathname={pathname}/>
-            {pathname === "_error"
-                ? <Grid item xs={12}>{children}</Grid>
-                : <Main mobile={mobile} pathname={pathname}>{children}</Main>}
-        </Grid>
+            <Main mobile={mobile} pathname={pathname}>{children}</Main>
+        </>
     )
 }
 
