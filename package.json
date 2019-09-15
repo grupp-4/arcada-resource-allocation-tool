@@ -2,8 +2,8 @@
   "name": "arcada-resource-allocation-tool",
   "version": "0.1.0",
   "description": "A web app designed for the staff at Arcada UAS to more easily be able to allocate their people resources.",
-  "homepage": "https://github.com/grupp-4/ramverk-och-webbapplikationer#readme",
-  "bugs": "https://github.com/grupp-4/ramverk-och-webbapplikationer/issues",
+  "homepage": "https://github.com/grupp-4/arcada-resource-allocation-tool#readme",
+  "bugs": "https://github.com/grupp-4/arcada-resource-allocation-tool/issues",
   "private": true,
   "author": "Daniel Giljam (https://github.com/DanielGiljam)",
   "contributors": [
@@ -14,7 +14,7 @@
   "scripts": {
     "start": "next dev"
   },
-  "repository": "github:grupp-4/ramverk-och-webbapplikationer",
+  "repository": "github:grupp-4/arcada-resource-allocation-tool",
   "dependencies": {
     "@material-ui/core": "^4.4.1",
     "@material-ui/icons": "^4.4.1",
