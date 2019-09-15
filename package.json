@@ -4,6 +4,7 @@
   "description": "A web app designed for the staff at Arcada UAS to more easily be able to allocate their people resources.",
   "homepage": "https://github.com/grupp-4/arcada-resource-allocation-tool#readme",
   "bugs": "https://github.com/grupp-4/arcada-resource-allocation-tool/issues",
+  "license": "MIT",
   "private": true,
   "author": "Daniel Giljam (https://github.com/DanielGiljam)",
   "contributors": [
