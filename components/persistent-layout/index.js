@@ -12,9 +12,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery"
 import Header from "./header"
 import Main from "./main"
 
+import themeParams from "theme/custom-parameters"
+
 function PersistentLayout({log, appName, children}) {
     const theme = useTheme()
-    const mobile = useMediaQuery(theme.breakpoints.down("sm"))
+    const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint))
     const [initializedPL, setInitializedPL] = useState(false)
     useEffect(() => {
         if (initializedPL) {

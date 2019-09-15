@@ -12,6 +12,8 @@ import TabView from "./tab-view"
 
 import useStyles from "./styles.js"
 
+import themeParams from "theme/custom-parameters"
+
 function Main({log, mobile, pathname, children}) {
     const styles = useStyles()
     function setupTabView() {
@@ -39,22 +41,22 @@ function Main({log, mobile, pathname, children}) {
         )
     }
     return (
-        <Container className={styles.container} maxWidth={"lg"}>
+        <Container className={styles.container} maxWidth={themeParams.maxWidth}>
             <main className={styles.main}>
                 {pathname === "_error" ? children : (
-                    <Grid className={mobile ? "" : styles.gridContainer} container spacing={2}>{mobile ? (
+                    <Grid className={mobile ? "" : styles.gridContainer} container spacing={themeParams.spacing}>{mobile ? (
                         <>
                             <Grid item xs={12}><EventsFeed/></Grid>
                             <Grid item xs={12}>{children}</Grid>
                         </>
                     ) : (
                         <>
-                            <Grid item xs={4}>
+                            <Grid item xs={themeParams.eventsFeedFraction}>
                                 <Paper className={styles.paper}>
                                     <EventsFeed/>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={themeParams.coursesTeachersFraction}>
                                 <Paper className={styles.paper}>
                                     {setupTabView()}
                                 </Paper>
