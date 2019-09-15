@@ -2,15 +2,18 @@ import {withLogging} from "gillog"
 
 import PropTypes from "prop-types"
 
+import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
-
 
 import EventsFeed from "components/events-feed"
 
 import TabView from "./tab-view"
 
+import useStyles from "./styles.js"
+
 function Main({log, mobile, pathname, children}) {
+    const styles = useStyles()
     function setupTabView() {
         // TODO: integrate with Next's Link component
         // definitions: Array of information about tabs to render.
@@ -36,9 +39,10 @@ function Main({log, mobile, pathname, children}) {
         )
     }
     return (
-        <main>
-            {pathname === "_error" ? children : (
-                <Grid container spacing={2}>{mobile ? (
+        <Container className={styles.container} maxWidth={"lg"}>
+            <main className={styles.main}>
+                {pathname === "_error" ? children : (
+                    <Grid className={mobile ? "" : styles.gridContainer} container spacing={2}>{mobile ? (
                         <>
                             <Grid item xs={12}><EventsFeed/></Grid>
                             <Grid item xs={12}>{children}</Grid>
@@ -46,20 +50,21 @@ function Main({log, mobile, pathname, children}) {
                     ) : (
                         <>
                             <Grid item xs={4}>
-                                <Paper>
+                                <Paper className={styles.paper}>
                                     <EventsFeed/>
                                 </Paper>
                             </Grid>
                             <Grid item xs={8}>
-                                <Paper>
+                                <Paper className={styles.paper}>
                                     {setupTabView()}
                                 </Paper>
                             </Grid>
                         </>
                     )}
-                </Grid>
-            )}
-        </main>
+                    </Grid>
+                )}
+            </main>
+        </Container>
     )
 }
 

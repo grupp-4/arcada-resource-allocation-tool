@@ -2,8 +2,8 @@ import {withLogging} from "gillog"
 
 import PropTypes from "prop-types"
 
-import Grid from "@material-ui/core/Grid"
 import AppBar from "@material-ui/core/AppBar"
+import Container from "@material-ui/core/Container"
 import Toolbar from "@material-ui/core/Toolbar"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -17,18 +17,19 @@ function Header({log, appName, mobile, pathname}) {
         log.debug("User tried opening menu which isn't yet implemented.")
     }
     return (
-        <Grid item xs={12}>
-            <AppBar className={styles.appBar} position={"static"}>
-                <Toolbar variant={mobile ? "regular" : "dense"}>
-                    <IconButton className={styles.menuButton} onClick={openMenu} color={"inherit"} edge={"start"} aria-label={"menu"} style={{display: mobile ? "initial" : "none"}}>
+        <AppBar className={styles.appBar} position={"static"}>
+            <Container className={styles.container} maxWidth={"lg"}>
+                <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
+                    <IconButton className={styles.menuButton} onClick={openMenu} color={"inherit"} edge={"start"}
+                                aria-label={"menu"} style={{display: mobile ? "initial" : "none"}}>
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant={"h6"}>
                         {appName}
                     </Typography>
                 </Toolbar>
-            </AppBar>
-        </Grid>
+            </Container>
+        </AppBar>
     )
 }
 

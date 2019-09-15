@@ -3,8 +3,6 @@ import {isomorphic} from "gillog"
 import __app from "next/app"
 import Head from "next/head"
 
-import {Fragment} from "react"
-
 import {ThemeProvider} from "@material-ui/styles"
 
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -12,6 +10,8 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import PersistentLayout from "components/persistent-layout"
 
 import theme from "theme"
+
+import "css/make-document-viewport-height.css"
 
 const log = isomorphic.getLogger("_app")
 
@@ -31,7 +31,7 @@ class _app extends __app {
         const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
         const {Component, pageProps} = this.props
         return (
-            <Fragment>
+            <>
                 <Head>
                     <title>{appName}</title>
                 </Head>
@@ -42,7 +42,7 @@ class _app extends __app {
                         <Component {...pageProps}/>
                     </PersistentLayout>
                 </ThemeProvider>
-            </Fragment>
+            </>
         )
     }
 }

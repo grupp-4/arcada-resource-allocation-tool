@@ -8,6 +8,7 @@
             <path value="file://$PROJECT_DIR$/components" />
             <path value="file://$PROJECT_DIR$/styles" />
             <path value="file://$PROJECT_DIR$/theme" />
+            <path value="file://$PROJECT_DIR$/css" />
           </resourceRoots>
         </entryData>
       </entry>
