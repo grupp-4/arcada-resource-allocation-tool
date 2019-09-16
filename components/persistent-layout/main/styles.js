@@ -5,17 +5,16 @@ import params from "theme/custom-parameters"
 function styles(theme) {
     return {
         container: {
-            height: "100%",
+            flexGrow: 1,
             maxHeight: params.mainMaxHeight,
-            paddingBottom: theme.spacing(params.spacing),
             paddingLeft: theme.spacing(params.spacing),
             paddingRight: theme.spacing(params.spacing)
         },
         main: {
-            height: "inherit",
+            height: "100%"
         },
         gridContainer: {
-            height: "inherit"
+            height: "100%"
         },
         paper: {
             height: "100%"
