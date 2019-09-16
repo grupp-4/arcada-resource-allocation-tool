@@ -1,23 +1,31 @@
 {
-  "name": "ramverk-och-webbapplikationer",
+  "name": "arcada-resource-allocation-tool",
   "version": "0.1.0",
+  "description": "A web app designed for the staff at Arcada UAS to more easily be able to allocate their people resources.",
+  "homepage": "https://github.com/grupp-4/arcada-resource-allocation-tool#readme",
+  "bugs": "https://github.com/grupp-4/arcada-resource-allocation-tool/issues",
+  "license": "MIT",
   "private": true,
+  "author": "Daniel Giljam (https://github.com/DanielGiljam)",
+  "contributors": [
+    "kaibiPrime (https://github.com/kaibiPrime)",
+    "Christian Häggblom (https://github.com/christian-haggblom)",
+    "Skeba (https://github.com/Skeba)"
+  ],
   "scripts": {
-    "dev": "next dev -p 3009",
-    "build": "next build",
-    "start": "next start"
+    "start": "next dev"
   },
+  "repository": "github:grupp-4/arcada-resource-allocation-tool",
   "dependencies": {
     "@material-ui/core": "^4.4.1",
     "@material-ui/icons": "^4.4.1",
-    "@svgr/webpack": "^4.3.2",
-    "@zeit/next-sass": "^1.0.1",
+    "@material-ui/styles": "^4.4.1",
+    "@zeit/next-css": "^1.0.1",
     "dotenv": "^8.1.0",
+    "gillog": "github:danielgiljam/gillog",
     "next": "9.0.5",
-    "node-sass": "^4.12.0",
-    "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "uuid": "^3.3.3"
+    "react-dom": "16.9.0"
   }
 }
