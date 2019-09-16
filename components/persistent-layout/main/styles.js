@@ -10,7 +10,10 @@ function styles(theme) {
             paddingRight: theme.spacing(params.spacing)
         },
         main: {
-            height: "100%"
+            height: "100%",
+            [theme.breakpoints.up('md')]: {
+                maxHeight: theme.breakpoints.values.md
+            }
         },
         gridContainer: {
             height: "100%"
