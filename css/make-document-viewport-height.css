@@ -8,4 +8,5 @@ html, body, #__next {
 #__next {
     display: flex;
     flex-flow: column;
+    max-height: 80rem;
 }

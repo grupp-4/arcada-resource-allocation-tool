@@ -6,7 +6,6 @@ function styles(theme) {
     return {
         container: {
             flexGrow: 1,
-            maxHeight: params.mainMaxHeight,
             paddingLeft: theme.spacing(params.spacing),
             paddingRight: theme.spacing(params.spacing)
         },
