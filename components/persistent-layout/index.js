@@ -15,9 +15,15 @@ import Main from "./main"
 import themeParams from "theme/custom-parameters"
 
 function PersistentLayout({log, appName, children}) {
+
+    // ====== HOOKS ======>
+
     const theme = useTheme()
+
     const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint))
+
     const [initializedPL, setInitializedPL] = useState(false)
+
     useEffect(() => {
         if (initializedPL) {
             log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
@@ -26,8 +32,15 @@ function PersistentLayout({log, appName, children}) {
             setInitializedPL(true)
         }
     }, [mobile])
+
     const router = useRouter()
+
+    // ====== MISC. LOGIC ======>
+
     const pathname = router.pathname.slice(1)
+
+    // ====== RENDER ======>
+
     return (
         <>
             <Header appName={appName} mobile={mobile} pathname={pathname}/>

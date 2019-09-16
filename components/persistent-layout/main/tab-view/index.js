@@ -13,10 +13,17 @@ import Teachers from "components/teachers"
 import TabPanel from "./tab-panel"
 
 function TabView({log, definitions, currentTab, children}) {
+
+    // ====== HOOKS ======>
+
     const [value, setValue] = useState(currentTab)
+
     useEffect(() => {
         log.debug(`Loading tab view with pre-selected tab: ${definitions[value].key}`)
     }, [])
+
+    // ====== EVENT HANDLERS ======>
+
     function changeTab(event, newValue) {
         // TODO: integrate with Next's Link component
         // Sets the `value` variable distributed throughout the tab view
@@ -24,6 +31,9 @@ function TabView({log, definitions, currentTab, children}) {
         log.debug(`Selecting tab: ${definitions[newValue].key}`)
         setValue(newValue)
     }
+
+    // ====== RENDER ======>
+
     return (
         <>
             <Tabs value={value} onChange={changeTab} indicatorColor="primary" centered aria-label="tabs">

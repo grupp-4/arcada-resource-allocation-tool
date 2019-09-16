@@ -15,7 +15,13 @@ import useStyles from "./styles.js"
 import themeParams from "theme/custom-parameters"
 
 function Main({log, mobile, pathname, children}) {
+
+    // ====== HOOKS ======>
+
     const styles = useStyles()
+
+    // ====== FUNCTIONS ======>
+
     function setupTabView() {
         // TODO: integrate with Next's Link component
         // definitions: Array of information about tabs to render.
@@ -40,6 +46,9 @@ function Main({log, mobile, pathname, children}) {
             </TabView>
         )
     }
+
+    // ====== RENDER ======>
+
     return (
         <Container className={styles.container} maxWidth={themeParams.maxWidth}>
             <main className={styles.main}>

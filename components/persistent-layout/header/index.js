@@ -14,10 +14,17 @@ import useStyles from "./styles"
 import themeParams from "theme/custom-parameters"
 
 function Header({log, appName, mobile, pathname}) {
+
+    // ====== HOOKS ======>
     const styles = useStyles()
+
+    // ====== EVENT HANDLERS ======>
     function openMenu() {
+        // TODO: implement menu
         log.debug("User tried opening menu which isn't yet implemented.")
     }
+
+    // ====== RENDER ======>
     return (
         <AppBar className={styles.appBar} position={"static"}>
             <Container className={styles.container} maxWidth={themeParams.maxWidth}>

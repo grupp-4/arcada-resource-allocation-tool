@@ -6,11 +6,12 @@ import {ServerStyleSheets} from "@material-ui/styles"
 
 import theme from "theme"
 
-/**
+/*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
  */
 
 class _document extends Document {
+
     static async getInitialProps(ctx) {
         /* Resolution order
          *

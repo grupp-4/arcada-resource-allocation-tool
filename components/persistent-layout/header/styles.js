@@ -8,7 +8,7 @@ function styles(theme) {
             padding: 0
         },
         appBar: {
-            background: theme.palette.primary[params.type],
+            background: theme.palette.primary[params.mode],
             marginBottom: theme.spacing(params.spacing)
         },
         toolBarDense: {
