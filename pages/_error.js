@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import useTypographyStyles from "styles/typography"
 
 function Error({log, code}) {
-    const typographyStyles = useTypographyStyles
+    const typographyStyles = useTypographyStyles()
 
     const message = {
         400: "Bad Request",
