@@ -12,9 +12,13 @@ import Teachers from "components/teachers"
 
 import TabPanel from "./tab-panel"
 
-function TabView({log, definitions, currentTab, children}) {
+import useStyles from "./styles"
+
+function TabView({log, definitions, currentTab, eventsFeed, children}) {
 
     // ====== HOOKS ======>
+
+    const styles = useStyles()
 
     const [value, setValue] = useState(currentTab)
 
@@ -36,11 +40,25 @@ function TabView({log, definitions, currentTab, children}) {
 
     return (
         <>
-            <Tabs value={value} onChange={changeTab} indicatorColor="primary" centered aria-label="tabs">
-                {definitions.map(({key, label}, index) => {
-                    return <Tab id={`tab-${index}`} key={key} label={label} aria-controls={`tabpanel-${index}`}/>
-                })}
-            </Tabs>
+            {eventsFeed
+                ? (
+                    <Tabs className={styles.tabs} classes={{indicator: eventsFeed ? styles.eventsFeedTabIndicator : ""}} value={value} centered
+                          aria-label="tabs">
+                        {definitions.map(({key, label}, index) => {
+                            return <Tab id={`tab-${index}`} classes={{root: styles.eventsFeedTab}} key={key}
+                                        label={label} disableRipple disableFocusRipple
+                                        aria-controls={`tabpanel-${index}`}/>
+                        })}
+                    </Tabs>
+                ) : (
+                    <Tabs className={styles.tabs} value={value} onChange={changeTab} indicatorColor="primary" centered aria-label="tabs">
+                        {definitions.map(({key, label}, index) => {
+                            return <Tab id={`tab-${index}`} key={key} label={label}
+                                        aria-controls={`tabpanel-${index}`}/>
+                        })}
+                    </Tabs>
+                )
+            }
             {definitions.map(({key}, index) => {
                 // TODO: integrate with Next's Link component
                 // Populates the `content` variable with the appropriate component,
@@ -54,7 +72,7 @@ function TabView({log, definitions, currentTab, children}) {
                     case "teachers":
                         content = <Teachers data={children.props.data}/>
                 }
-                return <TabPanel key={key} index={index} currentTab={value}>{content}</TabPanel>
+                return <TabPanel className={styles.tabPanel} key={key} index={index} currentTab={value}>{content}</TabPanel>
             })}
         </>
     )

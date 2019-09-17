@@ -7,8 +7,7 @@ import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
 
 import EventsFeed from "components/events-feed"
-
-import TabView from "./tab-view"
+import TabView from "components/tab-view"
 
 import useStyles from "./styles.js"
 
@@ -22,15 +21,11 @@ function Main({log, mobile, pathname, children}) {
 
     // ====== FUNCTIONS ======>
 
-    function setupTabView() {
-        // TODO: integrate with Next's Link component
-        // definitions: Array of information about tabs to render.
-        // key: Used for determining the pre-selected tab by matching URL path to this.
-        // label: Tab title (in Swedish), hardcoded for now.
-        const definitions = [
-            {key: "courses", label: "Kurser"},
-            {key: "teachers", label: "Lärare"}
-        ]
+    // TODO: integrate with Next's Link component
+    // definitions: Array of information about tabs to render.
+    // key: Used for determining the pre-selected tab by matching URL path to this.
+    // label: Tab title (in Swedish), hardcoded for now.
+    function setupTabView(definitions, options) {
         // Gets the index of the "definition" that has a key that matches the current URL path.
         let currentTab = definitions.findIndex(definition => {
             return definition.key === pathname
@@ -41,7 +36,8 @@ function Main({log, mobile, pathname, children}) {
         return (
             <TabView
                 definitions={definitions}
-                currentTab={currentTab}>
+                currentTab={currentTab}
+                eventsFeed={options && options.eventsFeed}>
                 {children}
             </TabView>
         )
@@ -54,20 +50,20 @@ function Main({log, mobile, pathname, children}) {
             <main className={styles.main}>
                 {pathname === "_error" ? children : (
                     <Grid className={mobile ? "" : styles.gridContainer} container spacing={themeParams.spacing}>{mobile ? (
-                        <>
-                            <Grid item xs={12}><EventsFeed/></Grid>
-                            <Grid item xs={12}>{children}</Grid>
-                        </>
+                        <Grid item xs={12}>{children}</Grid>
                     ) : (
                         <>
                             <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
-                                <Paper className={styles.paper}>
-                                    <EventsFeed/>
+                                <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
+                                    {setupTabView([{key: "events-feed", label: "Händelser"}], {eventsFeed: true})}
                                 </Paper>
                             </Grid>
                             <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
-                                <Paper className={styles.paper}>
-                                    {setupTabView()}
+                                <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
+                                    {setupTabView([
+                                        {key: "courses", label: "Kurser"},
+                                        {key: "teachers", label: "Lärare"}
+                                    ])}
                                 </Paper>
                             </Grid>
                         </>

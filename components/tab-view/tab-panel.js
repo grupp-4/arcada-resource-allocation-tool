@@ -5,14 +5,14 @@ import PropTypes from "prop-types"
 import Courses from "components/courses"
 import Teachers from "components/teachers"
 
-function TabPanel({log, index, currentTab, children}) {
+function TabPanel({log, className, index, currentTab, children}) {
     return (
         <div
+            className={className}
             role="tabpanel"
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
-            hidden={index !== currentTab}
-            style={{flexGrow: 1, overflow: "auto"}}>
+            hidden={index !== currentTab}>
                 {children}
         </div>
     )

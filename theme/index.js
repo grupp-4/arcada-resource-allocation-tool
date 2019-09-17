@@ -9,6 +9,6 @@ import params from "./custom-parameters"
 // (see https://material-ui.com/customization/theming/#createmuitheme-options-theme for details)
 export default responsiveFontSizes(createMuiTheme({
     palette: {
-        type: params.mode
+        type: params.darkMode ? "dark" : "light"
     }
 }))
