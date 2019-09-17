@@ -26,7 +26,7 @@ function Header({log, appName, mobile, pathname}) {
 
     // ====== RENDER ======>
     return (
-        <AppBar className={styles.appBar} position={"static"}>
+        <AppBar className={styles.appBar} position={"sticky"}>
             <Container className={styles.container} maxWidth={themeParams.maxWidth}>
                 <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
                     <IconButton className={styles.menuButton} onClick={openMenu} color={"inherit"} edge={"start"}
