@@ -60,12 +60,12 @@ function Main({log, mobile, pathname, children}) {
                         </>
                     ) : (
                         <>
-                            <Grid item xs={themeParams.eventsFeedFraction}>
+                            <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                                 <Paper className={styles.paper}>
                                     <EventsFeed/>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={themeParams.coursesTeachersFraction}>
+                            <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                                 <Paper className={styles.paper}>
                                     {setupTabView()}
                                 </Paper>

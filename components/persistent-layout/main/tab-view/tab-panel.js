@@ -11,7 +11,8 @@ function TabPanel({log, index, currentTab, children}) {
             role="tabpanel"
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
-            hidden={index !== currentTab}>
+            hidden={index !== currentTab}
+            style={{flexGrow: 1, overflow: "auto"}}>
                 {children}
         </div>
     )

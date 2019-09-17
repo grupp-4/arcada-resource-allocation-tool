@@ -18,8 +18,16 @@ function styles(theme) {
         gridContainer: {
             height: "100%"
         },
-        paper: {
+        gridItem: {
+            display: "flex",
+            flexFlow: "column",
             height: "100%"
+        },
+        paper: {
+            display: "flex",
+            flexFlow: "column",
+            flexGrow: 1,
+            overflow: "hidden"
         }
     }
 }
