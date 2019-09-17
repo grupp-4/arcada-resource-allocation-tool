@@ -1,0 +1,457 @@
+{
+  "courses": [
+    {
+      "name": "Webbutveckling",
+      "courseCode": "IA‑2‑001 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Matematisk programmering",
+      "courseCode": "IA‑2‑002 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Pre-Calculus",
+      "courseCode": "IA‑2‑012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Webbtjänster och molnteknologi",
+      "courseCode": "IA‑2‑017 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Mjukvaruutvecklingsprocessen - Devops",
+      "courseCode": "IA‑2‑018 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Ramverk och webbapplikationer",
+      "courseCode": "IA‑2‑012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "IT-juridik och etik",
+      "courseCode": "IA‑2‑011 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Databearbetning",
+      "courseCode": "IA‑2‑015 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Beslutssystemutveckling och verifikation",
+      "courseCode": "IA‑2‑023 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Preskriptiv analytik",
+      "courseCode": "IA‑2‑019 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Oscillation och partikelsystem",
+      "courseCode": "IA‑2‑007 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Autonoma agenter",
+      "courseCode": "IA‑2‑014 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Vektorer och krafter",
+      "courseCode": "IA‑1‑002 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Programmering och databehandling",
+      "courseCode": "IA‑2‑012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Introduktion till webbdesign",
+      "courseCode": "IA‑2‑012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Front-end programmering",
+      "courseCode": "IA‑2‑003 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Design av analytiska system",
+      "courseCode": "IA‑2‑021 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Maskininlärning och optimering",
+      "courseCode": "IA‑2‑024 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Projektledning",
+      "courseCode": "IA‑2‑025 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Visualisering av information",
+      "courseCode": "IA‑2‑008 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Back-end programmering",
+      "courseCode": "IA‑2‑004 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Innehållshanteringssystem",
+      "courseCode": "IA‑2‑012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Statistik och sannolikhet",
+      "courseCode": "IA‑1‑001 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Deskriptiv analytik - Data/Text mining",
+      "courseCode": "IA‑2‑013 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Datorseende",
+      "courseCode": "IA‑2‑022 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Cloud Native Apps",
+      "courseCode": "IA‑2‑016 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Nätverksprotokoll och datasäkerhet",
+      "courseCode": "IA‑2‑010 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Datastrukturer och algoritmer",
+      "courseCode": "IA‑2‑009 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Metodologi och examensseminarium",
+      "courseCode": "IA‑2‑027 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Webbkommunikation, Databaser och CMS",
+      "courseCode": "IA‑2‑005 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Datorarkitektur och operativsystem",
+      "courseCode": "IA‑2‑006 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Prediktiv analytik",
+      "courseCode": "IA‑2‑020 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Administration",
+      "courseCode": "IA‑2‑031 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Examensarbeten",
+      "courseCode": "IA‑2‑032 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Praktikansvarig",
+      "courseCode": "IA‑2‑033 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Tutorering",
+      "courseCode": "IA‑2‑034 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Pro-prefekt",
+      "courseCode": "IA‑2‑035 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Utbildningsansvarig",
+      "courseCode": "IA‑2‑036 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Studierummet",
+      "courseCode": "IA‑2‑037 (0)",
+      "hours": 30,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Breddstudiepaket - Full stack",
+      "courseCode": "IA‑2‑038 (0)",
+      "hours": 120,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "AFORA - Roboten Amy",
+      "courseCode": "IA‑2‑039 (0)",
+      "hours": 20,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Digimanu - Engineering platform",
+      "courseCode": "IA‑2‑040 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Forskning",
+      "courseCode": "IA‑2‑041 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "IA"
+    },
+    {
+      "name": "Intro till BDA",
+      "courseCode": "BD-2-001 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Machine Learning for Predictive Problems",
+      "courseCode": "BD-2-005 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Visual Analytics",
+      "courseCode": "BD-2-004 (0)",
+      "hours": 100,
+      "period": 2,
+      "program": "BDA"
+    },
+    {
+      "name": "Machine Learning for Descriptive Problems",
+      "courseCode": "BD-2-003 (0)",
+      "hours": 100,
+      "period": 2,
+      "program": "BDA"
+    },
+    {
+      "name": "Big Data Analytics",
+      "courseCode": "BD-2-002 (0)",
+      "hours": 100,
+      "period": 2,
+      "program": "BDA"
+    },
+    {
+      "name": "Analytical Service Development",
+      "courseCode": "BD-2-006 (0)",
+      "hours": 100,
+      "period": 3,
+      "program": "BDA"
+    },
+    {
+      "name": "Research Seminar and Group Supervision",
+      "courseCode": "BD-2-007 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Administrering",
+      "courseCode": "BD-2-008 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Examensarbete (Magister)",
+      "courseCode": "BD-2-009 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Program director - Spec. Stud.",
+      "courseCode": "BD-2-010 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Program director - Master",
+      "courseCode": "BD-2-011 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "FaceTrack - Facial recognition and tracking",
+      "courseCode": "BD-2-012 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "AMCOCP - Adaptive Machine Learning on Cloud Platforms",
+      "courseCode": "BD-2-013 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    },
+    {
+      "name": "Forskning",
+      "courseCode": "BD-2-015 (0)",
+      "hours": 100,
+      "period": 1,
+      "program": "BDA"
+    }
+  ],
+  "teachers": [
+    {
+      "firstName": "Dennis",
+      "lastName": "Biström"
+    },
+    {
+      "firstName": "Magnus",
+      "lastName": "Westerlund"
+    },
+    {
+      "firstName": "Jonny",
+      "lastName": "Karlsson"
+    },
+    {
+      "firstName": "Dan",
+      "lastName": "Granqvist"
+    },
+    {
+      "firstName": "Richard",
+      "lastName": "Weber"
+    },
+    {
+      "firstName": "Pekka",
+      "lastName": "Butler"
+    },
+    {
+      "firstName": "Robin",
+      "lastName": "Wikström"
+    },
+    {
+      "firstName": "Kaj-Mikael",
+      "lastName": "Björk"
+    },
+    {
+      "firstName": "Joachim",
+      "lastName": "Enkvist"
+    },
+    {
+      "firstName": "Andrey",
+      "lastName": "Shcherbakov"
+    },
+    {
+      "firstName": "Leonardo",
+      "lastName": "Espinosa Leal"
+    },
+    {
+      "firstName": "Anton",
+      "lastName": "Akusok"
+    },
+    {
+      "firstName": "Shuhua",
+      "lastName": "Liu"
+    }
+  ]
+}

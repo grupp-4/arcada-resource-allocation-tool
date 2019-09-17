@@ -23,6 +23,7 @@
     "@zeit/next-css": "^1.0.1",
     "dotenv": "^8.1.0",
     "gillog": "github:danielgiljam/gillog",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.0.5",
     "prop-types": "^15.7.2",
     "react": "16.9.0",

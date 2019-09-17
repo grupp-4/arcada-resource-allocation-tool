@@ -1,5 +1,7 @@
 import {isomorphic} from "gillog"
 
+import fetch from "isomorphic-unfetch"
+
 import __app from "next/app"
 import Head from "next/head"
 
@@ -21,10 +23,23 @@ const log = isomorphic.getLogger("_app")
 
 class _app extends __app {
 
+    constructor(props) {
+        super(props)
+        this.state = {data: null}
+    }
+
     componentDidMount() {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
+        // Loading data
+        // TODO: make a translator that translates the fetched test data so that we don't have to use the refactored version of the test data
+        fetch("http://localhost:3000/static/test-data-refactored.json")
+            .then(res => res.json())
+            .then(data => {
+                log.debug("Loaded data:", data)
+                this.setState({data})
+            })
     }
 
     render() {
@@ -39,7 +54,7 @@ class _app extends __app {
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline/>
                     <PersistentLayout appName={appName}>
-                        <Component {...pageProps}/>
+                        <Component {...pageProps} data={this.state.data}/>
                     </PersistentLayout>
                 </ThemeProvider>
             </>
