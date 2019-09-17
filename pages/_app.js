@@ -11,6 +11,8 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 
 import PersistentLayout from "components/persistent-layout"
 
+import translateData from "utility/translate-data"
+
 import theme from "theme"
 
 import "css/make-document-viewport-height.css"
@@ -33,12 +35,13 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Loading data
-        // TODO: make a translator that translates the fetched test data so that we don't have to use the refactored version of the test data
         fetch("http://localhost:3000/static/test-data-refactored.json")
             .then(res => res.json())
             .then(data => {
-                log.debug("Loaded data:", data)
-                this.setState({data})
+                log.debug("Loaded data (raw):", data)
+                const translatedData = translateData(data)
+                log.debug("Loaded data (translated):", translatedData)
+                this.setState({data: translatedData})
             })
     }
 
