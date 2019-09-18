@@ -3,6 +3,7 @@ export default {
     coursesTeachersFraction: 8, // The width (4/12) of courses-teachers tab view when displayed next to events feed
     darkNavbarInDarkMode: true, // Whether the navbar should shift to a darker nuance of blue when dark mode is enabled
     eventsFeedFraction: 4, // The width (4/12) of events feed when displayed next to courses-teachers tab view
+    mainMaxHeight: 896, // Max height of Main component
     maxWidth: "lg", // Max width of site content (see https://material-ui.com/customization/breakpoints)
     mobileBreakPoint: "sm", // Beginning with screen sizes in this range, or smaller, the mobile layout kicks in (see https://material-ui.com/customization/breakpoints)
     darkMode: false, // light/dark mode (see https://material-ui.com/customization/palette/#type-light-dark-theme)
