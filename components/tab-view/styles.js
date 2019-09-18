@@ -18,6 +18,7 @@ function styles(theme) {
         },
         tabPanel: {
             background: Color(theme.palette.background.default).darken(params.tabPanelDarkness).hex(),
+            flexBasis: 0,
             flexGrow: 1,
             overflow: "auto"
         }
