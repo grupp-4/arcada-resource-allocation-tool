@@ -9,6 +9,7 @@ import Tab from "@material-ui/core/Tab"
 
 import Courses from "components/courses"
 import Teachers from "components/teachers"
+import EventsFeed from "components/events-feed"
 
 import TabPanel from "./tab-panel"
 
@@ -71,6 +72,9 @@ function TabView({log, definitions, currentTab, eventsFeed, children}) {
                         break
                     case "teachers":
                         content = <Teachers data={children.props.data}/>
+                        break
+                    case "events-feed":
+                        content = <EventsFeed data={children.props.data}/>
                 }
                 return <TabPanel className={styles.tabPanel} key={key} index={index} currentTab={value}>{content}</TabPanel>
             })}

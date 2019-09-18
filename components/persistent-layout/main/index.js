@@ -33,14 +33,21 @@ function Main({log, mobile, pathname, children}) {
         // If no match is found (which probably means the current URL path is root, a.k.a /) then
         // currentTab defaults to the first index (0).
         if (currentTab === -1) currentTab = 0
-        return (
-            <TabView
-                definitions={definitions}
-                currentTab={currentTab}
-                eventsFeed={options && options.eventsFeed}>
-                {children}
-            </TabView>
-        )
+        return options && options.eventsFeed
+            ? (
+                <TabView
+                    definitions={definitions}
+                    currentTab={currentTab}
+                    eventsFeed>
+                    <EventsFeed/>
+                </TabView>
+            ) : (
+                <TabView
+                    definitions={definitions}
+                    currentTab={currentTab}>
+                    {children}
+                </TabView>
+            )
     }
 
     // ====== RENDER ======>
