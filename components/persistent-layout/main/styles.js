@@ -1,7 +1,11 @@
+import Color from "color"
+
 import {makeStyles} from "@material-ui/core/styles"
 
+import green from "@material-ui/core/colors/green"
+import red from "@material-ui/core/colors/red"
+
 import params from "theme/custom-parameters"
-import Color from "color"
 
 function styles(theme) {
     function getMediaQueryForMaxHeight() {
@@ -54,6 +58,36 @@ function styles(theme) {
             flexBasis: 0,
             flexGrow: 1,
             overflow: "auto"
+        },
+        coursesTeachersTabViewFooter: {
+            height: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
+        },
+        lastUpdatedContainer: {
+            contentAlign: "middle"
+        },
+        lastUpdated: {
+            display: "inline-block",
+            marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3,
+            textAlign: "center",
+            width: "100%"
+        },
+        submitDiscardButtons: {
+            position: "relative",
+            top: 0 - theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3
+        },
+        saveButton: {
+            background: green[500],
+            color: theme.palette.common.white,
+            "&:hover": {
+                background: green[600]
+            }
+        },
+        discardButton: {
+            background: red[500],
+            color: theme.palette.common.white,
+            "&:hover": {
+                background: red[600]
+            }
         }
     }
 }
