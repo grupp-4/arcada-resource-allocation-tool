@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles"
 
 import params from "theme/custom-parameters"
+import Color from "color"
 
 function styles(theme) {
     function getMediaQueryForMaxHeight() {
@@ -37,6 +38,22 @@ function styles(theme) {
             flexFlow: "column",
             flexGrow: 1,
             overflow: "hidden"
+        },
+        eventsFeedTab: {
+            cursor: "initial"
+        },
+        eventsFeedTabIndicator: {
+            background: "initial"
+        },
+        tabs: {
+            boxShadow: theme.shadows[params.tabBarElevation],
+            zIndex: params.tabBarElevation ? theme.zIndex.appBar : "auto"
+        },
+        tabPanel: {
+            background: Color(theme.palette.background.default).darken(params.tabPanelDarkness).hex(),
+            flexBasis: 0,
+            flexGrow: 1,
+            overflow: "auto"
         }
     }
 }
