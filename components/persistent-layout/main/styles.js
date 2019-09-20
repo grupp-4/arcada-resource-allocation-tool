@@ -65,6 +65,10 @@ function styles(theme) {
         lastUpdatedContainer: {
             contentAlign: "middle"
         },
+        syncButton: {
+            marginLeft: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 6,
+            marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 6
+        },
         lastUpdated: {
             display: "inline-block",
             marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3,
@@ -76,17 +80,17 @@ function styles(theme) {
             top: 0 - theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3
         },
         saveButton: {
-            background: green[500],
-            color: theme.palette.common.white,
+            background: `${green[500]} !important`,
+            color: `${theme.palette.common.white} !important`,
             "&:hover": {
-                background: green[600]
+                background: `${green[600]} !important`
             }
         },
         discardButton: {
-            background: red[500],
-            color: theme.palette.common.white,
+            background: `${red[500]} !important`,
+            color: `${theme.palette.common.white} !important`,
             "&:hover": {
-                background: red[600]
+                background: `${red[600]} !important`
             }
         }
     }
