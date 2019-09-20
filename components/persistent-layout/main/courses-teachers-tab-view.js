@@ -141,7 +141,7 @@ function CoursesTeachersTabView({log, pathname, children}) {
             })}
             <Grid className={styles.coursesTeachersTabViewFooter} container>
                 <Grid item xs={4}>
-                    <IconButton aria-label={"sync"}>
+                    <IconButton className={styles.syncButton} size={"small"} aria-label={"sync"}>
                         <SyncRoundedIcon/>
                     </IconButton>
                 </Grid>
