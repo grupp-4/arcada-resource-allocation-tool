@@ -1,16 +1,17 @@
-import {Fragment} from "react"
+import { Fragment } from "react"
 
-import Document, {Head, Html, Main, NextScript} from "next/document"
+import Document, { Head, Html, Main, NextScript } from "next/document"
 
-import {ServerStyleSheets} from "@material-ui/styles"
+import { ServerStyleSheets } from "@material-ui/styles"
 
 import theme from "theme"
 
-/**
+/*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
  */
 
 class _document extends Document {
+
     static async getInitialProps(ctx) {
         /* Resolution order
          *
@@ -62,14 +63,14 @@ class _document extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
-                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                     {/* PWA primary color */}
-                    <meta name="theme-color" content={theme.palette.primary.main}/>
+                    <meta name="theme-color" content={theme.palette.primary.main} />
                 </Head>
                 <body>
-                    <Main/>
-                    <NextScript/>
+                    <Main />
+                    <NextScript />
                 </body>
             </Html>
         )

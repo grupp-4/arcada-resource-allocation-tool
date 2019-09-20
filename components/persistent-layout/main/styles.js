@@ -5,20 +5,29 @@ import params from "theme/custom-parameters"
 function styles(theme) {
     return {
         container: {
-            height: "100%",
-            maxHeight: params.mainMaxHeight,
-            paddingBottom: theme.spacing(params.spacing),
+            flexGrow: 1,
             paddingLeft: theme.spacing(params.spacing),
             paddingRight: theme.spacing(params.spacing)
         },
         main: {
-            height: "inherit",
+            height: "100%",
+            [theme.breakpoints.up('md')]: {
+                maxHeight: theme.breakpoints.values.md
+            }
         },
         gridContainer: {
-            height: "inherit"
+            height: "100%"
+        },
+        gridItem: {
+            display: "flex",
+            flexFlow: "column",
+            height: "100%"
         },
         paper: {
-            height: "100%"
+            display: "flex",
+            flexFlow: "column",
+            flexGrow: 1,
+            overflow: "hidden"
         }
     }
 }
