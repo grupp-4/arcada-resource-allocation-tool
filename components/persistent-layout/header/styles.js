@@ -17,6 +17,9 @@ function styles(theme) {
         },
         menuButton: {
             marginRight: theme.spacing(params.spacing)
+        },
+        appName: {
+            flexGrow: 1
         }
     }
 }
