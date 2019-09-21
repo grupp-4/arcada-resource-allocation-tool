@@ -13,7 +13,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, appName, mobile, pathname}) {
+function Header({log, appName, mobile, pathname, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()

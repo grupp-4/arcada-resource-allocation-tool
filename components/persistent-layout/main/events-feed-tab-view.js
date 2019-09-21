@@ -7,11 +7,11 @@ import EventsFeed from "components/events-feed"
 
 import useStyles from "./styles"
 
-function EventsFeedTabView({log, data}) {
+function EventsFeedTabView({log, data, strings}) {
 
     // ====== INITIAL LOGIC ======>
     const key = "events-feed",
-        label = "Händelser",
+        label = strings.eventsFeedTabName,
         index = 0
 
     // ====== HOOKS ======>
