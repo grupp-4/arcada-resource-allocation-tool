@@ -22,10 +22,14 @@ function Preferences({log, anchorEl, onClose, strings}) {
     // ====== EVENT HANDLERS ======>
 
     function changeTheme(event) {
-        setState(prevState => ({...prevState, ...{theme: event.target.value}}))
+        const value = event.target.value
+        log.debug("Setting theme to", value)
+        setState(prevState => ({...prevState, ...{theme: value}}))
     }
     function changeLandingPage(event) {
-        setState(prevState => ({...prevState, ...{landingPage: event.target.value}}))
+        const value = event.target.value
+        log.debug("Setting landing page to", value)
+        setState(prevState => ({...prevState, ...{landingPage: value}}))
     }
 
     // ====== RENDER ======>

@@ -30,7 +30,6 @@ class _app extends __app {
     constructor(props) {
         super(props)
         this.state = {data: null, theme: theme}
-        console.log(theme)
     }
 
     componentDidMount() {
