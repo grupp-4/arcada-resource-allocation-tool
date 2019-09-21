@@ -13,7 +13,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function CoursesTeachersTabView({log, pathname, children}) {
+function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
 
@@ -22,8 +22,8 @@ function CoursesTeachersTabView({log, pathname, children}) {
     // key: Used for determining the pre-selected tab by matching URL path to this.
     // label: Tab title (in Swedish), hardcoded for now.
     const definitions = [
-        {key: "courses", label: "Kurser"},
-        {key: "teachers", label: "Lärare"}
+        {key: "courses", label: strings.coursesTabName},
+        {key: "teachers", label: strings.teachersTabName}
     ]
     // Gets the index of the "definition" that has a key that matches the current URL path.
     let currentTab = definitions.findIndex(definition => {

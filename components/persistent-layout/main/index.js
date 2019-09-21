@@ -13,7 +13,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-function Main({log, mobile, pathname, children}) {
+function Main({log, mobile, pathname, strings, children}) {
 
     // ====== HOOKS ======>
 
@@ -31,12 +31,12 @@ function Main({log, mobile, pathname, children}) {
                         <>
                             <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                                 <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                    <EventsFeedTabView data={children.props.data}/>
+                                    <EventsFeedTabView data={children.props.data} strings={strings}/>
                                 </Paper>
                             </Grid>
                             <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                                 <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                    <CoursesTeachersTabView pathname={pathname}>{children}</CoursesTeachersTabView>
+                                    <CoursesTeachersTabView pathname={pathname} strings={strings}>{children}</CoursesTeachersTabView>
                                 </Paper>
                             </Grid>
                         </>

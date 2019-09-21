@@ -13,6 +13,8 @@ import PersistentLayout from "components/persistent-layout"
 
 import translateData from "utility/translate-data"
 
+import useStringResources from "string-resources"
+
 import theme from "theme"
 
 import "css/make-document-viewport-height.css"
@@ -47,6 +49,8 @@ class _app extends __app {
 
     render() {
         const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
+        const strings = useStringResources()
+        const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
         const {Component, pageProps} = this.props
         return (
             <>
@@ -56,7 +60,7 @@ class _app extends __app {
                 <ThemeProvider theme={theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline/>
-                    <PersistentLayout appName={appName}>
+                    <PersistentLayout appName={appName} strings={strings}>
                         <Component {...pageProps} data={this.state.data}/>
                     </PersistentLayout>
                 </ThemeProvider>
