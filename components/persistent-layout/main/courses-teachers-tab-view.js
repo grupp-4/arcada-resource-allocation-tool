@@ -4,14 +4,11 @@ import {useEffect, useState} from "react"
 
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
-import Grid from "@material-ui/core/Grid"
 
 import Courses from "components/courses"
 import Teachers from "components/teachers"
 
 import useStyles from "./styles"
-
-import themeParams from "theme/custom-parameters"
 
 function CoursesTeachersTabView({log, pathname, strings, children}) {
 
@@ -53,16 +50,6 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
         setValue(newValue)
     }
 
-    function submitChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to submit changes, a feature which isn't yet implemented.")
-    }
-
-    function discardChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to discard changes, a feature which isn't yet implemented.")
-    }
-
     // ====== "SUB" COMPONENTS ======>
 
     function TabPanel({index, currentTab, children}) {
@@ -82,7 +69,7 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     return (
         <>
-            <Tabs className={styles.tabs} value={value} onChange={changeTab} indicatorColor="primary" centered aria-label="tabs">
+            <Tabs className={styles.tabs} onChange={changeTab} value={value} indicatorColor="primary" centered aria-label="tabs">
                 {definitions.map(({key, label}, index) => {
                     return <Tab id={`tab-${index}`} key={key} label={label}
                                 aria-controls={`tabpanel-${index}`}/>

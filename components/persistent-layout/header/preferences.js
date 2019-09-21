@@ -10,60 +10,69 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Radio from "@material-ui/core/Radio"
 
-function Preferences({log, anchorEl, onClose}) {
+import useStyles from "./styles"
+
+function Preferences({log, anchorEl, onClose, strings}) {
+
     // ====== HOOKS ======>
+
+    const styles = useStyles()
     const [{theme, landingPage}, setState] = useState({theme: "auto", landingPage: null})
+
     // ====== EVENT HANDLERS ======>
+
     function changeTheme(event) {
         setState(prevState => ({...prevState, ...{theme: event.target.value}}))
     }
     function changeLandingPage(event) {
         setState(prevState => ({...prevState, ...{landingPage: event.target.value}}))
     }
+
     // ====== RENDER ======>
+
     return (
         <Menu
-            anchorEl={anchorEl}
             open={!!anchorEl}
-            onClose={onClose}>
-            <MenuItem>
-                <FormControl>
-                    <FormLabel>Utseende</FormLabel>
-                    <RadioGroup onChange={changeTheme}
-                                row value={theme}>
+            onClose={onClose}
+            anchorEl={anchorEl}
+            keepMounted
+            id={"preferences-menu"}>
+            <MenuItem className={styles.preferencesMenuItem} button={false}>
+                <FormControl component={"fieldset"} id={"theme"}>
+                    <FormLabel classes={{focused: styles.preferencesMenuLegend}} component={"legend"}>{strings.theme.label}</FormLabel>
+                    <RadioGroup onChange={changeTheme} row value={theme} aria-label={"theme"}>
                         <FormControlLabel
-                            value="auto"
+                            value={"auto"}
                             control={<Radio/>}
-                            label="Auto"
-                            labelPlacement="bottom"/>
+                            label={strings.theme.auto}
+                            labelPlacement={"bottom"}/>
                         <FormControlLabel
-                            value="light"
+                            value={"light"}
                             control={<Radio/>}
-                            label="Ljust"
-                            labelPlacement="bottom"/>
+                            label={strings.theme.light}
+                            labelPlacement={"bottom"}/>
                         <FormControlLabel
-                            value="dark"
+                            value={"dark"}
                             control={<Radio/>}
-                            label="Mörkt"
-                            labelPlacement="bottom"/>
+                            label={strings.theme.dark}
+                            labelPlacement={"bottom"}/>
                     </RadioGroup>
                 </FormControl>
             </MenuItem>
-            <MenuItem>
-                <FormControl>
-                    <FormLabel>Landningssida</FormLabel>
-                    <RadioGroup onChange={changeLandingPage}
-                                row value={landingPage}>
+            <MenuItem className={styles.preferencesMenuItem} button={false}>
+                <FormControl component={"fieldset"} id={"theme"}>
+                    <FormLabel classes={{focused: styles.preferencesMenuLegend}} component={"legend"}>{strings.landingPage.label}</FormLabel>
+                    <RadioGroup onChange={changeLandingPage} row value={landingPage} aria-label={"landing-page"}>
                         <FormControlLabel
-                            value="courses"
+                            value={"courses"}
                             control={<Radio/>}
-                            label="Kurser"
-                            labelPlacement="bottom"/>
+                            label={strings.landingPage.courses}
+                            labelPlacement={"bottom"}/>
                         <FormControlLabel
-                            value="teachers"
+                            value={"teachers"}
                             control={<Radio/>}
-                            label="Lärare"
-                            labelPlacement="bottom"/>
+                            label={strings.landingPage.teachers}
+                            labelPlacement={"bottom"}/>
                     </RadioGroup>
                 </FormControl>
             </MenuItem>

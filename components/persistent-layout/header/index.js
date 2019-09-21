@@ -21,43 +21,47 @@ import themeParams from "theme/custom-parameters"
 function Header({log, appName, mobile, pathname, strings}) {
 
     // ====== HOOKS ======>
+
     const styles = useStyles()
     const [anchorElement, setAnchorElement] = useState(null)
 
     // ====== EVENT HANDLERS ======>
-    function openMenu() {
+
+    function openNavigationMenu() {
         // TODO: implement menu
         log.debug("User tried opening menu which isn't yet implemented.")
     }
-    function openPreferences({currentTarget}) {
+    function openPreferencesMenu({currentTarget}) {
         log.debug("Opening preferences.")
         setAnchorElement(currentTarget)
     }
-    function closePreferences() {
+    function closePreferencesMenu() {
         log.debug("Closing preferences.")
         setAnchorElement(null)
     }
 
     // ====== RENDER ======>
+
     return (
         <>
             <AppBar className={styles.appBar} position={"sticky"}>
                 <Container className={styles.container} maxWidth={themeParams.maxWidth}>
                     <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
-                        <IconButton className={styles.menuButton} onClick={openMenu} color={"inherit"} edge={"start"}
-                                    aria-label={"menu"} style={{display: mobile ? "initial" : "none"}}>
+                        <IconButton className={styles.navigationMenuButton} onClick={openNavigationMenu} color={"inherit"} edge={"start"}
+                                    aria-controls={"navigation-menu"} aria-haspopup={"true"} aria-label={"navigation"} style={{display: mobile ? "initial" : "none"}}>
                             <MenuIcon/>
                         </IconButton>
                         <Typography className={styles.appName} variant={"h6"}>
                             {appName}
                         </Typography>
-                        <IconButton onClick={openPreferences} color={"inherit"} size={mobile ? "medium" : "small"} aria-label={"preferences"}>
+                        <IconButton onClick={openPreferencesMenu} color={"inherit"} size={mobile ? "medium" : "small"}
+                                    aria-controls={"preferences-menu"} aria-haspopup={"true"} aria-label={"preferences"}>
                             <MoreVertIcon/>
                         </IconButton>
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Preferences anchorEl={anchorElement} onClose={closePreferences}/>
+            <Preferences anchorEl={anchorElement} onClose={closePreferencesMenu} strings={strings.preferencesMenu}/>
         </>
     )
 }

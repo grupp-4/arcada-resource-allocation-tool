@@ -29,7 +29,8 @@ class _app extends __app {
 
     constructor(props) {
         super(props)
-        this.state = {data: null}
+        this.state = {data: null, theme: theme}
+        console.log(theme)
     }
 
     componentDidMount() {
@@ -37,7 +38,7 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Loading data
-        fetch("http://localhost:3000/static/test-data-refactored.json")
+        fetch("http://192.168.1.2:3000/static/test-data-refactored.json")
             .then(res => res.json())
             .then(data => {
                 log.debug("Loaded data (raw):", data)
@@ -48,7 +49,6 @@ class _app extends __app {
     }
 
     render() {
-        const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
         const strings = useStringResources()
         const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
         const {Component, pageProps} = this.props
@@ -57,7 +57,7 @@ class _app extends __app {
                 <Head>
                     <title>{appName}</title>
                 </Head>
-                <ThemeProvider theme={theme}>
+                <ThemeProvider theme={this.state.theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline/>
                     <PersistentLayout appName={appName} strings={strings}>
