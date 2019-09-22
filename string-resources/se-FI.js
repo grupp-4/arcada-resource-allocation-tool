@@ -19,8 +19,17 @@ const header = {
         },
         landingPage: {
             label: "Landningssida",
-            get courses() {return cap(this._global.courses)},
-            get teachers() {return cap(this._global.teachers)},
+            desktop: "Desktop",
+            mobile: "Mobil",
+            get eventsFeed() {
+                return cap(this._global.events)
+            },
+            get courses() {
+                return cap(this._global.courses)
+            },
+            get teachers() {
+                return cap(this._global.teachers)
+            },
             _global: global
         }
     }

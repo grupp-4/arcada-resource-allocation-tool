@@ -14,7 +14,7 @@ import Main from "./main"
 
 import themeParams from "theme/custom-parameters"
 
-function PersistentLayout({log, appName, strings, children}) {
+function PersistentLayout({log, appName, preferences, setTheme, setLandingPage, strings, children}) {
 
     // ====== HOOKS ======>
 
@@ -26,10 +26,12 @@ function PersistentLayout({log, appName, strings, children}) {
 
     useEffect(() => {
         if (initializedPL) {
+            setLandingPage(mobile)
             log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
         } else {
-            log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
+            setLandingPage(mobile)
             setInitializedPL(true)
+            log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
         }
     }, [mobile])
 
@@ -43,7 +45,7 @@ function PersistentLayout({log, appName, strings, children}) {
 
     return (
         <>
-            <Header appName={appName} mobile={mobile} pathname={pathname} strings={strings.header}/>
+            <Header appName={appName} preferences={preferences} setTheme={setTheme} mobile={mobile} pathname={pathname} strings={strings.header}/>
             <Main mobile={mobile} pathname={pathname} strings={strings.main}>{children}</Main>
         </>
     )

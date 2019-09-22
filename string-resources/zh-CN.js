@@ -19,6 +19,11 @@ const header = {
         },
         landingPage: {
             label: "登陆页面",
+            desktop: "在桌面上",
+            mobile: "在移动设备上",
+            get eventsFeed() {
+                return cap(this._global.events)
+            },
             get courses() {
                 return cap(this._global.courses)
             },

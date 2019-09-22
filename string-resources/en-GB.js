@@ -19,6 +19,11 @@ const header = {
         },
         landingPage: {
             label: "Landing Page",
+            desktop: "Desktop",
+            mobile: "Mobile",
+            get eventsFeed() {
+                return cap(this._global.events)
+            },
             get courses() {
                 return cap(this._global.courses)
             },

@@ -18,7 +18,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, appName, mobile, pathname, strings}) {
+function Header({log, appName, preferences, setTheme, mobile, pathname, strings}) {
 
     // ====== HOOKS ======>
 
@@ -32,12 +32,12 @@ function Header({log, appName, mobile, pathname, strings}) {
         log.debug("User tried opening menu which isn't yet implemented.")
     }
     function openPreferencesMenu({currentTarget}) {
-        log.debug("Opening preferences.")
         setAnchorElement(currentTarget)
+        log.debug("Opening preferences.")
     }
     function closePreferencesMenu() {
-        log.debug("Closing preferences.")
         setAnchorElement(null)
+        log.debug("Closing preferences.")
     }
 
     // ====== RENDER ======>
@@ -61,7 +61,13 @@ function Header({log, appName, mobile, pathname, strings}) {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Preferences anchorEl={anchorElement} onClose={closePreferencesMenu} strings={strings.preferencesMenu}/>
+            <Preferences
+                anchorEl={anchorElement}
+                onClose={closePreferencesMenu}
+                preferences={preferences}
+                setTheme={setTheme}
+                mobile={mobile}
+                strings={strings.preferencesMenu}/>
         </>
     )
 }
