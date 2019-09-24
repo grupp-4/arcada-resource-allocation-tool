@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 
 import params from "theme/custom-parameters"
 
@@ -8,7 +8,7 @@ function styles(theme) {
             padding: 0
         },
         appBar: {
-            background: theme.palette.primary[params.mode],
+            background: params.darkMode && params.darkNavbarInDarkMode ? theme.palette.primary.dark : theme.palette.primary.main,
             marginBottom: theme.spacing(params.spacing)
         },
         toolBarDense: {

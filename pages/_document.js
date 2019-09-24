@@ -1,16 +1,20 @@
+import { isomorphic } from "gillog"
+
 import { Fragment } from "react"
 
-import Document, { Head, Html, Main, NextScript } from "next/document"
+import __document, { Head, Html, Main, NextScript } from "next/document"
 
 import { ServerStyleSheets } from "@material-ui/styles"
 
 import theme from "theme"
 
+const log = isomorphic.getLogger("_document")
+
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
  */
 
-class _document extends Document {
+class _document extends __document {
 
     static async getInitialProps(ctx) {
         /* Resolution order
@@ -44,7 +48,7 @@ class _document extends Document {
             enhanceApp: App => props => sheets.collect(<App {...props} />)
         })
 
-        const initialProps = await Document.getInitialProps(ctx)
+        const initialProps = await __document.getInitialProps(ctx)
 
         return {
             ...initialProps,

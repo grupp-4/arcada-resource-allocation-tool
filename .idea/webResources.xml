@@ -6,6 +6,11 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/components" />
+            <path value="file://$PROJECT_DIR$/styles" />
+            <path value="file://$PROJECT_DIR$/theme" />
+            <path value="file://$PROJECT_DIR$/css" />
+            <path value="file://$PROJECT_DIR$/utility" />
+            <path value="file://$PROJECT_DIR$/string-resources" />
           </resourceRoots>
         </entryData>
       </entry>

@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import { withLogging } from "gillog"
 
 import PropTypes from "prop-types"
 
@@ -13,7 +13,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, appName, mobile, pathname}) {
+function Header({ log, appName, mobile, pathname, strings }) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -26,12 +26,12 @@ function Header({log, appName, mobile, pathname}) {
 
     // ====== RENDER ======>
     return (
-        <AppBar className={styles.appBar} position={"static"}>
+        <AppBar className={styles.appBar} position={"sticky"}>
             <Container className={styles.container} maxWidth={themeParams.maxWidth}>
-                <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
+                <Toolbar classes={{ dense: styles.toolBarDense }} variant={mobile ? "regular" : "dense"}>
                     <IconButton className={styles.menuButton} onClick={openMenu} color={"inherit"} edge={"start"}
-                                aria-label={"menu"} style={{display: mobile ? "initial" : "none"}}>
-                        <MenuIcon/>
+                        aria-label={"menu"} style={{ display: mobile ? "initial" : "none" }}>
+                        <MenuIcon />
                     </IconButton>
                     <Typography variant={"h6"}>
                         {appName}

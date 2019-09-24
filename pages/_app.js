@@ -12,13 +12,14 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import PersistentLayout from "components/persistent-layout"
 
 import translateData from "utility/translate-data"
-import theme from "theme/index.js"
 
+import useStringResources from "string-resources"
+
+import theme from "theme"
 
 import "css/make-document-viewport-height.css"
 
 const log = isomorphic.getLogger("_app")
-
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
@@ -36,18 +37,16 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Loading data
-        fetch("http://localhost:3000/static/mockup-data.json")
+        fetch("http://localhost:3000/static/test-data-refactored.json")
             .then(res => res.json())
             .then(data => {
                 log.debug("Loaded data (raw):", data)
                 const translatedData = translateData(data)
                 log.debug("Loaded data (translated):", translatedData)
-                this.setState({ data: translatedData })
             })
-    }
-
-    render() {
         const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
+        const strings = useStringResources()
+        const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
         const { Component, pageProps } = this.props
         return (
             <>
@@ -57,7 +56,7 @@ class _app extends __app {
                 <ThemeProvider theme={theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline />
-                    <PersistentLayout appName={appName}>
+                    <PersistentLayout appName={appName} strings={strings}>
                         <Component {...pageProps} data={this.state.data} />
                     </PersistentLayout>
                 </ThemeProvider>

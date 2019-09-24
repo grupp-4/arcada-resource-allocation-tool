@@ -21,6 +21,7 @@
     "@material-ui/icons": "^4.4.1",
     "@material-ui/styles": "^4.4.1",
     "@zeit/next-css": "^1.0.1",
+    "color": "^3.1.2",
     "dotenv": "^8.1.0",
     "gillog": "github:danielgiljam/gillog",
     "isomorphic-unfetch": "^3.0.0",

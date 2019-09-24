@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ramverk-och-webbapplikationer.iml" filepath="$PROJECT_DIR$/.idea/ramverk-och-webbapplikationer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/arcada-resource-allocation-tool.iml" filepath="$PROJECT_DIR$/.idea/arcada-resource-allocation-tool.iml" />
     </modules>
   </component>
 </project>
