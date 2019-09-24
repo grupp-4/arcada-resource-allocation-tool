@@ -1,51 +1,72 @@
+import React from 'react';
 import {withLogging} from "gillog"
 
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+/*const useStyles = makeStyles({
+  card: {
+    minWidth: 50,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});*/
 
 
 function Courses({log, data}) {
     
-    const [open, setOpen] = React.useState(true);
+  //const classes = useStyles();
   
-    function handleClick() {
+    /*function handleClick() {
       setOpen(!open);
-    }
+    }*/
     // ====== HOOKS ======>
     //const typographyStyles = useTypographyStyles()
 
     // ====== RENDER ======>
-    // TODO: create this component
+    // TODO: Fix classNames
+    // TODO: If teacher : else button add teacher
     return (
-      <List component="nav" aria-label="main mailbox folders">
+
+      <>
             {data && data.courses
                 ? data.courses.map(course => 
-                <><ListItem button onClick={handleClick}>
-                    <ListItemText primary={course.name} />
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button>
-            <ListItemText primary={course.courseCode} />
-            <ListItemText primary={course.hours} />
-            <ListItemText primary={course.period} />
-            <ListItemText primary={course.program} />
-          </ListItem>
-        </List>
-      </Collapse></>
+                  <Card /*className={classes.card}*/>
+                    <CardContent>
+                      <Typography variant="h5" component="h2">
+                      {course.name}
+                      </Typography>
+                      <Typography /*className={classes.pos}*/ color="textSecondary">
+                      {'Program: '+course.program}
+                      <br/>
+                      {'Code: '+course.courseCode}
+                      <br/>
+                      {'Period: '+course.period+' - '+course.hours+'h'}
+                      </Typography>
+        </CardContent>
+        <CardActions>
+        <Button size="small">Add Teacher</Button>
+      </CardActions>
+      </Card>
       ) : "Loading courses..."}
-                
-        </List>
+          </>      
     );
 }
 
