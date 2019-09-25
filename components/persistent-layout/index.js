@@ -14,7 +14,7 @@ import Main from "./main"
 
 import themeParams from "theme/custom-parameters"
 
-function PersistentLayout({log, appName, preferences, setTheme, setLandingPage, strings, children}) {
+function PersistentLayout({log, appName, preferences, setTheme, setMobile, strings, children}) {
 
     // ====== HOOKS ======>
 
@@ -22,18 +22,46 @@ function PersistentLayout({log, appName, preferences, setTheme, setLandingPage, 
 
     const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint))
 
-    const [initializedPL, setInitializedPL] = useState(false)
+    const prefersColorSchemeDark = useMediaQuery("(prefers-color-scheme: dark)")
+    const prefersColorSchemeLight = useMediaQuery("(prefers-color-scheme: light)")
+    const prefersColorSchemeNoPreference = useMediaQuery("(prefers-color-scheme: no-preference)")
+
+    const [{initializedPL, initializedPCS}, setState] = useState({initializedPL: false, initializedPCS: false})
 
     useEffect(() => {
         if (initializedPL) {
-            setLandingPage(mobile)
+            setMobile(mobile)
             log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
         } else {
-            setLandingPage(mobile)
-            setInitializedPL(true)
+            setMobile(mobile)
+            setState(prevState => ({...prevState, ...{initializedPL: true}}))
             log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
         }
     }, [mobile])
+
+    useEffect(() => {
+        if (preferences.theme === "auto") {
+            let prefersColorScheme = ""
+            switch (true) {
+                case prefersColorSchemeDark && !prefersColorSchemeLight && !prefersColorSchemeNoPreference:
+                    prefersColorScheme = "dark"
+                    break
+                case !prefersColorSchemeDark && prefersColorSchemeLight && !prefersColorSchemeNoPreference:
+                    prefersColorScheme = "light"
+            }
+            if (prefersColorScheme && prefersColorScheme !== window._theme) {
+                log.debug(
+                    `Intercepted that client's preference of theme has changed to ${prefersColorScheme}.`,
+                    `Triggering reevaluation of theme`
+                )
+                setTheme()
+            }
+        }
+    }, [
+        prefersColorSchemeDark,
+        prefersColorSchemeLight,
+        prefersColorSchemeNoPreference
+    ])
 
     const router = useRouter()
 

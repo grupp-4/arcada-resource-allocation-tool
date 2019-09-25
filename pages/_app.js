@@ -33,8 +33,9 @@ class _app extends __app {
         super(props)
         const theme = createTheme(log)
         const {landingPage, landingPageMobile} = getLandingPagePreferences()
-        this.preferences = {theme: theme.preference, landingPage, landingPageMobile}
-        this.state = {data: null, theme: theme, landingPageMobile: false}
+        this.landingPage = landingPage
+        this.landingPageMobile = landingPageMobile
+        this.state = {data: null, theme: theme, mobile: false}
     }
 
     componentDidMount() {
@@ -56,13 +57,18 @@ class _app extends __app {
         this.setState({theme: createTheme(log)})
     }
 
-    setLandingPage(mobile) {
-        this.setState({landingPageMobile: mobile})
+    setMobile(mobile) {
+        this.setState({mobile: mobile})
     }
 
     render() {
         const strings = useStringResources()
         const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
+        const preferences = {
+            theme: this.state.theme.preference,
+            landingPage: this.landingPage,
+            landingPageMobile: this.landingPageMobile
+        }
         const {Component, pageProps} = this.props
         return (
             <>
@@ -74,14 +80,14 @@ class _app extends __app {
                     <CssBaseline/>
                     <PersistentLayout
                         appName={appName}
-                        preferences={this.preferences}
+                        preferences={preferences}
                         setTheme={this.setTheme.bind(this)}
-                        setLandingPage={this.setLandingPage.bind(this)}
+                        setMobile={this.setMobile.bind(this)}
                         strings={strings}>
                         <Component
-                            landingPage={this.preferences.landingPage}
-                            landingPageMobile={this.preferences.landingPageMobile}
-                            mobile={this.state.landingPageMobile}
+                            landingPage={preferences.landingPage}
+                            landingPageMobile={preferences.landingPageMobile}
+                            mobile={this.state.mobile}
                             data={this.state.data}
                             {...pageProps}/>
                     </PersistentLayout>

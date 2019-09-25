@@ -88,7 +88,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                     </FormLabel>
                     <RadioGroup
                         onChange={changeTheme}
-                        column={mobile}
                         row={!mobile}
                         value={theme}
                         aria-label={"theme"}>
@@ -126,7 +125,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                     </FormHelperText>
                     <RadioGroup
                         onChange={changeLandingPage}
-                        column={mobile}
                         row={!mobile}
                         value={landingPage ? landingPage : "courses"}
                         aria-label={"landing-page-desktop"}>
@@ -144,7 +142,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                     </FormHelperText>
                     <RadioGroup
                         onChange={changeLandingPageMobile}
-                        column={mobile}
                         row={!mobile}
                         value={landingPageMobile ? landingPageMobile : "events-feed"}
                         aria-label={"landing-page-mobile"}>
