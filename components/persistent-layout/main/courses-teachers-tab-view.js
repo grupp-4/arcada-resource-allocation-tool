@@ -20,6 +20,8 @@ import Teachers from "components/teachers"
 
 import useStyles from "./styles"
 
+import themeParams from "theme/custom-parameters"
+
 function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
@@ -53,13 +55,14 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
     const theme = useTheme()
 
     const [state, setState] = useState({
-        currentTab: currentTab,
+        currentTab: 0,
         lastUpdated: "just nu", // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
 
     useEffect(() => {
-        log.debug(`Loading tab view with pre-selected tab: ${definitions[state.currentTab].key}`)
+        log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+        setState(prevState => ({...prevState, ...{currentTab: currentTab}}))
     }, [])
 
     // ====== EVENT HANDLERS ======>
@@ -119,10 +122,15 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
     }
 
     // ====== RENDER ======>
-
     return (
         <>
-            <Tabs className={styles.tabs} onChange={changeTab} value={state.currentTab} indicatorColor={"primary"} centered aria-label={"tabs"}>
+            <Tabs
+                className={styles.tabs}
+                onChange={changeTab}
+                centered
+                indicatorColor={"primary"}
+                value={state.currentTab}
+                aria-label={"tabs"}>
                 {definitions.map(({key, label}, index) => {
                     return <Tab id={`tab-${index}`} key={key} label={label}
                                 aria-controls={`tabpanel-${index}`}/>

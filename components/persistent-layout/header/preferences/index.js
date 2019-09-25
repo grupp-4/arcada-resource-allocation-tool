@@ -37,14 +37,24 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     }
     function changeLandingPage(event) {
         const value = event.target.value
-        setState(prevState => ({...prevState, ...{landingPage: value}}))
-        window.localStorage.landingPage = value
+        if (value !== "courses") {
+            setState(prevState => ({...prevState, ...{landingPage: value}}))
+            window.localStorage.landingPage = value
+        } else {
+            setState(prevState => ({...prevState, ...{landingPage: null}}))
+            window.localStorage.removeItem("landingPage")
+        }
         log.debug("Setting landing page to", value)
     }
     function changeLandingPageMobile(event) {
         const value = event.target.value
-        setState(prevState => ({...prevState, ...{landingPageMobile: value}}))
-        window.localStorage.landingPageMobile = value
+        if (value !== "events-feed") {
+            setState(prevState => ({...prevState, ...{landingPageMobile: value}}))
+            window.localStorage.landingPageMobile = value
+        } else {
+            setState(prevState => ({...prevState, ...{landingPageMobile: null}}))
+            window.localStorage.removeItem("landingPageMobile")
+        }
         log.debug("Setting landing page on mobile to", value)
     }
     function resetTheme() {
