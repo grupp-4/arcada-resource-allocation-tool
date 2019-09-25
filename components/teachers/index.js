@@ -1,5 +1,7 @@
 import {withLogging} from "gillog"
 
+import {Fragment} from "react"
+
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
@@ -13,7 +15,7 @@ function Teachers({log, data}) {
     return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
             {data && data.teachers
-                ? data.teachers.map(teacher => <>{`${teacher.firstName} ${teacher.lastName}`}<br/></>)
+                ? data.teachers.map((teacher, index) => <Fragment key={index}>{`${teacher.firstName} ${teacher.lastName}`}<br/></Fragment>)
                 : "Loading teachers..."}
         </Typography>
     )

@@ -13,9 +13,11 @@ import PersistentLayout from "components/persistent-layout"
 
 import translateData from "utility/translate-data"
 
+import getLandingPagePreferences from "utility/landing-page-preferences"
+
 import useStringResources from "string-resources"
 
-import theme from "theme"
+import createTheme from "theme"
 
 import "css/make-document-viewport-height.css"
 
@@ -29,7 +31,11 @@ class _app extends __app {
 
     constructor(props) {
         super(props)
-        this.state = {data: null}
+        const theme = createTheme(log)
+        const {landingPage, landingPageMobile} = getLandingPagePreferences()
+        this.landingPage = landingPage
+        this.landingPageMobile = landingPageMobile
+        this.state = {data: null, theme: theme, mobile: false}
     }
 
     componentDidMount() {
@@ -47,21 +53,43 @@ class _app extends __app {
             })
     }
 
+    setTheme() {
+        this.setState({theme: createTheme(log)})
+    }
+
+    setMobile(mobile) {
+        this.setState({mobile: mobile})
+    }
+
     render() {
-        const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
         const strings = useStringResources()
         const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
+        const preferences = {
+            theme: this.state.theme.preference,
+            landingPage: this.landingPage,
+            landingPageMobile: this.landingPageMobile
+        }
         const {Component, pageProps} = this.props
         return (
             <>
                 <Head>
                     <title>{appName}</title>
                 </Head>
-                <ThemeProvider theme={theme}>
+                <ThemeProvider theme={this.state.theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline/>
-                    <PersistentLayout appName={appName} strings={strings}>
-                        <Component {...pageProps} data={this.state.data}/>
+                    <PersistentLayout
+                        appName={appName}
+                        preferences={preferences}
+                        setTheme={this.setTheme.bind(this)}
+                        setMobile={this.setMobile.bind(this)}
+                        strings={strings}>
+                        <Component
+                            landingPage={preferences.landingPage}
+                            landingPageMobile={preferences.landingPageMobile}
+                            mobile={this.state.mobile}
+                            data={this.state.data}
+                            {...pageProps}/>
                     </PersistentLayout>
                 </ThemeProvider>
             </>

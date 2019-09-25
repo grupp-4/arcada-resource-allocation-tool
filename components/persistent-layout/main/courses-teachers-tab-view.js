@@ -20,8 +20,6 @@ import Teachers from "components/teachers"
 
 import useStyles from "./styles"
 
-import themeParams from "theme/custom-parameters"
-
 function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
@@ -38,8 +36,14 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
     let currentTab = definitions.findIndex(definition => {
         return definition.key === pathname
     })
-    // If no match is found (which probably means the current URL path is root, a.k.a /) then
-    // currentTab defaults to the first index (0).
+    // If no match is found, then checks if current URL path is root (a.k.a /). If so, then
+    // gets the index of the "definition" that has the key that matches the client's landing page preference.
+    if (currentTab === -1 && pathname.length === 0) {
+        currentTab = definitions.findIndex(definition => {
+            return definition.key === children.props.landingPage
+        })
+    }
+    // If once again no match is found, currentTab defaults to the first index (0).
     if (currentTab === -1) currentTab = 0
 
     // ====== HOOKS ======>
@@ -118,7 +122,7 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     return (
         <>
-            <Tabs className={styles.tabs} value={state.currentTab} onChange={changeTab} indicatorColor={"primary"} centered aria-label={"tabs"}>
+            <Tabs className={styles.tabs} onChange={changeTab} value={state.currentTab} indicatorColor={"primary"} centered aria-label={"tabs"}>
                 {definitions.map(({key, label}, index) => {
                     return <Tab id={`tab-${index}`} key={key} label={label}
                                 aria-controls={`tabpanel-${index}`}/>
