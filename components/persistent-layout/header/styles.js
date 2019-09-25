@@ -20,21 +20,6 @@ function styles(theme) {
         },
         appName: {
             flexGrow: 1
-        },
-        preferencesMenuItem: {
-            outline: "none"
-        },
-        preferencesMenuFieldset: {
-            flexGrow: 1
-        },
-        preferencesMenuLegend: {
-            color: `${theme.palette.text.secondary} !important`
-        },
-        preferencesMenuLabel: {
-            flexGrow: 1
-        },
-        preferencesMenuLandingPageDesktop: {
-            width: `${100 / 1.5}%`
         }
     }
 }

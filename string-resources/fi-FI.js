@@ -31,7 +31,8 @@ const header = {
                 return cap(this._global.teachers)
             },
             _global: global
-        }
+        },
+        reset: "palauta"
     }
 }
 
