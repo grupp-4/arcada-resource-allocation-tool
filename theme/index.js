@@ -20,19 +20,21 @@ function autoSetTheme(log) {
     switch (true) {
         case isLightMode:
             mode = "light"
-            log.debug(`Adapting to client's preference of theme. Setting theme to light`)
+            log.debug("Adapting to client's preference of theme. Setting theme to light")
             break
         case isDarkMode:
             mode = "dark"
-            log.debug(`Adapting to client's preference of theme. Setting theme to dark`)
+            log.debug("Adapting to client's preference of theme. Setting theme to dark")
             break
         case notSpecified || notSupported:
             const date = new Date()
             const hours = date.getHours()
             if (hours < 7 || hours >= 23) mode = "dark"
             else mode = "light"
-            log.debug(  `Client doesn't express any kind of preference regarding theme. ` +
-                        `Setting theme to ${mode} based on local time (${date.toLocaleTimeString()})`)
+            log.debug(
+                `Client doesn't express any kind of preference regarding theme.`,
+                `Setting theme to ${mode} based on local time (${date.toLocaleTimeString()})`
+            )
     }
 
     window._theme = mode
@@ -48,6 +50,7 @@ export default function createTheme(log) {
     if (typeof(window) !== "undefined") {
         const mode = window.localStorage.theme
         if (mode) {
+            log.debug(`Adapting to client's explicit preference of theme. Setting theme to ${mode}`)
             window._theme = mode
             return executeThemeCreation(mode, {explicit: true})
         }

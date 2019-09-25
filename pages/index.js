@@ -18,7 +18,7 @@ function Index({log, mobile, landingPage, landingPageMobile, data}) {
                 log.debug(message, landingPageMobile)
                 return <EventsFeed data={data}/>
         }
-        log.debug("Client has no preference for landing page. Landing on default landing page for mobile: events-feed")
+        log.debug("Client has no preference for landing page. Landing on default landing page on mobile: events-feed")
         return <EventsFeed data={data}/>
     } else {
         const message = "Landing on client's preference for desktop landing page:"
