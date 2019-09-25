@@ -25,7 +25,7 @@ function Main({log, mobile, pathname, strings, children}) {
         <Container className={styles.container} maxWidth={themeParams.maxWidth}>
             <main className={styles.main}>
                 {pathname === "_error" ? children : (
-                    <Grid className={mobile ? "" : styles.gridContainer} container spacing={themeParams.spacing}>{mobile ? (
+                    <Grid className={!mobile && styles.gridContainer} container spacing={themeParams.spacing}>{mobile ? (
                         <Grid item xs={12}>{children}</Grid>
                     ) : (
                         <>

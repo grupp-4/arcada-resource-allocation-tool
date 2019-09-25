@@ -15,6 +15,7 @@ function styles(theme) {
             display: "flex"
         },
         menuLegendDesktop: {
+            alignItems: "baseline",
             justifyContent: "space-between",
             width: "100%"
         },
@@ -25,6 +26,9 @@ function styles(theme) {
         },
         menuLegendFocused: {
             color: `${theme.palette.text.primary} !important`
+        },
+        menuLegendSpan: {
+            paddingBottom: theme.spacing(1 / 2)
         },
         menuHelperText: {
             color: theme.palette.text.primary

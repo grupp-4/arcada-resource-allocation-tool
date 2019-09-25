@@ -88,7 +88,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
                         classes={{focused: styles.menuLegendFocused}}
                         component={"legend"}>
-                        <span>{strings.theme.label}</span>
+                        <span className={!mobile && styles.menuLegendSpan}>{strings.theme.label}</span>
                         {theme !== "auto"
                             ? (
                                 <Link component={"button"} onClick={resetTheme} variant={"caption"}>
@@ -122,7 +122,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
                         classes={{focused: styles.menuLegendFocused}}
                         component={"legend"}>
-                        <span>{strings.landingPage.label}</span>
+                        <span className={!mobile && styles.menuLegendSpan}>{strings.landingPage.label}</span>
                         {landingPage || landingPageMobile
                             ? (
                                 <Link component={"button"} onClick={resetLandingPages} variant={"caption"}>
