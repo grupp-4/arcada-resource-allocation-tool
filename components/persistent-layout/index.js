@@ -14,7 +14,7 @@ import Main from "./main"
 
 import themeParams from "theme/custom-parameters"
 
-function PersistentLayout({log, appName, children}) {
+function PersistentLayout({log, appName, preferences, setTheme, setMobile, strings, children}) {
 
     // ====== HOOKS ======>
 
@@ -22,16 +22,46 @@ function PersistentLayout({log, appName, children}) {
 
     const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint))
 
-    const [initializedPL, setInitializedPL] = useState(false)
+    const prefersColorSchemeDark = useMediaQuery("(prefers-color-scheme: dark)")
+    const prefersColorSchemeLight = useMediaQuery("(prefers-color-scheme: light)")
+    const prefersColorSchemeNoPreference = useMediaQuery("(prefers-color-scheme: no-preference)")
+
+    const [{initializedPL, initializedPCS}, setState] = useState({initializedPL: false, initializedPCS: false})
 
     useEffect(() => {
         if (initializedPL) {
+            setMobile(mobile)
             log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
         } else {
+            setMobile(mobile)
+            setState(prevState => ({...prevState, ...{initializedPL: true}}))
             log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
-            setInitializedPL(true)
         }
     }, [mobile])
+
+    useEffect(() => {
+        if (preferences.theme === "auto") {
+            let prefersColorScheme = ""
+            switch (true) {
+                case prefersColorSchemeDark && !prefersColorSchemeLight && !prefersColorSchemeNoPreference:
+                    prefersColorScheme = "dark"
+                    break
+                case !prefersColorSchemeDark && prefersColorSchemeLight && !prefersColorSchemeNoPreference:
+                    prefersColorScheme = "light"
+            }
+            if (prefersColorScheme && prefersColorScheme !== window._theme) {
+                log.debug(
+                    `Intercepted that client's preference of theme has changed to ${prefersColorScheme}.`,
+                    `Triggering reevaluation of theme`
+                )
+                setTheme()
+            }
+        }
+    }, [
+        prefersColorSchemeDark,
+        prefersColorSchemeLight,
+        prefersColorSchemeNoPreference
+    ])
 
     const router = useRouter()
 
@@ -43,8 +73,8 @@ function PersistentLayout({log, appName, children}) {
 
     return (
         <>
-            <Header appName={appName} mobile={mobile} pathname={pathname}/>
-            <Main mobile={mobile} pathname={pathname}>{children}</Main>
+            <Header appName={appName} preferences={preferences} setTheme={setTheme} mobile={mobile} pathname={pathname} strings={strings.header}/>
+            <Main mobile={mobile} pathname={pathname} strings={strings.main}>{children}</Main>
         </>
     )
 }

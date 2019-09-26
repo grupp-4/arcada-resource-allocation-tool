@@ -1,6 +1,8 @@
 import React from 'react';
 import {withLogging} from "gillog"
 
+import {Fragment} from "react"
+
 import Typography from "@material-ui/core/Typography"
 import useTypographyStyles from "styles/typography"
 

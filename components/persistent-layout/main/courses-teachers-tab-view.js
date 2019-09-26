@@ -22,7 +22,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function CoursesTeachersTabView({log, pathname, children}) {
+function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
 
@@ -31,15 +31,21 @@ function CoursesTeachersTabView({log, pathname, children}) {
     // key: Used for determining the pre-selected tab by matching URL path to this.
     // label: Tab title (in Swedish), hardcoded for now.
     const definitions = [
-        {key: "courses", label: "Kurser"},
-        {key: "teachers", label: "Lärare"}
+        {key: "courses", label: strings.coursesTabName},
+        {key: "teachers", label: strings.teachersTabName}
     ]
     // Gets the index of the "definition" that has a key that matches the current URL path.
     let currentTab = definitions.findIndex(definition => {
         return definition.key === pathname
     })
-    // If no match is found (which probably means the current URL path is root, a.k.a /) then
-    // currentTab defaults to the first index (0).
+    // If no match is found, then checks if current URL path is root (a.k.a /). If so, then
+    // gets the index of the "definition" that has the key that matches the client's landing page preference.
+    if (currentTab === -1 && pathname.length === 0) {
+        currentTab = definitions.findIndex(definition => {
+            return definition.key === children.props.landingPage
+        })
+    }
+    // If once again no match is found, currentTab defaults to the first index (0).
     if (currentTab === -1) currentTab = 0
 
     // ====== HOOKS ======>
@@ -49,13 +55,14 @@ function CoursesTeachersTabView({log, pathname, children}) {
     const theme = useTheme()
 
     const [state, setState] = useState({
-        currentTab: currentTab,
+        currentTab: 0,
         lastUpdated: "just nu", // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
 
     useEffect(() => {
-        log.debug(`Loading tab view with pre-selected tab: ${definitions[state.currentTab].key}`)
+        log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+        setState(prevState => ({...prevState, ...{currentTab: currentTab}}))
     }, [])
 
     // ====== EVENT HANDLERS ======>
@@ -115,10 +122,15 @@ function CoursesTeachersTabView({log, pathname, children}) {
     }
 
     // ====== RENDER ======>
-
     return (
         <>
-            <Tabs className={styles.tabs} value={state.currentTab} onChange={changeTab} indicatorColor={"primary"} centered aria-label={"tabs"}>
+            <Tabs
+                className={styles.tabs}
+                onChange={changeTab}
+                centered
+                indicatorColor={"primary"}
+                value={state.currentTab}
+                aria-label={"tabs"}>
                 {definitions.map(({key, label}, index) => {
                     return <Tab id={`tab-${index}`} key={key} label={label}
                                 aria-controls={`tabpanel-${index}`}/>
