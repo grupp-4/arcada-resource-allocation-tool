@@ -13,6 +13,9 @@ const global = {
 
 // ====== HEADER ======>
 const header = {
+    get appName() {
+        return this._global.appName
+    },
     preferencesMenu: {
         theme: {
             label: "Tila",
@@ -37,7 +40,8 @@ const header = {
         },
         about: "Meistä",
         reset: "palauta"
-    }
+    },
+    _global: global
 }
 
 // ====== MAIN ======>

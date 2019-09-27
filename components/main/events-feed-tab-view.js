@@ -10,17 +10,14 @@ import useStyles from "./styles"
 function EventsFeedTabView({log, data, strings}) {
 
     // ====== INITIAL LOGIC ======>
-
-    const key = "events-feed",
-        label = strings.eventsFeedTabName,
-        index = 0
+    const   key = "events-feed",
+            label = strings.eventsFeedTabName,
+            index = 0
 
     // ====== HOOKS ======>
-
     const styles = useStyles()
 
     // ====== RENDER ======>
-
     return (
         <>
             <Tabs className={styles.tabs} classes={{indicator: styles.eventsFeedTabIndicator}}

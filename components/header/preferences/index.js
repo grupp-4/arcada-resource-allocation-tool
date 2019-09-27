@@ -17,12 +17,10 @@ import useStyles from "./styles"
 function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
-
     const styles = useStyles()
     const [{theme, landingPage, landingPageMobile}, setState] = useState(preferences)
 
     // ====== EVENT HANDLERS ======>
-
     function changeTheme(event) {
         const value = event.target.value
         setState(prevState => ({...prevState, ...{theme: value}}))
@@ -68,9 +66,12 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         log.debug("Resetting landing page to courses")
         log.debug("Resetting landing page on mobile to events-feed")
     }
+    function goToAboutPage() {
+        // TODO: implement about page
+        log.debug("User tried to open link to the about page, a page which isn't yet implemented.")
+    }
 
     // ====== RENDER ======>
-
     return (
         <Menu
             open={!!anchorEl}
@@ -166,7 +167,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         </RadioGroup>
                     </FormControl>
                 </MenuItem>
-                <MenuItem>{strings.about}</MenuItem>
+                <MenuItem onClick={goToAboutPage}>{strings.about}</MenuItem>
         </Menu>
     )
 }

@@ -13,6 +13,9 @@ const global = {
 
 // ====== HEADER ======>
 const header = {
+    get appName() {
+        return this._global.appName
+    },
     preferencesMenu: {
         theme: {
             label: "状态",
@@ -37,7 +40,8 @@ const header = {
         },
         about: "关于",
         reset: "重启"
-    }
+    },
+    _global: global
 }
 
 // ====== MAIN ======>

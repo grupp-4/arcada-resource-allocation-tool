@@ -1,22 +1,34 @@
-import {createMuiTheme, responsiveFontSizes} from "@material-ui/core/styles"
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme"
+import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes"
 
 import params from "./custom-parameters"
 
 function executeThemeCreation(mode, options) {
-    const theme = responsiveFontSizes(createMuiTheme({palette: {type: mode}}))
+    const theme = responsiveFontSizes(createMuiTheme({
+        palette: {
+            type: mode,
+            primary: {
+                light: params.primaryLight,
+                main: params.primaryMain,
+                dark: params.primaryDark
+            },
+            secondary: {
+                light: params.secondaryLight,
+                main: params.secondaryMain,
+                dark: params.secondaryDark,
+            }
+        }
+    }))
     theme.preference = options && options.explicit ? mode : "auto"
     return theme
 }
 
 function autoSetTheme(log) {
-
     let mode = "light"
-
     const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
     const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
     const notSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
     const notSupported = !isDarkMode && !isLightMode && !notSpecified
-
     switch (true) {
         case isLightMode:
             mode = "light"
@@ -36,7 +48,6 @@ function autoSetTheme(log) {
                 `Setting theme to ${mode} based on local time (${date.toLocaleTimeString()})`
             )
     }
-
     window._theme = mode
     return executeThemeCreation(mode)
 }
@@ -47,7 +58,7 @@ function autoSetTheme(log) {
 // You can also customize aspects of the responsiveFontSizes function which enhances the theme created by createMuiTheme()
 // (see https://material-ui.com/customization/theming/#createmuitheme-options-theme for details)
 export default function createTheme(log) {
-    if (typeof(window) !== "undefined") {
+    if (typeof window !== "undefined") {
         const mode = window.localStorage.theme
         if (mode) {
             log.debug(`Adapting to client's explicit preference of theme. Setting theme to ${mode}`)

@@ -9,9 +9,17 @@ export default {
     spacing: 2, // Global spacing factor. Used as `theme.spacing(globalSpacingFactorComesHere)` (see https://material-ui.com/customization/spacing)
     tabBarElevation: 0, // The elevation (material design terminology for how much drop shadow) of the Tabs components
 
+    // primary and secondary colors
+    primaryLight: "#7986cb",
+    primaryMain: "#3f51b5",
+    primaryDark: "#303f9f",
+    secondaryLight: "#ff4081",
+    secondaryMain: "#f50057",
+    secondaryDark: "#c51162",
+
     // light/dark mode (see https://material-ui.com/customization/palette/#type-light-dark-theme)
     get darkMode() {
-        if (typeof (window) !== "undefined") {
+        if (typeof window !== "undefined") {
             switch (window._theme) {
                 case "light":
                     return false

@@ -1,7 +1,5 @@
 import {withLogging} from "gillog"
 
-import PropTypes from "prop-types"
-
 import {useState} from "react"
 
 import AppBar from "@material-ui/core/AppBar"
@@ -20,17 +18,15 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, appName, preferences, setStrings, setTheme, mobile, pathname, strings}) {
+function Header({log, preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
-
     const styles = useStyles()
     const [{langAnchor, prefAnchor}, setState] = useState({langAnchor: null, prefAnchor: null})
 
     // ====== EVENT HANDLERS ======>
-
     function openNavigationMenu() {
-        // TODO: implement menu
+        // TODO: implement navigation menu
         log.debug("User tried opening menu which isn't yet implemented.")
     }
     function openLanguagesMenu({currentTarget}) {
@@ -51,7 +47,6 @@ function Header({log, appName, preferences, setStrings, setTheme, mobile, pathna
     }
 
     // ====== RENDER ======>
-
     return (
         <>
             <AppBar className={styles.appBar} position={"sticky"}>
@@ -69,7 +64,7 @@ function Header({log, appName, preferences, setStrings, setTheme, mobile, pathna
                                 <MenuIcon/>
                         </IconButton>
                         <Typography className={styles.appName} variant={"h6"}>
-                            {appName}
+                            {strings.appName}
                         </Typography>
                         <IconButton
                             onClick={openLanguagesMenu}
@@ -95,7 +90,7 @@ function Header({log, appName, preferences, setStrings, setTheme, mobile, pathna
             <Languages
                 anchorEl={langAnchor}
                 onClose={closeLanguagesMenu}
-                setStrings={setStrings}/>
+                setLang={setLang}/>
             <Preferences
                 anchorEl={prefAnchor}
                 onClose={closePreferencesMenu}
@@ -105,11 +100,6 @@ function Header({log, appName, preferences, setStrings, setTheme, mobile, pathna
                 strings={strings.preferencesMenu}/>
         </>
     )
-}
-
-Header.propTypes = {
-    appName: PropTypes.string.isRequired,
-    mobile: PropTypes.bool.isRequired
 }
 
 export default withLogging(Header)

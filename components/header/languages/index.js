@@ -5,39 +5,30 @@ import {useRouter} from "next/router"
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 
-function Languages({log, anchorEl, onClose, setStrings}) {
+function Languages({log, anchorEl, onClose, setLang}) {
     // ====== HOOKS ======>
     const router = useRouter()
+
     // ====== INITIAL LOGIC ======>
     const languages = [
-        {
-            key: "en",
-            label: "English"
-        },
-        {
-            key: "se",
-            label: "Swedish"
-        },
-        {
-            key: "fi",
-            label: "Suomi"
-        },
-        {
-            key: "zh",
-            label: "中文"
-        }
+        {key: "en", label: "English"},
+        {key: "se", label: "Swedish"},
+        {key: "fi", label: "Suomi"},
+        {key: "zh", label: "中文"}
     ]
     let initialSelectedLang = "en"
-    if (typeof(window) !== "undefined" && window._lang) {
+    if (typeof window !== "undefined" && window._lang) {
         initialSelectedLang = window._lang
     }
+
     // ====== EVENT HANDLERS ======>
     function changeLang(lang) {
         window.localStorage.lang = lang
         log.debug(`Setting language to "${lang}"`)
-        setStrings()
+        setLang()
         onClose()
     }
+
     // ====== RENDER ======>
     return (
         <Menu

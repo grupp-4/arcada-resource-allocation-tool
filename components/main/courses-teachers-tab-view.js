@@ -2,7 +2,7 @@ import {withLogging} from "gillog"
 
 import {useEffect, useState} from "react"
 
-import {useTheme} from "@material-ui/core/styles"
+import useTheme from "@material-ui/core/styles/useTheme"
 
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
@@ -25,7 +25,6 @@ import themeParams from "theme/custom-parameters"
 function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
-
     // TODO: integrate with Next's Link component
     // definitions: Array of information about tabs to render.
     // key: Used for determining the pre-selected tab by matching URL path to this.
@@ -49,24 +48,19 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
     if (currentTab === -1) currentTab = 0
 
     // ====== HOOKS ======>
-
     const styles = useStyles()
-
     const theme = useTheme()
-
     const [state, setState] = useState({
         currentTab: 0,
         lastUpdated: 0, // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
-
     useEffect(() => {
         log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
         setState(prevState => ({...prevState, ...{currentTab: currentTab}}))
     }, [])
 
     // ====== EVENT HANDLERS ======>
-
     function changeTab(event, newValue) {
         // TODO: integrate with Next's Link component
         // Sets the `state` variable distributed throughout the tab view
@@ -74,19 +68,20 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
         log.debug(`Selecting tab: ${definitions[newValue].key}`)
         setState(prevState => ({...prevState, ...{currentTab: newValue}}))
     }
-
     function submitChanges() {
         // TODO: implement submitting changes
         log.debug("User tried to submit changes, a feature which isn't yet implemented.")
     }
-
     function discardChanges() {
         // TODO: implement submitting changes
         log.debug("User tried to discard changes, a feature which isn't yet implemented.")
     }
+    function syncData() {
+        // TODO: implement syncing data
+        log.debug("User tried to synchronize data, a feature which isn't yet implemented.")
+    }
 
     // ====== "SUB" COMPONENTS ======>
-
     function TabPanel({index, currentTab, children}) {
         return (
             <div
@@ -99,7 +94,6 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
             </div>
         )
     }
-
     function ConditionalFloatingActionButton({condition, children, ...props}) {
         // ====== INITIAL LOGIC ======>
         const transitionTimes = {
@@ -131,10 +125,10 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
                 indicatorColor={"primary"}
                 value={state.currentTab}
                 aria-label={"tabs"}>
-                {definitions.map(({key, label}, index) => {
-                    return <Tab id={`tab-${index}`} key={key} label={label}
-                                aria-controls={`tabpanel-${index}`}/>
-                })}
+                    {definitions.map(({key, label}, index) => {
+                        return <Tab id={`tab-${index}`} key={key} label={label}
+                                    aria-controls={`tabpanel-${index}`}/>
+                    })}
             </Tabs>
             {definitions.map(({key}, index) => {
                 // TODO: integrate with Next's Link component
@@ -153,26 +147,49 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
             })}
             <Grid className={styles.coursesTeachersTabViewFooter} container>
                 <Grid item xs={4}>
-                    <IconButton className={styles.syncButton} size={"small"} aria-label={"sync"}>
-                        <SyncRoundedIcon/>
+                    <IconButton
+                        className={styles.syncButton}
+                        onClick={syncData}
+                        size={"small"}
+                        aria-label={"sync"}>
+                            <SyncRoundedIcon/>
                     </IconButton>
                 </Grid>
                 <Grid className={styles.lastUpdatedContainer} item xs={4}>
                     <Typography className={styles.lastUpdated} variant={"caption"}>
-                        <b>{strings.lastUpdated}</b> {state.lastUpdated ? `${state.lastUpdated} ${strings.minutesAgo}` : strings.rightNow}
+                        <b>{strings.lastUpdated}</b>
+                        {state.lastUpdated
+                            ? ` ${state.lastUpdated} ${strings.minutesAgo}`
+                            : ` ${strings.rightNow}`}
                     </Typography>
                 </Grid>
-                <Grid className={styles.submitDiscardButtons} item container direction={"row-reverse"} spacing={themeParams.spacing / 2} xs={4}>
-                    <Grid item>
-                        <ConditionalFloatingActionButton className={styles.saveButton} condition={state.changes} color={"inherit"} aria-label={"save"}>
-                            <SaveIcon/>
-                        </ConditionalFloatingActionButton>
-                    </Grid>
-                    <Grid item>
-                        <ConditionalFloatingActionButton className={styles.discardButton} condition={state.changes} color={"inherit"} aria-label={"discard"}>
-                            <DeleteRoundedIcon/>
-                        </ConditionalFloatingActionButton>
-                    </Grid>
+                <Grid
+                    className={styles.submitDiscardButtons}
+                    container
+                    direction={"row-reverse"}
+                    item
+                    spacing={themeParams.spacing / 2}
+                    xs={4}>
+                        <Grid item>
+                            <ConditionalFloatingActionButton
+                                className={styles.saveButton}
+                                onClick={submitChanges}
+                                condition={state.changes}
+                                color={"inherit"}
+                                aria-label={"save"}>
+                                    <SaveIcon/>
+                            </ConditionalFloatingActionButton>
+                        </Grid>
+                        <Grid item>
+                            <ConditionalFloatingActionButton
+                                className={styles.discardButton}
+                                onClick={discardChanges}
+                                condition={state.changes}
+                                color={"inherit"}
+                                aria-label={"discard"}>
+                                    <DeleteRoundedIcon/>
+                            </ConditionalFloatingActionButton>
+                        </Grid>
                 </Grid>
             </Grid>
         </>

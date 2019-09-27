@@ -12,7 +12,6 @@ function Courses({log, data}) {
     const typographyStyles = useTypographyStyles()
 
     // ====== RENDER ======>
-    // TODO: create this component
     return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
             {data && data.courses

@@ -21,7 +21,7 @@ function selectResources(langCode) {
 }
 
 export default function useStringResources(log) {
-    if (typeof (window) !== "undefined" && typeof (navigator) !== "undefined") {
+    if (typeof window !== "undefined" && typeof navigator !== "undefined") {
         const local = window.localStorage.lang
         const session = window.sessionStorage.lang
         if (local) {

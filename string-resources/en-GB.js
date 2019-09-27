@@ -13,6 +13,9 @@ const global = {
 
 // ====== HEADER ======>
 const header = {
+    get appName() {
+        return this._global.appName
+    },
     preferencesMenu: {
         theme: {
             label: "Theme",
@@ -37,7 +40,8 @@ const header = {
         },
         about: "About",
         reset: "reset"
-    }
+    },
+    _global: global
 }
 
 // ====== MAIN ======>
