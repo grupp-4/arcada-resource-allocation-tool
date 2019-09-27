@@ -1,5 +1,8 @@
 import {cap} from "./utility"
 
+// ====== LANG ======>
+const code = "zh"
+
 // ====== GLOBALS ======>
 const global = {
     appName: "资源分配",
@@ -32,6 +35,7 @@ const header = {
             },
             _global: global
         },
+        about: "关于",
         reset: "重启"
     }
 }
@@ -47,7 +51,10 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    lastUpdated: "最近更新时间：",
+    minutesAgo: "几分钟前",
+    rightNow: "现在",
     _global: global
 }
 
-export default {global, header, main}
+export default {code, global, header, main}

@@ -56,7 +56,7 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
 
     const [state, setState] = useState({
         currentTab: 0,
-        lastUpdated: "just nu", // TODO: "actually" implement lastUpdated
+        lastUpdated: 0, // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
 
@@ -159,7 +159,7 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
                 </Grid>
                 <Grid className={styles.lastUpdatedContainer} item xs={4}>
                     <Typography className={styles.lastUpdated} variant={"caption"}>
-                        <b>Senast uppdaterad:</b> {state.lastUpdated}
+                        <b>{strings.lastUpdated}</b> {state.lastUpdated ? `${state.lastUpdated} ${strings.minutesAgo}` : strings.rightNow}
                     </Typography>
                 </Grid>
                 <Grid className={styles.submitDiscardButtons} item container direction={"row-reverse"} spacing={themeParams.spacing / 2} xs={4}>

@@ -1,31 +1,41 @@
 import {withLogging} from "gillog"
 
+import {useRouter} from "next/router"
+
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 
-function Languages({log, anchorEl, onClose}) {
+function Languages({log, anchorEl, onClose, setStrings}) {
+    // ====== HOOKS ======>
+    const router = useRouter()
     // ====== INITIAL LOGIC ======>
     const languages = [
         {
-            key: "english",
+            key: "en",
             label: "English"
         },
         {
-            key: "swedish",
+            key: "se",
             label: "Swedish"
         },
         {
-            key: "finnish",
+            key: "fi",
             label: "Suomi"
         },
         {
-            key: "chinese",
+            key: "zh",
             label: "中文"
         }
     ]
+    let initialSelectedLang = "en"
+    if (typeof(window) !== "undefined" && window._lang) {
+        initialSelectedLang = window._lang
+    }
     // ====== EVENT HANDLERS ======>
-    function changeLanguage(language) {
-        log.debug(`User tried changing language to "${language}", but the feature isn't yet implemented.`)
+    function changeLang(lang) {
+        window.localStorage.lang = lang
+        log.debug(`Setting language to "${lang}"`)
+        setStrings()
         onClose()
     }
     // ====== RENDER ======>
@@ -38,8 +48,9 @@ function Languages({log, anchorEl, onClose}) {
             id={"languages-menu"}>
             {languages.map(({key, label}) => (
                 <MenuItem
-                    onClick={() => changeLanguage(key)}
-                    selected={key === "swedish"}>
+                    key={key}
+                    onClick={() => changeLang(key)}
+                    selected={key === initialSelectedLang}>
                     {label}
                 </MenuItem>
             ))}

@@ -14,7 +14,7 @@ import Main from "./main"
 
 import themeParams from "theme/custom-parameters"
 
-function PersistentLayout({log, appName, preferences, setTheme, setMobile, strings, children}) {
+function PersistentLayout({log, appName, preferences, setMobile, setStrings, setTheme, strings, children}) {
 
     // ====== HOOKS ======>
 
@@ -73,8 +73,20 @@ function PersistentLayout({log, appName, preferences, setTheme, setMobile, strin
 
     return (
         <>
-            <Header appName={appName} preferences={preferences} setTheme={setTheme} mobile={mobile} pathname={pathname} strings={strings.header}/>
-            <Main mobile={mobile} pathname={pathname} strings={strings.main}>{children}</Main>
+            <Header
+                appName={appName}
+                preferences={preferences}
+                setStrings={setStrings}
+                setTheme={setTheme}
+                mobile={mobile}
+                pathname={pathname}
+                strings={strings.header}/>
+            <Main
+                mobile={mobile}
+                pathname={pathname}
+                strings={strings.main}>
+                    {children}
+            </Main>
         </>
     )
 }

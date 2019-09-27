@@ -26,14 +26,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeTheme(event) {
         const value = event.target.value
         setState(prevState => ({...prevState, ...{theme: value}}))
-        if (value !== "auto") {
-            window.localStorage.theme = value
-            setTheme()
-        } else {
-            window.localStorage.removeItem("theme")
-            setTheme()
-        }
+        if (value !== "auto") window.localStorage.theme = value
+        else window.localStorage.removeItem("theme")
         log.debug("Setting theme to", value)
+        setTheme()
     }
     function changeLandingPage(event) {
         const value = event.target.value
@@ -61,8 +57,8 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         const value = "auto"
         setState(prevState => ({...prevState, ...{theme: value}}))
         window.localStorage.removeItem("theme")
-        setTheme()
         log.debug("Resetting theme to", value)
+        setTheme()
     }
     function resetLandingPages() {
         const values = {landingPage: null, landingPageMobile: null}
@@ -82,95 +78,95 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
             anchorEl={anchorEl}
             keepMounted
             id={"preferences-menu"}>
-            <MenuItem className={styles.menuItem} button={false}>
-                <FormControl className={styles.menuFieldset} component={"fieldset"} id={"theme"}>
-                    <FormLabel
-                        className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
-                        classes={{focused: styles.menuLegendFocused}}
-                        component={"legend"}>
-                        <span className={!mobile && styles.menuLegendSpan}>{strings.theme.label}</span>
-                        {theme !== "auto"
-                            ? (
-                                <Link component={"button"} onClick={resetTheme} variant={"caption"}>
-                                    {strings.reset}
-                                </Link>
-                            ) : ""}
-                    </FormLabel>
-                    <RadioGroup
-                        onChange={changeTheme}
-                        row={!mobile}
-                        value={theme}
-                        aria-label={"theme"}>
-                        <FormControlLabel
-                            value={"auto"}
-                            control={<Radio/>}
-                            label={strings.theme.auto}/>
-                        <FormControlLabel
-                            value={"light"}
-                            control={<Radio/>}
-                            label={strings.theme.light}/>
-                        <FormControlLabel
-                            value={"dark"}
-                            control={<Radio/>}
-                            label={strings.theme.dark}/>
-                    </RadioGroup>
-                </FormControl>
-            </MenuItem>
-            <MenuItem className={styles.menuItem} button={false}>
-                <FormControl className={styles.menuFieldset} component={"fieldset"} id={"landing-page"}>
-                    <FormLabel
-                        className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
-                        classes={{focused: styles.menuLegendFocused}}
-                        component={"legend"}>
-                        <span className={!mobile && styles.menuLegendSpan}>{strings.landingPage.label}</span>
-                        {landingPage || landingPageMobile
-                            ? (
-                                <Link component={"button"} onClick={resetLandingPages} variant={"caption"}>
-                                    {strings.reset}
-                                </Link>
-                            ) : ""}
-                    </FormLabel>
-                    <FormHelperText className={styles.menuHelperText} id={"landing-page-desktop"}>
-                        {strings.landingPage.desktop}
-                    </FormHelperText>
-                    <RadioGroup
-                        onChange={changeLandingPage}
-                        row={!mobile}
-                        value={landingPage ? landingPage : "courses"}
-                        aria-label={"landing-page-desktop"}>
-                        <FormControlLabel
-                            value={"courses"}
-                            control={<Radio/>}
-                            label={strings.landingPage.courses}/>
-                        <FormControlLabel
-                            value={"teachers"}
-                            control={<Radio/>}
-                            label={strings.landingPage.teachers}/>
-                    </RadioGroup>
-                    <FormHelperText className={styles.menuHelperText} id={"landing-page-mobile"}>
-                        {strings.landingPage.mobile}
-                    </FormHelperText>
-                    <RadioGroup
-                        onChange={changeLandingPageMobile}
-                        row={!mobile}
-                        value={landingPageMobile ? landingPageMobile : "events-feed"}
-                        aria-label={"landing-page-mobile"}>
-                        <FormControlLabel
-                            value={"events-feed"}
-                            control={<Radio/>}
-                            label={strings.landingPage.eventsFeed}/>
-                        <FormControlLabel
-                            value={"courses"}
-                            control={<Radio/>}
-                            label={strings.landingPage.courses}/>
-                        <FormControlLabel
-                            value={"teachers"}
-                            control={<Radio/>}
-                            label={strings.landingPage.teachers}/>
-                    </RadioGroup>
-                </FormControl>
-            </MenuItem>
-            <MenuItem>About</MenuItem>
+                <MenuItem className={styles.menuItem} button={false}>
+                    <FormControl className={styles.menuFieldset} component={"fieldset"} id={"theme"}>
+                        <FormLabel
+                            className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
+                            classes={{focused: styles.menuLegendFocused}}
+                            component={"legend"}>
+                                <span className={!mobile ? styles.menuLegendSpan : null}>{strings.theme.label}</span>
+                                {theme !== "auto"
+                                    ? (
+                                        <Link component={"button"} onClick={resetTheme} variant={"caption"}>
+                                            {strings.reset}
+                                        </Link>
+                                    ) : null}
+                        </FormLabel>
+                        <RadioGroup
+                            onChange={changeTheme}
+                            row={!mobile}
+                            value={theme}
+                            aria-label={"theme"}>
+                                <FormControlLabel
+                                    value={"auto"}
+                                    control={<Radio/>}
+                                    label={strings.theme.auto}/>
+                                <FormControlLabel
+                                    value={"light"}
+                                    control={<Radio/>}
+                                    label={strings.theme.light}/>
+                                <FormControlLabel
+                                    value={"dark"}
+                                    control={<Radio/>}
+                                    label={strings.theme.dark}/>
+                        </RadioGroup>
+                    </FormControl>
+                </MenuItem>
+                <MenuItem className={styles.menuItem} button={false}>
+                    <FormControl className={styles.menuFieldset} component={"fieldset"} id={"landing-page"}>
+                        <FormLabel
+                            className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
+                            classes={{focused: styles.menuLegendFocused}}
+                            component={"legend"}>
+                                <span className={!mobile ? styles.menuLegendSpan : null}>{strings.landingPage.label}</span>
+                                {landingPage || landingPageMobile
+                                    ? (
+                                        <Link component={"button"} onClick={resetLandingPages} variant={"caption"}>
+                                            {strings.reset}
+                                        </Link>
+                                    ) : null}
+                        </FormLabel>
+                        <FormHelperText className={styles.menuHelperText} id={"landing-page-desktop"}>
+                            {strings.landingPage.desktop}
+                        </FormHelperText>
+                        <RadioGroup
+                            onChange={changeLandingPage}
+                            row={!mobile}
+                            value={landingPage ? landingPage : "courses"}
+                            aria-label={"landing-page-desktop"}>
+                                <FormControlLabel
+                                    value={"courses"}
+                                    control={<Radio/>}
+                                    label={strings.landingPage.courses}/>
+                                <FormControlLabel
+                                    value={"teachers"}
+                                    control={<Radio/>}
+                                    label={strings.landingPage.teachers}/>
+                        </RadioGroup>
+                        <FormHelperText className={styles.menuHelperText} id={"landing-page-mobile"}>
+                            {strings.landingPage.mobile}
+                        </FormHelperText>
+                        <RadioGroup
+                            onChange={changeLandingPageMobile}
+                            row={!mobile}
+                            value={landingPageMobile ? landingPageMobile : "events-feed"}
+                            aria-label={"landing-page-mobile"}>
+                                <FormControlLabel
+                                    value={"events-feed"}
+                                    control={<Radio/>}
+                                    label={strings.landingPage.eventsFeed}/>
+                                <FormControlLabel
+                                    value={"courses"}
+                                    control={<Radio/>}
+                                    label={strings.landingPage.courses}/>
+                                <FormControlLabel
+                                    value={"teachers"}
+                                    control={<Radio/>}
+                                    label={strings.landingPage.teachers}/>
+                        </RadioGroup>
+                    </FormControl>
+                </MenuItem>
+                <MenuItem>{strings.about}</MenuItem>
         </Menu>
     )
 }

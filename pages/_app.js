@@ -30,12 +30,16 @@ const log = isomorphic.getLogger("_app")
 class _app extends __app {
 
     constructor(props) {
+
         super(props)
-        const theme = createTheme(log)
+
         const {landingPage, landingPageMobile} = getLandingPagePreferences()
         this.landingPage = landingPage
         this.landingPageMobile = landingPageMobile
-        this.state = {data: null, theme: theme, mobile: false}
+
+        const theme = createTheme(log)
+        const strings = useStringResources(log)
+        this.state = {data: null, mobile: false, theme: theme, strings: strings}
     }
 
     componentDidMount() {
@@ -53,17 +57,20 @@ class _app extends __app {
             })
     }
 
-    setTheme() {
-        this.setState({theme: createTheme(log)})
-    }
-
     setMobile(mobile) {
         this.setState({mobile: mobile})
     }
 
+    setStrings() {
+        this.setState({strings: useStringResources(log)})
+    }
+
+    setTheme() {
+        this.setState({theme: createTheme(log)})
+    }
+
     render() {
-        const strings = useStringResources()
-        const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
+        const appName = this.state.strings.global.appName // TODO: make a real implementation for the app's name/page title
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
@@ -81,15 +88,16 @@ class _app extends __app {
                     <PersistentLayout
                         appName={appName}
                         preferences={preferences}
-                        setTheme={this.setTheme.bind(this)}
                         setMobile={this.setMobile.bind(this)}
-                        strings={strings}>
-                        <Component
-                            landingPage={preferences.landingPage}
-                            landingPageMobile={preferences.landingPageMobile}
-                            mobile={this.state.mobile}
-                            data={this.state.data}
-                            {...pageProps}/>
+                        setStrings={this.setStrings.bind(this)}
+                        setTheme={this.setTheme.bind(this)}
+                        strings={this.state.strings}>
+                            <Component
+                                landingPage={preferences.landingPage}
+                                landingPageMobile={preferences.landingPageMobile}
+                                mobile={this.state.mobile}
+                                data={this.state.data}
+                                {...pageProps}/>
                     </PersistentLayout>
                 </ThemeProvider>
             </>

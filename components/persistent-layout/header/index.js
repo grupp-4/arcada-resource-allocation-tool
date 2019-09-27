@@ -20,7 +20,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, appName, preferences, setTheme, mobile, pathname, strings}) {
+function Header({log, appName, preferences, setStrings, setTheme, mobile, pathname, strings}) {
 
     // ====== HOOKS ======>
 
@@ -57,27 +57,45 @@ function Header({log, appName, preferences, setTheme, mobile, pathname, strings}
             <AppBar className={styles.appBar} position={"sticky"}>
                 <Container className={styles.container} maxWidth={themeParams.maxWidth}>
                     <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
-                        <IconButton className={styles.navigationMenuButton} onClick={openNavigationMenu} color={"inherit"} edge={"start"}
-                                    aria-controls={"navigation-menu"} aria-haspopup={"true"} aria-label={"navigation"} style={{display: mobile ? "initial" : "none"}}>
-                            <MenuIcon/>
+                        <IconButton
+                            className={styles.navigationMenuButton}
+                            onClick={openNavigationMenu}
+                            color={"inherit"}
+                            edge={"start"}
+                            aria-controls={"navigation-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"navigation"}
+                            style={{display: mobile ? "initial" : "none"}}>
+                                <MenuIcon/>
                         </IconButton>
                         <Typography className={styles.appName} variant={"h6"}>
                             {appName}
                         </Typography>
-                        <IconButton onClick={openLanguagesMenu} color={"inherit"} size={mobile ? "medium" : "small"}
-                                    aria-controls={"languages-menu"} aria-haspopup={"true"} aria-label={"languages"}>
-                            <TranslateRoundedIcon/>
+                        <IconButton
+                            onClick={openLanguagesMenu}
+                            color={"inherit"}
+                            size={mobile ? "medium" : "small"}
+                            aria-controls={"languages-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"languages"}>
+                                <TranslateRoundedIcon/>
                         </IconButton>
-                        <IconButton onClick={openPreferencesMenu} color={"inherit"} size={mobile ? "medium" : "small"}
-                                    aria-controls={"preferences-menu"} aria-haspopup={"true"} aria-label={"preferences"}>
-                            <MoreVertIcon/>
+                        <IconButton
+                            onClick={openPreferencesMenu}
+                            color={"inherit"}
+                            size={mobile ? "medium" : "small"}
+                            aria-controls={"preferences-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"preferences"}>
+                                <MoreVertIcon/>
                         </IconButton>
                     </Toolbar>
                 </Container>
             </AppBar>
             <Languages
                 anchorEl={langAnchor}
-                onClose={closeLanguagesMenu}/>
+                onClose={closeLanguagesMenu}
+                setStrings={setStrings}/>
             <Preferences
                 anchorEl={prefAnchor}
                 onClose={closePreferencesMenu}

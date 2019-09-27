@@ -1,5 +1,8 @@
 import {cap} from "./utility"
 
+// ====== LANG ======>
+const code = "se"
+
 // ====== GLOBALS ======>
 const global = {
     appName: "Resursallokering",
@@ -32,16 +35,26 @@ const header = {
             },
             _global: global
         },
+        about: "Om oss",
         reset: "återställ"
     }
 }
 
 // ====== MAIN ======>
 const main = {
-    get eventsFeedTabName() {return cap(this._global.events)},
-    get coursesTabName() {return cap(this._global.courses)},
-    get teachersTabName() {return cap(this._global.teachers)},
+    get eventsFeedTabName() {
+        return cap(this._global.events)
+    },
+    get coursesTabName() {
+        return cap(this._global.courses)
+    },
+    get teachersTabName() {
+        return cap(this._global.teachers)
+    },
+    lastUpdated: "Senast uppdaterad:",
+    minutesAgo: "minuter sedan",
+    rightNow: "just nu",
     _global: global
 }
 
-export default {global, header, main}
+export default {code, global, header, main}

@@ -1,5 +1,8 @@
 import {cap} from "./utility"
 
+// ====== LANG ======>
+const code = "fi"
+
 // ====== GLOBALS ======>
 const global = {
     appName: "Resurssien kohdentaminen",
@@ -32,6 +35,7 @@ const header = {
             },
             _global: global
         },
+        about: "Meistä",
         reset: "palauta"
     }
 }
@@ -47,7 +51,10 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    lastUpdated: "Viimeksi päivitetty:",
+    minutesAgo: "minuuttia sitten",
+    rightNow: "juuri nyt",
     _global: global
 }
 
-export default {global, header, main}
+export default {code, global, header, main}
