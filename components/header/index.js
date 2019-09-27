@@ -49,7 +49,7 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
     // ====== RENDER ======>
     return (
         <>
-            <AppBar className={styles.appBar} position={"sticky"}>
+            <AppBar className={styles.appBar} position={"fixed"}>
                 <Container className={styles.container} maxWidth={themeParams.maxWidth}>
                     <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
                         <IconButton

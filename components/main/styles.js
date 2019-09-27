@@ -8,24 +8,38 @@ import red from "@material-ui/core/colors/red"
 import params from "theme/custom-parameters"
 
 function styles(theme) {
-    function getMediaQueryForMaxHeight() {
-        // Getting max height value
+    function getMinWidth() {
+        // Getting min width value
         const breakpointValues = theme.breakpoints.values
         const breakpointKeys = Object.keys(breakpointValues)
         const key = breakpointKeys[breakpointKeys.indexOf(params.mobileBreakPoint) + 1]
-        const maxHeight = breakpointValues[key]
-        // Return media query string
-        return `@media (min-width: ${maxHeight}px) and (min-height: ${params.mainMaxHeight}px)`
+        return breakpointValues[key]
     }
     return {
         container: {
             flexGrow: 1,
+            marginTop: theme.mixins.toolbar.minHeight + theme.spacing(params.spacing),
             paddingLeft: theme.spacing(params.spacing),
-            paddingRight: theme.spacing(params.spacing)
+            paddingRight: theme.spacing(params.spacing),
+            "@media (min-width:600px)": {
+                marginTop: theme.mixins.toolbar["@media (min-width:600px)"].minHeight + theme.spacing(params.spacing)
+            },
+            [`@media (min-width:${getMinWidth()}px)`]: {
+                marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight + theme.spacing(params.spacing)
+            }
+        },
+        containerMobile: {
+            marginBottom: theme.mixins.toolbar.minHeight,
+            "@media (min-width:600px)": {
+                marginBottom: theme.mixins.toolbar["@media (min-width:600px)"].minHeight
+            },
+            [`@media (min-width:${getMinWidth()}px)`]: {
+                marginBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
+            }
         },
         main: {
             height: "100%",
-            [getMediaQueryForMaxHeight()]: {
+            [`@media (min-width: ${getMinWidth()}px) and (min-height: ${params.mainMaxHeight}px)`]: {
                 maxHeight: params.mainMaxHeight
             }
         },
@@ -35,7 +49,8 @@ function styles(theme) {
         gridItem: {
             display: "flex",
             flexFlow: "column",
-            height: "100%"
+            height: "100%",
+            overflow: "hidden"
         },
         paper: {
             display: "flex",
@@ -58,40 +73,6 @@ function styles(theme) {
             flexBasis: 0,
             flexGrow: 1,
             overflow: "auto"
-        },
-        coursesTeachersTabViewFooter: {
-            height: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
-        },
-        lastUpdatedContainer: {
-            contentAlign: "middle"
-        },
-        syncButton: {
-            marginLeft: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 6,
-            marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 6
-        },
-        lastUpdated: {
-            display: "inline-block",
-            marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3,
-            textAlign: "center",
-            width: "100%"
-        },
-        submitDiscardButtons: {
-            position: "relative",
-            top: 0 - theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3
-        },
-        saveButton: {
-            background: `${green[500]} !important`,
-            color: `${theme.palette.common.white} !important`,
-            "&:hover": {
-                background: `${green[600]} !important`
-            }
-        },
-        discardButton: {
-            background: `${red[500]} !important`,
-            color: `${theme.palette.common.white} !important`,
-            "&:hover": {
-                background: `${red[600]} !important`
-            }
         }
     }
 }

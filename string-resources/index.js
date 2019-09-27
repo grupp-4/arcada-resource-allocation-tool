@@ -44,7 +44,7 @@ export default function useStringResources(log) {
                 log.debug(`Setting language to "${lang.code}" based on client's browser's language preference`)
                 return mergeResources(en, lang, "strings", log)
             } else {
-                log.debug(`Setting language to "${lang.code}" based on nothing`)
+                log.debug(`Setting language to "en" based on nothing`)
                 window.sessionStorage.lang = "en"
                 window._lang = "en"
                 return en
