@@ -4,7 +4,7 @@ function styles(theme) {
     return (
         {
             tableCell: {
-                '&:head': {
+                '&$head': {
                     backgroundColor: theme.palette.common.black,
                     color: theme.palette.common.white,
                     body: {
@@ -15,14 +15,10 @@ function styles(theme) {
                     backgroundColor: 'red'
                 },
             },
-            tableRow: {
+            tableRowRoot: {
                 '&:nth-of-type(odd)': {
                     backgroundColor: theme.palette.background.default,
                 },
-                '&:hover': {
-                    backgroundColor: theme.palette.primary.dark,
-                    color: theme.palette.common.white,
-                }
             },
             root: {
                 width: '100%',
@@ -61,7 +57,7 @@ function styles(theme) {
                 marginBottom: 12,
             },
             inputBase: {
-                '&:input': {
+                input: {
                     border: '1px solid black',
                     backgroundColor: 'blue',
                 },

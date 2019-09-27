@@ -37,16 +37,20 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Loading data
-        fetch("http://localhost:3000/static/test-data-refactored.json")
+        fetch("http://localhost:3000/static/mockup-data-periods.json")
             .then(res => res.json())
             .then(data => {
                 log.debug("Loaded data (raw):", data)
                 const translatedData = translateData(data)
                 log.debug("Loaded data (translated):", translatedData)
+                this.setState({ data: translatedData });
             })
+    }
+
+    render() {
         const appName = "Resursallokering" // TODO: make a real implementation for the app's name/page title
         const strings = useStringResources()
-        const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
+        // const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
         const { Component, pageProps } = this.props
         return (
             <>

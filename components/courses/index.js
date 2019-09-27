@@ -1,10 +1,10 @@
-import {withLogging} from "gillog"
+import { withLogging } from "gillog"
 
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function Courses({log, data}) {
+function Courses({ log, data }) {
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
@@ -14,8 +14,8 @@ function Courses({log, data}) {
     return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
             {data && data.courses
-                ? data.courses.map(course => <>{course.name}<br/></>)
-                : "Loading teachers..."}
+                ? data.courses.map(course => <>{course.name}<br /></>)
+                : "Loading courses... not"}
         </Typography>
     )
 }
