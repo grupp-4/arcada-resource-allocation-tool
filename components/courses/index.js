@@ -14,6 +14,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 /*Styles
 ** NOTES:
@@ -46,6 +48,17 @@ function Courses({log, data}) {
     // ====== HOOKS ======>
     //const typographyStyles = useTypographyStyles()
 
+    //3 functions for dropdown menu of teachers
+    const [anchorteacher, setAnchorteacher] = React.useState(null);
+
+    const selectTeacher = event => {
+      setAnchorteacher(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorteacher(null);
+    };    
+
     // ====== RENDER ======>
     // Fixed: Avatar
     // Fixed: Display cards in a grid
@@ -75,7 +88,18 @@ function Courses({log, data}) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Add Teacher</Button>
+                <Button size="small" onClick={selectTeacher}>Add Teacher</Button>
+                  <Menu
+                    id="teachers-menu"
+                    anchorEl={anchorteacher}
+                    keepMounted
+                    open={Boolean(anchorteacher)}
+                    onClose={handleClose}
+                    >
+                    {data.teachers.map(teacher =>
+                    <MenuItem onClick={handleClose}>{teacher.firstName} {teacher.lastName}</MenuItem>
+                    )}
+                    </Menu>
               </CardActions>
             </Card>
           </Grid>
