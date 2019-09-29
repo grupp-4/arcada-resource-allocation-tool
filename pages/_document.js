@@ -1,14 +1,10 @@
-import {isomorphic} from "gillog"
-
 import {Fragment} from "react"
 
 import __document, {Head, Html, Main, NextScript} from "next/document"
 
 import {ServerStyleSheets} from "@material-ui/styles"
 
-import theme from "theme"
-
-const log = isomorphic.getLogger("_document")
+import themeParams from "theme/custom-parameters"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
@@ -70,7 +66,7 @@ class _document extends __document {
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
                     {/* PWA primary color */}
-                    <meta name="theme-color" content={theme.palette.primary.main}/>
+                    <meta name="theme-color" content={themeParams.primaryMain}/>
                 </Head>
                 <body>
                     <Main/>
