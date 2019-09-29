@@ -40,7 +40,7 @@ function Main({log, mobile, strings, footerStrings, children}) {
                         </Grid>
                         <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                <CoursesTeachersTabView pathname={router.pathname} strings={strings} footerStrings={footerStrings}>{children}</CoursesTeachersTabView>
+                                <CoursesTeachersTabView pathname={router.pathname.slice(1)} strings={strings} footerStrings={footerStrings}>{children}</CoursesTeachersTabView>
                             </Paper>
                         </Grid>
                     </Grid>
