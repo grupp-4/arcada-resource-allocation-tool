@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function EventsFeed({log}) {
+function EventsFeed({log, strings}) {
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()

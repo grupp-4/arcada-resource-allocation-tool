@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function Courses({log, data}) {
+function Courses({log, data, strings}) {
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
