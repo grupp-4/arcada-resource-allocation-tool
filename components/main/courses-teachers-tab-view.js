@@ -11,7 +11,7 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, pathname, strings, children}) {
+function CoursesTeachersTabView({log, pathname, strings, footerStrings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // TODO: integrate with Next's Link component
@@ -99,7 +99,7 @@ function CoursesTeachersTabView({log, pathname, strings, children}) {
                 }
                 return <TabPanel key={key} index={index} currentTab={state.currentTab}>{content}</TabPanel>
             })}
-            <Footer strings={strings}/>
+            <Footer strings={footerStrings}/>
         </>
     )
 }

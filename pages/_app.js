@@ -129,13 +129,14 @@ class _app extends __app {
                                 strings={strings.header}/>
                             <Main
                                 mobile={mobile}
-                                strings={strings.main}>
+                                strings={strings.main}
+                                footerStrings={strings.footer}>
                                     <Component
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
                                         data={data}
                                         mobile={mobile}
-                                        strings={strings.pages}
+                                        strings={strings.main}
                                         {...pageProps}/>
                             </Main>
                     </PersistentLayoutController>

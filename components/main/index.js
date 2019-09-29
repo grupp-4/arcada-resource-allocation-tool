@@ -14,7 +14,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-function Main({log, mobile, strings, children}) {
+function Main({log, mobile, strings, footerStrings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -29,7 +29,7 @@ function Main({log, mobile, strings, children}) {
                         <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                             <Grid item xs={12}>{children}</Grid>
                         </Grid>
-                        <Footer mobile={mobile} strings={strings}/>
+                        <Footer mobile={mobile} strings={footerStrings}/>
                     </>
                 ) : (
                     <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
@@ -40,7 +40,7 @@ function Main({log, mobile, strings, children}) {
                         </Grid>
                         <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                <CoursesTeachersTabView pathname={router.pathname} strings={strings}>{children}</CoursesTeachersTabView>
+                                <CoursesTeachersTabView pathname={router.pathname.slice(1)} strings={strings} footerStrings={footerStrings}>{children}</CoursesTeachersTabView>
                             </Paper>
                         </Grid>
                     </Grid>

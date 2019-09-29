@@ -1,13 +1,9 @@
 import {withLogging} from "gillog"
 
-import {useRouter} from "next/router"
-
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 
 function Languages({log, anchorEl, onClose, setLang}) {
-    // ====== HOOKS ======>
-    const router = useRouter()
 
     // ====== INITIAL LOGIC ======>
     const languages = [
