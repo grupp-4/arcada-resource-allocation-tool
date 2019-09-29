@@ -27,20 +27,16 @@ function Navigation({log, open, onClose, landingPage, strings}) {
     const router = useRouter()
 
     // ====== MISC. LOGIC ======>
-    let initialSelectedItem = router.pathname.slice(1) || landingPage || "events-feed"
+    let initialSelectedItem = router.asPath.slice(1) || landingPage || "events-feed"
 
     // ====== EVENT HANDLERS ======>
     function onClick(key) {
-        if (key !== "events-feed") {
-            log.debug("Navigating to:", key)
-            router.replace(`/${key}`).then(() => {
-                log.debug("Navigated to:", key)
-            }).catch(error => {
-                log.error(error.stack)
-            })
-        } else {
-            log.debug(`Navigation to ${key} not yet implemented.`)
-        }
+        log.debug("Navigating to:", key)
+        router.replace(`/?page=${key}`, `/${key !== "events-feed" ? key : ""}`, {shallow: true}).then(() => {
+            log.debug("Navigated to:", key)
+        }).catch(error => {
+            log.error(error.stack)
+        })
     }
 
     // ====== RENDER ======>

@@ -2,6 +2,8 @@ import {withLogging} from "gillog"
 
 import {useEffect, useState} from "react"
 
+import {useRouter} from "next/router"
+
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 
@@ -11,30 +13,17 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, pathname, strings, footerStrings, children}) {
+function CoursesTeachersTabView({log, strings, footerStrings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // TODO: integrate with Next's Link component
     // definitions: Array of information about tabs to render.
     // key: Used for determining the pre-selected tab by matching URL path to this.
-    // label: Tab title (in Swedish), hardcoded for now.
+    // label: Tab title.
     const definitions = [
         {key: "courses", label: strings.coursesTabName},
         {key: "teachers", label: strings.teachersTabName}
     ]
-    // Gets the index of the "definition" that has a key that matches the current URL path.
-    let currentTab = definitions.findIndex(definition => {
-        return definition.key === pathname
-    })
-    // If no match is found, then checks if current URL path is root (a.k.a /). If so, then
-    // gets the index of the "definition" that has the key that matches the client's landing page preference.
-    if (currentTab === -1 && pathname.length === 0) {
-        currentTab = definitions.findIndex(definition => {
-            return definition.key === children.props.landingPage
-        })
-    }
-    // If once again no match is found, currentTab defaults to the first index (0).
-    if (currentTab === -1) currentTab = 0
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -45,6 +34,7 @@ function CoursesTeachersTabView({log, pathname, strings, footerStrings, children
         log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
         setState(prevState => ({...prevState, ...{currentTab: currentTab}}))
     }, [])
+    const router = useRouter()
 
     // ====== EVENT HANDLERS ======>
     function changeTab(event, newValue) {
@@ -68,6 +58,22 @@ function CoursesTeachersTabView({log, pathname, strings, footerStrings, children
             </div>
         )
     }
+
+    // ====== MISC. LOGIC ======>
+    // Gets the index of the "definition" that has a key that matches the current URL path.
+    const url = router.asPath.slice(1)
+    let currentTab = definitions.findIndex(definition => {
+        return definition.key === url
+    })
+    // If no match is found, then checks if current URL path is root (a.k.a /). If so, then
+    // gets the index of the "definition" that has the key that matches the client's landing page preference.
+    if (currentTab === -1 && !url) {
+        currentTab = definitions.findIndex(definition => {
+            return definition.key === children.props.landingPage
+        })
+    }
+    // If once again no match is found, currentTab defaults to the first index (0).
+    if (currentTab === -1) currentTab = 0
 
     // ====== RENDER ======>
     return (
