@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography"
 import TranslateRoundedIcon from "@material-ui/icons/TranslateRounded"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
 
-import Drawer from "./navigation"
+import Navigation from "./navigation"
 import Languages from "./languages"
 import Preferences from "./preferences"
 
@@ -92,9 +92,11 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Drawer
+            <Navigation
                 open={navOpen}
-                closeDrawer={closeNavigationMenu}/>
+                onClose={closeNavigationMenu}
+                landingPage={preferences.landingPageMobile}
+                strings={strings.navigationMenu}/>
             <Languages
                 anchorEl={langAnchor}
                 onClose={closeLanguagesMenu}

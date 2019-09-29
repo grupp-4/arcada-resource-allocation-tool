@@ -16,6 +16,18 @@ const header = {
     get appName() {
         return this._global.appName
     },
+    navigationMenu: {
+        get eventsFeed() {
+            return cap(this._global.events)
+        },
+        get courses() {
+            return cap(this._global.courses)
+        },
+        get teachers() {
+            return cap(this._global.teachers)
+        },
+        _global: global
+    },
     preferencesMenu: {
         theme: {
             label: "Tila",
