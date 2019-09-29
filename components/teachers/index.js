@@ -11,38 +11,39 @@ import useStyles from "./styles.js";
 import { InputBase } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from "@material-ui/core/styles";
 import AddCourse from "components/teachers/add-course"
 import CreateDropdownList from "utility/create-dropdown-list.js"
 
 
-
+// TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
 function Teachers({ log, data }) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
     const styles = useStyles();
     const [modifiedJson, setModifiedJson] = useState(data);
 
+    console.log('modifiedJson inside Teachers function');
+    console.log(modifiedJson);
+
     const modifyHours = (e, courseC, courses, period) => {
-        e.persist();
+        e.persist(); // This allows event to be read during function execution, in cost of performance
+
         // https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
         // Not even this might be needed, because in the setModifiedJson it doesn't use the courses parameter
-        //courses.find(x => x.courseCode === courseC).hours = e.target.value; // Spooky action
-        //let newHour = courses.find(x => x.courseCode === courseC).hours.period;
-        //        let index = courses.findIndex(x => x.courseCode === courseC); Probably not needed anymore
+        // courses.find(x => x.courseCode === courseC).hours = e.target.value; // Spooky action
+        // let newHour = courses.find(x => x.courseCode === courseC).hours.period;
+        // let index = courses.findIndex(x => x.courseCode === courseC); Probably not needed anymore
+
+        // Takes the element's value
         let newHour = e.target.value;
 
         console.log('modifiedjson inside modifyHours()');
         console.log(modifiedJson);
 
-
-
+        // Updates modifiedJson
         setModifiedJson(prevState => ({
-
-            ...prevState,
+            ...prevState, // ...prevState means it adds all unmodified properties of modifiedJson, same with ...el
             courses: prevState.courses.map(el => {
                 if (el.courseCode === courseC) {
                     let hoursObj = el.hours;
@@ -54,36 +55,25 @@ function Teachers({ log, data }) {
             ),
 
         }));
-        /*
-                setModifiedJson(prevState => ({
-                    
-                    courses: prevState.courses.map(
-                        el => el.courseCode === courseC ? { ...el, hours: { [period]: newHour } } : el) //Skapa en till map för hours objektet
-                        ,
-                    teachers: prevState.teachers
-                }));
-        */
     };
 
-
+    // Iterates through every teacher in modifiedJson and returns a Table component
     const mapTeachers = (teacher, incomingData, styles, dropdownList) => {
         const courses = incomingData.courses;
         const teacherFullName = `${teacher.firstName} ${teacher.lastName}`;
-        let assignedCourses = courses.filter((course) => {
-
-
-            return (course.teacher == teacherFullName)
-        });
+        let assignedCourses = courses.filter((course) => { return (course.teacher == teacherFullName) }); // Makes array of courses that match teacher name
 
         return (
             <>
                 <Card className={styles.card}>
                     <CardContent>
+                        {/*Teacher's name on top of table*/}
                         <Grid container justify="center" alignItems="center">
                             {teacher.lastName}, {teacher.firstName} <br />
                         </Grid>
-                        <Table className={styles.table} key={teacherFullName + "table"}
-                            // Not yet worked out, perhaps className is overriding this
+                        <Table className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
+                            key={teacherFullName + "table"}
+                            // Not working
                             classes={{
                                 root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
                                 label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
@@ -92,10 +82,10 @@ function Teachers({ log, data }) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell className={styles.tableCell}>Course</TableCell>
-                                    <TableCell align="right">Period 1</TableCell>
-                                    <TableCell align="right">Period 2</TableCell>
-                                    <TableCell align="right">Period 3</TableCell>
-                                    <TableCell align="right">Period 4</TableCell>
+                                    <TableCell align="left">Period 1</TableCell>
+                                    <TableCell align="left">Period 2</TableCell>
+                                    <TableCell align="left">Period 3</TableCell>
+                                    <TableCell align="left">Period 4</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -110,8 +100,8 @@ function Teachers({ log, data }) {
                                                     component="th"
                                                     scope="row"
                                                     key={element.name + "-cell1"}
-                                                    className={styles.tableCell}>
-                                                    {element.name + " " + element.courseCode}
+                                                    className={styles.tableCell, styles.thCustomWidth}>
+                                                    {element.name}<br />{element.courseCode}
                                                 </TableCell>
                                                 <TableCell align="right" key={element.name + "-cell2"}>
                                                     <InputBase
@@ -125,7 +115,7 @@ function Teachers({ log, data }) {
                                                 <TableCell align="right" key={element.name + "-cell3"}>
                                                     <InputBase
                                                         key={element.name + "-input2"}
-                                                        className={styles.margin}
+                                                        className={styles.inputBase}
                                                         defaultValue={element.hours.p2}
                                                         inputProps={{ 'aria-label': 'naked' }}
                                                         margin='dense'
@@ -135,7 +125,7 @@ function Teachers({ log, data }) {
                                                 <TableCell align="right" key={element.name + "-cell4"}>
                                                     <InputBase
                                                         key={element.name + "-input3"}
-                                                        className={styles.margin}
+                                                        className={styles.inputBase}
                                                         defaultValue={element.hours.p3}
                                                         inputProps={{ 'aria-label': 'naked' }}
                                                         margin='dense'
@@ -145,7 +135,7 @@ function Teachers({ log, data }) {
                                                 <TableCell align="right" key={element.name + "-cell5"}>
                                                     <InputBase
                                                         key={element.name + "-input4"}
-                                                        className={styles.margin}
+                                                        className={styles.inputBase}
                                                         defaultValue={element.hours.p4}
                                                         inputProps={{ 'aria-label': 'naked' }}
                                                         margin='dense'
@@ -158,11 +148,13 @@ function Teachers({ log, data }) {
                                 })}
                             </TableBody>
                         </Table>
+
                         <AddCourse
                             addCourseData={incomingData}
                             teacher={teacherFullName}
                             dropdownList={dropdownList}
                         />
+
                     </CardContent>
                 </Card>
             </>
@@ -170,19 +162,16 @@ function Teachers({ log, data }) {
     }
 
     // ====== RENDER ======>
-    // TODO: create this component
 
+    // Only starts rendering once data from api is ready
     if (data && data.teachers) {
+        // Creates array of all course's names, which gets sent to the AddCourse component
         const dropdownList = CreateDropdownList(modifiedJson)
-
 
         return (
             <Typography className={typographyStyles.typography} variant={"body1"} >
                 <div className={styles.root}>
-                    {
-
-                        modifiedJson.teachers.map((teacher) => mapTeachers(teacher, modifiedJson, styles, dropdownList))
-                    }
+                    {modifiedJson.teachers.map((teacher) => mapTeachers(teacher, modifiedJson, styles, dropdownList))}
                 </div>
             </Typography>
         );

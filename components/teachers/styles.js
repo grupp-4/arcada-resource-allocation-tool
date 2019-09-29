@@ -1,11 +1,27 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
 
 function styles(theme) {
     return (
         {
+            thCustomWidth: {
+                width: 300
+            },
+            nestedElements: {
+                "& th": {
+                    padding: "7px 0px 7px 10px",
+                },
+                "& td": {
+                    padding: "7px 20px 7px 10px",
+                },
+                "& input": {
+                    padding: "7px 20px 7px 10px",
+                    textAlign: "center",
+                }
+            },
             tableCell: {
-                '&:head': {
-                    backgroundColor: theme.palette.common.black,
+                "& head": {
+                    backgroundColor: "red",
                     color: theme.palette.common.white,
                     body: {
                         fontSize: 14,
@@ -14,6 +30,7 @@ function styles(theme) {
                 root: {
                     backgroundColor: 'red'
                 },
+
             },
             tableRow: {
                 '&:nth-of-type(odd)': {
@@ -61,9 +78,9 @@ function styles(theme) {
                 marginBottom: 12,
             },
             inputBase: {
-                '&:input': {
-                    border: '1px solid black',
-                    backgroundColor: 'blue',
+                /* Applying styles to children elements is like this, "& elementName" remember the space*/
+                '& input': {
+                    borderBottom: '1px solid black',
                 },
             },
         }

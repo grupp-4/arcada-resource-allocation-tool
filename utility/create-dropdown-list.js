@@ -9,7 +9,7 @@ export default function CreateDropdownList(dataObj) {
         return courseArray;
     }
     else {
-        console.log("No Data Yet in add-course")
+        console.log("No Data Yet for dropdown")
         console.log(dataObj);
     }
 }

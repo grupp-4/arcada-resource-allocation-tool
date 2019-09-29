@@ -1,292 +1,19 @@
 import { withLogging } from "gillog";
 import { useState, useEffect } from "react";
 import useStyles from "./styles.js";
-
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import Select from 'react-select';
-import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
-import CancelIcon from '@material-ui/icons/Cancel';
 
 
-const fuckPenis = [
-    {
-        "value": "Webbutveckling",
-        "label": "Webbutveckling"
-    },
-    {
-        "value": "Matematisk programmering",
-        "label": "Matematisk programmering"
-    },
-    {
-        "value": "Pre-Calculus",
-        "label": "Pre-Calculus"
-    },
-    {
-        "value": "Webbtjänster och molnteknologi",
-        "label": "Webbtjänster och molnteknologi"
-    },
-    {
-        "value": "Mjukvaruutvecklingsprocessen - Devops",
-        "label": "Mjukvaruutvecklingsprocessen - Devops"
-    },
-    {
-        "value": "Ramverk och webbapplikationer",
-        "label": "Ramverk och webbapplikationer"
-    },
-    {
-        "value": "IT-juridik och etik",
-        "label": "IT-juridik och etik"
-    },
-    {
-        "value": "Databearbetning",
-        "label": "Databearbetning"
-    },
-    {
-        "value": "Beslutssystemutveckling och verifikation",
-        "label": "Beslutssystemutveckling och verifikation"
-    },
-    {
-        "value": "Preskriptiv analytik",
-        "label": "Preskriptiv analytik"
-    },
-    {
-        "value": "Oscillation och partikelsystem",
-        "label": "Oscillation och partikelsystem"
-    },
-    {
-        "value": "Autonoma agenter",
-        "label": "Autonoma agenter"
-    },
-    {
-        "value": "Vektorer och krafter",
-        "label": "Vektorer och krafter"
-    },
-    {
-        "value": "Programmering och databehandling",
-        "label": "Programmering och databehandling"
-    },
-    {
-        "value": "Introduktion till webbdesign",
-        "label": "Introduktion till webbdesign"
-    },
-    {
-        "value": "Front-end programmering",
-        "label": "Front-end programmering"
-    },
-    {
-        "value": "Design av analytiska system",
-        "label": "Design av analytiska system"
-    },
-    {
-        "value": "Maskininlärning och optimering",
-        "label": "Maskininlärning och optimering"
-    },
-    {
-        "value": "Projektledning",
-        "label": "Projektledning"
-    },
-    {
-        "value": "Visualisering av information",
-        "label": "Visualisering av information"
-    },
-    {
-        "value": "Back-end programmering",
-        "label": "Back-end programmering"
-    },
-    {
-        "value": "Innehållshanteringssystem",
-        "label": "Innehållshanteringssystem"
-    },
-    {
-        "value": "Statistik och sannolikhet",
-        "label": "Statistik och sannolikhet"
-    },
-    {
-        "value": "Deskriptiv analytik - Data/Text mining",
-        "label": "Deskriptiv analytik - Data/Text mining"
-    },
-    {
-        "value": "Datorseende",
-        "label": "Datorseende"
-    },
-    {
-        "value": "Cloud Native Apps",
-        "label": "Cloud Native Apps"
-    },
-    {
-        "value": "Nätverksprotokoll och datasäkerhet",
-        "label": "Nätverksprotokoll och datasäkerhet"
-    },
-    {
-        "value": "Datastrukturer och algoritmer",
-        "label": "Datastrukturer och algoritmer"
-    },
-    {
-        "value": "Metodologi och examensseminarium",
-        "label": "Metodologi och examensseminarium"
-    },
-    {
-        "value": "Webbkommunikation, Databaser och CMS",
-        "label": "Webbkommunikation, Databaser och CMS"
-    },
-    {
-        "value": "Datorarkitektur och operativsystem",
-        "label": "Datorarkitektur och operativsystem"
-    },
-    {
-        "value": "Prediktiv analytik",
-        "label": "Prediktiv analytik"
-    },
-    {
-        "value": "Administration",
-        "label": "Administration"
-    },
-    {
-        "value": "Examensarbeten",
-        "label": "Examensarbeten"
-    },
-    {
-        "value": "Praktikansvarig",
-        "label": "Praktikansvarig"
-    },
-    {
-        "value": "Tutorering",
-        "label": "Tutorering"
-    },
-    {
-        "value": "Pro-prefekt",
-        "label": "Pro-prefekt"
-    },
-    {
-        "value": "Utbildningsansvarig",
-        "label": "Utbildningsansvarig"
-    },
-    {
-        "value": "Studierummet",
-        "label": "Studierummet"
-    },
-    {
-        "value": "Breddstudiepaket - Full stack",
-        "label": "Breddstudiepaket - Full stack"
-    },
-    {
-        "value": "AFORA - Roboten Amy",
-        "label": "AFORA - Roboten Amy"
-    },
-    {
-        "value": "Digimanu - Engineering platform",
-        "label": "Digimanu - Engineering platform"
-    },
-    {
-        "value": "Forskning",
-        "label": "Forskning"
-    },
-    {
-        "value": "Intro till BDA",
-        "label": "Intro till BDA"
-    },
-    {
-        "value": "Machine Learning for Predictive Problems",
-        "label": "Machine Learning for Predictive Problems"
-    },
-    {
-        "value": "Visual Analytics",
-        "label": "Visual Analytics"
-    },
-    {
-        "value": "Machine Learning for Descriptive Problems",
-        "label": "Machine Learning for Descriptive Problems"
-    },
-    {
-        "value": "Big Data Analytics",
-        "label": "Big Data Analytics"
-    },
-    {
-        "value": "Analytical Service Development",
-        "label": "Analytical Service Development"
-    },
-    {
-        "value": "Research Seminar and Group Supervision",
-        "label": "Research Seminar and Group Supervision"
-    },
-    {
-        "value": "Administrering",
-        "label": "Administrering"
-    },
-    {
-        "value": "Examensarbete (Magister)",
-        "label": "Examensarbete (Magister)"
-    },
-    {
-        "value": "Program director - Spec. Stud.",
-        "label": "Program director - Spec. Stud."
-    },
-    {
-        "value": "Program director - Master",
-        "label": "Program director - Master"
-    },
-    {
-        "value": "FaceTrack - Facial recognition and tracking",
-        "label": "FaceTrack - Facial recognition and tracking"
-    },
-    {
-        "value": "AMCOCP - Adaptive Machine Learning on Cloud Platforms",
-        "label": "AMCOCP - Adaptive Machine Learning on Cloud Platforms"
-    },
-    {
-        "value": "Forskning",
-        "label": "Forskning"
-    }
-]
 
 
-/*const suggestions = [
-    { label: 'Afghanistan' },
-    { label: 'Aland Islands' },
-    { label: 'Albania' },
-    { label: 'Algeria' },
-    { label: 'American Samoa' },
-    { label: 'Andorra' },
-    { label: 'Angola' },
-    { label: 'Anguilla' },
-    { label: 'Antarctica' },
-    { label: 'Antigua and Barbuda' },
-    { label: 'Argentina' },
-    { label: 'Armenia' },
-    { label: 'Aruba' },
-    { label: 'Australia' },
-    { label: 'Austria' },
-    { label: 'Azerbaijan' },
-    { label: 'Bahamas' },
-    { label: 'Bahrain' },
-    { label: 'Bangladesh' },
-    { label: 'Barbados' },
-    { label: 'Belarus' },
-    { label: 'Belgium' },
-    { label: 'Belize' },
-    { label: 'Benin' },
-    { label: 'Bermuda' },
-    { label: 'Bhutan' },
-    { label: 'Bolivia, Plurinational State of' },
-    { label: 'Bonaire, Sint Eustatius and Saba' },
-    { label: 'Bosnia and Herzegovina' },
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-    { label: 'British Indian Ocean Territory' },
-    { label: 'Brunei Darussalam' },
-].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-}));
-*/
+// Magic stuff that makes the input dropdown work, goes all the way to main function
 
 function NoOptionsMessage(props) {
     return (
@@ -476,30 +203,6 @@ ValueContainer.propTypes = {
     selectProps: PropTypes.object.isRequired,
 };
 
-function MultiValue(props) {
-    return (
-        <Chip
-            tabIndex={-1}
-            label={props.children}
-            className={clsx(props.selectProps.classes.chip, {
-                [props.selectProps.classes.chipFocused]: props.isFocused,
-            })}
-            onDelete={props.removeProps.onClick}
-            deleteIcon={<CancelIcon {...props.removeProps} />}
-        />
-    );
-}
-
-MultiValue.propTypes = {
-    children: PropTypes.node,
-    isFocused: PropTypes.bool.isRequired,
-    removeProps: PropTypes.shape({
-        onClick: PropTypes.func.isRequired,
-        onMouseDown: PropTypes.func.isRequired,
-        onTouchEnd: PropTypes.func.isRequired,
-    }).isRequired,
-    selectProps: PropTypes.object.isRequired,
-};
 
 function Menu(props) {
     return (
@@ -524,7 +227,6 @@ Menu.propTypes = {
 const components = {
     Control,
     Menu,
-    MultiValue,
     NoOptionsMessage,
     Option,
     Placeholder,
@@ -532,42 +234,46 @@ const components = {
     ValueContainer,
 };
 
+
+
+
+
+// Main function
+// TODO: Distill modifiedJson to just the course added 
+// TODO: Add button Component that confirms the course to be added
+// TODO: Somehow send this state back to parent state object
+// TODO: Call the table to re-render and show chosen course
 function AddCourse({ addCourseData, teacher, dropdownList }) {
-    const [single, setSingle] = React.useState(null);
+
+    // Values for the dropdown
     const suggestions = dropdownList;
 
     // ====== HOOKS ======>
-    const styles = useStyles();
-    console.log('just above the hook in add-course');
+    const [single, setSingle] = React.useState(null);
     const [modifiedJson, setModifiedJson] = useState(addCourseData);
+    const styles = useStyles();
+    const theme = useTheme();
+    const selectStyles = {
+        input: base => ({
+            ...base,
+            color: theme.palette.text.primary,
+            '& input': {
+                font: 'inherit',
+            },
+        }),
+    };
 
-
-    /*
-    useEffect(() => {
-        if (addCourseData && addCourseData.courses) {
-            const courseArray = addCourseData.courses.map(course => {
-                return ({ value: course.name, label: course.name })
-            });
-            suggestions = courseArray;
-        }
-        else {
-            console.log("No Data Yet in add-course")
-            console.log(addCourseData);
-        }
-    }, [])
-    */
-
+    // Triggered on change, updates the state
     const handleChangeSingle = (value, teacher) => {
         setSingle(value);
-        console.log("the value: ");
+        console.log("handleChangeSingle() value: ");
         console.log(value);
-        console.log('the teacher:');
-        console.log(teacher);
 
         console.log('modifiedJson inside handleChangeSingle');
         console.log(modifiedJson);
 
         setModifiedJson(prevState => ({
+            // ...prevState takes in all unmodified parts of the previous object, as does ...el
             ...prevState,
             courses: prevState.courses.map(
                 el => el.name == value.value ? { ...el, teacher: teacher } : el
@@ -576,29 +282,25 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
     };
 
 
-    // ====== RENDER ======>
-    // TODO: create this component
-
-
     return (
-        <div className={styles.placeholder}
+        <div className={styles.root}
         >
             <NoSsr>
                 <Select
                     classes={styles}
-
+                    styles={selectStyles}
                     inputId="react-select-single"
                     TextFieldProps={{
-                        label: 'Country',
+                        label: 'Course',
                         InputLabelProps: {
                             htmlFor: 'react-select-single',
                             shrink: true,
                         },
                     }}
-                    placeholder="Search a country (start with a)"
+                    placeholder="Add a course to this teacher"
                     options={suggestions}
                     components={components}
-                    value={single}
+                    value={single} // State variable
                     onChange={e => handleChangeSingle(e, teacher)}
                 />
                 <div className={styles.divider} />
@@ -608,5 +310,4 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
 }
 
 AddCourse.id = "AddCourse"
-
 export default withLogging(AddCourse)

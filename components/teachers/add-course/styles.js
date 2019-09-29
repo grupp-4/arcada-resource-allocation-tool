@@ -1,66 +1,54 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, emphasize } from '@material-ui/core/styles';
 
 function styles(theme) {
     return (
         {
-            tableCell: {
-                '&$head': {
-                    backgroundColor: theme.palette.common.black,
-                    color: theme.palette.common.white,
-                    body: {
-                        fontSize: 14,
-                    }
-                },
-                root: {
-                    backgroundColor: 'red'
-                },
-            },
-            tableRowRoot: {
-                '&:nth-of-type(odd)': {
-                    backgroundColor: theme.palette.background.default,
-                },
-            },
             root: {
-                width: '100%',
-                marginTop: theme.spacing(3),
-                width: '100%',
-                overflowX: 'auto',
-                marginBottom: theme.spacing(2),
+                flexGrow: 1,
+                minWidth: 290,
             },
-            // This is still not working
-            table: {
-                root: {
-                    background: "red",
-                },
-                minWidth: 0,
+            input: {
+                display: 'flex',
+                padding: 0,
+                height: 'auto',
+            },
+            valueContainer: {
+                display: 'flex',
+                flexWrap: 'wrap',
+                flex: 1,
+                alignItems: 'center',
+                overflow: 'hidden',
+            },
+            chip: {
+                margin: theme.spacing(0.5, 0.25),
+            },
+            chipFocused: {
+                backgroundColor: emphasize(
+                    theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
+                    0.08,
+                ),
+            },
+            noOptionsMessage: {
+                padding: theme.spacing(1, 2),
+            },
+            singleValue: {
+                fontSize: 16
+            },
+            placeholder: {
+                position: 'absolute',
+                left: 2,
+                bottom: 6,
+                fontSize: 16,
             },
             paper: {
-                root: {
-                    width: '100%',
-                    marginTop: theme.spacing(3),
-                    overflowX: 'auto',
-                },
+
+                zIndex: 1,
+                marginTop: theme.spacing(1),
+                left: 0,
+                right: 0,
             },
-            card: {
-                minWidth: 275,
-                margin: 20
-            },
-            bullet: {
-                display: 'inline-block',
-                margin: '0 2px',
-                transform: 'scale(0.8)',
-            },
-            title: {
-                fontSize: 14,
-            },
-            pos: {
-                marginBottom: 12,
-            },
-            inputBase: {
-                input: {
-                    border: '1px solid black',
-                    backgroundColor: 'blue',
-                },
+            divider: {
+                height: theme.spacing(2),
             },
         }
     )
