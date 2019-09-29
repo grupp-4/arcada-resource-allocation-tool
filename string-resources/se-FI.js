@@ -55,10 +55,14 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
-    lastUpdated: "Senast uppdaterad:",
-    minutesAgo: "minuter sedan",
-    rightNow: "just nu",
     _global: global
 }
 
-export default {code, global, header, main}
+// ====== FOOTER ======>
+const footer = {
+    lastUpdated: "Senast uppdaterad:",
+    minutesAgo: "minuter sedan",
+    rightNow: "just nu"
+}
+
+export default {code, global, header, main, footer}
