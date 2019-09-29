@@ -92,10 +92,10 @@ function CoursesTeachersTabView({log, pathname, strings, footerStrings, children
                 let content
                 switch (key) {
                     case "courses":
-                        content = <Courses data={children.props.data}/>
+                        content = <Courses data={children.props.data} strings={strings}/>
                         break
                     case "teachers":
-                        content = <Teachers data={children.props.data}/>
+                        content = <Teachers data={children.props.data} strings={strings}/>
                 }
                 return <TabPanel key={key} index={index} currentTab={state.currentTab}>{content}</TabPanel>
             })}
