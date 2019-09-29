@@ -26,6 +26,12 @@ function Teachers({ log, data }) {
     console.log('modifiedJson inside Teachers function');
     console.log(modifiedJson);
 
+    const theFreakingCourse = (e) => {
+        e.persist();
+        console.log('the Freaking Course: ');
+        console.log(e);
+    }
+
     const modifyHours = (e, courseC, courses, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance
 
@@ -55,6 +61,11 @@ function Teachers({ log, data }) {
             ),
 
         }));
+
+        let storage = window.localStorage;
+        storage.setItem("thing", JSON.stringify(modifiedJson));
+        console.log("The localstorage:");
+        console.log(JSON.parse(storage.getItem('thing')));
     };
 
     // Iterates through every teacher in modifiedJson and returns a Table component
@@ -68,10 +79,14 @@ function Teachers({ log, data }) {
                 <Card className={styles.card}>
                     <CardContent>
                         {/*Teacher's name on top of table*/}
-                        <Grid container justify="center" alignItems="center">
+                        <Grid
+                            container
+                            justify="center"
+                            alignItems="center">
                             {teacher.lastName}, {teacher.firstName} <br />
                         </Grid>
-                        <Table className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
+                        <Table
+                            className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
                             key={teacherFullName + "table"}
                             // Not working
                             classes={{
@@ -153,6 +168,7 @@ function Teachers({ log, data }) {
                             addCourseData={incomingData}
                             teacher={teacherFullName}
                             dropdownList={dropdownList}
+                            onFocus={() => console.log('somethinggg')}
                         />
 
                     </CardContent>

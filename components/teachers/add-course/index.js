@@ -9,6 +9,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
+import Fab from "@material-ui/core/Fab"
 
 
 
@@ -251,6 +252,7 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
     // ====== HOOKS ======>
     const [single, setSingle] = React.useState(null);
     const [modifiedJson, setModifiedJson] = useState(addCourseData);
+    const [doIt, setDoIt] = useState(false);
     const styles = useStyles();
     const theme = useTheme();
     const selectStyles = {
@@ -271,6 +273,7 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
 
         console.log('modifiedJson inside handleChangeSingle');
         console.log(modifiedJson);
+        setDoIt(true);
 
         setModifiedJson(prevState => ({
             // ...prevState takes in all unmodified parts of the previous object, as does ...el
@@ -280,6 +283,11 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
             ),
         }))
     };
+
+    const renderSomething = () => {
+        console.log("Rendering something");
+        return (<Typography variant="h6"><Fab color="secondary" aria-label="add">Add </Fab>{single.value}</Typography>)
+    }
 
 
     return (
@@ -301,9 +309,13 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
                     options={suggestions}
                     components={components}
                     value={single} // State variable
-                    onChange={e => handleChangeSingle(e, teacher)}
+                    onChange={e => {
+                        handleChangeSingle(e, teacher);
+
+                    }}
                 />
-                <div className={styles.divider} />
+                {doIt ? renderSomething() : ""}
+
             </NoSsr>
         </div>
     );
