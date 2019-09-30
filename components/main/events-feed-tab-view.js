@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
@@ -7,7 +7,9 @@ import EventsFeed from "components/events-feed"
 
 import useStyles from "./styles"
 
-function EventsFeedTabView({log, data, strings}) {
+const log = clientSide.getLogger("EventsFeedTabView")
+
+function EventsFeedTabView({data, strings}) {
 
     // ====== INITIAL LOGIC ======>
     const   key = "events-feed",
@@ -37,4 +39,4 @@ function EventsFeedTabView({log, data, strings}) {
     )
 }
 
-export default withLogging(EventsFeedTabView)
+export default EventsFeedTabView

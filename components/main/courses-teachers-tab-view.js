@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
 import {useEffect, useState} from "react"
 
@@ -11,7 +11,9 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, strings, footerStrings, children}) {
+const log = clientSide.getLogger("CoursesTeachersTabView")
+
+function CoursesTeachersTabView({strings, footerStrings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // definitions: Array of information about tabs to render.
@@ -29,7 +31,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     })
     useEffect(() => {
         log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
-        setState(prevState => ({...prevState, ...{currentTab: currentTab}}))
+        setState(prevState => ({...prevState, currentTab: currentTab}))
     }, [])
     const router = useRouter()
 
@@ -38,7 +40,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
         // Sets the `state` variable distributed throughout the tab view
         // to the index of the Tab that was clicked.
         log.debug(`Selecting tab: ${definitions[newValue].key}`)
-        setState(prevState => ({...prevState, ...{currentTab: newValue}}))
+        setState(prevState => ({...prevState, currentTab: newValue}))
     }
     function onClick(key) {
         router.replace(`/?page=${key}`, `/${key}`, {shallow: true}).catch(error => {
@@ -89,4 +91,4 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     )
 }
 
-export default withLogging(CoursesTeachersTabView)
+export default CoursesTeachersTabView

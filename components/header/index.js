@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
 import {useState} from "react"
 
@@ -21,7 +21,9 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({log, preferences, setLang, setTheme, mobile, strings}) {
+const log = clientSide.getLogger("Header")
+
+function Header({preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -29,27 +31,27 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== EVENT HANDLERS ======>
     function openNavigationMenu() {
-        setState(prevState => ({...prevState, ...{navOpen: true}}))
+        setState(prevState => ({...prevState, navOpen: true}))
         log.debug("Opening navigation menu")
     }
     function closeNavigationMenu() {
-        setState(prevState => ({...prevState, ...{navOpen: false}}))
+        setState(prevState => ({...prevState, navOpen: false}))
         log.debug("Closing navigation menu")
     }
     function openLanguagesMenu({currentTarget}) {
-        setState(prevState => ({...prevState, ...{langAnchor: currentTarget}}))
+        setState(prevState => ({...prevState, langAnchor: currentTarget}))
         log.debug("Opening languages menu.")
     }
     function closeLanguagesMenu() {
-        setState(prevState => ({...prevState, ...{langAnchor: null}}))
+        setState(prevState => ({...prevState, langAnchor: null}))
         log.debug("Closing languages menu.")
     }
     function openPreferencesMenu({currentTarget}) {
-        setState(prevState => ({...prevState, ...{prefAnchor: currentTarget}}))
+        setState(prevState => ({...prevState, prefAnchor: currentTarget}))
         log.debug("Opening preferences.")
     }
     function closePreferencesMenu() {
-        setState(prevState => ({...prevState, ...{prefAnchor: null}}))
+        setState(prevState => ({...prevState, prefAnchor: null}))
         log.debug("Closing preferences.")
     }
 
@@ -114,4 +116,4 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
     )
 }
 
-export default withLogging(Header)
+export default Header

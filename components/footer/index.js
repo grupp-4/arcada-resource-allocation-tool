@@ -1,6 +1,6 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
-import {useState, useEffect} from "react"
+import {useState} from "react"
 
 import useTheme from "@material-ui/core/styles/useTheme"
 
@@ -17,9 +17,9 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Footer({log, mobile, strings}) {
+const log = clientSide.getLogger("Footer")
 
-    // ====== INITIAL LOGIC ======>
+function Footer({mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -122,4 +122,4 @@ function Footer({log, mobile, strings}) {
     )
 }
 
-export default withLogging(Footer)
+export default Footer

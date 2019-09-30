@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
 import {useRouter} from "next/router"
 
@@ -13,7 +13,9 @@ import GroupRoundedIcon from "@material-ui/icons/GroupRounded"
 
 import useStyles from "./styles"
 
-function Navigation({log, open, onClose, landingPage, strings}) {
+const log = clientSide.getLogger("Navigation")
+
+function Navigation({open, onClose, landingPage, strings}) {
 
     // ====== INITIAL LOGIC ======>
     const definitions = [
@@ -66,4 +68,4 @@ function Navigation({log, open, onClose, landingPage, strings}) {
     )
 }
 
-export default withLogging(Navigation)
+export default Navigation

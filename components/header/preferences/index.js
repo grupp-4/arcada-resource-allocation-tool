@@ -1,4 +1,4 @@
-import {withLogging} from "gillog"
+import {clientSide} from "gillog"
 
 import {useState} from "react"
 
@@ -16,7 +16,9 @@ import Radio from "@material-ui/core/Radio"
 
 import useStyles from "./styles"
 
-function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, strings}) {
+const log = clientSide.getLogger("Preferences")
+
+function Preferences({anchorEl, onClose, preferences, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -26,7 +28,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     // ====== EVENT HANDLERS ======>
     function changeTheme(event) {
         const value = event.target.value
-        setState(prevState => ({...prevState, ...{theme: value}}))
+        setState(prevState => ({...prevState, theme: value}))
         if (value !== "auto") window.localStorage.theme = value
         else window.localStorage.removeItem("theme")
         log.debug("Setting theme to", value)
@@ -35,10 +37,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPage(event) {
         const value = event.target.value
         if (value !== "courses") {
-            setState(prevState => ({...prevState, ...{landingPage: value}}))
+            setState(prevState => ({...prevState, landingPage: value}))
             window.localStorage.landingPage = value
         } else {
-            setState(prevState => ({...prevState, ...{landingPage: null}}))
+            setState(prevState => ({...prevState, landingPage: null}))
             window.localStorage.removeItem("landingPage")
         }
         log.debug("Setting landing page to", value)
@@ -46,17 +48,17 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPageMobile(event) {
         const value = event.target.value
         if (value !== "events-feed") {
-            setState(prevState => ({...prevState, ...{landingPageMobile: value}}))
+            setState(prevState => ({...prevState, landingPageMobile: value}))
             window.localStorage.landingPageMobile = value
         } else {
-            setState(prevState => ({...prevState, ...{landingPageMobile: null}}))
+            setState(prevState => ({...prevState, landingPageMobile: null}))
             window.localStorage.removeItem("landingPageMobile")
         }
         log.debug("Setting landing page on mobile to", value)
     }
     function resetTheme() {
         const value = "auto"
-        setState(prevState => ({...prevState, ...{theme: value}}))
+        setState(prevState => ({...prevState, theme: value}))
         window.localStorage.removeItem("theme")
         log.debug("Resetting theme to", value)
         setTheme()
@@ -177,4 +179,4 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     )
 }
 
-export default withLogging(Preferences)
+export default Preferences

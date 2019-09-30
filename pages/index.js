@@ -1,12 +1,13 @@
-import {withLogging} from "gillog"
-
+import {clientSide} from "gillog"
 import {useRouter} from "next/router"
 
 import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
+const log = clientSide.getLogger("Index")
+
+function Index({landingPage, landingPageMobile, data, mobile, strings}) {
 
     // ====== HOOKS ======>
     const router = useRouter()
@@ -50,4 +51,4 @@ function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
     }
 }
 
-export default withLogging(Index)
+export default Index
