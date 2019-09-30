@@ -5,11 +5,7 @@ import fetch from "isomorphic-unfetch"
 import __app from "next/app"
 import Head from "next/head"
 
-<<<<<<< HEAD
-import { ThemeProvider } from "@material-ui/styles"
-=======
 import ThemeProvider from "@material-ui/styles/ThemeProvider"
->>>>>>> master
 
 import CssBaseline from "@material-ui/core/CssBaseline"
 
@@ -36,22 +32,14 @@ class _app extends __app {
     // ====== CONSTRUCTOR ======>
     constructor(props) {
         super(props)
-<<<<<<< HEAD
-        const theme = createTheme(log)
-        const { landingPage, landingPageMobile } = getLandingPagePreferences()
-        this.landingPage = landingPage
-        this.landingPageMobile = landingPageMobile
-        this.state = { data: null, theme: theme, mobile: false }
-=======
         // Getting landing page preferences
-        const {landingPage, landingPageMobile} = getLandingPagePreferences()
+        const { landingPage, landingPageMobile } = getLandingPagePreferences()
         this.landingPage = landingPage
         this.landingPageMobile = landingPageMobile
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {data: null, theme: theme, mobile: false, strings: strings}
->>>>>>> master
+        this.state = { data: null, theme: theme, mobile: false, strings: strings }
     }
 
     // ====== COMPONENT DID MOUNT ======>

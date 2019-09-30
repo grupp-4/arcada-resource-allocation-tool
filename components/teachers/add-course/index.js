@@ -255,6 +255,7 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
     const [doIt, setDoIt] = useState(false);
     const styles = useStyles();
     const theme = useTheme();
+    const storage = window.localStorage;
     const selectStyles = {
         input: base => ({
             ...base,
@@ -271,10 +272,24 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
         console.log("handleChangeSingle() value: ");
         console.log(value);
 
+        let storageData = JSON.parse(storage.getItem('data'))
+
+        let index = storageData.courses.findIndex(x => x.name == value.value)
+        console.log('The index:');
+        console.log(index);
+        console.log('storageData.courses[index]');
+        console.log(storageData.courses[index]);
+        storageData.courses[index].teacher = teacher;
+
+        console.log('The new storageData:');
+        console.log(storageData);
+
+        storage.setItem("data", JSON.stringify(storageData));
+
         console.log('modifiedJson inside handleChangeSingle');
         console.log(modifiedJson);
         setDoIt(true);
-
+        /*
         setModifiedJson(prevState => ({
             // ...prevState takes in all unmodified parts of the previous object, as does ...el
             ...prevState,
@@ -282,6 +297,7 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
                 el => el.name == value.value ? { ...el, teacher: teacher } : el
             ),
         }))
+        */
     };
 
     const renderSomething = () => {

@@ -22,15 +22,12 @@ function Teachers({ log, data }) {
     const typographyStyles = useTypographyStyles()
     const styles = useStyles();
     const [modifiedJson, setModifiedJson] = useState(data);
+    const storage = window.localStorage;
 
     console.log('modifiedJson inside Teachers function');
     console.log(modifiedJson);
 
-    const theFreakingCourse = (e) => {
-        e.persist();
-        console.log('the Freaking Course: ');
-        console.log(e);
-    }
+
 
     const modifyHours = (e, courseC, courses, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance
@@ -42,7 +39,7 @@ function Teachers({ log, data }) {
         // let index = courses.findIndex(x => x.courseCode === courseC); Probably not needed anymore
 
         // Takes the element's value
-        let newHour = e.target.value;
+        let newHour = parseInt(e.target.value, 10);
 
         console.log('modifiedjson inside modifyHours()');
         console.log(modifiedJson);
@@ -59,14 +56,13 @@ function Teachers({ log, data }) {
                 else { return (el) }
             }
             ),
-
         }));
 
-        let storage = window.localStorage;
-        storage.setItem("thing", JSON.stringify(modifiedJson));
+        // Creates/overrides localstorage "data" key with modifiedJson written into it
+        storage.setItem("data", JSON.stringify(modifiedJson));
         console.log("The localstorage:");
-        console.log(JSON.parse(storage.getItem('thing')));
-    };
+        console.log(JSON.parse(storage.getItem('data')));
+    }
 
     // Iterates through every teacher in modifiedJson and returns a Table component
     const mapTeachers = (teacher, incomingData, styles, dropdownList) => {
@@ -75,105 +71,103 @@ function Teachers({ log, data }) {
         let assignedCourses = courses.filter((course) => { return (course.teacher == teacherFullName) }); // Makes array of courses that match teacher name
 
         return (
-            <>
-                <Card className={styles.card}>
-                    <CardContent>
-                        {/*Teacher's name on top of table*/}
-                        <Grid
-                            container
-                            justify="center"
-                            alignItems="center">
-                            {teacher.lastName}, {teacher.firstName} <br />
-                        </Grid>
-                        <Table
-                            className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
-                            key={teacherFullName + "table"}
-                            // Not working
-                            classes={{
-                                root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
-                                label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
-                            }}
-                        >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell className={styles.tableCell}>Course</TableCell>
-                                    <TableCell align="left">Period 1</TableCell>
-                                    <TableCell align="left">Period 2</TableCell>
-                                    <TableCell align="left">Period 3</TableCell>
-                                    <TableCell align="left">Period 4</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {assignedCourses.map(element => {
-                                    return (
-                                        <>
-                                            <TableRow
-                                                key={element.name + "-courseRow"}
-                                                className={styles.tableRow}
-                                            >
-                                                <TableCell
-                                                    component="th"
-                                                    scope="row"
-                                                    key={element.name + "-cell1"}
-                                                    className={styles.tableCell, styles.thCustomWidth}>
-                                                    {element.name}<br />{element.courseCode}
-                                                </TableCell>
-                                                <TableCell align="right" key={element.name + "-cell2"}>
-                                                    <InputBase
-                                                        key={element.name + "-input1"}
-                                                        className={styles.inputBase}
-                                                        defaultValue={element.hours.p1}
-                                                        margin='dense'
-                                                        onChange={e => modifyHours(e, element.courseCode, courses, "p1")}
-                                                    />
-                                                </TableCell>
-                                                <TableCell align="right" key={element.name + "-cell3"}>
-                                                    <InputBase
-                                                        key={element.name + "-input2"}
-                                                        className={styles.inputBase}
-                                                        defaultValue={element.hours.p2}
-                                                        inputProps={{ 'aria-label': 'naked' }}
-                                                        margin='dense'
-                                                        onChange={e => modifyHours(e, element.courseCode, courses, "p2")}
-                                                    />
-                                                </TableCell>
-                                                <TableCell align="right" key={element.name + "-cell4"}>
-                                                    <InputBase
-                                                        key={element.name + "-input3"}
-                                                        className={styles.inputBase}
-                                                        defaultValue={element.hours.p3}
-                                                        inputProps={{ 'aria-label': 'naked' }}
-                                                        margin='dense'
-                                                        onChange={e => modifyHours(e, element.courseCode, courses, "p3")}
-                                                    />
-                                                </TableCell>
-                                                <TableCell align="right" key={element.name + "-cell5"}>
-                                                    <InputBase
-                                                        key={element.name + "-input4"}
-                                                        className={styles.inputBase}
-                                                        defaultValue={element.hours.p4}
-                                                        inputProps={{ 'aria-label': 'naked' }}
-                                                        margin='dense'
-                                                        onChange={e => modifyHours(e, element.courseCode, courses, "p4")}
-                                                    />
-                                                </TableCell>
-                                            </TableRow>
-                                        </>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>
+            <Card className={styles.card}>
+                <CardContent>
+                    {/*Teacher's name on top of table*/}
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center">
+                        {teacher.lastName}, {teacher.firstName} <br />
+                    </Grid>
+                    <Table
+                        className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
+                        key={teacherFullName + "table"}
+                        // Not working
+                        classes={{
+                            root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
+                            label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
+                    >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={styles.tableCell}>Course</TableCell>
+                                <TableCell align="left">Period 1</TableCell>
+                                <TableCell align="left">Period 2</TableCell>
+                                <TableCell align="left">Period 3</TableCell>
+                                <TableCell align="left">Period 4</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {assignedCourses.map(element => {
+                                return (
+                                    <>
+                                        <TableRow
+                                            key={element.name + "-courseRow"}
+                                            className={styles.tableRow}
+                                        >
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
+                                                key={element.name + "-cell1"}
+                                                className={styles.tableCell, styles.thCustomWidth}>
+                                                {element.name}<br />{element.courseCode}
+                                            </TableCell>
+                                            <TableCell align="right" key={element.name + "-cell2"}>
+                                                <InputBase
+                                                    key={element.name + "-input1"}
+                                                    className={styles.inputBase}
+                                                    defaultValue={element.hours.p1}
+                                                    margin='dense'
+                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p1")}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="right" key={element.name + "-cell3"}>
+                                                <InputBase
+                                                    key={element.name + "-input2"}
+                                                    className={styles.inputBase}
+                                                    defaultValue={element.hours.p2}
+                                                    inputProps={{ 'aria-label': 'naked' }}
+                                                    margin='dense'
+                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p2")}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="right" key={element.name + "-cell4"}>
+                                                <InputBase
+                                                    key={element.name + "-input3"}
+                                                    className={styles.inputBase}
+                                                    defaultValue={element.hours.p3}
+                                                    inputProps={{ 'aria-label': 'naked' }}
+                                                    margin='dense'
+                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p3")}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="right" key={element.name + "-cell5"}>
+                                                <InputBase
+                                                    key={element.name + "-input4"}
+                                                    className={styles.inputBase}
+                                                    defaultValue={element.hours.p4}
+                                                    inputProps={{ 'aria-label': 'naked' }}
+                                                    margin='dense'
+                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p4")}
+                                                />
+                                            </TableCell>
+                                        </TableRow>
+                                    </>
+                                )
+                            })}
+                        </TableBody>
+                    </Table>
 
-                        <AddCourse
-                            addCourseData={incomingData}
-                            teacher={teacherFullName}
-                            dropdownList={dropdownList}
-                            onFocus={() => console.log('somethinggg')}
-                        />
+                    <AddCourse
+                        addCourseData={incomingData}
+                        teacher={teacherFullName}
+                        dropdownList={dropdownList}
+                        onFocus={() => console.log('test')}
+                    />
 
-                    </CardContent>
-                </Card>
-            </>
+                </CardContent>
+            </Card>
         )
     }
 
@@ -184,13 +178,28 @@ function Teachers({ log, data }) {
         // Creates array of all course's names, which gets sent to the AddCourse component
         const dropdownList = CreateDropdownList(modifiedJson)
 
-        return (
-            <Typography className={typographyStyles.typography} variant={"body1"} >
-                <div className={styles.root}>
-                    {modifiedJson.teachers.map((teacher) => mapTeachers(teacher, modifiedJson, styles, dropdownList))}
-                </div>
-            </Typography>
-        );
+        // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
+        if (storage.getItem('data')) {
+            let storageData = JSON.parse(storage.getItem('data'));
+            console.log('localstorage data exists');
+
+            return (
+                <Typography className={typographyStyles.typography} variant={"body1"} >
+                    <div className={styles.root}>
+                        {storageData.teachers.map((teacher) => mapTeachers(teacher, storageData, styles, dropdownList))}
+                    </div>
+                </Typography>
+            )
+        }
+        else {
+            return (
+                <Typography className={typographyStyles.typography} variant={"body1"} >
+                    <div className={styles.root}>
+                        {modifiedJson.teachers.map((teacher) => mapTeachers(teacher, modifiedJson, styles, dropdownList))}
+                    </div>
+                </Typography>
+            )
+        }
     }
     else {
         return (
