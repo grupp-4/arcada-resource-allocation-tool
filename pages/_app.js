@@ -32,10 +32,10 @@ class _app extends __app {
     constructor(props) {
         super(props)
         const theme = createTheme(log)
-        const {landingPage, landingPageMobile} = getLandingPagePreferences()
+        const { landingPage, landingPageMobile } = getLandingPagePreferences()
         this.landingPage = landingPage
         this.landingPageMobile = landingPageMobile
-        this.state = {data: null, theme: theme, mobile: false}
+        this.state = { data: null, theme: theme, mobile: false }
     }
 
     componentDidMount() {
@@ -54,27 +54,22 @@ class _app extends __app {
     }
 
     setTheme() {
-        this.setState({theme: createTheme(log)})
+        this.setState({ theme: createTheme(log) })
     }
 
     setMobile(mobile) {
-        this.setState({mobile: mobile})
+        this.setState({ mobile: mobile })
     }
 
     render() {
         const strings = useStringResources()
-<<<<<<< HEAD
-        // const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
-        const { Component, pageProps } = this.props
-=======
         const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
             landingPageMobile: this.landingPageMobile
         }
-        const {Component, pageProps} = this.props
->>>>>>> courses-teachers-container
+        const { Component, pageProps } = this.props
         return (
             <>
                 <Head>
@@ -82,12 +77,7 @@ class _app extends __app {
                 </Head>
                 <ThemeProvider theme={this.state.theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
-<<<<<<< HEAD
                     <CssBaseline />
-                    <PersistentLayout appName={appName} strings={strings}>
-                        <Component {...pageProps} data={this.state.data} />
-=======
-                    <CssBaseline/>
                     <PersistentLayout
                         appName={appName}
                         preferences={preferences}
@@ -99,8 +89,7 @@ class _app extends __app {
                             landingPageMobile={preferences.landingPageMobile}
                             mobile={this.state.mobile}
                             data={this.state.data}
-                            {...pageProps}/>
->>>>>>> courses-teachers-container
+                            {...pageProps} />
                     </PersistentLayout>
                 </ThemeProvider>
             </>

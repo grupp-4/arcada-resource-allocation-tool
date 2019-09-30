@@ -73,12 +73,8 @@ function PersistentLayout({ log, appName, preferences, setTheme, setMobile, stri
 
     return (
         <>
-<<<<<<< HEAD
-    <Header appName={appName} mobile={mobile} pathname={pathname} strings={strings.header} />
-=======
-            <Header appName={appName} preferences={preferences} setTheme={setTheme} mobile={mobile} pathname={pathname} strings={strings.header}/>
->>>>>>> courses-teachers-container
-        <Main mobile={mobile} pathname={pathname} strings={strings.main}>{children}</Main>
+            <Header appName={appName} preferences={preferences} setTheme={setTheme} mobile={mobile} pathname={pathname} strings={strings.header} />
+            <Main mobile={mobile} pathname={pathname} strings={strings.main}>{children}</Main>
         </>
     )
 }
