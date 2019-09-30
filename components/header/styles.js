@@ -18,8 +18,11 @@ function styles(theme) {
         navigationMenuButton: {
             marginRight: theme.spacing(params.spacing)
         },
-        appName: {
+        appNameContainer: {
             flexGrow: 1
+        },
+        appNameAnchor: {
+            cursor: "pointer"
         }
     }
 }

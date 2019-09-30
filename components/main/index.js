@@ -24,7 +24,7 @@ function Main({log, mobile, strings, footerStrings, children}) {
     return (
         <Container className={`${styles.container} ${mobile ? styles.containerMobile : null}`} maxWidth={themeParams.maxWidth}>
             <main className={styles.main}>
-                {router.pathname === "_error" ? children : mobile ? (
+                {router.pathname === "/_error" ? children : mobile ? (
                     <>
                         <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                             <Grid item xs={12}>{children}</Grid>

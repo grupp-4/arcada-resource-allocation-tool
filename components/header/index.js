@@ -2,6 +2,8 @@ import {withLogging} from "gillog"
 
 import {useState} from "react"
 
+import Link from "next/link"
+
 import AppBar from "@material-ui/core/AppBar"
 import Container from "@material-ui/core/Container"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -68,13 +70,14 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                             style={{display: mobile ? "initial" : "none"}}>
                                 <MenuIcon/>
                         </IconButton>
-                        <Typography className={styles.appName} variant={"h6"}>
-                            {strings.appName}
-                        </Typography>
+                        <Link href={"/"} passHref>
+                            <Typography className={styles.appNameContainer} variant={"h6"}>
+                                <a className={styles.appNameAnchor}>{strings.appName}</a>
+                            </Typography>
+                        </Link>
                         <IconButton
                             onClick={openLanguagesMenu}
                             color={"inherit"}
-                            size={mobile ? "medium" : "small"}
                             aria-controls={"languages-menu"}
                             aria-haspopup={"true"}
                             aria-label={"languages"}>
@@ -83,7 +86,6 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                         <IconButton
                             onClick={openPreferencesMenu}
                             color={"inherit"}
-                            size={mobile ? "medium" : "small"}
                             aria-controls={"preferences-menu"}
                             aria-haspopup={"true"}
                             aria-label={"preferences"}>

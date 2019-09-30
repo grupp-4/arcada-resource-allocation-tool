@@ -2,6 +2,8 @@ import {withLogging} from "gillog"
 
 import {useState} from "react"
 
+import {useRouter} from "next/router"
+
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
@@ -19,6 +21,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     // ====== HOOKS ======>
     const styles = useStyles()
     const [{theme, landingPage, landingPageMobile}, setState] = useState(preferences)
+    const router = useRouter()
 
     // ====== EVENT HANDLERS ======>
     function changeTheme(event) {
@@ -67,8 +70,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         log.debug("Resetting landing page on mobile to events-feed")
     }
     function goToAboutPage() {
-        // TODO: implement about page
-        log.debug("User tried to open link to the about page, a page which isn't yet implemented.")
+        log.debug("Navigating to: about")
+        router.replace("/about").catch(error => {
+            log.error(error.stack)
+        })
     }
 
     // ====== RENDER ======>

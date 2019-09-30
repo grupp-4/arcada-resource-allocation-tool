@@ -32,9 +32,7 @@ function Navigation({log, open, onClose, landingPage, strings}) {
     // ====== EVENT HANDLERS ======>
     function onClick(key) {
         log.debug("Navigating to:", key)
-        router.replace(`/?page=${key}`, `/${key !== "events-feed" ? key : ""}`, {shallow: true}).then(() => {
-            log.debug("Navigated to:", key)
-        }).catch(error => {
+        router.replace(`/?page=${key}`, `/${key !== "events-feed" ? key : ""}`, {shallow: true}).catch(error => {
             log.error(error.stack)
         })
     }
