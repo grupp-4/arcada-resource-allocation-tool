@@ -22,7 +22,6 @@ function Teachers({ log, data }) {
     const typographyStyles = useTypographyStyles()
     const styles = useStyles();
     const [modifiedJson, setModifiedJson] = useState(data);
-    const storage = window.localStorage;
 
     console.log('modifiedJson inside Teachers function');
     console.log(modifiedJson);
@@ -177,6 +176,7 @@ function Teachers({ log, data }) {
     if (data && data.teachers) {
         // Creates array of all course's names, which gets sent to the AddCourse component
         const dropdownList = CreateDropdownList(modifiedJson)
+        let storage = window.localStorage;
 
         // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
         if (storage.getItem('data')) {
