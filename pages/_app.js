@@ -39,7 +39,7 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {data: null, theme: theme, mobile: false, strings: strings}
+        this.state = {data: null, theme: theme, mobile: true, strings: strings}
     }
 
     // ====== COMPONENT DID MOUNT ======>

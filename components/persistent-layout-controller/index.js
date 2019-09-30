@@ -13,7 +13,7 @@ function PersistentLayoutController({log, actOnMQ, actOnPCS, children}) {
 
     const theme = useTheme()
 
-    const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint))
+    const mobile = useMediaQuery(theme.breakpoints.down(themeParams.mobileBreakPoint), {defaultMatches: true})
 
     const prefersColorSchemeDark = useMediaQuery("(prefers-color-scheme: dark)")
     const prefersColorSchemeLight = useMediaQuery("(prefers-color-scheme: light)")
