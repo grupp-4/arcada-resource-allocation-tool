@@ -15,8 +15,11 @@ function styles(theme) {
             paddingLeft: theme.spacing(params.spacing),
             paddingRight: theme.spacing(params.spacing)
         },
-        menuButton: {
+        navigationMenuButton: {
             marginRight: theme.spacing(params.spacing)
+        },
+        appName: {
+            flexGrow: 1
         }
     }
 }
