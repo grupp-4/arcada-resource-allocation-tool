@@ -1,12 +1,10 @@
-import {withLogging} from "gillog"
-
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function Error({log, code}) {
-    const typographyStyles = useTypographyStyles()
+function Error({code}) {
 
+    // ====== INITIAL LOGIC ======>
     const message = {
         400: "Bad Request",
         404: "This page could not be found",
@@ -14,6 +12,10 @@ function Error({log, code}) {
         500: "Internal Server Error"
     }
 
+    // ====== HOOKS ======>
+    const typographyStyles = useTypographyStyles()
+
+    // ====== RENDER ======>
     return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
             {code && message[code]
@@ -30,4 +32,4 @@ Error.getInitialProps = async ({res, err}) => {
     return {code}
 }
 
-export default withLogging(Error)
+export default Error

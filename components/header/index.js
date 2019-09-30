@@ -1,7 +1,5 @@
 import { withLogging } from "gillog"
 
-import PropTypes from "prop-types"
-
 import { useState } from "react"
 
 import AppBar from "@material-ui/core/AppBar"
@@ -20,17 +18,15 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Header({ log, appName, preferences, setTheme, mobile, pathname, strings }) {
+function Header({ log, preferences, setLang, setTheme, mobile, strings }) {
 
     // ====== HOOKS ======>
-
     const styles = useStyles()
     const [{ langAnchor, prefAnchor }, setState] = useState({ langAnchor: null, prefAnchor: null })
 
     // ====== EVENT HANDLERS ======>
-
     function openNavigationMenu() {
-        // TODO: implement menu
+        // TODO: implement navigation menu
         log.debug("User tried opening menu which isn't yet implemented.")
     }
     function openLanguagesMenu({ currentTarget }) {
@@ -51,25 +47,41 @@ function Header({ log, appName, preferences, setTheme, mobile, pathname, strings
     }
 
     // ====== RENDER ======>
-
     return (
         <>
-            <AppBar className={styles.appBar} position={"sticky"}>
+            <AppBar className={styles.appBar} position={"fixed"}>
                 <Container className={styles.container} maxWidth={themeParams.maxWidth}>
                     <Toolbar classes={{ dense: styles.toolBarDense }} variant={mobile ? "regular" : "dense"}>
-                        <IconButton className={styles.navigationMenuButton} onClick={openNavigationMenu} color={"inherit"} edge={"start"}
-                            aria-controls={"navigation-menu"} aria-haspopup={"true"} aria-label={"navigation"} style={{ display: mobile ? "initial" : "none" }}>
+                        <IconButton
+                            className={styles.navigationMenuButton}
+                            onClick={openNavigationMenu}
+                            color={"inherit"}
+                            edge={"start"}
+                            aria-controls={"navigation-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"navigation"}
+                            style={{ display: mobile ? "initial" : "none" }}>
                             <MenuIcon />
                         </IconButton>
                         <Typography className={styles.appName} variant={"h6"}>
-                            {appName}
+                            {strings.appName}
                         </Typography>
-                        <IconButton onClick={openLanguagesMenu} color={"inherit"} size={mobile ? "medium" : "small"}
-                            aria-controls={"languages-menu"} aria-haspopup={"true"} aria-label={"languages"}>
+                        <IconButton
+                            onClick={openLanguagesMenu}
+                            color={"inherit"}
+                            size={mobile ? "medium" : "small"}
+                            aria-controls={"languages-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"languages"}>
                             <TranslateRoundedIcon />
                         </IconButton>
-                        <IconButton onClick={openPreferencesMenu} color={"inherit"} size={mobile ? "medium" : "small"}
-                            aria-controls={"preferences-menu"} aria-haspopup={"true"} aria-label={"preferences"}>
+                        <IconButton
+                            onClick={openPreferencesMenu}
+                            color={"inherit"}
+                            size={mobile ? "medium" : "small"}
+                            aria-controls={"preferences-menu"}
+                            aria-haspopup={"true"}
+                            aria-label={"preferences"}>
                             <MoreVertIcon />
                         </IconButton>
                     </Toolbar>
@@ -77,7 +89,8 @@ function Header({ log, appName, preferences, setTheme, mobile, pathname, strings
             </AppBar>
             <Languages
                 anchorEl={langAnchor}
-                onClose={closeLanguagesMenu} />
+                onClose={closeLanguagesMenu}
+                setLang={setLang} />
             <Preferences
                 anchorEl={prefAnchor}
                 onClose={closePreferencesMenu}
@@ -87,11 +100,6 @@ function Header({ log, appName, preferences, setTheme, mobile, pathname, strings
                 strings={strings.preferencesMenu} />
         </>
     )
-}
-
-Header.propTypes = {
-    appName: PropTypes.string.isRequired,
-    mobile: PropTypes.bool.isRequired
 }
 
 export default withLogging(Header)

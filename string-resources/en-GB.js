@@ -1,5 +1,8 @@
 import {cap} from "./utility"
 
+// ====== LANG ======>
+const code = "en"
+
 // ====== GLOBALS ======>
 const global = {
     appName: "Resource Allocation",
@@ -10,6 +13,9 @@ const global = {
 
 // ====== HEADER ======>
 const header = {
+    get appName() {
+        return this._global.appName
+    },
     preferencesMenu: {
         theme: {
             label: "Theme",
@@ -32,8 +38,10 @@ const header = {
             },
             _global: global
         },
+        about: "About",
         reset: "reset"
-    }
+    },
+    _global: global
 }
 
 // ====== MAIN ======>
@@ -47,7 +55,10 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    lastUpdated: "Last updated:",
+    minutesAgo: "minutes ago",
+    rightNow: "right now",
     _global: global
 }
 
-export default {global, header, main}
+export default {code, global, header, main}

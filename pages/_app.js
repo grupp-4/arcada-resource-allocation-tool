@@ -5,19 +5,23 @@ import fetch from "isomorphic-unfetch"
 import __app from "next/app"
 import Head from "next/head"
 
+<<<<<<< HEAD
 import { ThemeProvider } from "@material-ui/styles"
+=======
+import ThemeProvider from "@material-ui/styles/ThemeProvider"
+>>>>>>> master
 
 import CssBaseline from "@material-ui/core/CssBaseline"
 
-import PersistentLayout from "components/persistent-layout"
+import PersistentLayoutController from "components/persistent-layout-controller"
+import Header from "../components/header"
+import Main from "../components/main"
 
-import translateData from "utility/translate-data"
-
+import processData from "utility/process-data"
 import getLandingPagePreferences from "utility/landing-page-preferences"
 
-import useStringResources from "string-resources"
-
 import createTheme from "theme"
+import createStrings from "string-resources"
 
 import "css/make-document-viewport-height.css"
 
@@ -29,15 +33,28 @@ const log = isomorphic.getLogger("_app")
 
 class _app extends __app {
 
+    // ====== CONSTRUCTOR ======>
     constructor(props) {
         super(props)
+<<<<<<< HEAD
         const theme = createTheme(log)
         const { landingPage, landingPageMobile } = getLandingPagePreferences()
         this.landingPage = landingPage
         this.landingPageMobile = landingPageMobile
         this.state = { data: null, theme: theme, mobile: false }
+=======
+        // Getting landing page preferences
+        const {landingPage, landingPageMobile} = getLandingPagePreferences()
+        this.landingPage = landingPage
+        this.landingPageMobile = landingPageMobile
+        // Preparing initial state
+        const theme = createTheme(log)
+        const strings = createStrings(log)
+        this.state = {data: null, theme: theme, mobile: false, strings: strings}
+>>>>>>> master
     }
 
+    // ====== COMPONENT DID MOUNT ======>
     componentDidMount() {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side')
@@ -47,50 +64,93 @@ class _app extends __app {
             .then(res => res.json())
             .then(data => {
                 log.debug("Loaded data (raw):", data)
-                const translatedData = translateData(data)
-                log.debug("Loaded data (translated):", translatedData)
-                this.setState({ data: translatedData });
+                const processedData = processData(data)
+                log.debug("Loaded data (processed):", processedData)
+                this.setState({ data: processedData })
             })
     }
 
+    // ====== PERSISTENT LAYOUT CONTROLLER EVENT HANDLERS ======>
+    actOnMQ(mobile, initializedPL, setInitializedPL, log) {
+        if (initializedPL) {
+            this.setState({ mobile: mobile })
+            log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
+        } else {
+            this.setState({ mobile: mobile })
+            setInitializedPL(true)
+            log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
+        }
+    }
+    actOnPCS(theme, dark, light, noPreference, log) {
+        if (theme === "auto") {
+            let prefersColorScheme = ""
+            switch (true) {
+                case dark && !light && !noPreference:
+                    prefersColorScheme = "dark"
+                    break
+                case !dark && light && !noPreference:
+                    prefersColorScheme = "light"
+            }
+            if (prefersColorScheme && prefersColorScheme !== window._theme) {
+                log.debug(
+                    `Intercepted that client's preference of theme has changed to ${prefersColorScheme}.`,
+                    `Triggering reevaluation of theme`
+                )
+                this.setState({ theme: createTheme(log) })
+            }
+        }
+    }
+
+    // ====== SET STATE -WRAPPERS ======>
+    setLang() {
+        this.setState({ strings: createStrings(log) })
+    }
     setTheme() {
         this.setState({ theme: createTheme(log) })
     }
 
-    setMobile(mobile) {
-        this.setState({ mobile: mobile })
-    }
-
+    // ====== RENDER ======>
     render() {
-        const strings = useStringResources()
-        const appName = strings.global.appName // TODO: make a real implementation for the app's name/page title
+
+        // ====== Preparatory logic ======>
+        const { data, theme, mobile, strings } = this.state
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
             landingPageMobile: this.landingPageMobile
         }
         const { Component, pageProps } = this.props
+
+        // ====== Actual render ======>
         return (
             <>
                 <Head>
-                    <title>{appName}</title>
+                    <title>{strings.global.appName}</title>
                 </Head>
-                <ThemeProvider theme={this.state.theme}>
+                <ThemeProvider theme={theme}>
                     {/* CssBaseline kickstarts an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline />
-                    <PersistentLayout
-                        appName={appName}
-                        preferences={preferences}
-                        setTheme={this.setTheme.bind(this)}
-                        setMobile={this.setMobile.bind(this)}
-                        strings={strings}>
-                        <Component
-                            landingPage={preferences.landingPage}
-                            landingPageMobile={preferences.landingPageMobile}
-                            mobile={this.state.mobile}
-                            data={this.state.data}
-                            {...pageProps} />
-                    </PersistentLayout>
+                    <PersistentLayoutController
+                        actOnMQ={this.actOnMQ.bind(this)}
+                        actOnPCS={this.actOnPCS.bind(this, preferences.theme)}>
+                        <Header
+                            mobile={mobile}
+                            preferences={preferences}
+                            setLang={this.setLang.bind(this)}
+                            setTheme={this.setTheme.bind(this)}
+                            strings={strings.header} />
+                        <Main
+                            mobile={mobile}
+                            strings={strings.main}>
+                            <Component
+                                landingPage={preferences.landingPage}
+                                landingPageMobile={preferences.landingPageMobile}
+                                data={data}
+                                mobile={mobile}
+                                strings={strings.pages}
+                                {...pageProps} />
+                        </Main>
+                    </PersistentLayoutController>
                 </ThemeProvider>
             </>
         )
