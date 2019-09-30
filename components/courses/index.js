@@ -50,13 +50,17 @@ function Courses({log, data}) {
 
     //3 functions for dropdown menu of teachers
     const [anchorteacher, setAnchorteacher] = React.useState(null);
-
+    const [selectedTeacher, setSelectedTeacher] = React.useState('add teacher');
     const selectTeacher = event => {
       setAnchorteacher(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (e) => {
+      e.persist();
       setAnchorteacher(null);
+      console.log(e);
+      setSelectedTeacher(e.target.textContent);
+      //setSelectedTeacher(e)
     };    
 
     // ====== RENDER ======>
@@ -88,7 +92,7 @@ function Courses({log, data}) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={selectTeacher}>Add Teacher</Button>
+                <Button size="small" onClick={selectTeacher}>{selectedTeacher}</Button>
                   <Menu
                     id="teachers-menu"
                     anchorEl={anchorteacher}
