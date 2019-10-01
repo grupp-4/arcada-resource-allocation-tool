@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useState, useEffect} from "react"
 
@@ -7,9 +7,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 import themeParams from "theme/custom-parameters"
 
-const log = clientSide.getLogger("PersistentLayoutController")
-
-function PersistentLayoutController({actOnMQ, actOnPCS, children}) {
+function PersistentLayoutController({log, actOnMQ, actOnPCS, children}) {
 
     // ====== HOOKS ======>
 
@@ -50,4 +48,4 @@ function PersistentLayoutController({actOnMQ, actOnPCS, children}) {
     return children
 }
 
-export default PersistentLayoutController
+export default withLogging(PersistentLayoutController)

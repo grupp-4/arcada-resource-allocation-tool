@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useState} from "react"
 
@@ -16,9 +16,7 @@ import Radio from "@material-ui/core/Radio"
 
 import useStyles from "./styles"
 
-const log = clientSide.getLogger("Preferences")
-
-function Preferences({anchorEl, onClose, preferences, setTheme, mobile, strings}) {
+function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -182,4 +180,4 @@ function Preferences({anchorEl, onClose, preferences, setTheme, mobile, strings}
     )
 }
 
-export default Preferences
+export default withLogging(Preferences)

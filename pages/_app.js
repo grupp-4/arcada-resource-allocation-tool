@@ -54,7 +54,7 @@ class _app extends __app {
             .then(() => {
                 log.debug("Successfully dropped all databases.")
                 // Loading data
-                return fetch("http://localhost:3000/static/test-data.json")
+                return fetch(process.env.DATA_URL)
             })
             .then(res => {
                 // Parsing response body as JSON (which is asynchronous, for some reason)
