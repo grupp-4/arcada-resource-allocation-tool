@@ -39,7 +39,7 @@ function Courses({ log, data }) {
         // let newHour = courses.find(x => x.courseCode === courseC).hours.period;
         // let index = courses.findIndex(x => x.courseCode === courseC); Probably not needed anymore
 
-        // Takes the element's value
+        // Takes the courses's value
         let newHour = parseInt(e.target.value, 10);
 
         console.log('modifiedCourseJson inside modifyHours()');
@@ -68,8 +68,6 @@ function Courses({ log, data }) {
     // Iterates through every course in modifiedCourseJson and returns a Table component
     const mapCourses = (courses, incomingData, styles, dropdownList) => {
         const teachers = incomingData.teachers;
-        const teacherFullName = `${teachers.firstName} ${teachers.lastName}`;
-        let assignedTeacher = teachers.filter((teacher) => { return (teacher.course == teacherFullName) }); // Makes array of courses that match teacher name
         //Prototype that takes the first letter of a string and makes it into a Material UI Avatar
         //Call this function with "String".makeAvatar()
         String.prototype.makeAvatar = function () {
@@ -106,63 +104,59 @@ function Courses({ log, data }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {assignedTeacher.map(element => {
-                                return (
                                     <>
                                         <TableRow
-                                            key={element.name + "-courseRow"}
+                                            key={courses.name + "-courseRow"}
                                             className={styles.tableRow}
                                         >
                                             <TableCell
                                                 component="th"
                                                 scope="row"
-                                                key={element.name + "-cell1"}
+                                                key={courses.name + "-cell1"}
                                                 className={styles.tableCell, styles.thCustomWidth}>
-                                                {element.name}<br />{element.courseCode}
+                                                {courses.courseCode}<br />{courses.teacher}
                                             </TableCell>
-                                            <TableCell align="right" key={element.name + "-cell2"}>
+                                            <TableCell align="right" key={courses.name + "-cell2"}>
                                                 <InputBase
-                                                    key={element.name + "-input1"}
+                                                    key={courses.name + "-input1"}
                                                     className={styles.inputBase}
-                                                    defaultValue={element.hours.p1}
+                                                    defaultValue={courses.hours.p1}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p1")}
+                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p1")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={element.name + "-cell3"}>
+                                            <TableCell align="right" key={courses.name + "-cell3"}>
                                                 <InputBase
-                                                    key={element.name + "-input2"}
+                                                    key={courses.name + "-input2"}
                                                     className={styles.inputBase}
-                                                    defaultValue={element.hours.p2}
+                                                    defaultValue={courses.hours.p2}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p2")}
+                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p2")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={element.name + "-cell4"}>
+                                            <TableCell align="right" key={courses.name + "-cell4"}>
                                                 <InputBase
-                                                    key={element.name + "-input3"}
+                                                    key={courses.name + "-input3"}
                                                     className={styles.inputBase}
-                                                    defaultValue={element.hours.p3}
+                                                    defaultValue={courses.hours.p3}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p3")}
+                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p3")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={element.name + "-cell5"}>
+                                            <TableCell align="right" key={courses.name + "-cell5"}>
                                                 <InputBase
-                                                    key={element.name + "-input4"}
+                                                    key={courses.name + "-input4"}
                                                     className={styles.inputBase}
-                                                    defaultValue={element.hours.p4}
+                                                    defaultValue={courses.hours.p4}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p4")}
+                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p4")}
                                                 />
                                             </TableCell>
                                         </TableRow>
                                     </>
-                                )
-                            })}
                         </TableBody>
                     </Table>
 
