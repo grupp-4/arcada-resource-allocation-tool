@@ -1,4 +1,4 @@
-function processData(data) {
+export default function processData(data) {
 
     const processedData = {}
 
@@ -36,6 +36,3 @@ function processData(data) {
         return processedTeachers
     }
 }
-
-
-export default processData
