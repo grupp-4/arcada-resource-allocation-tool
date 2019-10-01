@@ -72,7 +72,7 @@ function Header({preferences, setLang, setTheme, mobile, strings}) {
                             style={{display: mobile ? "initial" : "none"}}>
                                 <MenuIcon/>
                         </IconButton>
-                        <Link href={"/"} passHref>
+                        <Link href={{pathname: "/"}} passHref replace shallow>
                             <Typography className={styles.appNameContainer} variant={"h6"}>
                                 <a className={styles.appNameAnchor}>{strings.appName}</a>
                             </Typography>
@@ -80,6 +80,7 @@ function Header({preferences, setLang, setTheme, mobile, strings}) {
                         <IconButton
                             onClick={openLanguagesMenu}
                             color={"inherit"}
+                            size={mobile ? "medium" : "small"}
                             aria-controls={"languages-menu"}
                             aria-haspopup={"true"}
                             aria-label={"languages"}>
@@ -88,6 +89,7 @@ function Header({preferences, setLang, setTheme, mobile, strings}) {
                         <IconButton
                             onClick={openPreferencesMenu}
                             color={"inherit"}
+                            size={mobile ? "medium" : "small"}
                             aria-controls={"preferences-menu"}
                             aria-haspopup={"true"}
                             aria-label={"preferences"}>

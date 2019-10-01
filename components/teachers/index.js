@@ -22,6 +22,4 @@ function Teachers({data, strings}) {
     )
 }
 
-Teachers.id = "teachers"
-
 export default Teachers

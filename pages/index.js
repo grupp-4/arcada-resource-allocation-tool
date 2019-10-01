@@ -1,11 +1,11 @@
-import {clientSide} from "gillog"
+import {isomorphic} from "gillog"
 import {useRouter} from "next/router"
 
 import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-const log = clientSide.getLogger("Index")
+const log = isomorphic.getLogger("Index")
 
 function Index({landingPage, landingPageMobile, data, mobile, strings}) {
 

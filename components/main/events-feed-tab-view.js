@@ -11,13 +11,13 @@ const log = clientSide.getLogger("EventsFeedTabView")
 
 function EventsFeedTabView({data, strings}) {
 
-    // ====== INITIAL LOGIC ======>
-    const   key = "events-feed",
-            label = strings.eventsFeedTabName,
-            index = 0
-
     // ====== HOOKS ======>
     const styles = useStyles()
+
+    // ====== INITIAL LOGIC ======>
+    const key = "events-feed",
+        label = strings.eventsFeedTabName,
+        index = 0
 
     // ====== RENDER ======>
     return (

@@ -73,7 +73,10 @@ function Preferences({anchorEl, onClose, preferences, setTheme, mobile, strings}
     }
     function goToAboutPage() {
         log.debug("Navigating to: about")
-        router.replace("/about").catch(error => {
+        router.push(
+            {pathname: "/about"},
+            {pathname: "/about"}
+        ).catch(error => {
             log.error(error.stack)
         })
     }

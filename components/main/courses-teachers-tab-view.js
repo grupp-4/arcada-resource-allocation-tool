@@ -15,15 +15,6 @@ const log = clientSide.getLogger("CoursesTeachersTabView")
 
 function CoursesTeachersTabView({strings, footerStrings, children}) {
 
-    // ====== INITIAL LOGIC ======>
-    // definitions: Array of information about tabs to render.
-    // key: Used for determining the pre-selected tab by matching URL path to this.
-    // label: Tab title.
-    const definitions = [
-        {key: "courses", label: strings.coursesTabName},
-        {key: "teachers", label: strings.teachersTabName}
-    ]
-
     // ====== HOOKS ======>
     const styles = useStyles()
     const [state, setState] = useState({
@@ -35,6 +26,29 @@ function CoursesTeachersTabView({strings, footerStrings, children}) {
     }, [])
     const router = useRouter()
 
+    // ====== INITIAL LOGIC ======>
+    // definitions: Array of information about tabs to render.
+    // key: Used for determining the pre-selected tab by matching page query to this.
+    // label: Tab title.
+    const definitions = [
+        {key: "courses", label: strings.coursesTabName},
+        {key: "teachers", label: strings.teachersTabName}
+    ]
+    // Gets the index of the "definition" that has a key that matches page query.
+    const page = router.query.page
+    let currentTab = definitions.findIndex(definition => {
+        return definition.key === page
+    })
+    // If no match is found, then gets the index of the "definition" that has the key
+    // that matches the client's landing page preference.
+    if (currentTab === -1) {
+        currentTab = definitions.findIndex(definition => {
+            return definition.key === children.props.landingPage
+        })
+    }
+    // If once again no match is found, currentTab defaults to the first index (0).
+    if (currentTab === -1) currentTab = 0
+
     // ====== EVENT HANDLERS ======>
     function changeTab(event, newValue) {
         // Sets the `state` variable distributed throughout the tab view
@@ -43,26 +57,14 @@ function CoursesTeachersTabView({strings, footerStrings, children}) {
         setState(prevState => ({...prevState, currentTab: newValue}))
     }
     function onClick(key) {
-        router.replace(`/?page=${key}`, `/${key}`, {shallow: true}).catch(error => {
+        router.replace(
+            {pathname: "/", query: {page: key}},
+            {pathname: "/", query: {page: key}},
+            {shallow: true}
+        ).catch(error => {
             log.error(error.stack)
         })
     }
-
-    // ====== MISC. LOGIC ======>
-    // Gets the index of the "definition" that has a key that matches the current URL path.
-    const url = router.asPath.slice(1)
-    let currentTab = definitions.findIndex(definition => {
-        return definition.key === url
-    })
-    // If no match is found, then checks if current URL path is root (a.k.a /). If so, then
-    // gets the index of the "definition" that has the key that matches the client's landing page preference.
-    if (currentTab === -1 && !url) {
-        currentTab = definitions.findIndex(definition => {
-            return definition.key === children.props.landingPage
-        })
-    }
-    // If once again no match is found, currentTab defaults to the first index (0).
-    if (currentTab === -1) currentTab = 0
 
     // ====== RENDER ======>
     return (

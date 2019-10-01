@@ -23,6 +23,4 @@ function Courses({data, strings}) {
     )
 }
 
-Courses.id = "courses"
-
 export default Courses

@@ -17,24 +17,26 @@ const log = clientSide.getLogger("Navigation")
 
 function Navigation({open, onClose, landingPage, strings}) {
 
+    // ====== HOOKS ======>
+    const styles = useStyles()
+    const router = useRouter()
+
     // ====== INITIAL LOGIC ======>
     const definitions = [
         {key: "events-feed", icon: <EventNoteRoundedIcon/>, label: strings.eventsFeed},
         {key: "courses", icon: <MenuBookRoundedIcon/>, label: strings.courses},
         {key: "teachers", icon: <GroupRoundedIcon/>, label: strings.teachers}
     ]
-
-    // ====== HOOKS ======>
-    const styles = useStyles()
-    const router = useRouter()
-
-    // ====== MISC. LOGIC ======>
     let initialSelectedItem = router.asPath.slice(1) || landingPage || "events-feed"
 
     // ====== EVENT HANDLERS ======>
     function onClick(key) {
         log.debug("Navigating to:", key)
-        router.replace(`/?page=${key}`, `/${key !== "events-feed" ? key : ""}`, {shallow: true}).catch(error => {
+        router.replace(
+            {pathname: "/", query: {page: key}},
+            {pathname: "/", query: {page: key}},
+            {shallow: true}
+        ).catch(error => {
             log.error(error.stack)
         })
     }
