@@ -48,7 +48,7 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Loading data
-        fetch("http://localhost:3000/static/test-data-refactored.json")
+        fetch("http://localhost:3000/static/test-data.json")
             .then(res => res.json())
             .then(data => {
                 log.debug("Loaded data (raw):", data)
