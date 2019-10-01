@@ -1,5 +1,5 @@
 import { withLogging } from "gillog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
@@ -19,32 +19,42 @@ import CreateDropdownList from "utility/create-dropdown-list.js"
 // TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
 function Teachers({ log, data }) {
     // ====== HOOKS ======>
-    const typographyStyles = useTypographyStyles()
+    const typographyStyles = useTypographyStyles();
     const styles = useStyles();
-    const [modifiedJson, setModifiedJson] = useState(data);
-    const storage = window.localStorage;
+    const [testState, setTestState] = useState(false);
+    let storage, storageData;
 
-    console.log('modifiedJson inside Teachers function');
-    console.log(modifiedJson);
+    const passToParent = (s) => {
+        console.log('S in passtoparent()');
+        console.log(s);
+        console.log('testState init:');
+        console.log(testState);
+        setTestState(s);
+        console.log('testState after:');
+        console.log(testState);
+
+    }
 
 
 
     const modifyHours = (e, courseC, courses, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance
 
-        // https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
-        // Not even this might be needed, because in the setModifiedJson it doesn't use the courses parameter
-        // courses.find(x => x.courseCode === courseC).hours = e.target.value; // Spooky action
-        // let newHour = courses.find(x => x.courseCode === courseC).hours.period;
-        // let index = courses.findIndex(x => x.courseCode === courseC); Probably not needed anymore
-
         // Takes the element's value
-        let newHour = parseInt(e.target.value, 10);
+        const newHour = parseInt(e.target.value, 10);
+        // Finds position of the modified course
+        const index = storageData.courses.findIndex(x => x.courseCode == courseC);
+        // Updates the targeted course with new hour
+        storageData.courses[index].hours[period] = newHour;
 
-        console.log('modifiedjson inside modifyHours()');
-        console.log(modifiedJson);
+        console.log('storageData.courses[index].hours[period]');
+        console.log(storageData.courses[index].hours[period]);
+
+        // // Creates/overrides localstorage "data" key with the updated storageData
+        storage.setItem("data", JSON.stringify(storageData));
 
         // Updates modifiedJson
+        /*
         setModifiedJson(prevState => ({
             ...prevState, // ...prevState means it adds all unmodified properties of modifiedJson, same with ...el
             courses: prevState.courses.map(el => {
@@ -57,14 +67,12 @@ function Teachers({ log, data }) {
             }
             ),
         }));
+        */
 
-        // Creates/overrides localstorage "data" key with modifiedJson written into it
-        storage.setItem("data", JSON.stringify(modifiedJson));
-        console.log("The localstorage:");
-        console.log(JSON.parse(storage.getItem('data')));
+
     }
 
-    // Iterates through every teacher in modifiedJson and returns a Table component
+    // Iterates through every teacher in the incoming data and returns a Table component
     const mapTeachers = (teacher, incomingData, styles, dropdownList) => {
         const courses = incomingData.courses;
         const teacherFullName = `${teacher.firstName} ${teacher.lastName}`;
@@ -163,7 +171,7 @@ function Teachers({ log, data }) {
                         addCourseData={incomingData}
                         teacher={teacherFullName}
                         dropdownList={dropdownList}
-                        onFocus={() => console.log('test')}
+                        passToParent={passToParent}
                     />
 
                 </CardContent>
@@ -176,15 +184,19 @@ function Teachers({ log, data }) {
     // Only starts rendering once data from api is ready
     if (data && data.teachers) {
         // Creates array of all course's names, which gets sent to the AddCourse component
-        const dropdownList = CreateDropdownList(modifiedJson)
+        const dropdownList = CreateDropdownList(data);
+        // Defining storage here seems to guarantee it being client rendered
+        storage = window.localStorage;
+
 
         // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
         if (storage.getItem('data')) {
-            let storageData = JSON.parse(storage.getItem('data'));
             console.log('localstorage data exists');
+            storageData = JSON.parse(storage.getItem('data'));
 
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
+                    {testState ? "yes" : "no"}
                     <div className={styles.root}>
                         {storageData.teachers.map((teacher) => mapTeachers(teacher, storageData, styles, dropdownList))}
                     </div>
@@ -192,10 +204,11 @@ function Teachers({ log, data }) {
             )
         }
         else {
+            storage.setItem("data", JSON.stringify(data));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                     <div className={styles.root}>
-                        {modifiedJson.teachers.map((teacher) => mapTeachers(teacher, modifiedJson, styles, dropdownList))}
+                        {data.teachers.map((teacher) => mapTeachers(teacher, data, styles, dropdownList))}
                     </div>
                 </Typography>
             )

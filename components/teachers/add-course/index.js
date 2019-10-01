@@ -244,7 +244,7 @@ const components = {
 // TODO: Add button Component that confirms the course to be added
 // TODO: Somehow send this state back to parent state object
 // TODO: Call the table to re-render and show chosen course
-function AddCourse({ addCourseData, teacher, dropdownList }) {
+function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
 
     // Values for the dropdown
     const suggestions = dropdownList;
@@ -273,21 +273,20 @@ function AddCourse({ addCourseData, teacher, dropdownList }) {
         console.log(value);
 
         let storageData = JSON.parse(storage.getItem('data'))
-
+        // Finds position of the modified course
         let index = storageData.courses.findIndex(x => x.name == value.value)
         console.log('The index:');
         console.log(index);
-        console.log('storageData.courses[index]');
-        console.log(storageData.courses[index]);
+        // Updates the targeted course with new teacher
         storageData.courses[index].teacher = teacher;
 
         console.log('The new storageData:');
         console.log(storageData);
 
+        // Creates/overrides localstorage "data" key with the updated storageData
         storage.setItem("data", JSON.stringify(storageData));
-
-        console.log('modifiedJson inside handleChangeSingle');
-        console.log(modifiedJson);
+        // Pass this component's state to parent component, forcing a re-render
+        passToParent(value.value);
         setDoIt(true);
         /*
         setModifiedJson(prevState => ({
