@@ -1,3 +1,4 @@
+import React from 'react';
 import { withLogging } from "gillog";
 import { useState, useEffect } from "react";
 import useStyles from "./styles.js";
@@ -9,7 +10,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Fab from "@material-ui/core/Fab"
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 
 
@@ -235,15 +236,23 @@ const components = {
     ValueContainer,
 };
 
+const Snack = () => {
+    const { enqueueSnackbar } = useSnackbar();
 
+    const handleClick = () => {
+        enqueueSnackbar("Course Added");
+    };
+    return (
+        <React.Fragment>
+            {handleClick()}
+        </React.Fragment>
+    );
+}
 
 
 
 // Main function
-// TODO: Distill modifiedJson to just the course added 
 // TODO: Add button Component that confirms the course to be added
-// TODO: Somehow send this state back to parent state object
-// TODO: Call the table to re-render and show chosen course
 function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
 
     // Values for the dropdown
@@ -251,7 +260,6 @@ function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
 
     // ====== HOOKS ======>
     const [single, setSingle] = React.useState(null);
-    const [modifiedJson, setModifiedJson] = useState(addCourseData);
     const [doIt, setDoIt] = useState(false);
     const styles = useStyles();
     const theme = useTheme();
@@ -287,23 +295,9 @@ function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
         storage.setItem("data", JSON.stringify(storageData));
         // Pass this component's state to parent component, forcing a re-render
         passToParent(value.value);
+        // This state tells the snackbar to be rendered
         setDoIt(true);
-        /*
-        setModifiedJson(prevState => ({
-            // ...prevState takes in all unmodified parts of the previous object, as does ...el
-            ...prevState,
-            courses: prevState.courses.map(
-                el => el.name == value.value ? { ...el, teacher: teacher } : el
-            ),
-        }))
-        */
     };
-
-    const renderSomething = () => {
-        console.log("Rendering something");
-        return (<Typography variant="h6"><Fab color="secondary" aria-label="add">Add </Fab>{single.value}</Typography>)
-    }
-
 
     return (
         <div className={styles.root}
@@ -329,7 +323,12 @@ function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
 
                     }}
                 />
-                {doIt ? renderSomething() : ""}
+                {doIt ? <SnackbarProvider
+                    maxSnack={3}
+                    autoHideDuration={1500}
+                    disableWindowBlurListener={true}>
+                    <Snack />
+                </SnackbarProvider> : ""}
 
             </NoSsr>
         </div>

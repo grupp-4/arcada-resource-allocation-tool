@@ -16,7 +16,7 @@ import AddCourse from "components/teachers/add-course"
 import CreateDropdownList from "utility/create-dropdown-list.js"
 
 
-// TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
+// TODO: Implement search function
 function Teachers({ log, data }) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles();
@@ -52,24 +52,6 @@ function Teachers({ log, data }) {
 
         // // Creates/overrides localstorage "data" key with the updated storageData
         storage.setItem("data", JSON.stringify(storageData));
-
-        // Updates modifiedJson
-        /*
-        setModifiedJson(prevState => ({
-            ...prevState, // ...prevState means it adds all unmodified properties of modifiedJson, same with ...el
-            courses: prevState.courses.map(el => {
-                if (el.courseCode === courseC) {
-                    let hoursObj = el.hours;
-                    hoursObj[period] = newHour;
-                    return { ...el, hours: hoursObj }
-                }
-                else { return (el) }
-            }
-            ),
-        }));
-        */
-
-
     }
 
     // Iterates through every teacher in the incoming data and returns a Table component
@@ -196,7 +178,7 @@ function Teachers({ log, data }) {
 
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
-                    {testState ? "yes" : "no"}
+                    {testState ? "" : ""}
                     <div className={styles.root}>
                         {storageData.teachers.map((teacher) => mapTeachers(teacher, storageData, styles, dropdownList))}
                     </div>
