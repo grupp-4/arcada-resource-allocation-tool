@@ -13,6 +13,8 @@ import PersistentLayoutController from "components/persistent-layout-controller"
 import Header from "../components/header"
 import Main from "../components/main"
 
+import initIDB from "utility/idb"
+import drop from "utility/idb/drop"
 import processData from "utility/process-data"
 import getLandingPagePreferences from "utility/landing-page-preferences"
 
@@ -47,15 +49,34 @@ class _app extends __app {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
-        // Loading data
-        fetch("http://localhost:3000/static/test-data.json")
-            .then(res => res.json())
+        // Dropping databases (just during development, when databases are changed a lot)
+        drop()
+            .then(() => {
+                log.debug("Successfully dropped all databases.")
+                // Loading data
+                return fetch("http://localhost:3000/static/test-data.json")
+            })
+            .then(res => {
+                // Parsing response body as JSON (which is asynchronous, for some reason)
+                return res.json()
+            })
             .then(data => {
                 log.debug("Loaded data (raw):", data)
+                // Processing data
                 const processedData = processData(data)
                 log.debug("Loaded data (processed):", processedData)
-                this.setState({data: processedData})
+                // Initializing IDB
+                return initIDB(processedData)
             })
+            .then(([cs, rc, wc]) => {
+                // Getting all data from working copy
+                return wc.getEverything()
+            })
+            .then(data => {
+                // Populating this.state.data with the data from working copy
+                this.setState({data})
+            })
+            .catch(error => log.error(error.stack))
     }
 
     // ====== PERSISTENT LAYOUT CONTROLLER EVENT HANDLERS ======>
