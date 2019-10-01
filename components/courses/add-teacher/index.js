@@ -244,7 +244,7 @@ const components = {
 // TODO: Add button Component that confirms the course to be added
 // TODO: Somehow send this state back to parent state object
 // TODO: Call the table to re-render and show chosen course
-function AddTeacher({ addTeacherData, course, dropdownList }) {
+function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
 
     // Values for the dropdown
     const suggestions = dropdownList;
@@ -267,27 +267,26 @@ function AddTeacher({ addTeacherData, course, dropdownList }) {
     };
 
     // Triggered on change, updates the state
-    const handleChangeSingle = (value, course) => {
+    const handleChangeSingle = (value, teacher) => {
         setSingle(value);
         console.log("handleChangeSingle() value: ");
         console.log(value);
 
         let storageData = JSON.parse(storage.getItem('data'))
-
-        let index = storageData.teachers.findIndex(x => x.firstName == value.value)
+        // Finds position of the modified course
+        let index = storageData.courses.findIndex(x => x.name == value.value)
         console.log('The index:');
         console.log(index);
-        console.log('storageData.teachers[index]');
-        console.log(storageData.teachers[index]);
-        storageData.teachers[index].course = course;
+        // Updates the targeted course with new teacher
+        storageData.courses[index].teacher = teacher;
 
         console.log('The new storageData:');
         console.log(storageData);
 
+        // Creates/overrides localstorage "data" key with the updated storageData
         storage.setItem("data", JSON.stringify(storageData));
-
-        console.log('modifiedCourseJson inside handleChangeSingle');
-        console.log(modifiedCourseJson);
+        // Pass this component's state to parent component, forcing a re-render
+        passToParent(value.value);
         setDoIt(true);
         /*
         setmodifiedCourseJson(prevState => ({
@@ -326,7 +325,7 @@ function AddTeacher({ addTeacherData, course, dropdownList }) {
                     components={components}
                     value={single} // State variable
                     onChange={e => {
-                        handleChangeSingle(e, course);
+                        handleChangeSingle(e, course.teacher);
 
                     }}
                 />
