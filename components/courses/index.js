@@ -19,14 +19,6 @@ import CreateDropdownTeachers from "utility/create-dropdown-teachers.js"
 
 // TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
 
-
-
-//Prototype that takes the first letter of a string and makes it into a Material UI Avatar
-//Call this function with "String".makeAvatar()
-String.prototype.makeAvatar = function () {
-    return <Avatar>{this.charAt(0)}</Avatar>;
-  }
-
 function Courses({ log, data }) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
@@ -78,6 +70,11 @@ function Courses({ log, data }) {
         const teachers = incomingData.teachers;
         const teacherFullName = `${teachers.firstName} ${teachers.lastName}`;
         let assignedTeacher = teachers.filter((teacher) => { return (teacher.course == teacherFullName) }); // Makes array of courses that match teacher name
+        //Prototype that takes the first letter of a string and makes it into a Material UI Avatar
+        //Call this function with "String".makeAvatar()
+        String.prototype.makeAvatar = function () {
+            return <Avatar className={styles.courseAvatar}>{this.charAt(0)}</Avatar>;
+        }
 
         return (
             <Card className={styles.card}>
@@ -85,7 +82,7 @@ function Courses({ log, data }) {
                     {/*Course name on top of table*/}
                     <Grid
                         container
-                        justify="center"
+                        justify="left"
                         alignItems="center">
                         {courses.name.makeAvatar()}
                         {courses.name} <br />
@@ -203,6 +200,8 @@ function Courses({ log, data }) {
             )
         }
         else {
+            storage.setItem("data", JSON.stringify(data));
+            console.log('creating localstorage data');
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                     <div className={styles.root}>

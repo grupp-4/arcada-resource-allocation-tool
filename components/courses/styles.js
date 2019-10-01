@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+import { red, green } from '@material-ui/core/colors';
 
 function styles(theme) {
     return (
@@ -74,6 +74,11 @@ function styles(theme) {
             title: {
                 fontSize: 14,
             },
+            courseAvatar: {
+                margin: 10,
+                color: '#fff',
+                backgroundColor: green[500],
+              },
             pos: {
                 marginBottom: 12,
             },
