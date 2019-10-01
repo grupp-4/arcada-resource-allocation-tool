@@ -1,11 +1,9 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 
-const log = clientSide.getLogger("Languages")
-
-function Languages({anchorEl, onClose, setLang}) {
+function Languages({log, anchorEl, onClose, setLang}) {
 
     // ====== INITIAL LOGIC ======>
     const languages = [
@@ -47,4 +45,4 @@ function Languages({anchorEl, onClose, setLang}) {
     )
 }
 
-export default Languages
+export default withLogging(Languages)

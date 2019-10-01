@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {Fragment} from "react"
 
@@ -6,9 +6,7 @@ import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-const log = clientSide.getLogger("Teachers")
-
-function Teachers({data, strings}) {
+function Teachers({log, data, strings}) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
 
@@ -22,4 +20,4 @@ function Teachers({data, strings}) {
     )
 }
 
-export default Teachers
+export default withLogging(Teachers)

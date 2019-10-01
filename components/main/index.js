@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useRouter} from "next/router"
 
@@ -14,9 +14,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-const log = clientSide.getLogger("Main")
-
-function Main({mobile, strings, footerStrings, children}) {
+function Main({log, mobile, strings, footerStrings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -53,4 +51,4 @@ function Main({mobile, strings, footerStrings, children}) {
     )
 }
 
-export default Main
+export default withLogging(Main)

@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useEffect, useState} from "react"
 
@@ -11,9 +11,7 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-const log = clientSide.getLogger("CoursesTeachersTabView")
-
-function CoursesTeachersTabView({strings, footerStrings, children}) {
+function CoursesTeachersTabView({log, strings, footerStrings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -93,4 +91,4 @@ function CoursesTeachersTabView({strings, footerStrings, children}) {
     )
 }
 
-export default CoursesTeachersTabView
+export default withLogging(CoursesTeachersTabView)

@@ -1,12 +1,10 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-const log = clientSide.getLogger("EventsFeed")
-
-function EventsFeed({strings}) {
+function EventsFeed({log, strings}) {
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
@@ -19,4 +17,4 @@ function EventsFeed({strings}) {
     )
 }
 
-export default EventsFeed
+export default withLogging(EventsFeed)

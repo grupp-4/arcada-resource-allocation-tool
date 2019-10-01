@@ -1,13 +1,12 @@
-import {isomorphic} from "gillog"
+import {withLogging} from "gillog"
+
 import {useRouter} from "next/router"
 
 import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-const log = isomorphic.getLogger("Index")
-
-function Index({landingPage, landingPageMobile, data, mobile, strings}) {
+function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
 
     // ====== HOOKS ======>
     const router = useRouter()
@@ -51,4 +50,4 @@ function Index({landingPage, landingPageMobile, data, mobile, strings}) {
     }
 }
 
-export default Index
+export default withLogging(Index)

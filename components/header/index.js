@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useState} from "react"
 
@@ -21,9 +21,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-const log = clientSide.getLogger("Header")
-
-function Header({preferences, setLang, setTheme, mobile, strings}) {
+function Header({log, preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -118,4 +116,4 @@ function Header({preferences, setLang, setTheme, mobile, strings}) {
     )
 }
 
-export default Header
+export default withLogging(Header)

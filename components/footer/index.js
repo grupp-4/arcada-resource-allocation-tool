@@ -1,4 +1,4 @@
-import {clientSide} from "gillog"
+import {withLogging} from "gillog"
 
 import {useState} from "react"
 
@@ -17,9 +17,7 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-const log = clientSide.getLogger("Footer")
-
-function Footer({mobile, strings}) {
+function Footer({log, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -44,8 +42,6 @@ function Footer({mobile, strings}) {
         // TODO: implement syncing data
         log.debug("User tried to synchronize data, a feature which isn't yet implemented.")
     }
-
-    // ====== FUNCTIONS ======>
 
     // ====== "SUB" COMPONENTS ======>
     function ConditionalFloatingActionButton({condition, children, ...props}) {
@@ -122,4 +118,4 @@ function Footer({mobile, strings}) {
     )
 }
 
-export default Footer
+export default withLogging(Footer)
