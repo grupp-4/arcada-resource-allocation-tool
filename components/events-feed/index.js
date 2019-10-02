@@ -4,7 +4,18 @@ import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
 
-function EventsFeed({log}) {
+
+
+
+
+
+function EventsFeed({log, cs, strings}) {
+
+
+
+
+
+
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
@@ -12,7 +23,7 @@ function EventsFeed({log}) {
     // ====== RENDER ======>
     return(
         <Typography className={typographyStyles.typography} variant={"body1"}>
-            This is the events feed.
+            cs.map
         </Typography>
     )
 }
