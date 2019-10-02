@@ -17,6 +17,7 @@ The app was made as a course project in ”Ramverk och webbapplikationer (2019-2
 - [kaibiPrime](https://github.com/kaibiPrime "kaibiPrime's GitHub page")
 - [Christian Häggblom](https://github.com/christian-haggblom "Christian Häggblom's GitHub page")
 - [Skeba](https://github.com/Skeba "Skeba's GitHub page")
+- [Kuvajaan](https://github.com/Kuvajaan "Kuvajaan's GitHub page")
 
 ## Powered By
 

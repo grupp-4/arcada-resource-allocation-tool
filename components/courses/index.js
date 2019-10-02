@@ -1,116 +1,208 @@
-import React from 'react';
-import { withLogging } from "gillog"
-
-import { Fragment } from "react"
-
-import Typography from "@material-ui/core/Typography"
-import useTypographyStyles from "styles/typography"
-
-import Grid from "@material-ui/core/Grid";
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import { withLogging } from "gillog";
+import { useState } from "react";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import Avatar from '@material-ui/core/Avatar';
-import CardHeader from '@material-ui/core/CardHeader';
+import Typography from "@material-ui/core/Typography";
+import useTypographyStyles from "styles/typography";
+import useStyles from "./styles.js";
+import { InputBase } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-/*Styles
-** NOTES:
-** 1. Had to add card margin and remove grid spacing to prevent horizontal scrollbar
-*/
-const useStyles = makeStyles({
-  card: {
-    minWidth: 50,
-    margin: 4,
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
-//Prototype that takes the first letter of a string and makes it into a Material UI Avatar
-//Call this function with "String".makeAvatar()
-String.prototype.makeAvatar = function () {
-  return <Avatar>{this.charAt(0)}</Avatar>;
-}
+import AddTeacher from "components/courses/add-teacher"
+import CreateDropdownTeachers from "utility/create-dropdown-teachers.js"
 
 
-function Courses({ log, data, strings }) {
+// TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
 
-  const classes = useStyles();
-
+function Courses({ log, data }) {
   // ====== HOOKS ======>
-  //const typographyStyles = useTypographyStyles()
+  const typographyStyles = useTypographyStyles()
+  const styles = useStyles();
 
-  //3 functions for dropdown menu of teachers
-  const [anchorteacher, setAnchorteacher] = React.useState(null);
-  const [selectedTeacher, setSelectedTeacher] = React.useState('add teacher');
-  const selectTeacher = event => {
-    setAnchorteacher(event.currentTarget);
-  };
+  /* -- old commit
+  const [modifiedCourseJson, setmodifiedCourseJson] = useState(data);
 
-  const handleClose = (e) => {
-    e.persist();
-    setAnchorteacher(null);
-    console.log(e);
-    setSelectedTeacher(e.target.textContent);
-    //setSelectedTeacher(e)
-  };
+  console.log('modifiedCourseJson inside Teachers function');
+  console.log(modifiedCourseJson);
+  */
+  const [testState, setTestState] = useState(false);
+  let storage, storageData;
 
-  // ====== RENDER ======>
-  // Fixed: Avatar
-  // Fixed: Display cards in a grid
-  // TODO: If teacher : else button add teacher
-  // Alternative: Make dropdown with default none : Teachers
-  // Fixed: Fix some kind of bug classNames -- Had missed constant? Not sure what fixed this
-  // TODO Searchbox && function
-  return (
-    <>
-      <Grid container spacing={0} justify="center" alignItems="stretch">
-        {data && data.courses
-          ? data.courses.map(course =>
-            <Grid item xs={6}>
-              <Card className={classes.card}>
-                <CardHeader
-                  avatar={course.name.makeAvatar()}
-                  title={course.name}
-                  subheader={'Code: ' + course.courseCode}
-                />
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    {'Program: ' + course.program}
-                    <br />
-                    {'Time: ' + course.hours + 'h - Starting period ' + course.period}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" onClick={selectTeacher}>{selectedTeacher}</Button>
-                  <Menu
-                    id="teachers-menu"
-                    anchorEl={anchorteacher}
-                    keepMounted
-                    open={Boolean(anchorteacher)}
-                    onClose={handleClose}
-                  >
-                    {data.teachers.map(teacher =>
-                      <MenuItem onClick={handleClose}>{teacher.firstName} {teacher.lastName}</MenuItem>
-                    )}
-                  </Menu>
-                </CardActions>
-              </Card>
-            </Grid>
-          ) : "Loading courses..."}
-      </Grid>
-    </>
-  );
+  const passToParent = (s) => {
+    console.log('S in passtoparent()');
+    console.log(s);
+    console.log('testState init:');
+    console.log(testState);
+    setTestState(s);
+    console.log('testState after:');
+    console.log(testState);
+
+  }
+
+
+  const modifyHours = (e, course, period) => {
+    e.persist(); // This allows event to be read during function execution, in cost of performance    
+    // Takes the element's value
+    const newHour = parseInt(e.target.value, 10);
+    // Finds position of the modified course
+    const index = storageData.courses.findIndex(x => x.name == course);
+    // Updates the targeted course with new hour
+    storageData.courses[index].hours[period] = newHour;
+    // // Creates/overrides localstorage "data" key with the updated storageData
+    storage.setItem("data", JSON.stringify(storageData));
+  }
+
+  // Iterates through every course in modifiedCourseJson and returns a Table component
+  const mapCourses = (course, incomingData, styles, dropdownList) => {
+
+    //Prototype that takes the first letter of a string and makes it into a Material UI Avatar
+    //Call this function with "String".makeAvatar()
+    String.prototype.makeAvatar = function () {
+      return <Avatar className={styles.courseAvatar}>{this.charAt(0)}</Avatar>;
+    }
+
+    return (
+      <Card className={styles.card}>
+        <CardContent>
+          {/*Course name on top of table*/}
+          <Grid
+            container
+            justify="left"
+            alignItems="center">
+            {course.name.makeAvatar()}
+            {course.name} <br />
+          </Grid>
+          <Table
+            className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
+            key={course.courseCode + "table"}
+            // Not working
+            classes={{
+              root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
+              label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
+            }}
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell className={styles.tableCell}>Course</TableCell>
+                <TableCell align="left">Period 1</TableCell>
+                <TableCell align="left">Period 2</TableCell>
+                <TableCell align="left">Period 3</TableCell>
+                <TableCell align="left">Period 4</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <>
+                <TableRow
+                  key={course.name + "-courseRow"}
+                  className={styles.tableRow}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    key={course.name + "-cell1"}
+                    className={styles.tableCell, styles.thCustomWidth}>
+                    {course.courseCode}<br />{course.teacher}
+                  </TableCell>
+                  <TableCell align="right" key={course.name + "-cell2"}>
+                    <InputBase
+                      key={course.name + "-input1"}
+                      className={styles.inputBase}
+                      defaultValue={course.hours.p1}
+                      margin='dense'
+                      onChange={e => modifyHours(e, course.name, "p1")}
+                    />
+                  </TableCell>
+                  <TableCell align="right" key={course.name + "-cell3"}>
+                    <InputBase
+                      key={course.name + "-input2"}
+                      className={styles.inputBase}
+                      defaultValue={course.hours.p2}
+                      inputProps={{ 'aria-label': 'naked' }}
+                      margin='dense'
+                      onChange={e => modifyHours(e, course.courseCode, course, "p2")}
+                    />
+                  </TableCell>
+                  <TableCell align="right" key={course.name + "-cell4"}>
+                    <InputBase
+                      key={course.name + "-input3"}
+                      className={styles.inputBase}
+                      defaultValue={course.hours.p3}
+                      inputProps={{ 'aria-label': 'naked' }}
+                      margin='dense'
+                      onChange={e => modifyHours(e, course.courseCode, course, "p3")}
+                    />
+                  </TableCell>
+                  <TableCell align="right" key={course.name + "-cell5"}>
+                    <InputBase
+                      key={course.name + "-input4"}
+                      className={styles.inputBase}
+                      defaultValue={course.hours.p4}
+                      inputProps={{ 'aria-label': 'naked' }}
+                      margin='dense'
+                      onChange={e => modifyHours(e, course.courseCode, course, "p4")}
+                    />
+                  </TableCell>
+                </TableRow>
+              </>
+            </TableBody>
+          </Table>
+
+          <AddTeacher
+            addTeacherData={incomingData}
+            course={course.name}
+            dropdownList={dropdownList}
+            passToParent={passToParent}
+          />
+
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // ====== RENDER ======<<<<
+
+  // Only starts rendering once data from api is ready
+  if (data && data.courses) {
+    // Creates array of all course's names, which gets sent to the AddCourse component
+    const dropdownList = CreateDropdownTeachers(data)
+    // Defining storage here seems to guarantee it being client rendered
+    storage = window.localStorage;
+
+    // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
+    if (storage.getItem('data')) {
+      console.log('localstorage data exists(courses)');
+      storageData = JSON.parse(storage.getItem('data'));
+      return (
+        <Typography className={typographyStyles.typography} variant={"body1"} >
+          {testState ? "yes" : "no"}
+          <div className={styles.root}>
+            {storageData.courses.map((course) => mapCourses(course, storageData, styles, dropdownList))}
+          </div>
+        </Typography>
+      )
+    }
+    else {
+      storage.setItem("data", JSON.stringify(data));
+      storageData = JSON.parse(storage.getItem('data'));
+      return (
+        <Typography className={typographyStyles.typography} variant={"body1"} >
+          <div className={styles.root}>
+            {storageData.courses.map((course) => mapCourses(course, storageData, styles, dropdownList))}
+          </div>
+        </Typography>
+      )
+    }
+  }
+  else {
+    return (
+      "Loading courses..."
+    );
+  }
 }
 
 export default withLogging(Courses)
