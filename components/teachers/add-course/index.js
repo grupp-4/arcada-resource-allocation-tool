@@ -10,7 +10,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import Snacky from "utility/snacky.js";
 
 
 
@@ -264,6 +264,9 @@ function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
     const styles = useStyles();
     const theme = useTheme();
     const storage = window.localStorage;
+    const resetState = () => {
+        setDoIt(false);
+    }
     const selectStyles = {
         input: base => ({
             ...base,
@@ -323,12 +326,8 @@ function AddCourse({ addCourseData, teacher, dropdownList, passToParent }) {
 
                     }}
                 />
-                {doIt ? <SnackbarProvider
-                    maxSnack={3}
-                    autoHideDuration={1500}
-                    disableWindowBlurListener={true}>
-                    <Snack />
-                </SnackbarProvider> : ""}
+
+                {doIt ? <Snacky message="Course Added" resetState={resetState} /> : ""}
 
             </NoSsr>
         </div>

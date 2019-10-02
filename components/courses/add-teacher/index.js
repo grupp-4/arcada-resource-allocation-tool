@@ -252,6 +252,9 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
     const styles = useStyles();
     const theme = useTheme();
     const storage = window.localStorage;
+    const resetState = () => {
+        setDoIt(false);
+    }
     const selectStyles = {
         input: base => ({
             ...base,
@@ -311,7 +314,7 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
 
                     }}
                 />
-                {doIt ? <Snacky message="Teacher Added" /> : ""}
+                {doIt ? <Snacky message="Teacher Added" resetState={resetState} /> : ""}
             </NoSsr>
         </div>
     );

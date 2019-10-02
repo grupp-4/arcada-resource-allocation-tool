@@ -1,8 +1,6 @@
 import { SnackbarProvider, useSnackbar } from 'notistack';
 
-export default function Snacky({ message }) {
-
-
+export default function Snacky({ message, resetState }) {
     const Snack = () => {
         const { enqueueSnackbar } = useSnackbar();
         const handleClick = () => {
@@ -15,13 +13,13 @@ export default function Snacky({ message }) {
         );
     }
 
-
-
     return (
         <SnackbarProvider
             maxSnack={3}
             autoHideDuration={1500}
-            disableWindowBlurListener={true}>
+            disableWindowBlurListener={true}
+            onExited={() => resetState()}
+        >
             <Snack />
         </SnackbarProvider>
     )

@@ -31,6 +31,11 @@ function Footer({ log, mobile, strings }) {
     const [showSubmit, setShowSubmit] = useState(false);
     const [showDiscard, setShowDiscard] = useState(false);
 
+    const resetState = () => {
+        setShowDiscard(false);
+        setShowSubmit(false);
+    }
+
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
@@ -84,7 +89,6 @@ function Footer({ log, mobile, strings }) {
     // ====== RENDER ======>
     return (
         <Grid
-            onMouseOut={() => { console.log("Shmooovin"); }}
             className={`${styles.footer} ${mobile ? styles.footerMobile : null}`} container>
             <Grid item xs={!mobile}>
                 <IconButton
@@ -111,8 +115,8 @@ function Footer({ log, mobile, strings }) {
                 spacing={themeParams.spacing / 2}
                 xs>
                 <Grid item
-                    onMouseMove={() => setShowSubmit(false)}
                 >
+
                     <ConditionalFloatingActionButton
                         className={styles.saveButton}
                         onClick={submitChanges}
@@ -121,11 +125,11 @@ function Footer({ log, mobile, strings }) {
                         aria-label={"save"}>
                         <SaveIcon />
                     </ConditionalFloatingActionButton>
-                    {showSubmit ? <Snacky message="Saved Changes" /> : ""}
                 </Grid>
+                {showSubmit ? <Snacky resetState={resetState} message="Saved Changes" /> : ""}
                 <Grid item
-                    onMouseMove={() => setShowDiscard(false)}
                 >
+
                     <ConditionalFloatingActionButton
                         className={styles.discardButton}
                         onClick={discardChanges}
@@ -134,8 +138,8 @@ function Footer({ log, mobile, strings }) {
                         aria-label={"discard"}>
                         <DeleteRoundedIcon />
                     </ConditionalFloatingActionButton>
-                    {showDiscard ? <Snacky message="Discarded Changes" /> : ""}
                 </Grid>
+                {showDiscard ? <Snacky resetState={resetState} message="Discarded Changes" /> : ""}
             </Grid>
         </Grid>
     )

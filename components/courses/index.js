@@ -27,14 +27,9 @@ function Courses({ log, data }) {
     let storage, storageData;
 
     const passToParent = (s) => {
-        console.log('S in passtoparent()');
-        console.log(s);
-        console.log('testState init:');
-        console.log(testState);
         setTestState(s);
         console.log('testState after:');
         console.log(testState);
-
     }
 
 
@@ -89,59 +84,59 @@ function Courses({ log, data }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                                    <>
-                                        <TableRow
-                                            key={course.name + "-courseRow"}
-                                            className={styles.tableRow}
-                                        >
-                                            <TableCell
-                                                component="th"
-                                                scope="row"
-                                                key={course.name + "-cell1"}
-                                                className={styles.tableCell, styles.thCustomWidth}>
-                                                {course.courseCode}<br />{course.teacher}
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell2"}>
-                                                <InputBase
-                                                    key={course.name + "-input1"}
-                                                    className={styles.inputBase}
-                                                    defaultValue={course.hours.p1}
-                                                    margin='dense'
-                                                    onChange={e => modifyHours(e, course.name, "p1")}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell3"}>
-                                                <InputBase
-                                                    key={course.name + "-input2"}
-                                                    className={styles.inputBase}
-                                                    defaultValue={course.hours.p2}
-                                                    inputProps={{ 'aria-label': 'naked' }}
-                                                    margin='dense'
-                                                    onChange={e => modifyHours(e, course.courseCode, course, "p2")}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell4"}>
-                                                <InputBase
-                                                    key={course.name + "-input3"}
-                                                    className={styles.inputBase}
-                                                    defaultValue={course.hours.p3}
-                                                    inputProps={{ 'aria-label': 'naked' }}
-                                                    margin='dense'
-                                                    onChange={e => modifyHours(e, course.courseCode, course, "p3")}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell5"}>
-                                                <InputBase
-                                                    key={course.name + "-input4"}
-                                                    className={styles.inputBase}
-                                                    defaultValue={course.hours.p4}
-                                                    inputProps={{ 'aria-label': 'naked' }}
-                                                    margin='dense'
-                                                    onChange={e => modifyHours(e, course.courseCode, course, "p4")}
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    </>
+                            <>
+                                <TableRow
+                                    key={course.name + "-courseRow"}
+                                    className={styles.tableRow}
+                                >
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                        key={course.name + "-cell1"}
+                                        className={styles.tableCell, styles.thCustomWidth}>
+                                        {course.courseCode}<br />{course.teacher}
+                                    </TableCell>
+                                    <TableCell align="right" key={course.name + "-cell2"}>
+                                        <InputBase
+                                            key={course.name + "-input1"}
+                                            className={styles.inputBase}
+                                            defaultValue={course.hours.p1}
+                                            margin='dense'
+                                            onChange={e => modifyHours(e, course.name, "p1")}
+                                        />
+                                    </TableCell>
+                                    <TableCell align="right" key={course.name + "-cell3"}>
+                                        <InputBase
+                                            key={course.name + "-input2"}
+                                            className={styles.inputBase}
+                                            defaultValue={course.hours.p2}
+                                            inputProps={{ 'aria-label': 'naked' }}
+                                            margin='dense'
+                                            onChange={e => modifyHours(e, course.courseCode, course, "p2")}
+                                        />
+                                    </TableCell>
+                                    <TableCell align="right" key={course.name + "-cell4"}>
+                                        <InputBase
+                                            key={course.name + "-input3"}
+                                            className={styles.inputBase}
+                                            defaultValue={course.hours.p3}
+                                            inputProps={{ 'aria-label': 'naked' }}
+                                            margin='dense'
+                                            onChange={e => modifyHours(e, course.courseCode, course, "p3")}
+                                        />
+                                    </TableCell>
+                                    <TableCell align="right" key={course.name + "-cell5"}>
+                                        <InputBase
+                                            key={course.name + "-input4"}
+                                            className={styles.inputBase}
+                                            defaultValue={course.hours.p4}
+                                            inputProps={{ 'aria-label': 'naked' }}
+                                            margin='dense'
+                                            onChange={e => modifyHours(e, course.courseCode, course, "p4")}
+                                        />
+                                    </TableCell>
+                                </TableRow>
+                            </>
                         </TableBody>
                     </Table>
 
@@ -172,7 +167,7 @@ function Courses({ log, data }) {
             storageData = JSON.parse(storage.getItem('data'));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
-                {testState ? "" : ""}
+                    {testState ? "" : ""}
                     <div className={styles.root}>
                         {storageData.courses.map((course) => mapCourses(course, storageData, styles, dropdownList))}
                     </div>
