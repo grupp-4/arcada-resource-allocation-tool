@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import Snacky from "utility/snacky.js";
 
 
 
@@ -236,18 +237,7 @@ const components = {
 };
 
 
-const Snack = () => {
-    const { enqueueSnackbar } = useSnackbar();
 
-    const handleClick = () => {
-        enqueueSnackbar("Teacher Added");
-    };
-    return (
-        <React.Fragment>
-            {handleClick()}
-        </React.Fragment>
-    );
-}
 
 
 // Main function
@@ -322,12 +312,7 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
 
                     }}
                 />
-                {doIt ? <SnackbarProvider
-                    maxSnack={3}
-                    autoHideDuration={1500}
-                    disableWindowBlurListener={true}>
-                    <Snack />
-                </SnackbarProvider> : ""}
+                {doIt ? <Snacky message="Teacher Added" /> : ""}
             </NoSsr>
         </div>
     );
