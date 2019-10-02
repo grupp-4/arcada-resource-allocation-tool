@@ -45,43 +45,20 @@ function Courses({ log, data }) {
     }
 
 
-    const modifyHours = (e, courseC, courses, period) => {
-        e.persist(); // This allows event to be read during function execution, in cost of performance
-
+    const modifyHours = (e, course, period) => {
+        e.persist(); // This allows event to be read during function execution, in cost of performance    
         // Takes the element's value
         const newHour = parseInt(e.target.value, 10);
         // Finds position of the modified course
-        const index = storageData.courses.findIndex(x => x.courseCode == courseC);
+        const index = storageData.courses.findIndex(x => x.name == course);
         // Updates the targeted course with new hour
         storageData.courses[index].hours[period] = newHour;
-
-        console.log('storageData.courses[index].hours[period]');
-        console.log(storageData.courses[index].hours[period]);
-
         // // Creates/overrides localstorage "data" key with the updated storageData
         storage.setItem("data", JSON.stringify(storageData));
-
-        // Updates modifiedJson
-        /*
-        setModifiedJson(prevState => ({
-            ...prevState, // ...prevState means it adds all unmodified properties of modifiedJson, same with ...el
-            courses: prevState.courses.map(el => {
-                if (el.courseCode === courseC) {
-                    let hoursObj = el.hours;
-                    hoursObj[period] = newHour;
-                    return { ...el, hours: hoursObj }
-                }
-                else { return (el) }
-            }
-            ),
-        }));
-        */
-
-
     }
 
     // Iterates through every course in modifiedCourseJson and returns a Table component
-    const mapCourses = (courses, incomingData, styles, dropdownList) => {
+    const mapCourses = (course, incomingData, styles, dropdownList) => {
 
         //Prototype that takes the first letter of a string and makes it into a Material UI Avatar
         //Call this function with "String".makeAvatar()
@@ -97,12 +74,12 @@ function Courses({ log, data }) {
                         container
                         justify="left"
                         alignItems="center">
-                        {courses.name.makeAvatar()}
-                        {courses.name} <br />
+                        {course.name.makeAvatar()}
+                        {course.name} <br />
                     </Grid>
                     <Table
                         className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
-                        key={courses.courseCode + "table"}
+                        key={course.courseCode + "table"}
                         // Not working
                         classes={{
                             root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
@@ -121,53 +98,53 @@ function Courses({ log, data }) {
                         <TableBody>
                                     <>
                                         <TableRow
-                                            key={courses.name + "-courseRow"}
+                                            key={course.name + "-courseRow"}
                                             className={styles.tableRow}
                                         >
                                             <TableCell
                                                 component="th"
                                                 scope="row"
-                                                key={courses.name + "-cell1"}
+                                                key={course.name + "-cell1"}
                                                 className={styles.tableCell, styles.thCustomWidth}>
-                                                {courses.courseCode}<br />{courses.teacher}
+                                                {course.courseCode}<br />{course.teacher}
                                             </TableCell>
-                                            <TableCell align="right" key={courses.name + "-cell2"}>
+                                            <TableCell align="right" key={course.name + "-cell2"}>
                                                 <InputBase
-                                                    key={courses.name + "-input1"}
+                                                    key={course.name + "-input1"}
                                                     className={styles.inputBase}
-                                                    defaultValue={courses.hours.p1}
+                                                    defaultValue={course.hours.p1}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p1")}
+                                                    onChange={e => modifyHours(e, course.name, "p1")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={courses.name + "-cell3"}>
+                                            <TableCell align="right" key={course.name + "-cell3"}>
                                                 <InputBase
-                                                    key={courses.name + "-input2"}
+                                                    key={course.name + "-input2"}
                                                     className={styles.inputBase}
-                                                    defaultValue={courses.hours.p2}
+                                                    defaultValue={course.hours.p2}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p2")}
+                                                    onChange={e => modifyHours(e, course.courseCode, course, "p2")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={courses.name + "-cell4"}>
+                                            <TableCell align="right" key={course.name + "-cell4"}>
                                                 <InputBase
-                                                    key={courses.name + "-input3"}
+                                                    key={course.name + "-input3"}
                                                     className={styles.inputBase}
-                                                    defaultValue={courses.hours.p3}
+                                                    defaultValue={course.hours.p3}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p3")}
+                                                    onChange={e => modifyHours(e, course.courseCode, course, "p3")}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right" key={courses.name + "-cell5"}>
+                                            <TableCell align="right" key={course.name + "-cell5"}>
                                                 <InputBase
-                                                    key={courses.name + "-input4"}
+                                                    key={course.name + "-input4"}
                                                     className={styles.inputBase}
-                                                    defaultValue={courses.hours.p4}
+                                                    defaultValue={course.hours.p4}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, courses.courseCode, courses, "p4")}
+                                                    onChange={e => modifyHours(e, course.courseCode, course, "p4")}
                                                 />
                                             </TableCell>
                                         </TableRow>
@@ -177,7 +154,7 @@ function Courses({ log, data }) {
 
                     <AddTeacher
                         addTeacherData={incomingData}
-                        course={courses.teacher}
+                        course={course.name}
                         dropdownList={dropdownList}
                         passToParent={passToParent}
                     />
@@ -194,13 +171,12 @@ function Courses({ log, data }) {
         // Creates array of all course's names, which gets sent to the AddCourse component
         const dropdownList = CreateDropdownTeachers(data)
         // Defining storage here seems to guarantee it being client rendered
-        let storage = window.localStorage;
+        storage = window.localStorage;
 
         // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
         if (storage.getItem('data')) {
-            console.log('localstorage data exists');
-            let storageData = JSON.parse(storage.getItem('data'));
-
+            console.log('localstorage data exists(courses)');
+            storageData = JSON.parse(storage.getItem('data'));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                 {testState ? "yes" : "no"}
@@ -212,10 +188,11 @@ function Courses({ log, data }) {
         }
         else {
             storage.setItem("data", JSON.stringify(data));
+            storageData = JSON.parse(storage.getItem('data'));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                     <div className={styles.root}>
-                        {modifiedCourseJson.courses.map((course) => mapCourses(course, modifiedCourseJson, styles, dropdownList))}
+                        {storageData.courses.map((course) => mapCourses(course, storageData, styles, dropdownList))}
                     </div>
                 </Typography>
             )

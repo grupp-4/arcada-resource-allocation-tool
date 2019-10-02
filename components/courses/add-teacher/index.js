@@ -9,7 +9,8 @@ import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Fab from "@material-ui/core/Fab"
+import Fab from "@material-ui/core/Fab";
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 
 
@@ -236,7 +237,18 @@ const components = {
 };
 
 
+const Snack = () => {
+    const { enqueueSnackbar } = useSnackbar();
 
+    const handleClick = () => {
+        enqueueSnackbar("Teacher Added");
+    };
+    return (
+        <React.Fragment>
+            {handleClick()}
+        </React.Fragment>
+    );
+}
 
 
 // Main function
@@ -267,18 +279,18 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
     };
 
     // Triggered on change, updates the state
-    const handleChangeSingle = (value, teacher) => {
+    const handleChangeSingle = (value, course) => {
         setSingle(value);
         console.log("handleChangeSingle() value: ");
         console.log(value);
 
         let storageData = JSON.parse(storage.getItem('data'))
         // Finds position of the modified course
-        let index = storageData.courses.findIndex(x => x.name == value.value)
+        let index = storageData.courses.findIndex(x => x.name == course)
         console.log('The index:');
         console.log(index);
         // Updates the targeted course with new teacher
-        storageData.courses[index].teacher = teacher;
+        storageData.courses[index].teacher = value.value;
 
         console.log('The new storageData:');
         console.log(storageData);
@@ -288,21 +300,7 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
         // Pass this component's state to parent component, forcing a re-render
         passToParent(value.value);
         setDoIt(true);
-        /*
-        setmodifiedCourseJson(prevState => ({
-            // ...prevState takes in all unmodified parts of the previous object, as does ...el
-            ...prevState,asdasdasd
-            courses: prevState.courses.map(
-                el => el.name == value.value ? { ...el, teacher: teacher } : el
-            ),
-        }))
-        */
     };
-
-    const renderSomething = () => {
-        console.log("Rendering something");
-        return (<Typography variant="h6"><Fab color="secondary" aria-label="add">Add </Fab>{single.value}</Typography>)
-    }
 
 
     return (
@@ -325,12 +323,16 @@ function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
                     components={components}
                     value={single} // State variable
                     onChange={e => {
-                        handleChangeSingle(e, course.teacher);
+                        handleChangeSingle(e, course);
 
                     }}
                 />
-                {doIt ? renderSomething() : ""}
-
+                {doIt ? <SnackbarProvider
+                    maxSnack={3}
+                    autoHideDuration={1500}
+                    disableWindowBlurListener={true}>
+                    <Snack />
+                </SnackbarProvider> : ""}
             </NoSsr>
         </div>
     );
