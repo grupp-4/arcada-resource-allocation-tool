@@ -17,7 +17,7 @@ import CreateDropdownList from "utility/create-dropdown-list.js"
 
 
 // TODO: Implement search function
-function Teachers({ log, data }) {
+function Teachers({ log, data, strings }) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles();
     const styles = useStyles();
@@ -202,7 +202,5 @@ function Teachers({ log, data }) {
         );
     }
 }
-
-Teachers.id = "teachers"
 
 export default withLogging(Teachers)

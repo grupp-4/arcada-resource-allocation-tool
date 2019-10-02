@@ -9,13 +9,13 @@ import useStyles from "./styles"
 
 function EventsFeedTabView({log, data, strings}) {
 
-    // ====== INITIAL LOGIC ======>
-    const   key = "events-feed",
-            label = strings.eventsFeedTabName,
-            index = 0
-
     // ====== HOOKS ======>
     const styles = useStyles()
+
+    // ====== INITIAL LOGIC ======>
+    const key = "events-feed",
+        label = strings.eventsFeedTabName,
+        index = 0
 
     // ====== RENDER ======>
     return (
@@ -31,7 +31,7 @@ function EventsFeedTabView({log, data, strings}) {
                 role="tabpanel"
                 id={`tabpanel-${index}`}
                 aria-labelledby={`tab-${index}`}>
-                <EventsFeed data={data}/>
+                <EventsFeed data={data} strings={strings}/>
             </div>
         </>
     )

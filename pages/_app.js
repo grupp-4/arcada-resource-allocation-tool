@@ -13,6 +13,8 @@ import PersistentLayoutController from "components/persistent-layout-controller"
 import Header from "../components/header"
 import Main from "../components/main"
 
+import initIDB from "utility/idb"
+import drop from "utility/idb/drop"
 import processData from "utility/process-data"
 import getLandingPagePreferences from "utility/landing-page-preferences"
 
@@ -39,7 +41,7 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = { data: null, theme: theme, mobile: false, strings: strings }
+        this.state = { data: null, theme: theme, mobile: true, strings: strings }
     }
 
     // ====== COMPONENT DID MOUNT ======>
@@ -47,15 +49,34 @@ class _app extends __app {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
-        // Loading data
-        fetch("http://localhost:3000/static/mockup-data-periods.json")
-            .then(res => res.json())
+        // Dropping databases (just during development, when databases are changed a lot)
+        drop()
+            .then(() => {
+                log.debug("Successfully dropped all databases.")
+                // Loading data
+                return fetch(process.env.DATA_URL)
+            })
+            .then(res => {
+                // Parsing response body as JSON (which is asynchronous, for some reason)
+                return res.json()
+            })
             .then(data => {
                 log.debug("Loaded data (raw):", data)
+                // Processing data
                 const processedData = processData(data)
                 log.debug("Loaded data (processed):", processedData)
-                this.setState({ data: processedData })
+                // Initializing IDB
+                return initIDB(processedData)
             })
+            .then(([cs, rc, wc]) => {
+                // Getting all data from working copy
+                return wc.getEverything()
+            })
+            .then(data => {
+                // Populating this.state.data with the data from working copy
+                this.setState({ data })
+            })
+            .catch(error => log.error(error.stack))
     }
 
     // ====== PERSISTENT LAYOUT CONTROLLER EVENT HANDLERS ======>
@@ -129,13 +150,14 @@ class _app extends __app {
                             strings={strings.header} />
                         <Main
                             mobile={mobile}
-                            strings={strings.main}>
+                            strings={strings.main}
+                            footerStrings={strings.footer}>
                             <Component
                                 landingPage={preferences.landingPage}
                                 landingPageMobile={preferences.landingPageMobile}
                                 data={data}
                                 mobile={mobile}
-                                strings={strings.pages}
+                                strings={strings.main}
                                 {...pageProps} />
                         </Main>
                     </PersistentLayoutController>

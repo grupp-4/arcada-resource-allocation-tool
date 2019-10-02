@@ -2,6 +2,8 @@ import { withLogging } from "gillog"
 
 import { useState } from "react"
 
+import Link from "next/link"
+
 import AppBar from "@material-ui/core/AppBar"
 import Container from "@material-ui/core/Container"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -11,6 +13,7 @@ import Typography from "@material-ui/core/Typography"
 import TranslateRoundedIcon from "@material-ui/icons/TranslateRounded"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
 
+import Navigation from "./navigation"
 import Languages from "./languages"
 import Preferences from "./preferences"
 
@@ -22,27 +25,31 @@ function Header({ log, preferences, setLang, setTheme, mobile, strings }) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const [{ langAnchor, prefAnchor }, setState] = useState({ langAnchor: null, prefAnchor: null })
+    const [{ navOpen, langAnchor, prefAnchor }, setState] = useState({ langAnchor: null, prefAnchor: null })
 
     // ====== EVENT HANDLERS ======>
     function openNavigationMenu() {
-        // TODO: implement navigation menu
-        log.debug("User tried opening menu which isn't yet implemented.")
+        setState(prevState => ({ ...prevState, navOpen: true }))
+        log.debug("Opening navigation menu")
+    }
+    function closeNavigationMenu() {
+        setState(prevState => ({ ...prevState, navOpen: false }))
+        log.debug("Closing navigation menu")
     }
     function openLanguagesMenu({ currentTarget }) {
-        setState(prevState => ({ ...prevState, ...{ langAnchor: currentTarget } }))
+        setState(prevState => ({ ...prevState, langAnchor: currentTarget }))
         log.debug("Opening languages menu.")
     }
     function closeLanguagesMenu() {
-        setState(prevState => ({ ...prevState, ...{ langAnchor: null } }))
+        setState(prevState => ({ ...prevState, langAnchor: null }))
         log.debug("Closing languages menu.")
     }
     function openPreferencesMenu({ currentTarget }) {
-        setState(prevState => ({ ...prevState, ...{ prefAnchor: currentTarget } }))
+        setState(prevState => ({ ...prevState, prefAnchor: currentTarget }))
         log.debug("Opening preferences.")
     }
     function closePreferencesMenu() {
-        setState(prevState => ({ ...prevState, ...{ prefAnchor: null } }))
+        setState(prevState => ({ ...prevState, prefAnchor: null }))
         log.debug("Closing preferences.")
     }
 
@@ -63,9 +70,11 @@ function Header({ log, preferences, setLang, setTheme, mobile, strings }) {
                             style={{ display: mobile ? "initial" : "none" }}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography className={styles.appName} variant={"h6"}>
-                            {strings.appName}
-                        </Typography>
+                        <Link href={{ pathname: "/" }} passHref replace shallow>
+                            <Typography className={styles.appNameContainer} variant={"h6"}>
+                                <a className={styles.appNameAnchor}>{strings.appName}</a>
+                            </Typography>
+                        </Link>
                         <IconButton
                             onClick={openLanguagesMenu}
                             color={"inherit"}
@@ -87,6 +96,11 @@ function Header({ log, preferences, setLang, setTheme, mobile, strings }) {
                     </Toolbar>
                 </Container>
             </AppBar>
+            <Navigation
+                open={navOpen}
+                onClose={closeNavigationMenu}
+                landingPage={preferences.landingPageMobile}
+                strings={strings.navigationMenu} />
             <Languages
                 anchorEl={langAnchor}
                 onClose={closeLanguagesMenu}

@@ -41,7 +41,7 @@ String.prototype.makeAvatar = function () {
 }
 
 
-function Courses({ log, data }) {
+function Courses({ log, data, strings }) {
 
   const classes = useStyles();
 
@@ -112,7 +112,5 @@ function Courses({ log, data }) {
     </>
   );
 }
-
-Courses.id = "courses"
 
 export default withLogging(Courses)

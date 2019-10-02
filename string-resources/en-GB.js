@@ -16,6 +16,18 @@ const header = {
     get appName() {
         return this._global.appName
     },
+    navigationMenu: {
+        get eventsFeed() {
+            return cap(this._global.events)
+        },
+        get courses() {
+            return cap(this._global.courses)
+        },
+        get teachers() {
+            return cap(this._global.teachers)
+        },
+        _global: global
+    },
     preferencesMenu: {
         theme: {
             label: "Theme",
@@ -55,10 +67,14 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
-    lastUpdated: "Last updated:",
-    minutesAgo: "minutes ago",
-    rightNow: "right now",
     _global: global
 }
 
-export default {code, global, header, main}
+// ====== FOOTER ======>
+const footer = {
+    lastUpdated: "Last updated:",
+    minutesAgo: "minutes ago",
+    rightNow: "right now"
+}
+
+export default {code, global, header, main, footer}

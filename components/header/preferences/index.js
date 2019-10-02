@@ -2,6 +2,8 @@ import {withLogging} from "gillog"
 
 import {useState} from "react"
 
+import {useRouter} from "next/router"
+
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
@@ -19,11 +21,12 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     // ====== HOOKS ======>
     const styles = useStyles()
     const [{theme, landingPage, landingPageMobile}, setState] = useState(preferences)
+    const router = useRouter()
 
     // ====== EVENT HANDLERS ======>
     function changeTheme(event) {
         const value = event.target.value
-        setState(prevState => ({...prevState, ...{theme: value}}))
+        setState(prevState => ({...prevState, theme: value}))
         if (value !== "auto") window.localStorage.theme = value
         else window.localStorage.removeItem("theme")
         log.debug("Setting theme to", value)
@@ -32,10 +35,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPage(event) {
         const value = event.target.value
         if (value !== "courses") {
-            setState(prevState => ({...prevState, ...{landingPage: value}}))
+            setState(prevState => ({...prevState, landingPage: value}))
             window.localStorage.landingPage = value
         } else {
-            setState(prevState => ({...prevState, ...{landingPage: null}}))
+            setState(prevState => ({...prevState, landingPage: null}))
             window.localStorage.removeItem("landingPage")
         }
         log.debug("Setting landing page to", value)
@@ -43,17 +46,17 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPageMobile(event) {
         const value = event.target.value
         if (value !== "events-feed") {
-            setState(prevState => ({...prevState, ...{landingPageMobile: value}}))
+            setState(prevState => ({...prevState, landingPageMobile: value}))
             window.localStorage.landingPageMobile = value
         } else {
-            setState(prevState => ({...prevState, ...{landingPageMobile: null}}))
+            setState(prevState => ({...prevState, landingPageMobile: null}))
             window.localStorage.removeItem("landingPageMobile")
         }
         log.debug("Setting landing page on mobile to", value)
     }
     function resetTheme() {
         const value = "auto"
-        setState(prevState => ({...prevState, ...{theme: value}}))
+        setState(prevState => ({...prevState, theme: value}))
         window.localStorage.removeItem("theme")
         log.debug("Resetting theme to", value)
         setTheme()
@@ -67,8 +70,13 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         log.debug("Resetting landing page on mobile to events-feed")
     }
     function goToAboutPage() {
-        // TODO: implement about page
-        log.debug("User tried to open link to the about page, a page which isn't yet implemented.")
+        log.debug("Navigating to: about")
+        router.push(
+            {pathname: "/about"},
+            {pathname: "/about"}
+        ).catch(error => {
+            log.error(error.stack)
+        })
     }
 
     // ====== RENDER ======>

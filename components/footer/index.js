@@ -1,6 +1,6 @@
 import {withLogging} from "gillog"
 
-import {useState, useEffect} from "react"
+import {useState} from "react"
 
 import useTheme from "@material-ui/core/styles/useTheme"
 
@@ -18,8 +18,6 @@ import useStyles from "./styles"
 import themeParams from "theme/custom-parameters"
 
 function Footer({log, mobile, strings}) {
-
-    // ====== INITIAL LOGIC ======>
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -44,8 +42,6 @@ function Footer({log, mobile, strings}) {
         // TODO: implement syncing data
         log.debug("User tried to synchronize data, a feature which isn't yet implemented.")
     }
-
-    // ====== FUNCTIONS ======>
 
     // ====== "SUB" COMPONENTS ======>
     function ConditionalFloatingActionButton({condition, children, ...props}) {
