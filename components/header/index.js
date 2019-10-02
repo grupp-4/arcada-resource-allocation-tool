@@ -32,7 +32,8 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
         setState(prevState => ({...prevState, navOpen: true}))
         log.debug("Opening navigation menu")
     }
-    function closeNavigationMenu() {
+    function closeNavigationMenu(event) {
+        if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) return
         setState(prevState => ({...prevState, navOpen: false}))
         log.debug("Closing navigation menu")
     }

@@ -25,7 +25,7 @@ function Navigation({log, open, onClose, landingPage, strings}) {
         {key: "courses", icon: <MenuBookRoundedIcon/>, label: strings.courses},
         {key: "teachers", icon: <GroupRoundedIcon/>, label: strings.teachers}
     ]
-    let initialSelectedItem = router.asPath.slice(1) || landingPage || "events-feed"
+    let initialSelectedItem = router.query.page || landingPage || "events-feed"
 
     // ====== EVENT HANDLERS ======>
     function onClick(key) {
@@ -41,29 +41,34 @@ function Navigation({log, open, onClose, landingPage, strings}) {
 
     // ====== RENDER ======>
     return (
-        <Drawer open={open} onClose={onClose}>
-            <div
-                role="presentation"
-                onClick={onClose}
-                onKeyDown={onClose}>
-                <List>
-                    {definitions.map(({key, icon, label}) => (
-                        <ListItem
-                            key={key}
-                            className={styles.listItem}
-                            onClick={() => onClick(key)}
-                            button
-                            selected={key === initialSelectedItem}>
-                            <ListItemIcon>
-                                {icon}
-                            </ListItemIcon>
-                            <ListItemText>
-                                {label}
-                            </ListItemText>
-                        </ListItem>
-                    ))}
-                </List>
-            </div>
+        <Drawer
+            open={open}
+            onClose={onClose}
+            onKeyDown={onKeyDown}
+            ModalProps={{keepMounted: true}}
+            id={"navigation-menu"}>
+                <div
+                    role="presentation"
+                    onClick={onClose}
+                    onKeyDown={onClose}>
+                    <List>
+                        {definitions.map(({key, icon, label}) => (
+                            <ListItem
+                                key={key}
+                                className={styles.listItem}
+                                onClick={() => onClick(key)}
+                                button
+                                selected={key === initialSelectedItem}>
+                                <ListItemIcon>
+                                    {icon}
+                                </ListItemIcon>
+                                <ListItemText>
+                                    {label}
+                                </ListItemText>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
         </Drawer>
     )
 }
