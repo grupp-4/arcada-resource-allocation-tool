@@ -1,7 +1,7 @@
 import {withLogging} from "gillog"
 
 import {useState, useEffect} from "react"
-
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import useTheme from "@material-ui/core/styles/useTheme"
 
 import Grid from "@material-ui/core/Grid"
@@ -28,21 +28,45 @@ function Footer({log, mobile, strings}) {
         lastUpdated: 0, // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
+    const Snack = () => {
+        const { enqueueSnackbar } = useSnackbar();
+    
+        const handleClick = () => {
+            enqueueSnackbar("Course Added");
+        };
+        return (
+            <React.Fragment>
+                {handleClick()}
+            </React.Fragment>
+        );
+    }
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to submit changes, a feature which isn't yet implemented.")
+        <SnackbarProvider
+                    maxSnack={3}
+                    autoHideDuration={1500}
+                    disableWindowBlurListener={true}>
+                    <Snack />
+                </SnackbarProvider>
     }
 
     function discardChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to discard changes, a feature which isn't yet implemented.")
+        <SnackbarProvider
+                            maxSnack={3}
+                            autoHideDuration={1500}
+                            disableWindowBlurListener={true}>
+                            <Snack />
+                        </SnackbarProvider>
     }
 
     function syncData() {
-        // TODO: implement syncing data
-        log.debug("User tried to synchronize data, a feature which isn't yet implemented.")
+        <SnackbarProvider
+                    maxSnack={3}
+                    autoHideDuration={1500}
+                    disableWindowBlurListener={true}>
+                    <Snack />
+                </SnackbarProvider>
     }
 
     // ====== FUNCTIONS ======>
