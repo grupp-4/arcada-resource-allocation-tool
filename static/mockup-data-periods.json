@@ -5,9 +5,9 @@
       "courseCode": "IA‑2‑001 (0)",
       "hours": {
         "p1": 100,
-        "p2": 100,
-        "p3": 100,
-        "p4": 100
+        "p2": 0,
+        "p3": 0,
+        "p4": 0
       },
       "period": 1,
       "program": "IA",
@@ -18,26 +18,26 @@
       "courseCode": "IA‑2‑002 (0)",
       "hours": {
         "p1": 100,
-        "p2": 100,
-        "p3": 100,
-        "p4": 100
+        "p2": 0,
+        "p3": 0,
+        "p4": 0
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Pre-Calculus",
       "courseCode": "IA‑2‑012 (0)",
       "hours": {
         "p1": 100,
-        "p2": 100,
-        "p3": 100,
-        "p4": 100
+        "p2": 0,
+        "p3": 0,
+        "p4": 0
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Webbtjänster och molnteknologi",
@@ -50,7 +50,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Mjukvaruutvecklingsprocessen - Devops",
@@ -63,7 +63,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Ramverk och webbapplikationer",
@@ -89,7 +89,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Databearbetning",
@@ -102,7 +102,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Beslutssystemutveckling och verifikation",
@@ -115,7 +115,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Preskriptiv analytik",
@@ -128,7 +128,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Oscillation och partikelsystem",
@@ -141,7 +141,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Dennis Biström"
+      "teacher":""
     },
     {
       "name": "Autonoma agenter",
@@ -154,7 +154,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher":"Jonny Karlsson"
+      "teacher":""
     },
     {
       "name": "Vektorer och krafter",
@@ -167,7 +167,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Programmering och databehandling",
@@ -180,7 +180,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Jonny Karlsson"
+      "teacher": ""
     },
     {
       "name": "Introduktion till webbdesign",
@@ -193,7 +193,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Front-end programmering",
@@ -206,7 +206,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Design av analytiska system",
@@ -219,7 +219,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Jonny Karlsson"
+      "teacher": ""
     },
     {
       "name": "Maskininlärning och optimering",
@@ -245,7 +245,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Jonny Karlsson"
+      "teacher": ""
     },
     {
       "name": "Visualisering av information",
@@ -258,7 +258,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Back-end programmering",
@@ -271,7 +271,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Innehållshanteringssystem",
@@ -284,7 +284,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dan Granqvist"
+      "teacher": ""
     },
     {
       "name": "Statistik och sannolikhet",
@@ -297,7 +297,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Deskriptiv analytik - Data/Text mining",
@@ -310,7 +310,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Jonny Karlsson"
+      "teacher": ""
     },
     {
       "name": "Datorseende",
@@ -323,7 +323,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Cloud Native Apps",
@@ -336,7 +336,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Nätverksprotokoll och datasäkerhet",
@@ -362,7 +362,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Jonny Karlsson"
+      "teacher": ""
     },
     {
       "name": "Metodologi och examensseminarium",
@@ -375,7 +375,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Webbkommunikation, Databaser och CMS",
@@ -388,7 +388,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Datorarkitektur och operativsystem",
@@ -414,7 +414,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Administration",
@@ -427,7 +427,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Examensarbeten",
@@ -440,7 +440,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Praktikansvarig",
@@ -453,7 +453,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Tutorering",
@@ -466,7 +466,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Pro-prefekt",
@@ -479,7 +479,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Utbildningsansvarig",
@@ -500,7 +500,7 @@
       "hours": 30,
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Breddstudiepaket - Full stack",
@@ -508,7 +508,7 @@
       "hours": 120,
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "AFORA - Roboten Amy",
@@ -516,7 +516,7 @@
       "hours": 20,
       "period": 1,
       "program": "IA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "Digimanu - Engineering platform",
@@ -529,7 +529,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Forskning",
@@ -542,7 +542,7 @@
       },
       "period": 1,
       "program": "IA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Intro till BDA",
@@ -555,7 +555,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "Machine Learning for Predictive Problems",
@@ -568,7 +568,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Visual Analytics",
@@ -594,7 +594,7 @@
       },
       "period": 2,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "Big Data Analytics",
@@ -602,7 +602,7 @@
       "hours": 50,
       "period": 2,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "Analytical Service Development",
@@ -615,7 +615,7 @@
       },
       "period": 3,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": "Robin Wikström"
     },
     {
       "name": "Research Seminar and Group Supervision",
@@ -628,7 +628,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "Administrering",
@@ -654,7 +654,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": "Anton Akusok"
     },
     {
       "name": "Program director - Spec. Stud.",
@@ -667,7 +667,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Dennis Biström"
+      "teacher": ""
     },
     {
       "name": "Program director - Master",
@@ -680,7 +680,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": ""
     },
     {
       "name": "FaceTrack - Facial recognition and tracking",
@@ -693,7 +693,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Dennis Biström"
+      "teacher": "Pekka Butler"
     },
     {
       "name": "AMCOCP - Adaptive Machine Learning on Cloud Platforms",
@@ -706,7 +706,7 @@
       },
       "period": 1,
       "program": "BDA",
-      "teacher": "Shuhua Liu"
+      "teacher": "Leonardo Espinosa Leal"
     },
     {
       "name": "Forskning",
