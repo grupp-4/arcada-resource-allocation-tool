@@ -11,7 +11,8 @@ function EventsFeed({log, data}) {
     let storage, storageData;
     const typographyStyles = useTypographyStyles()
     
-    //Filter teacher hours
+    //Filter teachers and add up the hours
+    //Not working, don't know what to do!
     const countHours = (data.teacher, data.courses) => {
     setSingle(value);
     console.log("data.teachers.firstName+' '+data.teachers.lastName");
@@ -31,6 +32,7 @@ function EventsFeed({log, data}) {
         let totalhours += elem;
     }
 
+    //If it is more than 1600 hours return this pretty typography??
     if (totalhours > 1600) {
         return (
             <Typography className={typographyStyles.typography} variant={"body1"} >
@@ -38,16 +40,21 @@ function EventsFeed({log, data}) {
             </Typography>
         )
     }
+    //Return nothing if it's below 1600hours
     else {
         break;
     }
-    // Creates/overrides localstorage "data" key with the updated storageData
-    storage.setItem("data", JSON.stringify(storageData));
-    // Pass this component's state to parent component, forcing a re-render
-    passToParent(value.value);
+    /* Pass this component's state to parent component, forcing a re-render
+    //passToParent(value.value);
+    Don't think we need this*/
     };
 
     // ====== RENDER ======<<<<
+
+    /*=====================================================================================================
+    normal app start cpoy pasta, should be changed to call the hours function while maping teachers????
+    =======================================================================================================*/
+
 
     // Only starts rendering once data from api is ready
     if (data && data.courses) {
