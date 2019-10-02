@@ -33,14 +33,15 @@ function Languages({log, anchorEl, onClose, setLang}) {
             anchorEl={anchorEl}
             keepMounted
             id={"languages-menu"}>
-            {languages.map(({key, label}) => (
-                <MenuItem
-                    key={key}
-                    onClick={() => changeLang(key)}
-                    selected={key === initialSelectedLang}>
-                    {label}
-                </MenuItem>
-            ))}
+                {languages.map(({key, label}) => (
+                    <MenuItem
+                        key={key}
+                        onClick={() => changeLang(key)}
+                        selected={key === initialSelectedLang}
+                        aria-label={key}>
+                            {label}
+                    </MenuItem>
+                ))}
         </Menu>
     )
 }

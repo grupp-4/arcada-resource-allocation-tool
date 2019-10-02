@@ -74,6 +74,7 @@ function Footer({log, mobile, strings}) {
                     className={styles.syncButton}
                     onClick={syncData}
                     size={"small"}
+                    titleAccess={"sync"}
                     aria-label={"sync"}>
                         <SyncRoundedIcon/>
                 </IconButton>
@@ -99,6 +100,7 @@ function Footer({log, mobile, strings}) {
                             onClick={submitChanges}
                             condition={state.changes}
                             color={"inherit"}
+                            titleAccess={"save"}
                             aria-label={"save"}>
                                 <SaveIcon/>
                         </ConditionalFloatingActionButton>
@@ -109,6 +111,7 @@ function Footer({log, mobile, strings}) {
                             onClick={discardChanges}
                             condition={state.changes}
                             color={"inherit"}
+                            titleAccess={"discard"}
                             aria-label={"discard"}>
                                 <DeleteRoundedIcon/>
                         </ConditionalFloatingActionButton>
