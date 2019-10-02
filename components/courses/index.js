@@ -23,13 +23,6 @@ function Courses({ log, data }) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
     const styles = useStyles();
-    
-    /* -- old commit
-    const [modifiedCourseJson, setmodifiedCourseJson] = useState(data);
-
-    console.log('modifiedCourseJson inside Teachers function');
-    console.log(modifiedCourseJson);
-    */
     const [testState, setTestState] = useState(false);
     let storage, storageData;
 
@@ -179,7 +172,7 @@ function Courses({ log, data }) {
             storageData = JSON.parse(storage.getItem('data'));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
-                {testState ? "yes" : "no"}
+                {testState ? "" : ""}
                     <div className={styles.root}>
                         {storageData.courses.map((course) => mapCourses(course, storageData, styles, dropdownList))}
                     </div>

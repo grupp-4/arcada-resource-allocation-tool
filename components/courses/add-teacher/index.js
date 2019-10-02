@@ -9,7 +9,6 @@ import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Fab from "@material-ui/core/Fab";
 import { SnackbarProvider, useSnackbar } from 'notistack';
 
 
@@ -252,10 +251,6 @@ const Snack = () => {
 
 
 // Main function
-// TODO: Distill modifiedCourseJson to just the course added 
-// TODO: Add button Component that confirms the course to be added
-// TODO: Somehow send this state back to parent state object
-// TODO: Call the table to re-render and show chosen course
 function AddTeacher({ addTeacherData, course, dropdownList, passToParent }) {
 
     // Values for the dropdown
