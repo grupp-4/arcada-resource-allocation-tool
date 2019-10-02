@@ -44,7 +44,6 @@ function Navigation({log, open, onClose, landingPage, strings}) {
         <Drawer
             open={open}
             onClose={onClose}
-            onKeyDown={onKeyDown}
             ModalProps={{keepMounted: true}}
             id={"navigation-menu"}>
                 <div
@@ -58,13 +57,14 @@ function Navigation({log, open, onClose, landingPage, strings}) {
                                 className={styles.listItem}
                                 onClick={() => onClick(key)}
                                 button
-                                selected={key === initialSelectedItem}>
-                                <ListItemIcon>
-                                    {icon}
-                                </ListItemIcon>
-                                <ListItemText>
-                                    {label}
-                                </ListItemText>
+                                selected={key === initialSelectedItem}
+                                aria-label={key}>
+                                    <ListItemIcon>
+                                        {icon}
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        {label}
+                                    </ListItemText>
                             </ListItem>
                         ))}
                     </List>
