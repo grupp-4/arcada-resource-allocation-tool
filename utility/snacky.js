@@ -15,6 +15,8 @@ export default function Snacky({ message }) {
         );
     }
 
+
+
     return (
         <SnackbarProvider
             maxSnack={3}

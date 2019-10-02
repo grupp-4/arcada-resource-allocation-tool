@@ -1,9 +1,7 @@
-import {withLogging} from "gillog"
+import { withLogging } from "gillog"
 
-import {useState, useEffect} from "react"
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useState, useEffect } from "react"
 import useTheme from "@material-ui/core/styles/useTheme"
-
 import Grid from "@material-ui/core/Grid"
 import Zoom from "@material-ui/core/Zoom"
 import IconButton from "@material-ui/core/IconButton"
@@ -12,12 +10,14 @@ import Typography from "@material-ui/core/Typography"
 import Fab from "@material-ui/core/Fab"
 import SaveIcon from "@material-ui/icons/Save"
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded"
-
+import Snacky from "utility/snacky.js"
 import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Footer({log, mobile, strings}) {
+
+
+function Footer({ log, mobile, strings }) {
 
     // ====== INITIAL LOGIC ======>
 
@@ -28,51 +28,38 @@ function Footer({log, mobile, strings}) {
         lastUpdated: 0, // TODO: "actually" implement lastUpdated
         changes: true // TODO: "actually implement change tracker
     })
-    const Snack = () => {
-        const { enqueueSnackbar } = useSnackbar();
-    
-        const handleClick = () => {
-            enqueueSnackbar("Course Added");
-        };
-        return (
-            <React.Fragment>
-                {handleClick()}
-            </React.Fragment>
-        );
-    }
+    const [showSubmit, setShowSubmit] = useState(false);
+    const [showDiscard, setShowDiscard] = useState(false);
+
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
-        <SnackbarProvider
-                    maxSnack={3}
-                    autoHideDuration={1500}
-                    disableWindowBlurListener={true}>
-                    <Snack />
-                </SnackbarProvider>
+        console.log('submitting changes');
+        setShowSubmit(true);
     }
 
     function discardChanges() {
-        <SnackbarProvider
-                            maxSnack={3}
-                            autoHideDuration={1500}
-                            disableWindowBlurListener={true}>
-                            <Snack />
-                        </SnackbarProvider>
+        setShowDiscard(true);
     }
 
     function syncData() {
         <SnackbarProvider
-                    maxSnack={3}
-                    autoHideDuration={1500}
-                    disableWindowBlurListener={true}>
-                    <Snack />
-                </SnackbarProvider>
+            maxSnack={3}
+            autoHideDuration={1500}
+            disableWindowBlurListener={true}>
+            <Snack />
+        </SnackbarProvider>
+    }
+
+    const setFalse = () => {
+        console.log('Setting to false');
+        setShowSnacky(false);
     }
 
     // ====== FUNCTIONS ======>
 
     // ====== "SUB" COMPONENTS ======>
-    function ConditionalFloatingActionButton({condition, children, ...props}) {
+    function ConditionalFloatingActionButton({ condition, children, ...props }) {
         // ====== INITIAL LOGIC ======>
         const transitionTimes = {
             enter: theme.transitions.duration.enteringScreen,
@@ -84,18 +71,20 @@ function Footer({log, mobile, strings}) {
             <Zoom
                 in={condition}
                 timeout={transitionTimes}
-                style={{transitionDelay}}
+                style={{ transitionDelay }}
                 unmountOnExit>
-                    <Fab {...props}>
-                        {children}
-                    </Fab>
+                <Fab {...props}>
+                    {children}
+                </Fab>
             </Zoom>
         )
     }
 
+
     // ====== RENDER ======>
     return (
         <Grid
+            onMouseOut={() => { console.log("Shmooovin"); }}
             className={`${styles.footer} ${mobile ? styles.footerMobile : null}`} container>
             <Grid item xs={!mobile}>
                 <IconButton
@@ -103,7 +92,7 @@ function Footer({log, mobile, strings}) {
                     onClick={syncData}
                     size={"small"}
                     aria-label={"sync"}>
-                        <SyncRoundedIcon/>
+                    <SyncRoundedIcon />
                 </IconButton>
             </Grid>
             <Grid className={styles.lastUpdatedContainer} item xs={!mobile}>
@@ -121,26 +110,32 @@ function Footer({log, mobile, strings}) {
                 item
                 spacing={themeParams.spacing / 2}
                 xs>
-                    <Grid item>
-                        <ConditionalFloatingActionButton
-                            className={styles.saveButton}
-                            onClick={submitChanges}
-                            condition={state.changes}
-                            color={"inherit"}
-                            aria-label={"save"}>
-                                <SaveIcon/>
-                        </ConditionalFloatingActionButton>
-                    </Grid>
-                    <Grid item>
-                        <ConditionalFloatingActionButton
-                            className={styles.discardButton}
-                            onClick={discardChanges}
-                            condition={state.changes}
-                            color={"inherit"}
-                            aria-label={"discard"}>
-                                <DeleteRoundedIcon/>
-                        </ConditionalFloatingActionButton>
-                    </Grid>
+                <Grid item
+                    onMouseMove={() => setShowSubmit(false)}
+                >
+                    <ConditionalFloatingActionButton
+                        className={styles.saveButton}
+                        onClick={submitChanges}
+                        condition={state.changes}
+                        color={"inherit"}
+                        aria-label={"save"}>
+                        <SaveIcon />
+                    </ConditionalFloatingActionButton>
+                    {showSubmit ? <Snacky message="Saved Changes" /> : ""}
+                </Grid>
+                <Grid item
+                    onMouseMove={() => setShowDiscard(false)}
+                >
+                    <ConditionalFloatingActionButton
+                        className={styles.discardButton}
+                        onClick={discardChanges}
+                        condition={state.changes}
+                        color={"inherit"}
+                        aria-label={"discard"}>
+                        <DeleteRoundedIcon />
+                    </ConditionalFloatingActionButton>
+                    {showDiscard ? <Snacky message="Discarded Changes" /> : ""}
+                </Grid>
             </Grid>
         </Grid>
     )
