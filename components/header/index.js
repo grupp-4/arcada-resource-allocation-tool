@@ -57,7 +57,6 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                             onClick={openNavigationMenu}
                             color={"inherit"}
                             edge={"start"}
-                            titleAccess={"navigation-menu"}
                             aria-controls={"navigation-menu"}
                             aria-haspopup={"true"}
                             aria-label={"navigation"}
@@ -71,7 +70,6 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                             onClick={openLanguagesMenu}
                             color={"inherit"}
                             size={mobile ? "medium" : "small"}
-                            titleAccess={"languages-menu"}
                             aria-controls={"languages-menu"}
                             aria-haspopup={"true"}
                             aria-label={"languages"}>
@@ -81,7 +79,6 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                             onClick={openPreferencesMenu}
                             color={"inherit"}
                             size={mobile ? "medium" : "small"}
-                            titleAccess={"languages-menu"}
                             aria-controls={"preferences-menu"}
                             aria-haspopup={"true"}
                             aria-label={"preferences"}>
