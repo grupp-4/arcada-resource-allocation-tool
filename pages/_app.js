@@ -70,11 +70,7 @@ class _app extends __app {
             })
             .then(([cs, rc, wc]) => {
                 // Getting all data from working copy
-                return wc.getEverything()
-            })
-            .then(data => {
-                // Populating this.state.data with the data from working copy
-                this.setState({data})
+                this.setState({data: wc})
             })
             .catch(error => log.error(error.stack))
     }

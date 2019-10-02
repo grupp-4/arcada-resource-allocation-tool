@@ -8,8 +8,8 @@ export default function wcLib(wc) {
     return {
         async getEverything() {
             return {
-                courses: await wc["courses"].toArray(),
-                teachers: await wc["teachers"].toArray()
+                courses: await wc["courses"].toCollection(),
+                teachers: await wc["teachers"].toCollection()
             }
         },
         async populate(fetchedData) {
