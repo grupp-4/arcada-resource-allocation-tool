@@ -7,6 +7,13 @@ function styles(theme) {
             thCustomWidth: {
                 width: 300
             },
+            warning: {
+                '& input': {
+                    color: red[400],
+                    borderBottom: '1px solid ' + red[400],
+                    fontWeight: "bold"
+                },
+            },
             nestedElements: {
                 "& th": {
                     padding: "7px 0px 7px 10px",

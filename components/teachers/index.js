@@ -35,7 +35,9 @@ function Teachers({ log, data }) {
 
     }
 
-
+    const calcTotalHours = (arr) => {
+        return (arr[0] + arr[1] + arr[2] + arr[3])
+    }
 
     const modifyHours = (e, courseC, courses, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance
@@ -59,6 +61,7 @@ function Teachers({ log, data }) {
         const courses = incomingData.courses;
         const teacherFullName = `${teacher.firstName} ${teacher.lastName}`;
         let assignedCourses = courses.filter((course) => { return (course.teacher == teacherFullName) }); // Makes array of courses that match teacher name
+        let periodTotalHours = [0, 0, 0, 0];
 
         return (
             <Card className={styles.card}>
@@ -90,6 +93,12 @@ function Teachers({ log, data }) {
                         </TableHead>
                         <TableBody>
                             {assignedCourses.map(element => {
+                                periodTotalHours[0] += element.hours.p1;
+                                periodTotalHours[1] += element.hours.p2;
+                                periodTotalHours[2] += element.hours.p3;
+                                periodTotalHours[3] += element.hours.p4;
+
+
                                 return (
                                     <>
                                         <TableRow
@@ -146,6 +155,23 @@ function Teachers({ log, data }) {
                                     </>
                                 )
                             })}
+
+                            <TableRow
+                                key={teacherFullName + "-periodHoursRow"}
+                                className={styles.tableRow}
+                            >
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    key={teacherFullName + "-cell1"}
+                                    className={styles.tableCell, styles.thCustomWidth}>
+                                    <strong>Total Hours: {calcTotalHours(periodTotalHours)}</strong>
+                                </TableCell>
+                                <TableCell align="center">{periodTotalHours[0]}</TableCell>
+                                <TableCell align="center">{periodTotalHours[1]}</TableCell>
+                                <TableCell align="center">{periodTotalHours[2]}</TableCell>
+                                <TableCell align="center">{periodTotalHours[3]}</TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
 
