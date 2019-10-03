@@ -4,7 +4,8 @@ import {Fragment} from "react"
 
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
-import Grid from "@material-ui/core/Grid"
+import CardHeader from "@material-ui/core/CardHeader"
+import Avatar from "@material-ui/core/Avatar"
 import InputBase from "@material-ui/core/InputBase"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
@@ -14,7 +15,9 @@ import TableRow from "@material-ui/core/TableRow"
 
 import AddCourse from "./add-course"
 
+import useCtStyles from "styles/courses-teachers"
 import useStyles from "./styles"
+import {CardActions} from "@material-ui/core"
 
 function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data, mobile, strings}) {
 
@@ -24,6 +27,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
     let periodTotalHours = [0, 0, 0, 0]
 
     // ====== HOOKS ======>
+    const ctStyles = useCtStyles()
     const styles = useStyles()
 
     // ====== FUNCTIONS ======>
@@ -48,22 +52,27 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
 
     // ====== RENDER ======>
     return (
-        <Card className={mobile ? styles.cardMobile : styles.cardDesktop}>
-            <CardContent>
-                <Grid container justify={"center"} alignItems={"center"}>
-                    {teacherFullName}<br/>
-                </Grid>
+        <Card className={mobile ? ctStyles.cardMobile : ctStyles.cardDesktop}>
+            <CardHeader
+                className={styles.cardHeader}
+                avatar={(
+                    <Avatar>
+                        {`${teacher.firstName.slice(0,1).toUpperCase()}${teacher.lastName.slice(0, 1).toUpperCase()}`}
+                    </Avatar>
+                )}
+                title={teacherFullName}/>
+            <CardContent className={ctStyles.cardContent}>
                 <Table
                     className={`${styles.table} ${styles.nestedElements}`}
                     key={teacherFullName + "-table"}
                     classes={{root: styles.table.root, label: styles.table.label}}>
                         <TableHead>
                             <TableRow>
-                                <TableCell className={styles.tableCell}>Course</TableCell>
-                                <TableCell align={"left"}>Period 1</TableCell>
-                                <TableCell align={"left"}>Period 2</TableCell>
-                                <TableCell align={"left"}>Period 3</TableCell>
-                                <TableCell align={"left"}>Period 4</TableCell>
+                                <TableCell className={styles.tableCell}>{strings.course}</TableCell>
+                                <TableCell>{strings.period1}</TableCell>
+                                <TableCell>{strings.period2}</TableCell>
+                                <TableCell>{strings.period3}</TableCell>
+                                <TableCell>{strings.period4}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -130,21 +139,24 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                         className={`${styles.tableCell} ${styles.thCustomWidth}`}
                                         component={"th"}
                                         scope={"row"}>
-                                            <strong>Total Hours: {calcTotalHours(periodTotalHours)}</strong>
+                                            <strong>{`${strings.totalHours} ${calcTotalHours(periodTotalHours)}`}</strong>
                                     </TableCell>
-                                    <TableCell align={"center"}>{periodTotalHours[0]}</TableCell>
-                                    <TableCell align={"center"}>{periodTotalHours[1]}</TableCell>
-                                    <TableCell align={"center"}>{periodTotalHours[2]}</TableCell>
-                                    <TableCell align={"center"}>{periodTotalHours[3]}</TableCell>
+                                    <TableCell>{periodTotalHours[0]}</TableCell>
+                                    <TableCell>{periodTotalHours[1]}</TableCell>
+                                    <TableCell>{periodTotalHours[2]}</TableCell>
+                                    <TableCell>{periodTotalHours[3]}</TableCell>
                             </TableRow>
                         </TableBody>
                 </Table>
+            </CardContent>
+            <CardActions className={ctStyles.cardActions}>
                 <AddCourse
                     setTeacher={setTeacher}
                     addCourse={invalidate}
                     teacher={teacherFullName}
-                    dropdownList={courses}/>
-            </CardContent>
+                    dropdownList={courses}
+                    strings={strings}/>
+            </CardActions>
         </Card>
     )
 }

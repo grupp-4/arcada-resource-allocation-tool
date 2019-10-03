@@ -58,6 +58,24 @@ const header = {
 
 // ====== MAIN ======>
 const main = {
+    course: {
+        heldBy: "Held by",
+        period1: "Period 1",
+        period2: "Period 2",
+        period3: "Period 3",
+        period4: "Period 4",
+        notAssigned: "Not assigned",
+        assignTeacher: "Assign teacher to this course"
+    },
+    teacher: {
+        course: "Course",
+        period1: "Period 1",
+        period2: "Period 2",
+        period3: "Period 3",
+        period4: "Period 4",
+        totalHours: "Total hours:",
+        assignCourse: "Assign to course to this teacher"
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },

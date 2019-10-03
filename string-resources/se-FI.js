@@ -58,6 +58,24 @@ const header = {
 
 // ====== MAIN ======>
 const main = {
+    course: {
+        heldBy: "Hålls av",
+        period1: "Period 1",
+        period2: "Period 2",
+        period3: "Period 3",
+        period4: "Period 4",
+        notAssigned: "Inte tilldelad",
+        assignTeacher: "Allokera en lärare i denna kurs"
+    },
+    teacher: {
+        course: "Kurs",
+        period1: "Period 1",
+        period2: "Period 2",
+        period3: "Period 3",
+        period4: "Period 4",
+        totalHours: "Totalt:",
+        assignCourse: "Tilldela en kurs till denna lärare"
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },

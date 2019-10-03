@@ -1,8 +1,8 @@
 import {withLogging} from "gillog"
 
 import Card from "@material-ui/core/Card"
+import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
-import Grid from "@material-ui/core/Grid"
 import InputBase from "@material-ui/core/InputBase"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
@@ -12,11 +12,14 @@ import TableRow from "@material-ui/core/TableRow"
 
 import AddTeacher from "./add-teacher"
 
+import useCtStyles from "styles/courses-teachers"
 import useStyles from "./styles"
+import {CardActions} from "@material-ui/core"
 
 function Course({log, setHours, setTeacher, invalidate, course, teachers, data, mobile, strings}) {
 
     // ====== HOOKS ======>
+    const ctStyles = useCtStyles()
     const styles = useStyles()
 
     // ====== FUNCTIONS ======>
@@ -38,22 +41,22 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
 
     // ====== RENDER ======>
     return (
-        <Card className={mobile ? styles.cardMobile : styles.cardDesktop}>
-            <CardContent>
-                <Grid container justify={"flex-start"} alignItems={"center"}>
-                    {course.name}<br/>
-                </Grid>
+        <Card className={mobile ? ctStyles.cardMobile : ctStyles.cardDesktop}>
+            <CardHeader
+                title={course.name}
+                subheader={course.courseCode}/>
+            <CardContent className={ctStyles.cardContent}>
                 <Table
                     className={`${styles.table} ${styles.nestedElements}`}
                     key={course.courseCode + "-table"}
                     classes={{root: styles.table.root, label: styles.table.label}}>
                         <TableHead>
                             <TableRow>
-                                <TableCell className={styles.tableCell}>Course</TableCell>
-                                <TableCell align={"left"}>Period 1</TableCell>
-                                <TableCell align={"left"}>Period 2</TableCell>
-                                <TableCell align={"left"}>Period 3</TableCell>
-                                <TableCell align={"left"}>Period 4</TableCell>
+                                <TableCell className={styles.tableCell}>{strings.heldBy}</TableCell>
+                                <TableCell>{strings.period1}</TableCell>
+                                <TableCell>{strings.period2}</TableCell>
+                                <TableCell>{strings.period3}</TableCell>
+                                <TableCell>{strings.period4}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -63,7 +66,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                                     className={`${styles.tableCell} ${styles.thCustomWidth}`}
                                     component={"th"}
                                     scope={"row"}>
-                                        {course.courseCode}<br/>{course.teacher}
+                                        {course.teacher ? course.teacher : strings.notAssigned}
                                 </TableCell>
                                 <TableCell align={"right"} key={course.name + "-cell2"}>
                                     <InputBase
@@ -104,12 +107,16 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                             </TableRow>
                         </TableBody>
                 </Table>
+            </CardContent>
+            <CardActions className={ctStyles.cardActions}>
                 <AddTeacher
                     setTeacher={setTeacher}
                     addTeacher={invalidate}
+                    teacher={course.teacher}
                     course={course.name}
-                    dropdownList={teachers}/>
-            </CardContent>
+                    dropdownList={teachers}
+                    strings={strings}/>
+            </CardActions>
         </Card>
     )
 }

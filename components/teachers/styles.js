@@ -6,17 +6,8 @@ import params from "../../theme/custom-parameters"
 
 function styles(theme) {
     return {
-        root: {
-            textAlign: "center"
-        },
-        circularProgress: {
-            marginTop: theme.spacing(params.spacing * 2)
-        },
-        cardMobile: {
-            marginBottom: theme.spacing(params.spacing)
-        },
-        cardDesktop: {
-            margin: theme.spacing(params.spacing)
+        cardHeader: {
+            textAlign: "left"
         },
         thCustomWidth: {
             width: 300
@@ -88,7 +79,9 @@ function styles(theme) {
         },
         inputBase: {
             "& input": {
-                borderBottom: "1px solid black"
+                borderBottom: "1px solid black",
+                padding: 0,
+                textAlign: "left"
             }
         }
     }

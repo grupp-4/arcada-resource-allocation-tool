@@ -6,13 +6,13 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 
 import Teacher from "./teacher"
 
-import useStyles from "./styles.js"
+import useCtStyles from "styles/courses-teachers"
 
 // TODO: implement search, sort and filter functions
 function Teachers({log, db, mobile, strings}) {
 
     // ====== HOOKS ======>
-    const styles = useStyles()
+    const ctStyles = useCtStyles()
     const [state, setState] = useState({
         data: null
     })
@@ -47,7 +47,7 @@ function Teachers({log, db, mobile, strings}) {
                 courses={courseNames}
                 data={storageData}
                 mobile={mobile}
-                strings={strings}/>
+                strings={strings.teacher}/>
         ))
     }
     function invalidate() {
@@ -56,10 +56,10 @@ function Teachers({log, db, mobile, strings}) {
 
     // ====== RENDER ======>
     return (
-        <div className={styles.root}>
+        <div className={ctStyles.root}>
             {state.data
                 ? listTeachers(state.data)
-                : <div className={styles.circularProgress}><CircularProgress/></div>
+                : <div className={ctStyles.circularProgress}><CircularProgress/></div>
             }
         </div>
     )

@@ -2,22 +2,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles"
 
 import green from "@material-ui/core/colors/green"
 import red from "@material-ui/core/colors/red"
+
 import params from "../../theme/custom-parameters"
 
 function styles(theme) {
     return {
-        root: {
-            textAlign: "center"
-        },
-        circularProgress: {
-            marginTop: theme.spacing(params.spacing * 2)
-        },
-        cardMobile: {
-            marginBottom: theme.spacing(params.spacing)
-        },
-        cardDesktop: {
-            margin: theme.spacing(params.spacing)
-        },
         thCustomWidth: {
             width: 300
         },
@@ -86,7 +75,9 @@ function styles(theme) {
         },
         inputBase: {
             "& input": {
-                borderBottom: "1px solid black"
+                borderBottom: "1px solid black",
+                padding: 0,
+                textAlign: "left"
             }
         }
     }

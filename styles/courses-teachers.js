@@ -1,4 +1,6 @@
-import {emphasize, makeStyles} from "@material-ui/core/styles"
+import makeStyles from "@material-ui/core/styles/makeStyles"
+
+import params from "../theme/custom-parameters"
 
 /* Special note regarding add-course-teacher.js:
  * The reason why this file is called add-course-teacher.js and exists in the styles directory
@@ -19,51 +21,24 @@ import {emphasize, makeStyles} from "@material-ui/core/styles"
 function styles(theme) {
     return {
         root: {
-            flexGrow: 1,
-            minWidth: 290
+            textAlign: "center"
         },
-        input: {
-            display: "flex",
-            padding: 0,
-            height: "auto"
+        circularProgress: {
+            marginTop: theme.spacing(params.spacing * 2)
         },
-        valueContainer: {
-            display: "flex",
-            flexWrap: "wrap",
-            flex: 1,
-            alignItems: "center",
-            overflow: "hidden"
+        cardDesktop: {
+            background: params.darkMode ? theme.palette.background.default : "initial",
+            margin: theme.spacing(params.spacing)
         },
-        chip: {
-            margin: theme.spacing(0.5, 0.25)
+        cardMobile: {
+            marginBottom: theme.spacing(params.spacing)
         },
-        chipFocused: {
-            backgroundColor: emphasize(
-                theme.palette.type === "light" ? theme.palette.grey[300] : theme.palette.grey[700],
-                0.08
-            )
+        cardContent: {
+            paddingTop: 0,
+            paddingBottom: 0
         },
-        noOptionsMessage: {
-            padding: theme.spacing(1, 2)
-        },
-        singleValue: {
-            fontSize: 16
-        },
-        placeholder: {
-            position: "absolute",
-            left: 2,
-            bottom: 6,
-            fontSize: 16
-        },
-        paper: {
-
-            zIndex: 1,
-            marginTop: theme.spacing(1),
-            left: 0,
-            right: 0
-        },
-        divider: {
-            height: theme.spacing(2)
+        cardActions: {
+            padding: `${theme.spacing(params.spacing)}px !important`
         }
     }
 }

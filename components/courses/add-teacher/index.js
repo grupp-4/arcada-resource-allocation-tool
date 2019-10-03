@@ -8,11 +8,11 @@ import Snacky from "components/snacky"
 import useStyles from "styles/add-course-teacher"
 
 // TODO: get snackbar working
-function AddTeacher({log, setTeacher, addTeacher, course, dropdownList}) {
+function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const [single, setSingle] = useState(null)
+    const [single, setSingle] = useState(teacher ? {value: teacher, label: teacher} : null)
     const [doIt, setDoIt] = useState(false)
 
     // ====== FUNCTIONS ======>
@@ -43,9 +43,7 @@ function AddTeacher({log, setTeacher, addTeacher, course, dropdownList}) {
     return (
         <div className={styles.root}>
             <Select
-                classes={styles}
-                textFieldProps={{label: "Teacher"}}
-                placeholder={"Add a teacher to this course"}
+                placeholder={strings.assignTeacher}
                 options={dropdownList}
                 value={single}
                 onChange={event => addTeacherToCourse(event, course)}/>

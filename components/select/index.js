@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography"
 
 import ReactSelect from "react-select"
 
+import useStyles from "./styles"
+
 function NoOptionsMessage(props) {
     return (
         <Typography
@@ -212,15 +214,16 @@ function Menu(props) {
     selectProps: PropTypes.object.isRequired
 }*/
 
-function Select({log, classes, textFieldProps, placeholder, options, value, onChange}) {
+function Select({log, placeholder, options, value, onChange}) {
 
     // ====== HOOKS ======>
+    const styles = useStyles()
     const theme = useTheme()
 
     // ====== RENDER ======>
     return (
         <ReactSelect
-            classes={classes}
+            classes={styles}
             styles={{
                 input: base => ({
                     ...base,
@@ -232,7 +235,6 @@ function Select({log, classes, textFieldProps, placeholder, options, value, onCh
             }}
             inputId={"select-single"}
             TextFieldProps={{
-                ...textFieldProps,
                 InputLabelProps: {
                     htmlFor: "select-single",
                     shrink: true
