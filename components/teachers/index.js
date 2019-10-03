@@ -12,21 +12,22 @@ function Teachers({log, data, strings}) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
     const [teachers, setTeachers] = useState(null)
-    useEffect(() => {
+    /*useEffect(() => {
         if (data) {
             data.getTeachers()
                 .then(teachers => setTeachers(teachers))
                 .catch(error => log.error(error.stack))
         }
-    }, [data])
+    }, [data])*/
 
     // ====== RENDER ======>
-    return teachers ? (
+    return (
         <Typography className={typographyStyles.typography} variant={"body1"}>
-            {teachers.map((teacher, index) => <Fragment key={index}>{`${teacher.firstName} ${teacher.lastName}`}<br/></Fragment>)}
+            {teachers
+                ? teachers.map((teacher, index) => <Fragment key={index}>{`${teacher.firstName} ${teacher.lastName}`}<br/></Fragment>)
+                : <CircularProgress/>
+            }
         </Typography>
-    ) : (
-        <CircularProgress/>
     )
 }
 

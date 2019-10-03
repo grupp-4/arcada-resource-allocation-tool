@@ -22,8 +22,8 @@ function styles(theme) {
     return {
         typography: {
             padding: theme.spacing(params.spacing),
-            textAlign: 'center',
-            color: theme.palette.text.secondary,
+            textAlign: "center",
+            color: theme.palette.text.secondary
         }
     }
 }
