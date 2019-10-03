@@ -3,7 +3,7 @@
 A web app designed for the staff at [Arcada UAS](https://www.arcada.fi/en "arcada.fi") to more easily be able to allocate their people resources and quickly manage things like:
 
 - who keeps what course?
-- who `conducts` what research?
+- who researches what?
 - is this month’s workload evenly distributed?
 - is someone doing too many hours per month?
 
@@ -13,10 +13,12 @@ The app was made as a course project in ”Ramverk och webbapplikationer (2019-2
 
 ## Creators
 
-- [Daniel Giljam](https://github.com/DanielGiljam "Daniel Giljam's GitHub page")
-- [kaibiPrime](https://github.com/kaibiPrime "kaibiPrime's GitHub page")
-- [Christian Häggblom](https://github.com/christian-haggblom "Christian Häggblom's GitHub page")
-- [Skeba](https://github.com/Skeba "Skeba's GitHub page")
+- [Daniel Giljam](https://github.com/DanielGiljam "Daniel's GitHub page")
+- [Johan Penttinen](https://github.com/kaibiPrime "Johan's GitHub page")
+- [Kristoffer Kuvaja](https://github.com/kuvajaan "Kristoffer's GitHub page")
+- [Christian Häggblom](https://github.com/christian-haggblom "Christian's GitHub page")
+- [Sebastian Lundgren](https://github.com/Skeba "Sebastian's GitHub page")
+- [Thomas Sandelin](https://github.com/sandelit "Thomas's GitHub page")
 
 ## Powered By
 
