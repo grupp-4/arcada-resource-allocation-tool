@@ -30,10 +30,12 @@ function Footer({ log, mobile, strings }) {
     })
     const [showSubmit, setShowSubmit] = useState(false);
     const [showDiscard, setShowDiscard] = useState(false);
+    const [showSync, setShowSync] = useState(false);
 
     const resetState = () => {
         setShowDiscard(false);
         setShowSubmit(false);
+        setShowSync(false);
     }
 
 
@@ -48,12 +50,7 @@ function Footer({ log, mobile, strings }) {
     }
 
     function syncData() {
-        <SnackbarProvider
-            maxSnack={3}
-            autoHideDuration={1500}
-            disableWindowBlurListener={true}>
-            <Snack />
-        </SnackbarProvider>
+        setShowSync(true);
     }
 
     const setFalse = () => {
@@ -99,6 +96,7 @@ function Footer({ log, mobile, strings }) {
                     <SyncRoundedIcon />
                 </IconButton>
             </Grid>
+            {showSync ? <Snacky resetState={resetState} message="API request" /> : ""}
             <Grid className={styles.lastUpdatedContainer} item xs={!mobile}>
                 <Typography className={styles.lastUpdated} variant={"caption"}>
                     <b>{strings.lastUpdated}</b>

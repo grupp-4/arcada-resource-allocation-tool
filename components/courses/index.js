@@ -15,6 +15,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import AddTeacher from "components/courses/add-teacher"
 import CreateDropdownTeachers from "utility/create-dropdown-teachers.js"
+import warning from "utility/warning.js";
 
 
 // TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
@@ -24,14 +25,16 @@ function Courses({ log, data }) {
     const typographyStyles = useTypographyStyles()
     const styles = useStyles();
     const [testState, setTestState] = useState(false);
+    //new
+    const [courseHour, setCourseHour] = useState(null);
     let storage, storageData;
 
     const passToParent = (s) => {
         setTestState(s);
-        console.log('testState after:');
-        console.log(testState);
     }
-
+    const calcTotalHours = (arr) => {
+        return (arr[0] + arr[1] + arr[2] + arr[3])
+    }
 
     const modifyHours = (e, course, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance    
@@ -43,21 +46,26 @@ function Courses({ log, data }) {
         storageData.courses[index].hours[period] = newHour;
         // // Creates/overrides localstorage "data" key with the updated storageData
         storage.setItem("data", JSON.stringify(storageData));
+        setCourseHour(newHour);
     }
 
     // Iterates through every course in modifiedCourseJson and returns a Table component
     const mapCourses = (course, incomingData, styles, dropdownList) => {
-
         //Prototype that takes the first letter of a string and makes it into a Material UI Avatar
         //Call this function with "String".makeAvatar()
         String.prototype.makeAvatar = function () {
             return <Avatar className={styles.courseAvatar}>{this.charAt(0)}</Avatar>;
         }
-
+        //new hours array
+        let periodTotalHours = [0, 0, 0, 0];
+        periodTotalHours[0] += course.hours.p1;
+        periodTotalHours[1] += course.hours.p2;
+        periodTotalHours[2] += course.hours.p3;
+        periodTotalHours[3] += course.hours.p4;
         return (
             <Card className={styles.card}>
                 <CardContent>
-                    {/*Course name on top of table*/}
+                    {/*Course name on top of table and an avatar*/}
                     <Grid
                         container
                         justify="left"
@@ -94,7 +102,7 @@ function Courses({ log, data }) {
                                     <TableCell align="right" key={course.name + "-cell2"}>
                                         <InputBase
                                             key={course.name + "-input1"}
-                                            className={styles.inputBase}
+                                            className={warning("period", "p1", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p1}
                                             margin='dense'
                                             onChange={e => modifyHours(e, course.name, "p1")}
@@ -103,7 +111,7 @@ function Courses({ log, data }) {
                                     <TableCell align="right" key={course.name + "-cell3"}>
                                         <InputBase
                                             key={course.name + "-input2"}
-                                            className={styles.inputBase}
+                                            className={warning("period", "p2", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p2}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
@@ -113,7 +121,7 @@ function Courses({ log, data }) {
                                     <TableCell align="right" key={course.name + "-cell4"}>
                                         <InputBase
                                             key={course.name + "-input3"}
-                                            className={styles.inputBase}
+                                            className={warning("period", "p3", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p3}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
@@ -123,7 +131,7 @@ function Courses({ log, data }) {
                                     <TableCell align="right" key={course.name + "-cell5"}>
                                         <InputBase
                                             key={course.name + "-input4"}
-                                            className={styles.inputBase}
+                                            className={warning("period", "p4", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p4}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
@@ -132,6 +140,19 @@ function Courses({ log, data }) {
                                     </TableCell>
                                 </TableRow>
                             </>
+                            <TableRow
+                                key={course.teacher + "-periodHoursRow"}
+                                className={styles.tableRow}
+                            >
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    key={course.teacher + "-cell1"}
+                                    className={warning("totalHours", "asd", calcTotalHours(periodTotalHours)) ? `${styles.warning}` : (`${styles.tableCell} ${styles.thCustomWidth}`)}
+                                >
+                                    <strong>Total Hours: {calcTotalHours(periodTotalHours)}</strong>
+                                </TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
 
