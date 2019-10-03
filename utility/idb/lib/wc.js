@@ -12,6 +12,12 @@ export default function wcLib(wc) {
                 teachers: await wc["teachers"].toCollection()
             }
         },
+        async getCourses() {
+            return await wc["courses"].toArray()
+        },
+        async getTeachers() {
+            return await wc["teachers"].toArray()
+        },
         async populate(fetchedData) {
             await teachersCoursesPopulate(fetchedData, wc, log)
         }
