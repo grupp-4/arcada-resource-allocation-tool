@@ -12,13 +12,13 @@ function Courses({log, data, strings}) {
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
     const [courses, setCourses] = useState(null)
-    /*useEffect(() => {
+    useEffect(() => {
         if (data) {
             data.getCourses()
                 .then(courses => setCourses(courses))
                 .catch(error => log.error(error.stack))
         }
-    }, [data])*/
+    }, [data])
 
     // ====== RENDER ======>
     return (
