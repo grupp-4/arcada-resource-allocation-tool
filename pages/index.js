@@ -22,8 +22,11 @@ function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
                 log.debug("Loading page", page)
                 return <Teachers data={data} strings={strings}/>
             case "events-feed":
-                log.debug("Loading page", page)
-                return <EventsFeed data={data} strings={strings}/>
+                if (mobile) {
+                    log.debug("Loading page", page)
+                    return <EventsFeed data={data} strings={strings}/>
+                }
+                break
             default:
         }
     }

@@ -13,17 +13,6 @@ import useStyles from "./styles"
 
 function CoursesTeachersTabView({log, strings, footerStrings, children}) {
 
-    // ====== HOOKS ======>
-    const styles = useStyles()
-    const [state, setState] = useState({
-        currentTab: 0
-    })
-    useEffect(() => {
-        log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
-        setState(prevState => ({...prevState, currentTab: currentTab}))
-    }, [])
-    const router = useRouter()
-
     // ====== INITIAL LOGIC ======>
     // definitions: Array of information about tabs to render.
     // key: Used for determining the pre-selected tab by matching page query to this.
@@ -32,20 +21,30 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
         {key: "courses", label: strings.coursesTabName},
         {key: "teachers", label: strings.teachersTabName}
     ]
-    // Gets the index of the "definition" that has a key that matches page query.
-    const page = router.query.page
-    let currentTab = definitions.findIndex(definition => {
-        return definition.key === page
-    })
-    // If no match is found, then gets the index of the "definition" that has the key
-    // that matches the client's landing page preference.
-    if (currentTab === -1) {
-        currentTab = definitions.findIndex(definition => {
-            return definition.key === children.props.landingPage
-        })
-    }
-    // If once again no match is found, currentTab defaults to the first index (0).
+    // Gets the index of the "definition" that has the key that matches
+    // the client's landing page preference.
+    let currentTab = definitions.findIndex(definition => definition.key === children.props.landingPage)
+    // If no match is found, currentTab defaults to the first index (0).
     if (currentTab === -1) currentTab = 0
+
+    // ====== HOOKS ======>
+    const styles = useStyles()
+    const [state, setState] = useState({
+        currentTab: currentTab
+    })
+    const router = useRouter()
+    useEffect(() => {
+        log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+    }, [])
+    useEffect(() => {
+        const page = router.query.page
+        if (page) {
+            // Gets the index of the "definition" that has a key that matches page query.
+            currentTab = definitions.findIndex(definition => definition.key === page)
+            log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+            setState(prevState => ({...prevState, currentTab: currentTab}))
+        }
+    }, [router])
 
     // ====== EVENT HANDLERS ======>
     function changeTab(event, newValue) {
