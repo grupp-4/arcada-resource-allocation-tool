@@ -13,7 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import AddCourse from "components/teachers/add-course"
-import CreateDropdownList from "utility/create-dropdown-list.js"
+import CreateDropdownList from "utility/create-dropdown-list.js";
+import warning from "utility/warning.js";
 
 
 // TODO: Implement search function
@@ -22,38 +23,28 @@ function Teachers({ log, data }) {
     const typographyStyles = useTypographyStyles();
     const styles = useStyles();
     const [testState, setTestState] = useState(false);
+    const [courseHour, setCourseHour] = useState(null);
     let storage, storageData;
 
     const passToParent = (s) => {
-        console.log('S in passtoparent()');
-        console.log(s);
-        console.log('testState init:');
-        console.log(testState);
         setTestState(s);
-        console.log('testState after:');
-        console.log(testState);
-
     }
 
     const calcTotalHours = (arr) => {
         return (arr[0] + arr[1] + arr[2] + arr[3])
     }
 
-    const modifyHours = (e, courseC, courses, period) => {
+    const modifyHours = (e, course, period) => {
         e.persist(); // This allows event to be read during function execution, in cost of performance
-
         // Takes the element's value
         const newHour = parseInt(e.target.value, 10);
         // Finds position of the modified course
-        const index = storageData.courses.findIndex(x => x.courseCode == courseC);
+        const index = storageData.courses.findIndex(x => x.name == course);
         // Updates the targeted course with new hour
         storageData.courses[index].hours[period] = newHour;
-
-        console.log('storageData.courses[index].hours[period]');
-        console.log(storageData.courses[index].hours[period]);
-
         // // Creates/overrides localstorage "data" key with the updated storageData
-        storage.setItem("data", JSON.stringify(storageData));
+        storage.setItem('data', JSON.stringify(storageData));
+        setCourseHour(newHour);
     }
 
     // Iterates through every teacher in the incoming data and returns a Table component
@@ -70,17 +61,14 @@ function Teachers({ log, data }) {
                     <Grid
                         container
                         justify="center"
-                        alignItems="center">
-                        {teacher.lastName}, {teacher.firstName} <br />
+                        alignItems="center"
+                        forceAnUpdate={courseHour}
+                    >
+                        {teacher.lastName}, {teacher.firstName}  {}<br />
                     </Grid>
                     <Table
-                        className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
+                        className={`${styles.table} ${styles.nestedElements}`/* Idea is to have nestedElements to style HTML elements inside Table */}
                         key={teacherFullName + "table"}
-                        // Not working
-                        classes={{
-                            root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
-                            label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
-                        }}
                     >
                         <TableHead>
                             <TableRow>
@@ -93,11 +81,11 @@ function Teachers({ log, data }) {
                         </TableHead>
                         <TableBody>
                             {assignedCourses.map(element => {
+                                // Adds this courses hours together with potentially other courses
                                 periodTotalHours[0] += element.hours.p1;
                                 periodTotalHours[1] += element.hours.p2;
                                 periodTotalHours[2] += element.hours.p3;
                                 periodTotalHours[3] += element.hours.p4;
-
 
                                 return (
                                     <>
@@ -109,46 +97,46 @@ function Teachers({ log, data }) {
                                                 component="th"
                                                 scope="row"
                                                 key={element.name + "-cell1"}
-                                                className={styles.tableCell, styles.thCustomWidth}>
+                                                className={`${styles.tableCell} ${styles.thCustomWidth}`}>
                                                 {element.name}<br />{element.courseCode}
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell2"}>
                                                 <InputBase
                                                     key={element.name + "-input1"}
-                                                    className={styles.inputBase}
+                                                    className={warning("period", "p1", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p1}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p1")}
+                                                    onChange={e => modifyHours(e, element.name, "p1")}
                                                 />
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell3"}>
                                                 <InputBase
                                                     key={element.name + "-input2"}
-                                                    className={styles.inputBase}
+                                                    className={warning("period", "p2", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p2}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p2")}
+                                                    onChange={e => modifyHours(e, element.name, "p2")}
                                                 />
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell4"}>
                                                 <InputBase
                                                     key={element.name + "-input3"}
-                                                    className={styles.inputBase}
+                                                    className={warning("period", "p3", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p3}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p3")}
+                                                    onChange={e => modifyHours(e, element.name, "p3")}
                                                 />
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell5"}>
                                                 <InputBase
                                                     key={element.name + "-input4"}
-                                                    className={styles.inputBase}
+                                                    className={warning("period", "p4", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p4}
                                                     inputProps={{ 'aria-label': 'naked' }}
                                                     margin='dense'
-                                                    onChange={e => modifyHours(e, element.courseCode, courses, "p4")}
+                                                    onChange={e => modifyHours(e, element.name, "p4")}
                                                 />
                                             </TableCell>
                                         </TableRow>
@@ -164,23 +152,40 @@ function Teachers({ log, data }) {
                                     component="th"
                                     scope="row"
                                     key={teacherFullName + "-cell1"}
-                                    className={styles.tableCell, styles.thCustomWidth}>
+                                    className={warning("totalHours", "asd", calcTotalHours(periodTotalHours)) ? `${styles.warning}` : (`${styles.tableCell} ${styles.thCustomWidth}`)}
+                                >
                                     <strong>Total Hours: {calcTotalHours(periodTotalHours)}</strong>
                                 </TableCell>
-                                <TableCell align="center">{periodTotalHours[0]}</TableCell>
-                                <TableCell align="center">{periodTotalHours[1]}</TableCell>
-                                <TableCell align="center">{periodTotalHours[2]}</TableCell>
-                                <TableCell align="center">{periodTotalHours[3]}</TableCell>
+                                <TableCell align="center"
+                                    className={warning("periodTotal", 0, periodTotalHours) ? `${styles.warning}` : (`${styles.tableCell}`)}>
+                                    {periodTotalHours[0]}
+                                </TableCell>
+                                <TableCell align="center"
+                                    className={warning("periodTotal", 1, periodTotalHours) ? `${styles.warning}` : (`${styles.tableCell}`)}>
+                                    {periodTotalHours[1]}
+                                </TableCell>
+                                <TableCell align="center"
+                                    className={warning("periodTotal", 2, periodTotalHours) ? `${styles.warning}` : (`${styles.tableCell}`)}>
+                                    {periodTotalHours[2]}
+                                </TableCell>
+                                <TableCell align="center"
+                                    className={warning("periodTotal", 3, periodTotalHours) ? `${styles.warning}` : (`${styles.tableCell}`)}>
+                                    {periodTotalHours[3]}
+                                </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
 
-                    <AddCourse
-                        addCourseData={incomingData}
-                        teacher={teacherFullName}
-                        dropdownList={dropdownList}
-                        passToParent={passToParent}
-                    />
+
+                    <div className={warning("teacherCourses", "", assignedCourses) ? `${styles.teacherWarning}` : null}>
+                        <AddCourse
+                            addCourseData={incomingData}
+                            teacher={teacherFullName}
+                            dropdownList={dropdownList}
+                            passToParent={passToParent}
+                        />
+                    </div>
+
 
                 </CardContent>
             </Card>
@@ -196,12 +201,10 @@ function Teachers({ log, data }) {
         // Defining storage here seems to guarantee it being client rendered
         storage = window.localStorage;
 
-
         // If localstorage data key exists it renders with that, this allows you to switch between tabs and not lose data
         if (storage.getItem('data')) {
             console.log('localstorage data exists');
             storageData = JSON.parse(storage.getItem('data'));
-
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                     {testState ? "" : ""}
@@ -213,10 +216,11 @@ function Teachers({ log, data }) {
         }
         else {
             storage.setItem("data", JSON.stringify(data));
+            storageData = JSON.parse(storage.getItem('data'));
             return (
                 <Typography className={typographyStyles.typography} variant={"body1"} >
                     <div className={styles.root}>
-                        {data.teachers.map((teacher) => mapTeachers(teacher, data, styles, dropdownList))}
+                        {storageData.teachers.map((teacher) => mapTeachers(teacher, storageData, styles, dropdownList))}
                     </div>
                 </Typography>
             )

@@ -68,11 +68,6 @@ function Courses({ log, data }) {
                     <Table
                         className={styles.table, styles.nestedElements/* Idea is to have nestedElements to style HTML elements inside Table */}
                         key={course.courseCode + "table"}
-                        // Not working
-                        classes={{
-                            root: styles.table.root, // class name, e.g. `classes-nesting-root-x`
-                            label: styles.table.label, // class name, e.g. `classes-nesting-label-x`
-                        }}
                     >
                         <TableHead>
                             <TableRow>

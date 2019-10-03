@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+import { red, blue, green } from '@material-ui/core/colors';
 
 function styles(theme) {
     return (
         {
             thCustomWidth: {
-                width: 300
+                width: 300,
             },
             warning: {
                 '& input': {
@@ -13,6 +13,13 @@ function styles(theme) {
                     borderBottom: '1px solid ' + red[400],
                     fontWeight: "bold"
                 },
+                '& strong': {
+                    color: red[400],
+                },
+                color: red[400],
+            },
+            teacherWarning: {
+                border: "2px solid" + red[400],
             },
             nestedElements: {
                 "& th": {
@@ -55,13 +62,6 @@ function styles(theme) {
                 overflowX: 'auto',
                 marginBottom: theme.spacing(2),
             },
-            // This is still not working
-            table: {
-                root: {
-                    background: "red",
-                },
-                minWidth: 0,
-            },
             paper: {
                 root: {
                     width: '100%',
@@ -71,18 +71,10 @@ function styles(theme) {
             },
             card: {
                 minWidth: 275,
-                margin: 20
-            },
-            bullet: {
-                display: 'inline-block',
-                margin: '0 2px',
-                transform: 'scale(0.8)',
+                margin: 20,
             },
             title: {
                 fontSize: 14,
-            },
-            pos: {
-                marginBottom: 12,
             },
             inputBase: {
                 /* Applying styles to children elements is like this, "& elementName" remember the space*/

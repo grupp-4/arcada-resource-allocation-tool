@@ -7,6 +7,13 @@ function styles(theme) {
             thCustomWidth: {
                 width: 300
             },
+            warning: {
+                '& input': {
+                    color: red[400],
+                    borderBottom: '1px solid ' + red[400],
+                    fontWeight: "bold"
+                },
+            },
             nestedElements: {
                 "& th": {
                     padding: "7px 0px 7px 10px",
@@ -48,13 +55,6 @@ function styles(theme) {
                 overflowX: 'auto',
                 marginBottom: theme.spacing(2),
             },
-            // This is still not working
-            table: {
-                root: {
-                    background: "red",
-                },
-                minWidth: 0,
-            },
             paper: {
                 root: {
                     width: '100%',
@@ -78,9 +78,6 @@ function styles(theme) {
                 margin: 10,
                 color: '#fff',
                 backgroundColor: green[500],
-              },
-            pos: {
-                marginBottom: 12,
             },
             inputBase: {
                 /* Applying styles to children elements is like this, "& elementName" remember the space*/
