@@ -13,6 +13,8 @@ import Fab from "@material-ui/core/Fab"
 import SaveIcon from "@material-ui/icons/Save"
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded"
 
+import Snacky from "components/snacky"
+
 import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
@@ -24,23 +26,43 @@ function Footer({log, mobile, strings}) {
     const theme = useTheme()
     const [state, setState] = useState({
         lastUpdated: 0, // TODO: "actually" implement lastUpdated
-        changes: true // TODO: "actually implement change tracker
+        changes: true, // TODO: "actually implement change tracker
+        snackbar: ""
     })
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to submit changes, a feature which isn't yet implemented.")
+        log.debug("Submitting changes")
+        setState(prevState => ({
+            ...prevState,
+            snackbar: (
+                <Snacky
+                    resetState={() => setState({...state, snackbar: ""})}
+                    message="Saved changes"/>
+            )
+        }))
     }
-
     function discardChanges() {
-        // TODO: implement submitting changes
-        log.debug("User tried to discard changes, a feature which isn't yet implemented.")
+        log.debug("Discarding changes")
+        setState(prevState => ({
+            ...prevState,
+            snackbar: (
+                <Snacky
+                    resetState={() => setState({...state, snackbar: ""})}
+                    message="Discarded changes"/>
+            )
+        }))
     }
-
     function syncData() {
-        // TODO: implement syncing data
-        log.debug("User tried to synchronize data, a feature which isn't yet implemented.")
+        log.debug("Syncing data")
+        setState(prevState => ({
+            ...prevState,
+            snackbar: (
+                <Snacky
+                    resetState={() => setState({...state, snackbar: ""})}
+                    message="Sync complete"/>
+            )
+        }))
     }
 
     // ====== "SUB" COMPONENTS ======>
@@ -114,6 +136,7 @@ function Footer({log, mobile, strings}) {
                         </ConditionalFloatingActionButton>
                     </Grid>
             </Grid>
+            {state.snackbar}
         </Grid>
     )
 }

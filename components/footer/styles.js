@@ -1,6 +1,4 @@
-import Color from "color"
-
-import {makeStyles} from "@material-ui/core/styles"
+import makeStyles from "@material-ui/core/styles/makeStyles"
 
 import green from "@material-ui/core/colors/green"
 import red from "@material-ui/core/colors/red"
