@@ -16,7 +16,7 @@ import AddCourse from "./add-course"
 
 import useStyles from "./styles"
 
-function Teacher({log, setHours, setTeacher, invalidate, teacher, data, courses}) {
+function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data, mobile, strings}) {
 
     // ====== INITIAL LOGIC ======>
     const teacherFullName = `${teacher.firstName} ${teacher.lastName}`
@@ -48,7 +48,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, data, courses}
 
     // ====== RENDER ======>
     return (
-        <Card className={styles.card}>
+        <Card className={mobile ? styles.cardMobile : styles.cardDesktop}>
             <CardContent>
                 <Grid container justify={"center"} alignItems={"center"}>
                     {teacherFullName}<br/>

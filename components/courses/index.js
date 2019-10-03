@@ -2,19 +2,16 @@ import {withLogging} from "gillog"
 
 import {useEffect, useState} from "react"
 
-import Typography from "@material-ui/core/Typography"
 import CircularProgress from "@material-ui/core/CircularProgress"
 
 import Course from "./course"
 
-import useTypographyStyles from "styles/typography"
 import useStyles from "./styles"
 
 // TODO: implement search, sort and filter functions
-function Courses({log, db}) {
+function Courses({log, db, mobile, strings}) {
 
     // ====== HOOKS ======>
-    const typographyStyles = useTypographyStyles()
     const styles = useStyles()
     const [state, setState] = useState({
         data: null
@@ -47,8 +44,10 @@ function Courses({log, db}) {
                 setTeacher={db.setTeacher}
                 invalidate={invalidate}
                 course={course}
+                teachers={teacherNames}
                 data={storageData}
-                teachers={teacherNames}/>
+                mobile={mobile}
+                strings={strings}/>
         ))
     }
 

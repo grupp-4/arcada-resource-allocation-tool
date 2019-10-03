@@ -12,6 +12,12 @@ function styles(theme) {
         circularProgress: {
             marginTop: theme.spacing(params.spacing * 2)
         },
+        cardMobile: {
+            marginBottom: theme.spacing(params.spacing)
+        },
+        cardDesktop: {
+            margin: theme.spacing(params.spacing)
+        },
         thCustomWidth: {
             width: 300
         },
@@ -68,10 +74,6 @@ function styles(theme) {
                 marginTop: theme.spacing(3),
                 overflowX: "auto"
             }
-        },
-        card: {
-            minWidth: 275,
-            margin: 20
         },
         bullet: {
             display: "inline-block",

@@ -14,7 +14,7 @@ import AddTeacher from "./add-teacher"
 
 import useStyles from "./styles"
 
-function Course({log, setHours, setTeacher, invalidate, course, data, teachers}) {
+function Course({log, setHours, setTeacher, invalidate, course, teachers, data, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -38,7 +38,7 @@ function Course({log, setHours, setTeacher, invalidate, course, data, teachers})
 
     // ====== RENDER ======>
     return (
-        <Card className={styles.card}>
+        <Card className={mobile ? styles.cardMobile : styles.cardDesktop}>
             <CardContent>
                 <Grid container justify={"flex-start"} alignItems={"center"}>
                     {course.name}<br/>
