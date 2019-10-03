@@ -69,7 +69,8 @@ function Courses({ log, data }) {
                     <Grid
                         container
                         justify="left"
-                        alignItems="center">
+                        alignItems="center"
+                        forceAnUpdate={courseHour}>
                         {course.name.makeAvatar()}
                         {course.name} <br />
                     </Grid>
@@ -115,7 +116,7 @@ function Courses({ log, data }) {
                                             defaultValue={course.hours.p2}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
-                                            onChange={e => modifyHours(e, course.courseCode, course, "p2")}
+                                            onChange={e => modifyHours(e, course.name, "p2")}
                                         />
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell4"}>
@@ -125,7 +126,7 @@ function Courses({ log, data }) {
                                             defaultValue={course.hours.p3}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
-                                            onChange={e => modifyHours(e, course.courseCode, course, "p3")}
+                                            onChange={e => modifyHours(e, course.name, "p3")}
                                         />
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell5"}>
@@ -135,7 +136,7 @@ function Courses({ log, data }) {
                                             defaultValue={course.hours.p4}
                                             inputProps={{ 'aria-label': 'naked' }}
                                             margin='dense'
-                                            onChange={e => modifyHours(e, course.courseCode, course, "p4")}
+                                            onChange={e => modifyHours(e, course.name, "p4")}
                                         />
                                     </TableCell>
                                 </TableRow>
@@ -155,14 +156,12 @@ function Courses({ log, data }) {
                             </TableRow>
                         </TableBody>
                     </Table>
-
                     <AddTeacher
                         addTeacherData={incomingData}
                         course={course.name}
                         dropdownList={dropdownList}
                         passToParent={passToParent}
                     />
-
                 </CardContent>
             </Card>
         )
