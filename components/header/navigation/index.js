@@ -29,7 +29,7 @@ function Navigation({log, open, onClose, landingPage, strings}) {
 
     // ====== EVENT HANDLERS ======>
     function onClick(key) {
-        log.debug("Navigating to:", key)
+        log.info("Navigating to:", key)
         router.replace(
             {pathname: "/", query: {page: key}},
             {pathname: "/", query: {page: key}},

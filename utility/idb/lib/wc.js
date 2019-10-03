@@ -22,6 +22,10 @@ export default function wcLib(wc) {
             // TODO: this function
             throw new Error("Function not implemented!")
         },
+        async setTeacher(courseName, teacherName) {
+            // TODO: this function
+            throw new Error("Function not implemented!")
+        },
         async populate(fetchedData) {
             await teachersCoursesPopulate(fetchedData, wc, log)
         }

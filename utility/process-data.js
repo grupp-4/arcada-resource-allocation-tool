@@ -14,9 +14,15 @@ export default function processData(data) {
                 const processedCourse = {
                     name: course.namn,
                     courseCode: course.kurskod,
-                    hours: course.timmar,
+                    hours: {
+                        p1: course.period === 1 ? course.timmar : 0,
+                        p2: course.period === 2 ? course.timmar : 0,
+                        p3: course.period === 3 ? course.timmar : 0,
+                        p4: course.period === 4 ? course.timmar : 0
+                    },
                     period: course.period,
-                    program: programName
+                    program: programName,
+                    teacher: course.lärare ? course.lärare : ""
                 }
                 processedCourses.push(processedCourse)
             })

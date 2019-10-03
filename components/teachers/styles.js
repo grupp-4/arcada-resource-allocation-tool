@@ -2,8 +2,16 @@ import makeStyles from "@material-ui/core/styles/makeStyles"
 
 import red from "@material-ui/core/colors/red"
 
+import params from "../../theme/custom-parameters"
+
 function styles(theme) {
     return {
+        root: {
+            textAlign: "center"
+        },
+        circularProgress: {
+            marginTop: theme.spacing(params.spacing * 2)
+        },
         thCustomWidth: {
             width: 300
         },
@@ -47,12 +55,6 @@ function styles(theme) {
                 color: theme.palette.common.white
             }
         },
-        root: {
-            width: "100%",
-            marginTop: theme.spacing(3),
-            overflowX: "auto",
-            marginBottom: theme.spacing(2)
-        },
         // This is still not working
         table: {
             root: {
@@ -83,7 +85,6 @@ function styles(theme) {
             marginBottom: 12
         },
         inputBase: {
-            // Applying styles to children elements is like this, "& elementName" remember the space
             "& input": {
                 borderBottom: "1px solid black"
             }

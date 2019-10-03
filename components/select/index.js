@@ -22,30 +22,30 @@ function NoOptionsMessage(props) {
     )
 }
 
-NoOptionsMessage.propTypes = {
-    /**
+/*NoOptionsMessage.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.node,
-    /**
+    /!**
      * Props to be passed on to the wrapper.
-     */
+     *!/
     innerProps: PropTypes.object.isRequired,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 function inputComponent({inputRef, ...props}) {
     return <div ref={inputRef} {...props} />
 }
 
-inputComponent.propTypes = {
+/*inputComponent.propTypes = {
     inputRef: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.shape({
             current: PropTypes.any.isRequired
         })
     ])
-}
+}*/
 
 function Control({children, innerProps, innerRef, selectProps: {classes, TextFieldProps}}) {
     return (
@@ -64,14 +64,14 @@ function Control({children, innerProps, innerRef, selectProps: {classes, TextFie
     )
 }
 
-Control.propTypes = {
-    /**
+/*Control.propTypes = {
+    /!**
      * Children to render.
-     */
+     *!/
     children: PropTypes.node,
-    /**
+    /!**
      * The mouse down event and the innerRef to pass down to the controller element.
-     */
+     *!/
     innerProps: PropTypes.shape({
         onMouseDown: PropTypes.func.isRequired
     }).isRequired,
@@ -83,7 +83,7 @@ Control.propTypes = {
         })
     ]).isRequired,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 function Option(props) {
     return (
@@ -98,14 +98,14 @@ function Option(props) {
     )
 }
 
-Option.propTypes = {
-    /**
+/*Option.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.node,
-    /**
+    /!**
      * props passed to the wrapping element for the group.
-     */
+     *!/
     innerProps: PropTypes.shape({
         id: PropTypes.string.isRequired,
         key: PropTypes.string.isRequired,
@@ -114,9 +114,9 @@ Option.propTypes = {
         onMouseOver: PropTypes.func.isRequired,
         tabIndex: PropTypes.number.isRequired
     }).isRequired,
-    /**
+    /!**
      * Inner ref to DOM Node
-     */
+     *!/
     innerRef: PropTypes.oneOfType([
         PropTypes.oneOf([null]),
         PropTypes.func,
@@ -124,15 +124,15 @@ Option.propTypes = {
             current: PropTypes.any.isRequired
         })
     ]).isRequired,
-    /**
+    /!**
      * Whether the option is focused.
-     */
+     *!/
     isFocused: PropTypes.bool.isRequired,
-    /**
+    /!**
      * Whether the option is selected.
-     */
+     *!/
     isSelected: PropTypes.bool.isRequired
-}
+}*/
 
 function Placeholder(props) {
     const {selectProps, innerProps = {}, children} = props
@@ -143,17 +143,17 @@ function Placeholder(props) {
     )
 }
 
-Placeholder.propTypes = {
-    /**
+/*Placeholder.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.node,
-    /**
+    /!**
      * props passed to the wrapping element for the group.
-     */
+     *!/
     innerProps: PropTypes.object,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 function SingleValue(props) {
     return (
@@ -163,17 +163,17 @@ function SingleValue(props) {
     )
 }
 
-SingleValue.propTypes = {
-    /**
+/*SingleValue.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.node,
-    /**
+    /!**
      * Props passed to the wrapping element for the group.
-     */
+     *!/
     innerProps: PropTypes.any.isRequired,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 function ValueContainer(props) {
     return (
@@ -183,13 +183,13 @@ function ValueContainer(props) {
     )
 }
 
-ValueContainer.propTypes = {
-    /**
+/*ValueContainer.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.node,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 
 function Menu(props) {
@@ -200,17 +200,17 @@ function Menu(props) {
     )
 }
 
-Menu.propTypes = {
-    /**
+/*Menu.propTypes = {
+    /!**
      * The children to be rendered.
-     */
+     *!/
     children: PropTypes.element.isRequired,
-    /**
+    /!**
      * Props to be passed to the menu wrapper.
-     */
+     *!/
     innerProps: PropTypes.object.isRequired,
     selectProps: PropTypes.object.isRequired
-}
+}*/
 
 function Select({log, classes, textFieldProps, placeholder, options, value, onChange}) {
 
@@ -230,8 +230,14 @@ function Select({log, classes, textFieldProps, placeholder, options, value, onCh
                     }
                 })
             }}
-            inputId={"react-select-single"}
-            TextFieldProps={textFieldProps}
+            inputId={"select-single"}
+            TextFieldProps={{
+                ...textFieldProps,
+                InputLabelProps: {
+                    htmlFor: "select-single",
+                    shrink: true
+                }
+            }}
             placeholder={placeholder}
             options={options.map(option => ({value: option, label: option}))}
             components={{

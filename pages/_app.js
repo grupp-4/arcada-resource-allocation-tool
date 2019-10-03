@@ -41,7 +41,7 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {data: null, theme: theme, mobile: true, strings: strings}
+        this.state = {db: null, theme: theme, mobile: true, strings: strings}
     }
 
     // ====== COMPONENT DID MOUNT ======>
@@ -52,7 +52,7 @@ class _app extends __app {
         // Dropping databases (just during development, when databases are changed a lot)
         drop()
             .then(() => {
-                log.debug("Successfully dropped all databases.")
+                log.debug("Successfully dropped all databases")
                 // Loading data
                 return fetch(process.env.DATA_URL)
             })
@@ -70,7 +70,7 @@ class _app extends __app {
             })
             .then(([cs, rc, wc]) => {
                 // Getting all data from working copy
-                this.setState({data: wc})
+                this.setState({db: wc})
             })
             .catch(error => log.error(error.stack))
     }
@@ -79,11 +79,11 @@ class _app extends __app {
     actOnMQ(mobile, initializedPL, setInitializedPL, log) {
         if (initializedPL) {
             this.setState({mobile: mobile})
-            log.debug(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
+            log.info(`Re-rendering layout for: ${mobile ? "mobile" : "desktop"}`)
         } else {
             this.setState({mobile: mobile})
             setInitializedPL(true)
-            log.debug(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
+            log.info(`Initialized persistent layout. Rendering for: ${mobile ? "mobile" : "desktop"}`)
         }
     }
     actOnPCS(theme, dark, light, noPreference, log) {
@@ -97,7 +97,7 @@ class _app extends __app {
                         prefersColorScheme = "light"
                 }
                 if (prefersColorScheme && prefersColorScheme !== window._theme) {
-                    log.debug(
+                    log.info(
                         `Intercepted that client's preference of theme has changed to ${prefersColorScheme}.`,
                         `Triggering reevaluation of theme`
                     )
@@ -118,7 +118,7 @@ class _app extends __app {
     render() {
 
         // ====== Preparatory logic ======>
-        const {data, theme, mobile, strings} = this.state
+        const {db, theme, mobile, strings} = this.state
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
@@ -151,7 +151,7 @@ class _app extends __app {
                                     <Component
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
-                                        data={data}
+                                        db={db}
                                         mobile={mobile}
                                         strings={strings.main}
                                         {...pageProps}/>

@@ -36,7 +36,7 @@ export default async function initIDB(fetchedData) {
     await rcDB.open()
     await wcDB.open()
 
-    log.debug("Initialized databases.")
+    log.debug("Initialized databases")
 
     await rc.sync(fetchedData, SHA1(fetchedData).toString(), await cs.getLatestChecksum())
 

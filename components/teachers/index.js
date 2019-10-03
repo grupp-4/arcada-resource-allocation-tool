@@ -10,9 +10,8 @@ import Teacher from "./teacher"
 import useTypographyStyles from "styles/typography"
 import useStyles from "./styles.js"
 
-
-// TODO: Implement search function
-function Teachers({log, data: db}) {
+// TODO: implement search, sort and filter functions
+function Teachers({log, db}) {
 
     // ====== HOOKS ======>
     const typographyStyles = useTypographyStyles()
@@ -28,35 +27,42 @@ function Teachers({log, data: db}) {
 
     // ====== FUNCTIONS ======>
     function listTeachers(data) {
-        log.debug("data:", data)
         // Creates array of all course's names, which gets sent to the AddCourse component
         const courseNames = data.courses.map(course => course.name)
         // If localStorage data exists it renders with that (this allows you to switch between tabs and not lose data)
-        // TODO: find a way to switch tabs and not lose data that doesn't involve localStorage
+        // TODO: deprecate usage of localStorage, integrate the IDB library
         let storageData = window.localStorage.data
         if (storageData) {
-            log.debug("localStorage data exists")
             storageData = JSON.parse(storageData)
+            log.debug("localStorage data exists:", storageData)
         } else {
             window.localStorage.setItem("data", JSON.stringify(data))
             storageData = data
+            log.debug("localStorage data doesn't exist. Putting following data in there:", storageData)
         }
-        return data.teachers.map(teacher => (
-            <Teacher setHours={db.setHours} teacher={teacher} data={storageData} courses={courseNames}/>
+        return storageData.teachers.map((teacher, index) => (
+            <Teacher
+                key={index}
+                setHours={db.setHours}
+                setTeacher={db.setTeacher}
+                invalidate={invalidate}
+                teacher={teacher}
+                data={storageData}
+                courses={courseNames}/>
         ))
     }
+    function invalidate() {
+        db.getEverything().then(data => setState({...state, data}))
+    }
 
-    log.debug("state.data:", state.data)
     // ====== RENDER ======>
     return (
-        <Typography className={typographyStyles.typography} variant={"body1"}>
-            <div className={styles.root}>
-                {state.data
-                    ? listTeachers(state.data)
-                    : <CircularProgress/>
-                }
-            </div>
-        </Typography>
+        <div className={styles.root}>
+            {state.data
+                ? listTeachers(state.data)
+                : <div className={styles.circularProgress}><CircularProgress/></div>
+            }
+        </div>
     )
 }
 

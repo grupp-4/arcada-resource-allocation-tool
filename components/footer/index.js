@@ -32,7 +32,10 @@ function Footer({log, mobile, strings}) {
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
-        log.debug("Submitting changes")
+        // TODO: implement submitting changes
+        log.warn("User tried to submit changes, a feature which isn't yet implemented.")
+        // TODO: get snackbar working
+        /*log.info("Submitting changes")
         setState(prevState => ({
             ...prevState,
             snackbar: (
@@ -40,10 +43,13 @@ function Footer({log, mobile, strings}) {
                     resetState={() => setState({...state, snackbar: ""})}
                     message="Saved changes"/>
             )
-        }))
+        }))*/
     }
     function discardChanges() {
-        log.debug("Discarding changes")
+        // TODO: implement discarding changes
+        log.warn("User tried to discard changes, a feature which isn't yet implemented.")
+        // TODO: get snackbar working
+        /*log.info("Discarding changes")
         setState(prevState => ({
             ...prevState,
             snackbar: (
@@ -51,10 +57,13 @@ function Footer({log, mobile, strings}) {
                     resetState={() => setState({...state, snackbar: ""})}
                     message="Discarded changes"/>
             )
-        }))
+        }))*/
     }
     function syncData() {
-        log.debug("Syncing data")
+        // TODO: implement syncing data
+        log.warn("User tried to synchronize data, a feature which isn't yet implemented.")
+        // TODO: get snackbar working
+        /*log.info("Syncing data")
         setState(prevState => ({
             ...prevState,
             snackbar: (
@@ -62,7 +71,7 @@ function Footer({log, mobile, strings}) {
                     resetState={() => setState({...state, snackbar: ""})}
                     message="Sync complete"/>
             )
-        }))
+        }))*/
     }
 
     // ====== "SUB" COMPONENTS ======>

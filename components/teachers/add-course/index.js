@@ -7,49 +7,49 @@ import Snacky from "components/snacky"
 
 import useStyles from "styles/add-course-teacher"
 
-// TODO: Add button Component that confirms the course to be added
-function AddCourse({log, teacher, dropdownList, passToParent}) {
+// TODO: get snackbar working
+function AddCourse({log, setTeacher, addCourse, teacher, dropdownList}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
     const [single, setSingle] = useState(null)
     const [doIt, setDoIt] = useState(false)
 
+    // ====== FUNCTIONS ======>
     // Triggered on change, updates the state
-    const handleChangeSingle = (value, teacher) => {
+    function addCourseToTeacher(value, teacherName) {
         setSingle(value)
-        log.debug("handleChangeSingle() value:", value)
+        log.debug("addCourseToTeacher() value:", value)
         let storageData = JSON.parse(window.localStorage.getItem("data"))
         // Finds position of the modified course
         let index = storageData.courses.findIndex(course => course.name === value.value)
         log.debug("index:", index)
         // Updates the targeted course with new teacher
-        storageData.courses[index].teacher = teacher
-        log.debug("localStorage.data (new):", storageData)
+        setTeacher(courseName, value.value)
+            .then(() => log.debug("Successfully set teacher"))
+            .catch(error => log.error(error.message))
+        storageData.courses[index].teacher = teacherName
+        log.debug("storageData.courses[index].teacher:", storageData.courses[index].teacher)
         // Creates/overrides localstorage "data" key with the updated storageData
         window.localStorage.setItem("data", JSON.stringify(storageData))
+        log.debug("localStorage.data (new):", JSON.parse(window.localStorage.data))
         // Pass this component's state to parent component, forcing a re-render
-        passToParent(value.value)
+        addCourse(value.value)
         // This state tells the snackbar to be rendered
         setDoIt(true)
     }
 
+    // ====== RENDER ======>
     return (
         <div className={styles.root}>
             <Select
                 classes={styles}
-                textFieldProps={{
-                    label: "Course",
-                    InputLabelProps: {
-                        htmlFor: "react-select-single",
-                        shrink: true
-                    }
-                }}
+                textFieldProps={{label: "Course"}}
                 placeholder={"Add a course to this teacher"}
                 options={dropdownList}
                 value={single}
-                onChange={event => handleChangeSingle(event, teacher)}/>
-            {doIt ? <Snacky message="Course Added" resetState={() => setDoIt(false)}/> : ""}
+                onChange={event => addCourseToTeacher(event, teacher)}/>
+            {/*doIt ? <Snacky message="Course Added" resetState={() => setDoIt(false)}/> : ""*/""}
         </div>
     )
 }

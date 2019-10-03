@@ -35,7 +35,7 @@ function Main({log, mobile, strings, footerStrings, children}) {
                     <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                         <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                <EventsFeedTabView data={children.props.data} strings={strings}/>
+                                <EventsFeedTabView db={children.props.db} strings={strings}/>
                             </Paper>
                         </Grid>
                         <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>

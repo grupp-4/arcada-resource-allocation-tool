@@ -20,7 +20,7 @@ function Languages({log, anchorEl, onClose, setLang}) {
     // ====== EVENT HANDLERS ======>
     function changeLang(lang) {
         window.localStorage.lang = lang
-        log.debug(`Setting language to "${lang}"`)
+        log.info(`Setting language to "${lang}"`)
         setLang()
         onClose()
     }

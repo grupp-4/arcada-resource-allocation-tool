@@ -34,14 +34,14 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     })
     const router = useRouter()
     useEffect(() => {
-        log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+        log.info(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
     }, [])
     useEffect(() => {
         const page = router.query.page
         if (page) {
             // Gets the index of the "definition" that has a key that matches page query.
             currentTab = definitions.findIndex(definition => definition.key === page)
-            log.debug(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
+            log.info(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
             setState(prevState => ({...prevState, currentTab: currentTab}))
         }
     }, [router])
@@ -50,7 +50,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     function changeTab(event, newValue) {
         // Sets the `state` variable distributed throughout the tab view
         // to the index of the Tab that was clicked.
-        log.debug(`Selecting tab: ${definitions[newValue].key}`)
+        log.info(`Selecting tab: ${definitions[newValue].key}`)
         setState(prevState => ({...prevState, currentTab: newValue}))
     }
     function onClick(key) {

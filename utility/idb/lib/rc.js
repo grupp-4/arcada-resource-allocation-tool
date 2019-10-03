@@ -9,7 +9,7 @@ export default function rcLib(rc) {
         async sync(fetchedData, fetchedDataChecksum, latestChecksum) {
             log.debug("Syncing...", {fetchedDataChecksum, latestChecksum})
             if (fetchedDataChecksum === latestChecksum) {
-                log.debug("Up to date. (Checksums matched.)")
+                log.debug("Up to date (checksums matched)")
             } else {
                 // TODO: locking down differences
                 throw new Error("fetchedDataChecksum did not equal latestChecksum!")

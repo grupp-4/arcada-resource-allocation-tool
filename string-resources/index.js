@@ -26,11 +26,11 @@ export default function useStringResources(log) {
         const session = window.sessionStorage.lang
         if (local) {
             window._lang = local
-            log.debug(`Setting language to "${local}" based on item in localStorage`)
+            log.info(`Setting language to "${local}" based on item in localStorage`)
             return mergeResources(en, selectResources(local), "strings", log)
         } else if (session) {
             window._lang = session
-            log.debug(`Setting language to "${session}" based on item in sessionStorage`)
+            log.info(`Setting language to "${session}" based on item in sessionStorage`)
             return mergeResources(en, selectResources(session), "strings", log)
         } else {
             let lang
@@ -41,16 +41,16 @@ export default function useStringResources(log) {
             if (lang) {
                 window.sessionStorage.lang = lang.code
                 window._lang = lang.code
-                log.debug(`Setting language to "${lang.code}" based on client's browser's language preference`)
+                log.info(`Setting language to "${lang.code}" based on client's browser's language preference`)
                 return mergeResources(en, lang, "strings", log)
             } else {
-                log.debug(`Setting language to "en" based on nothing`)
+                log.info(`Setting language to "en" based on nothing`)
                 window.sessionStorage.lang = "en"
                 window._lang = "en"
                 return en
             }
         }
     }
-    log.debug(`Environment not client's. Setting language to "en"`)
+    log.info(`Environment not client's. Setting language to "en"`)
     return en
 }

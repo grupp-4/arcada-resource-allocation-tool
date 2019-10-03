@@ -29,7 +29,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         setState(prevState => ({...prevState, theme: value}))
         if (value !== "auto") window.localStorage.theme = value
         else window.localStorage.removeItem("theme")
-        log.debug("Setting theme to", value)
+        log.info("Setting theme to", value)
         setTheme()
     }
     function changeLandingPage(event) {
@@ -41,7 +41,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
             setState(prevState => ({...prevState, landingPage: null}))
             window.localStorage.removeItem("landingPage")
         }
-        log.debug("Setting landing page to", value)
+        log.info("Setting landing page to", value)
     }
     function changeLandingPageMobile(event) {
         const value = event.target.value
@@ -52,13 +52,13 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
             setState(prevState => ({...prevState, landingPageMobile: null}))
             window.localStorage.removeItem("landingPageMobile")
         }
-        log.debug("Setting landing page on mobile to", value)
+        log.info("Setting landing page on mobile to", value)
     }
     function resetTheme() {
         const value = "auto"
         setState(prevState => ({...prevState, theme: value}))
         window.localStorage.removeItem("theme")
-        log.debug("Resetting theme to", value)
+        log.info("Resetting theme to", value)
         setTheme()
     }
     function resetLandingPages() {
@@ -66,11 +66,11 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         setState(prevState => ({...prevState, ...values}))
         window.localStorage.removeItem("landingPage")
         window.localStorage.removeItem("landingPageMobile")
-        log.debug("Resetting landing page to courses")
-        log.debug("Resetting landing page on mobile to events-feed")
+        log.info("Resetting landing page to courses")
+        log.info("Resetting landing page on mobile to events-feed")
     }
     function goToAboutPage() {
-        log.debug("Navigating to: about")
+        log.info("Navigating to: about")
         router.push(
             {pathname: "/about"},
             {pathname: "/about"}

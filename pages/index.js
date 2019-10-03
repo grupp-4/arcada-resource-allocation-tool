@@ -6,7 +6,7 @@ import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
+function Index({log, landingPage, landingPageMobile, db, mobile, strings}) {
 
     // ====== HOOKS ======>
     const router = useRouter()
@@ -16,15 +16,15 @@ function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
     if (page) {
         switch (page) {
             case "courses":
-                log.debug("Loading page", page)
-                return <Courses data={data} strings={strings}/>
+                log.info("Loading page", page)
+                return <Courses db={db} strings={strings}/>
             case "teachers":
-                log.debug("Loading page", page)
-                return <Teachers data={data} strings={strings}/>
+                log.info("Loading page", page)
+                return <Teachers db={db} strings={strings}/>
             case "events-feed":
                 if (mobile) {
-                    log.debug("Loading page", page)
-                    return <EventsFeed data={data} strings={strings}/>
+                    log.info("Loading page", page)
+                    return <EventsFeed db={db} strings={strings}/>
                 }
                 break
             default:
@@ -33,22 +33,22 @@ function Index({log, landingPage, landingPageMobile, data, mobile, strings}) {
     if (mobile) {
         switch (landingPageMobile) {
             case "courses":
-                log.debug("Landing on page \"courses\" based on preference for landing page on mobile")
-                return <Courses data={data} strings={strings}/>
+                log.info("Landing on page \"courses\" based on preference for landing page on mobile")
+                return <Courses db={db} strings={strings}/>
             case "teachers":
-                log.debug("Landing on page \"teachers\" based on preference for landing page on mobile")
-                return <Teachers data={data} strings={strings}/>
+                log.info("Landing on page \"teachers\" based on preference for landing page on mobile")
+                return <Teachers db={db} strings={strings}/>
             default:
-                log.debug("Landing on default landing page on mobile: events-feed")
-                return <EventsFeed data={data} strings={strings}/>
+                log.info("Landing on default landing page on mobile: events-feed")
+                return <EventsFeed db={db} strings={strings}/>
         }
     } else {
         if (landingPage === "teachers") {
-            log.debug("Landing on page \"teachers\" based on preference for landing page")
-            return <Teachers data={data} strings={strings}/>
+            log.info("Landing on page \"teachers\" based on preference for landing page")
+            return <Teachers db={db} strings={strings}/>
         } else {
-            log.debug("Landing on default landing page: courses")
-            return <Courses data={data} strings={strings}/>
+            log.info("Landing on default landing page: courses")
+            return <Courses db={db} strings={strings}/>
         }
     }
 }
