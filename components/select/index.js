@@ -233,7 +233,7 @@ function Select({log, classes, textFieldProps, placeholder, options, value, onCh
             inputId={"react-select-single"}
             TextFieldProps={textFieldProps}
             placeholder={placeholder}
-            options={options}
+            options={options.map(option => ({value: option, label: option}))}
             components={{
                 Control,
                 Menu,
