@@ -16,6 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import AddTeacher from "components/courses/add-teacher"
 import CreateDropdownTeachers from "utility/create-dropdown-teachers.js"
 import warning from "utility/warning.js";
+import numbersOnly from 'numbers-only';
 
 
 // TODO: Place the modified JSON in a global variable to be written and read from. Right now each teacher table and table row tracks its own state only
@@ -102,6 +103,7 @@ function Courses({ log, data }) {
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell2"}>
                                         <InputBase
+                                            onKeyDown={numbersOnly}
                                             key={course.name + "-input1"}
                                             className={warning("period", "p1", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p1}
@@ -111,6 +113,7 @@ function Courses({ log, data }) {
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell3"}>
                                         <InputBase
+                                            onKeyDown={numbersOnly}
                                             key={course.name + "-input2"}
                                             className={warning("period", "p2", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p2}
@@ -121,6 +124,7 @@ function Courses({ log, data }) {
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell4"}>
                                         <InputBase
+                                            onKeyDown={numbersOnly}
                                             key={course.name + "-input3"}
                                             className={warning("period", "p3", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p3}
@@ -131,6 +135,7 @@ function Courses({ log, data }) {
                                     </TableCell>
                                     <TableCell align="right" key={course.name + "-cell5"}>
                                         <InputBase
+                                            onKeyDown={numbersOnly}
                                             key={course.name + "-input4"}
                                             className={warning("period", "p4", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                             defaultValue={course.hours.p4}

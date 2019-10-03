@@ -15,6 +15,7 @@ import CardContent from '@material-ui/core/CardContent';
 import AddCourse from "components/teachers/add-course"
 import CreateDropdownList from "utility/create-dropdown-list.js";
 import warning from "utility/warning.js";
+import numbersOnly from 'numbers-only';
 
 
 // TODO: Implement search function
@@ -102,6 +103,7 @@ function Teachers({ log, data }) {
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell2"}>
                                                 <InputBase
+                                                    onKeyDown={numbersOnly}
                                                     key={element.name + "-input1"}
                                                     className={warning("period", "p1", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p1}
@@ -111,6 +113,7 @@ function Teachers({ log, data }) {
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell3"}>
                                                 <InputBase
+                                                    onKeyDown={numbersOnly}
                                                     key={element.name + "-input2"}
                                                     className={warning("period", "p2", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p2}
@@ -121,6 +124,7 @@ function Teachers({ log, data }) {
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell4"}>
                                                 <InputBase
+                                                    onKeyDown={numbersOnly}
                                                     key={element.name + "-input3"}
                                                     className={warning("period", "p3", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p3}
@@ -131,6 +135,7 @@ function Teachers({ log, data }) {
                                             </TableCell>
                                             <TableCell align="right" key={element.name + "-cell5"}>
                                                 <InputBase
+                                                    onKeyDown={numbersOnly}
                                                     key={element.name + "-input4"}
                                                     className={warning("period", "p4", element) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     defaultValue={element.hours.p4}
