@@ -2,15 +2,11 @@ import {withLogging} from "gillog"
 
 import Typography from "@material-ui/core/Typography"
 
-import useTypographyStyles from "styles/typography"
-
-
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-
 
 
 export default function SimpleCard() {
@@ -19,22 +15,17 @@ export default function SimpleCard() {
     <Card>
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
-          Word of the Day
+          Course added to:
         </Typography>
         <Typography variant="h5" component="h2">
-          be
-
-          nev
-
-          lent
+          Dennis Biström
         </Typography>
         <Typography color="textSecondary">
-          adjective
+          Course added
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
+          Webbutveckling
           <br />
-          {'"a benevolent smile"'}
         </Typography>
       </CardContent>
       <CardActions>
@@ -43,7 +34,7 @@ export default function SimpleCard() {
     </Card>
   );
 }
-/* Detta är äldre men finare kod gjort av Daniel och Johan
+/* Detta är äldre men finare kod gjort av Daniel och Johan. Kan ennu implementeras
 function EventsFeed({log, cs, strings}) {
 
 
