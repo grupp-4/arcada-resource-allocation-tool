@@ -25,7 +25,7 @@ function AddCourse({log, setTeacher, addCourse, teacher, dropdownList, strings})
         let index = storageData.courses.findIndex(course => course.name === value.value)
         log.debug("index:", index)
         // Updates the targeted course with new teacher
-        setTeacher(courseName, value.value)
+        setTeacher(teacherName, value.value)
             .then(() => log.debug("Successfully set teacher"))
             .catch(error => log.error(error.message))
         storageData.courses[index].teacher = teacherName

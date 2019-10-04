@@ -93,6 +93,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                             </TableCell>
                                             <TableCell align="right" key={course.name + "-cell2"}>
                                                 <InputBase
+                                                    type="number"
                                                     key={course.name + "-input1"}
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, "p1")}
@@ -102,6 +103,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                             </TableCell>
                                             <TableCell align="right" key={course.name + "-cell3"}>
                                                 <InputBase
+                                                    type="number"
                                                     key={course.name + "-input2"}
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, "p2")}
@@ -111,6 +113,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                             </TableCell>
                                             <TableCell align="right" key={course.name + "-cell4"}>
                                                 <InputBase
+                                                    type="number"
                                                     key={course.name + "-input3"}
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, "p3")}
@@ -120,6 +123,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                             </TableCell>
                                             <TableCell align="right" key={course.name + "-cell5"}>
                                                 <InputBase
+                                                    type="number"
                                                     key={course.name + "-input4"}
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, "p4")}
