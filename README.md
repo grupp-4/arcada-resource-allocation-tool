@@ -7,6 +7,17 @@ A web app designed for the staff at [Arcada UAS](https://www.arcada.fi/en "arcad
 - is this month’s workload evenly distributed?
 - is someone doing too many hours per month?
 
+## Quick Start
+
+**Requirements:** [Node.js](https://nodejs.org "nodejs.org") and [npm](https://www.npmjs.com "npmjs.com")
+
+1. Clone this repository
+2. Run `npm install` to install the dependencies
+3. Run `npm start` to start the local development server
+4. Navigate to `http://localhost:3000` in your web browser to use the tool
+
+If for some reason you can't use port 3000, you can — instead of starting the dev server with `npm start` — use `node_modules/.bin/next dev -p [port]` to start the dev server.
+
 ## Special Note
 
 The app was made as a course project in ”Ramverk och webbapplikationer (2019-20)” — a course part of the swedish [Information Technology Bachelor’s degree programme](https://www.arcada.fi/en/bachelor/information-technology "arcada.fi/en/bachelor/information-technology") at [Arcada](https://www.arcada.fi/en "arcada.fi").

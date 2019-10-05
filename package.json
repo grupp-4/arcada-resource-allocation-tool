@@ -8,12 +8,14 @@
   "private": true,
   "author": "Daniel Giljam (https://github.com/DanielGiljam)",
   "contributors": [
-    "kaibiPrime (https://github.com/kaibiPrime)",
+    "Johan Penttinen (https://github.com/kaibiPrime)",
+    "Kristoffer Kuvaja (https://github.com/kuvajaan)",
     "Christian Häggblom (https://github.com/christian-haggblom)",
-    "Skeba (https://github.com/Skeba)"
+    "Sebastian Lundgren (https://github.com/Skeba)",
+    "Thomas Sandelin (https://github.com/sandelit)"
   ],
   "scripts": {
-    "start": "next dev"
+    "start": "node_modules/.bin/next dev"
   },
   "repository": "github:grupp-4/arcada-resource-allocation-tool",
   "dependencies": {
