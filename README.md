@@ -9,7 +9,7 @@ A web app designed for the staff at [Arcada UAS](https://www.arcada.fi/en "arcad
 
 ## Quick Start
 
-**Requirements:** [Node.js](https://nodejs.org "nodejs.org") and [npm](https://www.npmjs.com "npmjs.com")
+Requirements: [Node.js](https://nodejs.org "nodejs.org") and [npm](https://www.npmjs.com "npmjs.com")
 
 1. Clone this repository
 2. Run `npm install` to install the dependencies
