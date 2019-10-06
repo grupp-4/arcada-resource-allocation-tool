@@ -119,7 +119,8 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                     teacher={course.teacher}
                     course={course.name}
                     dropdownList={teachers}
-                    strings={strings}/>
+                    strings={strings}
+                    loglevel={log.getLevel()}/>
             </CardActions>
         </Card>
     )

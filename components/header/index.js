@@ -101,18 +101,21 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                 open={navOpen}
                 onClose={closeNavigationMenu}
                 landingPage={preferences.landingPageMobile}
-                strings={strings.navigationMenu}/>
+                strings={strings.navigationMenu}
+                loglevel={log.getLevel()}/>
             <Languages
                 anchorEl={langAnchor}
                 onClose={closeLanguagesMenu}
-                setLang={setLang}/>
+                setLang={setLang}
+                loglevel={log.getLevel()}/>
             <Preferences
                 anchorEl={prefAnchor}
                 onClose={closePreferencesMenu}
                 preferences={preferences}
                 setTheme={setTheme}
                 mobile={mobile}
-                strings={strings.preferencesMenu}/>
+                strings={strings.preferencesMenu}
+                loglevel={log.getLevel()}/>
         </>
     )
 }

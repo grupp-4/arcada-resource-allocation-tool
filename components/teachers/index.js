@@ -47,7 +47,8 @@ function Teachers({log, db, mobile, strings}) {
                 courses={courseNames}
                 data={storageData}
                 mobile={mobile}
-                strings={strings.teacher}/>
+                strings={strings.teacher}
+                loglevel={log.getLevel()}/>
         ))
     }
     function invalidate() {

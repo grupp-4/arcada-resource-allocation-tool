@@ -31,7 +31,7 @@ function EventsFeedTabView({log, db, strings}) {
                 role="tabpanel"
                 id={`tabpanel-${index}`}
                 aria-labelledby={`tab-${index}`}>
-                <EventsFeed db={db} strings={strings}/>
+                <EventsFeed db={db} strings={strings} loglevel={log.getLevel()}/>
             </div>
         </>
     )

@@ -63,7 +63,11 @@ class _app extends __app {
             .then(data => {
                 log.debug("Loaded data (raw):", data)
                 // Processing data
-                const processedData = processData(data)
+                return processData(data)
+            })
+            .then(processedData => {
+                // If processing data failed (`processedData` is undefined), throw error
+                if(!processedData) throw new Error("processData failed. See above error for more details.")
                 log.debug("Loaded data (processed):", processedData)
                 // Initializing IDB
                 return initIDB(processedData)

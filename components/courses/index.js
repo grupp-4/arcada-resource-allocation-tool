@@ -47,7 +47,8 @@ function Courses({log, db, mobile, strings}) {
                 teachers={teacherNames}
                 data={storageData}
                 mobile={mobile}
-                strings={strings.course}/>
+                strings={strings.course}
+                loglevel={log.getLevel()}/>
         ))
     }
 
