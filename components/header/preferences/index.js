@@ -20,13 +20,13 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const [{theme, landingPage, landingPageMobile}, setState] = useState(preferences)
+    const [state, setState] = useState(preferences)
     const router = useRouter()
 
     // ====== EVENT HANDLERS ======>
     function changeTheme(event) {
         const value = event.target.value
-        setState(prevState => ({...prevState, theme: value}))
+        setState({...state, theme: value})
         if (value !== "auto") window.localStorage.theme = value
         else window.localStorage.removeItem("theme")
         log.info("Setting theme to", value)
@@ -35,10 +35,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPage(event) {
         const value = event.target.value
         if (value !== "courses") {
-            setState(prevState => ({...prevState, landingPage: value}))
+            setState({...state, landingPage: value})
             window.localStorage.landingPage = value
         } else {
-            setState(prevState => ({...prevState, landingPage: null}))
+            setState({...state, landingPage: null})
             window.localStorage.removeItem("landingPage")
         }
         log.info("Setting landing page to", value)
@@ -46,17 +46,17 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPageMobile(event) {
         const value = event.target.value
         if (value !== "events-feed") {
-            setState(prevState => ({...prevState, landingPageMobile: value}))
+            setState({...state, landingPageMobile: value})
             window.localStorage.landingPageMobile = value
         } else {
-            setState(prevState => ({...prevState, landingPageMobile: null}))
+            setState({...state, landingPageMobile: null})
             window.localStorage.removeItem("landingPageMobile")
         }
         log.info("Setting landing page on mobile to", value)
     }
     function resetTheme() {
         const value = "auto"
-        setState(prevState => ({...prevState, theme: value}))
+        setState({...state, theme: value})
         window.localStorage.removeItem("theme")
         log.info("Resetting theme to", value)
         setTheme()
@@ -94,7 +94,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                             classes={{focused: styles.menuLegendFocused}}
                             component={"legend"}>
                                 <span className={!mobile ? styles.menuLegendSpan : null}>{strings.theme.label}</span>
-                                {theme !== "auto"
+                                {state.theme !== "auto"
                                     ? (
                                         <Link component={"button"} onClick={resetTheme} variant={"caption"}>
                                             {strings.reset}
@@ -104,7 +104,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeTheme}
                             row={!mobile}
-                            value={theme}
+                            value={state.theme}
                             aria-label={"theme"}>
                                 <FormControlLabel
                                     value={"auto"}
@@ -128,7 +128,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                             classes={{focused: styles.menuLegendFocused}}
                             component={"legend"}>
                                 <span className={!mobile ? styles.menuLegendSpan : null}>{strings.landingPage.label}</span>
-                                {landingPage || landingPageMobile
+                                {state.landingPage || state.landingPageMobile
                                     ? (
                                         <Link component={"button"} onClick={resetLandingPages} variant={"caption"}>
                                             {strings.reset}
@@ -141,7 +141,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeLandingPage}
                             row={!mobile}
-                            value={landingPage ? landingPage : "courses"}
+                            value={state.landingPage ? state.landingPage : "courses"}
                             aria-label={"landing-page-desktop"}>
                                 <FormControlLabel
                                     value={"courses"}
@@ -158,7 +158,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeLandingPageMobile}
                             row={!mobile}
-                            value={landingPageMobile ? landingPageMobile : "events-feed"}
+                            value={state.landingPageMobile ? state.landingPageMobile : "events-feed"}
                             aria-label={"landing-page-mobile"}>
                                 <FormControlLabel
                                     value={"events-feed"}

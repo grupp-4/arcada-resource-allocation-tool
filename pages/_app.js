@@ -41,7 +41,7 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {db: null, theme: theme, mobile: true, strings: strings}
+        this.state = {db: null, changes: false, theme: theme, mobile: true, strings: strings}
     }
 
     // ====== COMPONENT DID MOUNT ======>
@@ -122,7 +122,7 @@ class _app extends __app {
     render() {
 
         // ====== Preparatory logic ======>
-        const {db, theme, mobile, strings} = this.state
+        const {db, changes, theme, mobile, strings} = this.state
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
@@ -149,6 +149,8 @@ class _app extends __app {
                                 setTheme={this.setTheme.bind(this)}
                                 strings={strings.header}/>
                             <Main
+                                db={db}
+                                changes={changes}
                                 mobile={mobile}
                                 strings={strings.main}
                                 footerStrings={strings.footer}>
@@ -156,6 +158,7 @@ class _app extends __app {
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
                                         db={db}
+                                        changes={changes}
                                         mobile={mobile}
                                         strings={strings.main}
                                         {...pageProps}/>

@@ -27,9 +27,6 @@ function styles(theme) {
         },
         containerMobile: {
             marginBottom: theme.mixins.toolbar.minHeight,
-            "@media (min-width:600px)": {
-                marginBottom: theme.mixins.toolbar["@media (min-width:600px)"].minHeight
-            },
             [`@media (min-width:${getMinWidth()}px)`]: {
                 marginBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
             }

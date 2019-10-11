@@ -11,7 +11,7 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, strings, footerStrings, children}) {
+function CoursesTeachersTabView({log, changes, strings, footerStrings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // definitions: Array of information about tabs to render.
@@ -38,11 +38,11 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     }, [])
     useEffect(() => {
         const page = router.query.page
-        if (page) {
+        if (page && page !== "events-feed") {
             // Gets the index of the "definition" that has a key that matches page query.
             currentTab = definitions.findIndex(definition => definition.key === page)
             log.info(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
-            setState(prevState => ({...prevState, currentTab: currentTab}))
+            setState({...state, currentTab: currentTab})
         }
     }, [router])
 
@@ -51,7 +51,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
         // Sets the `state` variable distributed throughout the tab view
         // to the index of the Tab that was clicked.
         log.info(`Selecting tab: ${definitions[newValue].key}`)
-        setState(prevState => ({...prevState, currentTab: newValue}))
+        setState({...state, currentTab: newValue})
     }
     function onClick(key) {
         router.replace(
@@ -85,7 +85,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
                 aria-labelledby={`tab-${state.currentTab}`}>
                     {children}
             </div>
-            <Footer strings={footerStrings}/>
+            <Footer changes={changes} strings={footerStrings}/>
         </>
     )
 }

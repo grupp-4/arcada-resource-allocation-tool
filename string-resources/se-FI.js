@@ -65,7 +65,7 @@ const main = {
         period3: "Period 3",
         period4: "Period 4",
         notAssigned: "Inte tilldelad",
-        assignTeacher: "Allokera en lärare i denna kurs"
+        assignTeacher: "Tilldela en lärare till denna kurs"
     },
     teacher: {
         course: "Kurs",
@@ -73,7 +73,7 @@ const main = {
         period2: "Period 2",
         period3: "Period 3",
         period4: "Period 4",
-        totalHours: "Totalt:",
+        totalHours: "Totala timmar:",
         assignCourse: "Tilldela en kurs till denna lärare"
     },
     get eventsFeedTabName() {
@@ -92,7 +92,11 @@ const main = {
 const footer = {
     lastUpdated: "Senast uppdaterad:",
     minutesAgo: "minuter sedan",
-    rightNow: "just nu"
+    rightNow: "just nu",
+    undo: "ångra",
+    submitted: "Skickade ändringar",
+    discarded: "Raderade ändringar",
+    synced: "Synkning färdig"
 }
 
 export default {code, global, header, main, footer}

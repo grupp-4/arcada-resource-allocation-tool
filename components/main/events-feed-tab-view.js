@@ -20,18 +20,29 @@ function EventsFeedTabView({log, db, strings}) {
     // ====== RENDER ======>
     return (
         <>
-            <Tabs className={styles.tabs} classes={{indicator: styles.eventsFeedTabIndicator}}
-                  value={index} centered aria-label="tabs">
-                <Tab classes={{root: styles.eventsFeedTab}}
-                     key={key} label={label} disableRipple disableFocusRipple disableTouchRipple tabIndex={-1}
-                     id={`tab-${index}`} aria-controls={`tabpanel-${index}`}/>
+            <Tabs
+                className={styles.tabs}
+                classes={{indicator: styles.eventsFeedTabIndicator}}
+                value={index}
+                centered
+                aria-label="tabs">
+                    <Tab
+                        classes={{root: styles.eventsFeedTab}}
+                        key={key}
+                        label={label}
+                        disableRipple
+                        disableFocusRipple
+                        disableTouchRipple
+                        tabIndex={-1}
+                        id={`tab-${index}`}
+                        aria-controls={`tabpanel-${index}`}/>
             </Tabs>
             <div
                 className={styles.tabPanel}
                 role="tabpanel"
                 id={`tabpanel-${index}`}
                 aria-labelledby={`tab-${index}`}>
-                <EventsFeed db={db} strings={strings} loglevel={log.getLevel()}/>
+                    <EventsFeed db={db} strings={strings} loglevel={log.getLevel()}/>
             </div>
         </>
     )

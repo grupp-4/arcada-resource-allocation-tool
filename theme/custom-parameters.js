@@ -8,6 +8,9 @@ export default {
     mobileBreakPoint: "sm", // Beginning with screen sizes in this range, or smaller, the mobile layout kicks in (see https://material-ui.com/customization/breakpoints)
     spacing: 2, // Global spacing factor. Used as `theme.spacing(globalSpacingFactorComesHere)` (see https://material-ui.com/customization/spacing)
     tabBarElevation: 0, // The elevation (material design terminology for how much drop shadow) of the Tabs components
+    footerMobileOpacity: 0.54, // Opacity of the Footer component on mobile devices (currently set to 0.54, which is the default for secondary items, e.g. secondary text)
+    footerMobileBlurIntensity: 8, // Intensity of the backdrop blur effect of the Footer component on mobile devices
+    footerMobileElevation: 4, // The elevation (material design terminology for how much drop shadow) of the Footer component on mobile devices (currently set to 4, which is the default for Navbars)
 
     // primary and secondary colors
     primaryLight: "#7986cb",

@@ -25,32 +25,32 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const [{navOpen, langAnchor, prefAnchor}, setState] = useState({langAnchor: null, prefAnchor: null})
+    const [state, setState] = useState({navOpen: false, langAnchor: null, prefAnchor: null})
 
     // ====== EVENT HANDLERS ======>
     function openNavigationMenu() {
-        setState(prevState => ({...prevState, navOpen: true}))
+        setState({...state, navOpen: true})
         log.info("Opening navigation menu")
     }
     function closeNavigationMenu(event) {
         if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) return
-        setState(prevState => ({...prevState, navOpen: false}))
+        setState({...state, navOpen: false})
         log.info("Closing navigation menu")
     }
     function openLanguagesMenu({currentTarget}) {
-        setState(prevState => ({...prevState, langAnchor: currentTarget}))
+        setState({...state, langAnchor: currentTarget})
         log.info("Opening languages menu")
     }
     function closeLanguagesMenu() {
-        setState(prevState => ({...prevState, langAnchor: null}))
+        setState({...state, langAnchor: null})
         log.info("Closing languages menu")
     }
     function openPreferencesMenu({currentTarget}) {
-        setState(prevState => ({...prevState, prefAnchor: currentTarget}))
+        setState({...state, prefAnchor: currentTarget})
         log.info("Opening preferences menu")
     }
     function closePreferencesMenu() {
-        setState(prevState => ({...prevState, prefAnchor: null}))
+        setState({...state, prefAnchor: null})
         log.info("Closing preferences menu")
     }
 
@@ -59,7 +59,7 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
         <>
             <AppBar className={styles.appBar} position={"fixed"}>
                 <Container className={styles.container} maxWidth={themeParams.maxWidth}>
-                    <Toolbar classes={{dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
+                    <Toolbar classes={{regular: styles.toolBarRegular, dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
                         <IconButton
                             className={styles.navigationMenuButton}
                             onClick={openNavigationMenu}
@@ -98,18 +98,18 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                 </Container>
             </AppBar>
             <Navigation
-                open={navOpen}
+                open={state.navOpen}
                 onClose={closeNavigationMenu}
                 landingPage={preferences.landingPageMobile}
                 strings={strings.navigationMenu}
                 loglevel={log.getLevel()}/>
             <Languages
-                anchorEl={langAnchor}
+                anchorEl={state.langAnchor}
                 onClose={closeLanguagesMenu}
                 setLang={setLang}
                 loglevel={log.getLevel()}/>
             <Preferences
-                anchorEl={prefAnchor}
+                anchorEl={state.prefAnchor}
                 onClose={closePreferencesMenu}
                 preferences={preferences}
                 setTheme={setTheme}

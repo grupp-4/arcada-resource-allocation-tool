@@ -11,9 +11,12 @@ function styles(theme) {
             background: params.darkMode && params.darkNavbarInDarkMode ? theme.palette.primary.dark : theme.palette.primary.main,
             marginBottom: theme.spacing(params.spacing)
         },
+        toolBarRegular: {
+            paddingRight: theme.spacing(params.spacing * .75)
+        },
         toolBarDense: {
             paddingLeft: theme.spacing(params.spacing),
-            paddingRight: theme.spacing(params.spacing)
+            paddingRight: theme.spacing(params.spacing * .75)
         },
         navigationMenuButton: {
             marginRight: theme.spacing(params.spacing)

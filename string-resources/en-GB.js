@@ -65,7 +65,7 @@ const main = {
         period3: "Period 3",
         period4: "Period 4",
         notAssigned: "Not assigned",
-        assignTeacher: "Assign teacher to this course"
+        assignTeacher: "Assign a teacher to this course"
     },
     teacher: {
         course: "Course",
@@ -74,7 +74,7 @@ const main = {
         period3: "Period 3",
         period4: "Period 4",
         totalHours: "Total hours:",
-        assignCourse: "Assign to course to this teacher"
+        assignCourse: "Assign a course to this teacher"
     },
     get eventsFeedTabName() {
         return cap(this._global.events)
@@ -92,7 +92,11 @@ const main = {
 const footer = {
     lastUpdated: "Last updated:",
     minutesAgo: "minutes ago",
-    rightNow: "right now"
+    rightNow: "right now",
+    undo: "undo",
+    submitted: "Submitted changes",
+    discarded: "Discarded changes",
+    synced: "Sync complete"
 }
 
 export default {code, global, header, main, footer}

@@ -58,6 +58,24 @@ const header = {
 
 // ====== MAIN ======>
 const main = {
+    course: {
+        heldBy: "Opettaja",
+        period1: "1. jakso",
+        period2: "2. jakso",
+        period3: "3. jakso",
+        period4: "4. jakso",
+        notAssigned: "Ei määritetty",
+        assignTeacher: "Valitse opettaja tälle kursille"
+    },
+    teacher: {
+        course: "Kurssi",
+        period1: "1. jakso",
+        period2: "2. jakso",
+        period3: "3. jakso",
+        period4: "4. jakso",
+        totalHours: "Tunnit yhteensä:",
+        assignCourse: "Valitse kurssi tälle opettajalle"
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },
@@ -74,7 +92,11 @@ const main = {
 const footer = {
     lastUpdated: "Viimeksi päivitetty:",
     minutesAgo: "minuuttia sitten",
-    rightNow: "juuri nyt"
+    rightNow: "juuri nyt",
+    undo: "peru",
+    submitted: "Muutokset lähetetty",
+    discarded: "Muutokset poistettu",
+    synced: "Synkronisointi valmis"
 }
 
 export default {code, global, header, main, footer}

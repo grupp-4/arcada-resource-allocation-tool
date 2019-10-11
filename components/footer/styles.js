@@ -1,3 +1,5 @@
+import Color from "color"
+
 import makeStyles from "@material-ui/core/styles/makeStyles"
 
 import green from "@material-ui/core/colors/green"
@@ -15,18 +17,26 @@ function styles(theme) {
         // Return media query string
         return `@media (min-width: ${maxHeight}px)`
     }
+    function getMediaQueryForMaxWidth() {
+        // Getting max height value
+        const breakpointValues = theme.breakpoints.values
+        const breakpointKeys = Object.keys(breakpointValues)
+        const key = breakpointKeys[breakpointKeys.indexOf(params.mobileBreakPoint) + 1]
+        const maxHeight = breakpointValues[key]
+        // Return media query string
+        return `@media (max-width: ${maxHeight}px)`
+    }
     return {
         footer: {
             height: theme.mixins.toolbar.minHeight,
-            "@media (min-width:600px)": {
-                height: theme.mixins.toolbar["@media (min-width:600px)"].minHeight
-            },
             [getMediaQueryForMinWidth()]: {
                 height: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
             }
         },
         footerMobile: {
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: Color(theme.palette.background.paper).alpha(params.footerMobileOpacity).rgb().string(),
+            backdropFilter: `blur(${params.footerMobileBlurIntensity}px)`,
+            boxShadow: theme.shadows[params.footerMobileElevation],
             bottom: 0,
             left: 0,
             right: 0,
@@ -39,11 +49,25 @@ function styles(theme) {
             marginLeft: theme.spacing(params.spacing / 2),
             marginRight: theme.spacing(params.spacing / 2),
             marginTop: theme.mixins.toolbar.minHeight / 4,
-            "@media (min-width:600px)": {
-                marginTop: theme.mixins.toolbar["@media (min-width:600px)"].minHeight / 4
-            },
             [getMediaQueryForMinWidth()]: {
                 marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 5
+            }
+        },
+        spin: {
+            animation: "1s linear $spin"
+        },
+        spinPaused: {
+            animationIterationCount: 0
+        },
+        spinPlaying: {
+            animationIterationCount: "infinite"
+        },
+        "@keyframes spin": {
+            from: {
+                transform: "none"
+            },
+            to: {
+                transform: "rotate(-360deg)"
             }
         },
         lastUpdated: {
@@ -51,9 +75,6 @@ function styles(theme) {
             marginTop: theme.mixins.toolbar.minHeight / 3,
             textAlign: "center",
             width: "100%",
-            "@media (min-width:600px)": {
-                marginTop: theme.mixins.toolbar["@media (min-width:600px)"].minHeight / 3
-            },
             [getMediaQueryForMinWidth()]: {
                 marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight / 3.75
             }
@@ -62,10 +83,8 @@ function styles(theme) {
             padding: theme.spacing(params.spacing / 2),
             position: "relative",
             top: 0 - theme.spacing(params.spacing),
-            "@media (min-width:600px)": {
-                top: 0 - theme.spacing(params.spacing) / 1.5
-            },
             [getMediaQueryForMinWidth()]: {
+                padding: theme.spacing(params.spacing / 2),
                 top: 0 - theme.spacing(params.spacing) * 1.5
             },
         },
@@ -82,6 +101,29 @@ function styles(theme) {
             "&:hover": {
                 background: `${red[600]} !important`
             }
+        },
+        snackbar: {
+            left: theme.spacing(params.spacing / 2),
+            bottom: theme.spacing(params.spacing / 2),
+            [getMediaQueryForMaxWidth()]: {
+                paddingBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight + theme.spacing(params.spacing / 2)
+            }
+        },
+        snackbarExtraPadding: {
+            [theme.breakpoints.down("xs")]: {
+                paddingBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight + theme.spacing(params.spacing)
+            }
+        },
+        snackbarContent: {
+            [theme.breakpoints.up("xs")]: {
+                minWidth: "initial"
+            }
+        },
+        snackbarUndoButton: {
+            color: red[500]
+        },
+        snackbarCloseButton: {
+            padding: theme.spacing(params.spacing / 4)
         }
     }
 }

@@ -14,7 +14,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-function Main({log, mobile, strings, footerStrings, children}) {
+function Main({log, db, changes, mobile, strings, footerStrings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -29,14 +29,14 @@ function Main({log, mobile, strings, footerStrings, children}) {
                         <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                             <Grid item xs={12}>{children}</Grid>
                         </Grid>
-                        <Footer mobile={mobile} strings={footerStrings} loglevel={log.getLevel()}/>
+                        <Footer changes={changes} mobile={mobile} strings={footerStrings} loglevel={log.getLevel()}/>
                     </>
                 ) : (
                     <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                         <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
                                 <EventsFeedTabView
-                                    db={children.props.db}
+                                    db={db}
                                     strings={strings}
                                     loglevel={log.getLevel()}/>
                             </Paper>
@@ -44,6 +44,7 @@ function Main({log, mobile, strings, footerStrings, children}) {
                         <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
                                 <CoursesTeachersTabView
+                                    changes={changes}
                                     strings={strings}
                                     footerStrings={footerStrings}
                                     loglevel={log.getLevel()}>
