@@ -10,8 +10,9 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider"
 import CssBaseline from "@material-ui/core/CssBaseline"
 
 import PersistentLayoutController from "components/persistent-layout-controller"
-import Header from "../components/header"
-import Main from "../components/main"
+import Header from "components/header"
+import Main from "components/main"
+import Footer from "components/footer"
 
 import initIDB from "utility/idb"
 import drop from "utility/idb/drop"
@@ -182,11 +183,8 @@ class _app extends __app {
                                 cs={cs}
                                 wc={wc}
                                 events={events}
-                                lastUpdated={lastUpdated}
-                                modifications={modifications}
                                 mobile={mobile}
                                 strings={strings.main}
-                                footerStrings={strings.footer}
                                 loglevel={"silent"}>
                                     <Component
                                         landingPage={preferences.landingPage}
@@ -198,6 +196,12 @@ class _app extends __app {
                                         strings={strings.main}
                                         loglevel={"silent"}
                                         {...pageProps}/>
+                                    <Footer
+                                        lastUpdated={lastUpdated}
+                                        modifications={!!modifications}
+                                        mobile={mobile}
+                                        strings={strings.footer}
+                                        loglevel={"silent"}/>
                             </Main>
                     </PersistentLayoutController>
                 </ThemeProvider>

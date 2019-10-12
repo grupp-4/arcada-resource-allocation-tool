@@ -24,9 +24,6 @@ function styles(theme) {
             padding: theme.spacing(params.spacing),
             textAlign: "center",
             color: theme.palette.text.secondary
-        },
-        circularProgress: {
-            marginTop: theme.spacing(params.spacing * 2)
         }
     }
 }
