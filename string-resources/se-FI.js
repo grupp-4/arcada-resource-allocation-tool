@@ -85,14 +85,18 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "Det skulle finnas händelser att visa, men tyvärr har visning av händelser inte implementerats ännu.",
+    noEvents: "Det finns inga händelser att visa.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Senast uppdaterad:",
-    minutesAgo: "minuter sedan",
-    rightNow: "just nu",
+    date(time) {
+        return new Date(time).toLocaleDateString("se-FI", {dateStyle: "medium", timeStyle: "short"})
+    },
+    calculating: "beräknar...",
     undo: "ångra",
     submitted: "Skickade ändringar",
     discarded: "Raderade ändringar",

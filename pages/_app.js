@@ -41,7 +41,16 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {db: null, changes: false, theme: theme, mobile: true, strings: strings}
+        this.state = {
+            cs: null,
+            wc: null,
+            events: null,
+            lastUpdated: null,
+            modifications: null,
+            theme: theme,
+            mobile: true,
+            strings: strings
+        }
     }
 
     // ====== COMPONENT DID MOUNT ======>
@@ -74,7 +83,17 @@ class _app extends __app {
             })
             .then(([cs, rc, wc]) => {
                 // Getting all data from working copy
-                this.setState({db: wc})
+                this.setState({cs, wc})
+                Promise.all([
+                    cs.getADozenChanges(),
+                    cs.getLatestTimestamp()
+                ]).then(([events, lastUpdated]) => {
+                    this.setState({events, lastUpdated})
+                })
+            })
+            .then(latestTimestamp => {
+                // Setting state property for latest timestamp
+                this.setState({latestTimestamp})
             })
             .catch(error => log.error(error.stack))
     }
@@ -122,7 +141,16 @@ class _app extends __app {
     render() {
 
         // ====== Preparatory logic ======>
-        const {db, changes, theme, mobile, strings} = this.state
+        const {
+            cs,
+            wc,
+            events,
+            lastUpdated,
+            modifications,
+            theme,
+            mobile,
+            strings
+        } = this.state
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
@@ -141,26 +169,34 @@ class _app extends __app {
                     <CssBaseline/>
                     <PersistentLayoutController
                         actOnMQ={this.actOnMQ.bind(this)}
-                        actOnPCS={this.actOnPCS.bind(this, preferences.theme)}>
+                        actOnPCS={this.actOnPCS.bind(this, preferences.theme)}
+                        loglevel={"silent"}>
                             <Header
                                 mobile={mobile}
                                 preferences={preferences}
                                 setLang={this.setLang.bind(this)}
                                 setTheme={this.setTheme.bind(this)}
-                                strings={strings.header}/>
+                                strings={strings.header}
+                                loglevel={"silent"}/>
                             <Main
-                                db={db}
-                                changes={changes}
+                                cs={cs}
+                                wc={wc}
+                                events={events}
+                                lastUpdated={lastUpdated}
+                                modifications={modifications}
                                 mobile={mobile}
                                 strings={strings.main}
-                                footerStrings={strings.footer}>
+                                footerStrings={strings.footer}
+                                loglevel={"silent"}>
                                     <Component
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
-                                        db={db}
-                                        changes={changes}
+                                        cs={cs}
+                                        wc={wc}
+                                        events={events}
                                         mobile={mobile}
                                         strings={strings.main}
+                                        loglevel={"silent"}
                                         {...pageProps}/>
                             </Main>
                     </PersistentLayoutController>

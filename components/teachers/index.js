@@ -9,7 +9,7 @@ import Teacher from "./teacher"
 import useCtStyles from "styles/courses-teachers"
 
 // TODO: implement search, sort and filter functions
-function Teachers({log, db, mobile, strings}) {
+function Teachers({log, wc, mobile, strings}) {
 
     // ====== HOOKS ======>
     const ctStyles = useCtStyles()
@@ -17,10 +17,10 @@ function Teachers({log, db, mobile, strings}) {
         data: null
     })
     useEffect(() => {
-        if (db) {
-            db.getEverything().then(data => setState({...state, data}))
+        if (wc) {
+            wc.getEverything().then(data => setState({...state, data}))
         }
-    }, [db])
+    }, [wc])
 
     // ====== FUNCTIONS ======>
     function listTeachers(data) {
@@ -40,8 +40,8 @@ function Teachers({log, db, mobile, strings}) {
         return storageData.teachers.map((teacher, index) => (
             <Teacher
                 key={index}
-                setHours={db.setHours}
-                setTeacher={db.setTeacher}
+                setHours={wc.setHours}
+                setTeacher={wc.setTeacher}
                 invalidate={invalidate}
                 teacher={teacher}
                 courses={courseNames}
@@ -52,7 +52,7 @@ function Teachers({log, db, mobile, strings}) {
         ))
     }
     function invalidate() {
-        db.getEverything().then(data => setState({...state, data}))
+        wc.getEverything().then(data => setState({...state, data}))
     }
 
     // ====== RENDER ======>

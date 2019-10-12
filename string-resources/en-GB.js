@@ -85,14 +85,18 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "There would be events to display, but unfortunately displaying events isn't implemented yet.",
+    noEvents: "There are no events to display.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Last updated:",
-    minutesAgo: "minutes ago",
-    rightNow: "right now",
+    date(time) {
+        return new Date(time).toLocaleDateString("en-GB", {dateStyle: "medium", timeStyle: "short"})
+    },
+    calculating: "calculating...",
     undo: "undo",
     submitted: "Submitted changes",
     discarded: "Discarded changes",

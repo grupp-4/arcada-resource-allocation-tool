@@ -20,14 +20,13 @@ import useStyles from "./styles"
 
 import themeParams from "theme/custom-parameters"
 
-function Footer({log, changes, mobile, strings}) {
+function Footer({log, lastUpdated, modifications, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
     const theme = useTheme()
     const [state, setState] = useState({
-        lastUpdated: 0, // TODO: "actually" implement lastUpdated
-        changes: changes ? "true" : "false",
+        changes: modifications ? "true" : "false",
         snackbar: ""
     })
 
@@ -151,9 +150,9 @@ function Footer({log, changes, mobile, strings}) {
                     <Grid className={styles.lastUpdatedContainer} item xs={!mobile}>
                         <Typography className={styles.lastUpdated} variant={"caption"}>
                             <b>{strings.lastUpdated}</b>
-                            {state.lastUpdated
-                                ? ` ${state.lastUpdated} ${strings.minutesAgo}`
-                                : ` ${strings.rightNow}`}
+                            {lastUpdated
+                                ? ` ${strings.date(lastUpdated)}`
+                                : ` ${strings.calculating}`}
                         </Typography>
                     </Grid>
                     {submitDiscardButtons}

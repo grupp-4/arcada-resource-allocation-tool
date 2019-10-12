@@ -85,14 +85,18 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "Näytettäviä tapahtumia olisi, mutta valitettavasti tapahtumien näyttämistä ei ole vielä toteutettu.",
+    noEvents: "Ei ole näytettäviä tapahtumia.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Viimeksi päivitetty:",
-    minutesAgo: "minuuttia sitten",
-    rightNow: "juuri nyt",
+    date(time) {
+        return new Date(time).toLocaleDateString("fi-FI", {dateStyle: "medium", timeStyle: "short"})
+    },
+    calculating: "laskee...",
     undo: "peru",
     submitted: "Muutokset lähetetty",
     discarded: "Muutokset poistettu",

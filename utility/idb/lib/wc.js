@@ -18,7 +18,7 @@ export default function wcLib(wc) {
         async getTeachers() {
             return await wc["teachers"].toArray()
         },
-        async setHours(courseName, period, hours) {
+        async setHours(teacherName, courseName, period, hours) {
             // TODO: this function
             throw new Error("Function not implemented!")
         },

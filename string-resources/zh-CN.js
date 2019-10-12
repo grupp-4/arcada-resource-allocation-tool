@@ -85,14 +85,18 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "会有事件要显示，但是不幸的是，尚未实现显示事件。",
+    noEvents: "没有要显示的事件。",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "最近更新时间：",
-    minutesAgo: "几分钟前",
-    rightNow: "现在",
+    date(time) {
+        return new Date(time).toLocaleDateString("zh-CN", {dateStyle: "medium", timeStyle: "short"})
+    },
+    calculating: "计算...",
     undo: "撤消",
     submitted: "提交变更",
     discarded: "放弃的变更",

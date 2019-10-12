@@ -14,7 +14,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-function Main({log, db, changes, mobile, strings, footerStrings, children}) {
+function Main({log, cs, wc, events, lastUpdated, modifications, mobile, strings, footerStrings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -29,14 +29,16 @@ function Main({log, db, changes, mobile, strings, footerStrings, children}) {
                         <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                             <Grid item xs={12}>{children}</Grid>
                         </Grid>
-                        <Footer changes={changes} mobile={mobile} strings={footerStrings} loglevel={log.getLevel()}/>
+                        <Footer lastUpdated={lastUpdated} modifications={modifications} mobile={mobile} strings={footerStrings} loglevel={log.getLevel()}/>
                     </>
                 ) : (
                     <Grid className={styles.gridContainer} container spacing={themeParams.spacing}>
                         <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
                                 <EventsFeedTabView
-                                    db={db}
+                                    cs={cs}
+                                    wc={wc}
+                                    events={events}
                                     strings={strings}
                                     loglevel={log.getLevel()}/>
                             </Paper>
@@ -44,7 +46,8 @@ function Main({log, db, changes, mobile, strings, footerStrings, children}) {
                         <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
                                 <CoursesTeachersTabView
-                                    changes={changes}
+                                    lastUpdated={lastUpdated}
+                                    modifications={modifications}
                                     strings={strings}
                                     footerStrings={footerStrings}
                                     loglevel={log.getLevel()}>

@@ -11,7 +11,7 @@ import Footer from "components/footer"
 
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, changes, strings, footerStrings, children}) {
+function CoursesTeachersTabView({log, lastUpdated, modifications, strings, footerStrings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // definitions: Array of information about tabs to render.
@@ -85,7 +85,7 @@ function CoursesTeachersTabView({log, changes, strings, footerStrings, children}
                 aria-labelledby={`tab-${state.currentTab}`}>
                     {children}
             </div>
-            <Footer changes={changes} strings={footerStrings}/>
+            <Footer lastUpdated={lastUpdated} modifications={modifications} strings={footerStrings}/>
         </>
     )
 }
