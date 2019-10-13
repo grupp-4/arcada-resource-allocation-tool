@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
 import Typography from "@material-ui/core/Typography"
 import TranslateRoundedIcon from "@material-ui/icons/TranslateRounded"
+import InfoRoundedIcon from "@material-ui/icons/InfoRounded"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
 
 import Navigation from "./navigation"
@@ -85,6 +86,15 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                             aria-label={"languages"}>
                                 <TranslateRoundedIcon/>
                         </IconButton>
+                        <Link href={{pathname: "/about"}} passHref>
+                            <IconButton
+                                component={"a"}
+                                color={"inherit"}
+                                size={mobile ? "medium" : "small"}
+                                aria-label={"about"}>
+                                    <InfoRoundedIcon/>
+                            </IconButton>
+                        </Link>
                         <IconButton
                             onClick={openPreferencesMenu}
                             color={"inherit"}

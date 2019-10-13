@@ -69,15 +69,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         log.info("Resetting landing page to courses")
         log.info("Resetting landing page on mobile to events-feed")
     }
-    function goToAboutPage() {
-        log.info("Navigating to: about")
-        router.push(
-            {pathname: "/about"},
-            {pathname: "/about"}
-        ).catch(error => {
-            log.error(error.stack)
-        })
-    }
 
     // ====== RENDER ======>
     return (
@@ -175,7 +166,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         </RadioGroup>
                     </FormControl>
                 </MenuItem>
-                <MenuItem onClick={goToAboutPage}>{strings.about}</MenuItem>
         </Menu>
     )
 }

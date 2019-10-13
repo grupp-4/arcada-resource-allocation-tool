@@ -5,13 +5,14 @@ import {Fragment} from "react"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import CardHeader from "@material-ui/core/CardHeader"
-import Avatar from "@material-ui/core/Avatar"
 import InputBase from "@material-ui/core/InputBase"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+
+import TeacherAvatar from "./teacher-avatar"
 
 import AddCourse from "./add-course"
 
@@ -22,9 +23,8 @@ import {CardActions} from "@material-ui/core"
 function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data, mobile, strings}) {
 
     // ====== INITIAL LOGIC ======>
-    const teacherFullName = `${teacher.firstName} ${teacher.lastName}`
-    let assignedCourses = data.courses.filter(course => course.teacher === teacherFullName) // Makes array of courses that match teacher name
-    let periodTotalHours = [0, 0, 0, 0]
+    const assignedCourses = data.courses.filter(course => course.teacher === teacher.ame) // Makes array of courses that match teacher name
+    let totalHoursPerPeriod = [0, 0, 0, 0]
 
     // ====== HOOKS ======>
     const ctStyles = useCtStyles()
@@ -55,16 +55,12 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
         <Card className={mobile ? ctStyles.cardMobile : ctStyles.cardDesktop}>
             <CardHeader
                 className={styles.cardHeader}
-                avatar={(
-                    <Avatar>
-                        {`${teacher.firstName.slice(0,1).toUpperCase()}${teacher.lastName.slice(0, 1).toUpperCase()}`}
-                    </Avatar>
-                )}
-                title={teacherFullName}/>
+                avatar={<TeacherAvatar teacher={teacher}/>}
+                title={teacher.name}/>
             <CardContent className={ctStyles.cardContent}>
                 <Table
                     className={`${styles.table} ${styles.nestedElements}`}
-                    key={teacherFullName + "-table"}
+                    key={teacher.name + "-table"}
                     classes={{root: styles.table.root, label: styles.table.label}}>
                         <TableHead>
                             <TableRow>
@@ -77,10 +73,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                         </TableHead>
                         <TableBody>
                             {assignedCourses.map((course, index) => {
-                                periodTotalHours[0] += course.hours.p1
-                                periodTotalHours[1] += course.hours.p2
-                                periodTotalHours[2] += course.hours.p3
-                                periodTotalHours[3] += course.hours.p4
+                                totalHoursPerPeriod = totalHoursPerPeriod.map((hours, index) => hours += course.hours[index])
                                 return (
                                     <Fragment key={index}>
                                         <TableRow key={course.name + "-courseRow"} className={styles.tableRow}>
@@ -96,8 +89,8 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                                     type="number"
                                                     key={course.name + "-input1"}
                                                     className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p1")}
-                                                    defaultValue={course.hours.p1}
+                                                    onChange={event => modifyHours(event, course.name, 1)}
+                                                    defaultValue={course.hours[0]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -106,8 +99,8 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                                     type="number"
                                                     key={course.name + "-input2"}
                                                     className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p2")}
-                                                    defaultValue={course.hours.p2}
+                                                    onChange={event => modifyHours(event, course.name, 2)}
+                                                    defaultValue={course.hours[1]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -116,8 +109,8 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                                     type="number"
                                                     key={course.name + "-input3"}
                                                     className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p3")}
-                                                    defaultValue={course.hours.p3}
+                                                    onChange={event => modifyHours(event, course.name, 3)}
+                                                    defaultValue={course.hours[2]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -126,8 +119,8 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                                     type="number"
                                                     key={course.name + "-input4"}
                                                     className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p4")}
-                                                    defaultValue={course.hours.p4}
+                                                    onChange={event => modifyHours(event, course.name, 4)}
+                                                    defaultValue={course.hours[3]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -136,19 +129,16 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                                 )
                             })}
                             <TableRow
-                                key={teacherFullName + "-periodHoursRow"}
+                                key={teacher.name + "-periodHoursRow"}
                                 className={styles.tableRow}>
                                     <TableCell
-                                        key={teacherFullName + "-cell1"}
+                                        key={teacher.name + "-cell1"}
                                         className={`${styles.tableCell} ${styles.thCustomWidth}`}
                                         component={"th"}
                                         scope={"row"}>
-                                            <strong>{`${strings.totalHours} ${calcTotalHours(periodTotalHours)}`}</strong>
+                                            <strong>{`${strings.totalHours} ${calcTotalHours(totalHoursPerPeriod)}`}</strong>
                                     </TableCell>
-                                    <TableCell>{periodTotalHours[0]}</TableCell>
-                                    <TableCell>{periodTotalHours[1]}</TableCell>
-                                    <TableCell>{periodTotalHours[2]}</TableCell>
-                                    <TableCell>{periodTotalHours[3]}</TableCell>
+                                    {totalHoursPerPeriod.map(hours => <TableCell>{hours}</TableCell>)}
                             </TableRow>
                         </TableBody>
                 </Table>
@@ -157,7 +147,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                 <AddCourse
                     setTeacher={setTeacher}
                     addCourse={invalidate}
-                    teacher={teacherFullName}
+                    teacher={teacher.name}
                     dropdownList={courses}
                     strings={strings}
                     loglevel={log.getLevel()}/>
