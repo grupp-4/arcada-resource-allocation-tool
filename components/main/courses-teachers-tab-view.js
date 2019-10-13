@@ -40,7 +40,7 @@ function CoursesTeachersTabView({log, strings, children}) {
             // Gets the index of the "definition" that has a key that matches page query.
             currentTab = definitions.findIndex(definition => definition.key === page)
             log.info(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
-            setState({...state, currentTab: currentTab})
+            setState(prevState => ({...prevState, currentTab: currentTab}))
         }
     }, [router])
 
@@ -49,7 +49,7 @@ function CoursesTeachersTabView({log, strings, children}) {
         // Sets the `state` variable distributed throughout the tab view
         // to the index of the Tab that was clicked.
         log.info(`Selecting tab: ${definitions[newValue].key}`)
-        setState({...state, currentTab: newValue})
+        setState(prevState => ({...prevState, currentTab: newValue}))
     }
     function onClick(key) {
         router.replace(

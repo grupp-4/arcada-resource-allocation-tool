@@ -14,15 +14,17 @@ import wcLib from "./lib/wc"
 
 const log = clientSide.getLogger("initIDB")
 
-export default async function initIDB(fetchedData) {
+export default async function initIDB(fetchedData, options) {
+
+    if (options && options.loglevel) log.setLevel(options.loglevel)
 
     const changeSetsDB = new Dexie(structure.cs.name)
     const remoteCopyDB = new Dexie(structure.rc.name)
     const workingCopyDB = new Dexie(structure.wc.name)
 
-    const changeSets = csLib(changeSetsDB)
-    const remoteCopy = rcLib(remoteCopyDB)
-    const workingCopy = wcLib(workingCopyDB)
+    const changeSets = csLib(changeSetsDB, {loglevel: log.getLevel()})
+    const remoteCopy = rcLib(remoteCopyDB, {loglevel: log.getLevel()})
+    const workingCopy = wcLib(workingCopyDB, {loglevel: log.getLevel()})
 
     createStores(changeSetsDB, structure.cs, log)
     createStores(remoteCopyDB, structure.rc, log)

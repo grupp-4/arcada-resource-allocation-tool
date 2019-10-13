@@ -3,7 +3,8 @@ import SHA1 from "crypto-js/sha1"
 
 const log = clientSide.getLogger("ChangeSetsDB")
 
-export default function csLib(cs) {
+export default function csLib(cs, options) {
+    if (options && options.loglevel) log.setLevel(options.loglevel)
     return {
         async add(checksum, changes) {
             const timestamp = Date.now()

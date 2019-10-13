@@ -4,7 +4,8 @@ import {teachersCoursesPopulate} from "./static"
 
 const log = clientSide.getLogger("RemoteCopyDB")
 
-export default function rcLib(rc) {
+export default function rcLib(rc, options) {
+    if (options && options.loglevel) log.setLevel(options.loglevel)
     return {
         async sync(fetchedData, fetchedDataChecksum, latestChecksum) {
             log.debug("Syncing...", {fetchedDataChecksum, latestChecksum})

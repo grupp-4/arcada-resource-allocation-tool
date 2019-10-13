@@ -7,7 +7,7 @@ import EventsFeed from "components/events-feed"
 
 import useStyles from "./styles"
 
-function EventsFeedTabView({log, cs, wc, events, strings}) {
+function EventsFeedTabView({log, cs, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -42,7 +42,7 @@ function EventsFeedTabView({log, cs, wc, events, strings}) {
                 role="tabpanel"
                 id={`tabpanel-${index}`}
                 aria-labelledby={`tab-${index}`}>
-                    <EventsFeed cs={cs} wc={wc} events={events} strings={strings} loglevel={log.getLevel()}/>
+                    <EventsFeed cs={cs} strings={strings} loglevel={log.getLevel()}/>
             </div>
         </>
     )

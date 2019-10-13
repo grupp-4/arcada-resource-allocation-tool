@@ -18,7 +18,7 @@ function Teachers({log, wc, mobile, strings}) {
     })
     useEffect(() => {
         if (wc) {
-            wc.getEverything().then(data => setState({...state, data}))
+            wc.getEverything().then(data => setState(prevState => ({...prevState, data})))
         }
     }, [wc])
 
@@ -52,7 +52,7 @@ function Teachers({log, wc, mobile, strings}) {
         ))
     }
     function invalidate() {
-        wc.getEverything().then(data => setState({...state, data}))
+        wc.getEverything().then(data => setState(prevState => ({...prevState, data})))
     }
 
     // ====== RENDER ======>

@@ -35,6 +35,8 @@ class _app extends __app {
     // ====== CONSTRUCTOR ======>
     constructor(props) {
         super(props)
+        // Clearing localStorage (just during development)
+        if (typeof window !== "undefined") window.localStorage.clear()
         // Getting landing page preferences
         const {landingPage, landingPageMobile} = getLandingPagePreferences()
         this.landingPage = landingPage
@@ -44,9 +46,8 @@ class _app extends __app {
         const strings = createStrings(log)
         this.state = {
             cs: null,
+            rc: null,
             wc: null,
-            events: null,
-            lastUpdated: null,
             modifications: null,
             theme: theme,
             mobile: true,
@@ -84,17 +85,7 @@ class _app extends __app {
             })
             .then(([cs, rc, wc]) => {
                 // Getting all data from working copy
-                this.setState({cs, wc})
-                Promise.all([
-                    cs.getADozenChanges(),
-                    cs.getLatestTimestamp()
-                ]).then(([events, lastUpdated]) => {
-                    this.setState({events, lastUpdated})
-                })
-            })
-            .then(latestTimestamp => {
-                // Setting state property for latest timestamp
-                this.setState({latestTimestamp})
+                this.setState({cs, rc, wc, modifications: []})
             })
             .catch(error => log.error(error.stack))
     }
@@ -144,9 +135,8 @@ class _app extends __app {
         // ====== Preparatory logic ======>
         const {
             cs,
+            rc,
             wc,
-            events,
-            lastUpdated,
             modifications,
             theme,
             mobile,
@@ -170,38 +160,30 @@ class _app extends __app {
                     <CssBaseline/>
                     <PersistentLayoutController
                         actOnMQ={this.actOnMQ.bind(this)}
-                        actOnPCS={this.actOnPCS.bind(this, preferences.theme)}
-                        loglevel={"silent"}>
+                        actOnPCS={this.actOnPCS.bind(this, preferences.theme)}>
                             <Header
                                 mobile={mobile}
                                 preferences={preferences}
                                 setLang={this.setLang.bind(this)}
                                 setTheme={this.setTheme.bind(this)}
-                                strings={strings.header}
-                                loglevel={"silent"}/>
+                                strings={strings.header}/>
                             <Main
                                 cs={cs}
-                                wc={wc}
-                                events={events}
                                 mobile={mobile}
-                                strings={strings.main}
-                                loglevel={"silent"}>
+                                strings={strings.main}>
                                     <Component
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
                                         cs={cs}
                                         wc={wc}
-                                        events={events}
                                         mobile={mobile}
                                         strings={strings.main}
-                                        loglevel={"silent"}
                                         {...pageProps}/>
                                     <Footer
-                                        lastUpdated={lastUpdated}
-                                        modifications={!!modifications}
+                                        getLatestTimestamp={cs ? cs.getLatestTimestamp : null}
+                                        modifications={modifications}
                                         mobile={mobile}
-                                        strings={strings.footer}
-                                        loglevel={"silent"}/>
+                                        strings={strings.footer}/>
                             </Main>
                     </PersistentLayoutController>
                 </ThemeProvider>

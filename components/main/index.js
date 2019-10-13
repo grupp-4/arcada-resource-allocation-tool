@@ -12,7 +12,7 @@ import useStyles from "./styles.js"
 
 import themeParams from "theme/custom-parameters"
 
-function Main({log, cs, wc, events, mobile, strings, children}) {
+function Main({log, cs, mobile, strings, children}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -32,8 +32,6 @@ function Main({log, cs, wc, events, mobile, strings, children}) {
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
                                 <EventsFeedTabView
                                     cs={cs}
-                                    wc={wc}
-                                    events={events}
                                     strings={strings}
                                     loglevel={log.getLevel()}/>
                             </Paper>

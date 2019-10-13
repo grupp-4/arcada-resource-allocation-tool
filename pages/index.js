@@ -6,7 +6,7 @@ import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-function Index({log, landingPage, landingPageMobile, cs, wc, events, mobile, strings}) {
+function Index({log, landingPage, landingPageMobile, cs, wc, mobile, strings}) {
 
     // ====== HOOKS ======>
     const router = useRouter()
@@ -24,7 +24,7 @@ function Index({log, landingPage, landingPageMobile, cs, wc, events, mobile, str
             case "events-feed":
                 if (mobile) {
                     log.info("Loading page", page)
-                    return <EventsFeed cs={cs} wc={wc} events={events} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
+                    return <EventsFeed cs={cs} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
                 }
                 break
             default:
@@ -40,7 +40,7 @@ function Index({log, landingPage, landingPageMobile, cs, wc, events, mobile, str
                 return <Teachers wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
             default:
                 log.info("Landing on default landing page on mobile: events-feed")
-                return <EventsFeed cs={cs} wc={wc} events={events} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
+                return <EventsFeed cs={cs} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
         }
     } else {
         if (landingPage === "teachers") {

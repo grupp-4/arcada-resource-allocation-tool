@@ -29,28 +29,28 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
 
     // ====== EVENT HANDLERS ======>
     function openNavigationMenu() {
-        setState({...state, navOpen: true})
+        setState(prevState => ({...prevState, navOpen: true}))
         log.info("Opening navigation menu")
     }
     function closeNavigationMenu(event) {
         if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) return
-        setState({...state, navOpen: false})
+        setState(prevState => ({...prevState, navOpen: false}))
         log.info("Closing navigation menu")
     }
     function openLanguagesMenu({currentTarget}) {
-        setState({...state, langAnchor: currentTarget})
+        setState(prevState => ({...prevState, langAnchor: currentTarget}))
         log.info("Opening languages menu")
     }
     function closeLanguagesMenu() {
-        setState({...state, langAnchor: null})
+        setState(prevState => ({...prevState, langAnchor: null}))
         log.info("Closing languages menu")
     }
     function openPreferencesMenu({currentTarget}) {
-        setState({...state, prefAnchor: currentTarget})
+        setState(prevState => ({...prevState, prefAnchor: currentTarget}))
         log.info("Opening preferences menu")
     }
     function closePreferencesMenu() {
-        setState({...state, prefAnchor: null})
+        setState(prevState => ({...prevState, prefAnchor: null}))
         log.info("Closing preferences menu")
     }
 

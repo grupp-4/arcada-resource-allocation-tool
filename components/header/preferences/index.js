@@ -26,7 +26,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     // ====== EVENT HANDLERS ======>
     function changeTheme(event) {
         const value = event.target.value
-        setState({...state, theme: value})
+        setState(prevState => ({...prevState, theme: value}))
         if (value !== "auto") window.localStorage.theme = value
         else window.localStorage.removeItem("theme")
         log.info("Setting theme to", value)
@@ -35,10 +35,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPage(event) {
         const value = event.target.value
         if (value !== "courses") {
-            setState({...state, landingPage: value})
+            setState(prevState => ({...prevState, landingPage: value}))
             window.localStorage.landingPage = value
         } else {
-            setState({...state, landingPage: null})
+            setState(prevState => ({...prevState, landingPage: null}))
             window.localStorage.removeItem("landingPage")
         }
         log.info("Setting landing page to", value)
@@ -46,17 +46,17 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
     function changeLandingPageMobile(event) {
         const value = event.target.value
         if (value !== "events-feed") {
-            setState({...state, landingPageMobile: value})
+            setState(prevState => ({...prevState, landingPageMobile: value}))
             window.localStorage.landingPageMobile = value
         } else {
-            setState({...state, landingPageMobile: null})
+            setState(prevState => ({...prevState, landingPageMobile: null}))
             window.localStorage.removeItem("landingPageMobile")
         }
         log.info("Setting landing page on mobile to", value)
     }
     function resetTheme() {
         const value = "auto"
-        setState({...state, theme: value})
+        setState(prevState => ({...prevState, theme: value}))
         window.localStorage.removeItem("theme")
         log.info("Resetting theme to", value)
         setTheme()
