@@ -9,13 +9,13 @@ import useStyles from "./styles"
 
 function EventsFeedTabView({log, cs, strings}) {
 
+    // ====== INITIAL LOGIC ======>
+    const key = "events-feed"
+    const label = strings.eventsFeedTabName
+    const index = 0
+
     // ====== HOOKS ======>
     const styles = useStyles()
-
-    // ====== INITIAL LOGIC ======>
-    const key = "events-feed",
-        label = strings.eventsFeedTabName,
-        index = 0
 
     // ====== RENDER ======>
     return (

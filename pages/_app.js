@@ -35,8 +35,6 @@ class _app extends __app {
     // ====== CONSTRUCTOR ======>
     constructor(props) {
         super(props)
-        // Clearing localStorage (just during development)
-        if (typeof window !== "undefined") window.localStorage.clear()
         // Getting landing page preferences
         const {landingPage, landingPageMobile} = getLandingPagePreferences()
         this.landingPage = landingPage

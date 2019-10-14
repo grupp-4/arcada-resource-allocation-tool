@@ -18,6 +18,9 @@ function Main({log, cs, mobile, strings, children}) {
     const styles = useStyles()
     const router = useRouter()
 
+    // ====== MISC. LOGIC ======>
+    const pageWithoutFooter = router.pathname === "/_error" || router.pathname === "/about"
+
     // ====== RENDER ======>
     return (
         <>
@@ -26,7 +29,7 @@ function Main({log, cs, mobile, strings, children}) {
                 component={"main"}
                 container
                 spacing={mobile ? 0 : themeParams.spacing}>
-                {router.pathname === "/_error" || mobile ? children[0] /* Main content: events feed, courses, teachers, or the error component */ : (
+                {pageWithoutFooter || mobile ? children[0] /* Main content: events feed, courses, teachers, or the error component */ : (
                     <>
                         <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
                             <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
@@ -48,7 +51,7 @@ function Main({log, cs, mobile, strings, children}) {
                     </>
                 )}
             </Grid>
-            {router.pathname !== "/_error" && mobile ? children[1] : null}
+            {!pageWithoutFooter && mobile ? children[1] : null}
         </>
     )
 }
