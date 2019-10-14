@@ -28,6 +28,7 @@ function Main({log, cs, mobile, strings, children}) {
                 className={`${styles.container} ${mobile ? styles.containerMobile : null}`}
                 component={"main"}
                 container
+                alignContent={"flex-start"}
                 spacing={mobile ? 0 : themeParams.spacing}>
                 {pageWithoutFooter || mobile ? children[0] /* Main content: events feed, courses, teachers, or the error component */ : (
                     <>
