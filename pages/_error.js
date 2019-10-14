@@ -1,3 +1,4 @@
+import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 
 import useTypographyStyles from "styles/typography"
@@ -17,13 +18,13 @@ function Error({code}) {
 
     // ====== RENDER ======>
     return (
-        <Typography className={typographyStyles.typography} variant={"body1"}>
+        <Grid className={typographyStyles.typography} component={Typography} variant={"body1"} xs={12}>
             {code && message[code]
             ? `${code} | ${message[code]}`
             : code
             ? `Error: ${code}`
             : `An unexpected error has occurred`}
-        </Typography>
+        </Grid>
     )
 }
 

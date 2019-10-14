@@ -64,6 +64,7 @@ const main = {
         period2: "2期",
         period3: "3期",
         period4: "4期",
+        totalHours: "全部小时数：",
         notAssigned: "未分配",
         assignTeacher: "指定老师参加这门课程"
     },

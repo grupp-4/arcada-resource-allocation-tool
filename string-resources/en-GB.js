@@ -64,6 +64,7 @@ const main = {
         period2: "Period 2",
         period3: "Period 3",
         period4: "Period 4",
+        totalHours: "Total hours:",
         notAssigned: "Not assigned",
         assignTeacher: "Assign a teacher to this course"
     },

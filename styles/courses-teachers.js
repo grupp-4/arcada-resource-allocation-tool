@@ -20,11 +20,9 @@ import params from "../theme/custom-parameters"
  */
 function styles(theme) {
     return {
-        root: {
-            textAlign: "center"
-        },
         circularProgress: {
-            marginTop: theme.spacing(params.spacing * 2)
+            marginTop: theme.spacing(params.spacing * 2),
+            textAlign: "center"
         },
         cardDesktop: {
             background: params.darkMode ? theme.palette.background.default : "initial",

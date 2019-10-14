@@ -64,6 +64,7 @@ const main = {
         period2: "2. jakso",
         period3: "3. jakso",
         period4: "4. jakso",
+        totalHours: "Tunnit yhteensä:",
         notAssigned: "Ei määritetty",
         assignTeacher: "Valitse opettaja tälle kursille"
     },
