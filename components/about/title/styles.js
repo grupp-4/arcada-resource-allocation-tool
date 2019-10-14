@@ -4,8 +4,26 @@ import params from "theme/custom-parameters"
 
 function styles(theme) {
     return {
+        titleContainer: {
+            [`@media (max-width: ${theme.breakpoints.values.md * 1.05}px)`]: {
+                marginBottom: theme.spacing(params.spacing)
+            },
+            [theme.breakpoints.down("sm")]: {
+                marginBottom: theme.spacing(params.spacing * 2)
+            }
+        },
         arcadaLogoContainer: {
-            padding: theme.spacing(params.spacing)
+            color: "inherit",
+            paddingRight: theme.spacing(params.spacing),
+            "&:visited": {
+                color: "inherit"
+            },
+            "&:hover": {
+                color: theme.palette.primary.main
+            },
+            [theme.breakpoints.down("xs")]: {
+                paddingRight: theme.spacing(params.spacing / 2)
+            }
         },
         arcadaLogo: {
             width: "100%",
@@ -15,7 +33,16 @@ function styles(theme) {
             borderLeft: `thin solid ${theme.palette.text.primary}`,
             alignItems: "center",
             display: "flex",
-            padding: theme.spacing(params.spacing)
+            paddingLeft: theme.spacing(params.spacing),
+            [`@media (max-width: ${theme.breakpoints.values.md * 1.05}px)`]: {
+                flexBasis: 0
+            },
+            [theme.breakpoints.down("xs")]: {
+                paddingLeft: theme.spacing(params.spacing / 2)
+            },
+            [`@media (max-width: ${theme.breakpoints.values.sm / 1.5}px)`]: {
+                fontSize: "2rem"
+            }
         }
     }
 }

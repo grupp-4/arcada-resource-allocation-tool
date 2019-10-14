@@ -73,7 +73,7 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
                                 <MenuIcon/>
                         </IconButton>
                         <Link href={{pathname: "/"}} passHref replace shallow>
-                            <Typography className={styles.appNameContainer} variant={"h6"}>
+                            <Typography className={styles.appNameContainer} variant={"h6"} variantMapping={{h6: "h1"}}>
                                 <a className={styles.appNameAnchor}>{strings.appName}</a>
                             </Typography>
                         </Link>

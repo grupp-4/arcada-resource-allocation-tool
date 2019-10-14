@@ -1,16 +1,15 @@
 import {withLogging} from "gillog"
 
-import Grid from "@material-ui/core/Grid"
-
 import Title from "components/about/title"
+import Creators from "components/about/creators"
 
-function About({log, mobile, strings}) {
+function About({log, mobile, strings: {about: strings}}) {
 
     // ====== RENDER ======>
     return (
         <>
-            <Title/>
-            {"This is the About page."}
+            <Title strings={strings}/>
+            <Creators mobile={mobile} strings={strings}/>
         </>
     )
 }

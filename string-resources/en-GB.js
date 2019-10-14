@@ -77,6 +77,13 @@ const main = {
         totalHours: "Total hours:",
         assignCourse: "Assign a course to this teacher"
     },
+    about: {
+        appTitle: "Resource Allocation Tool",
+        createdBy: "Created by",
+        creatorLinkTitle(name) {
+            return `${name}'s GitHub page`
+        }
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },
