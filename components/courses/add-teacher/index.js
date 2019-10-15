@@ -21,7 +21,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
         setSingle(value)
         log.debug("addTeacherToCourse() value:", value.value)
         // Updates the targeted course with new teacher
-        setTeacher(courseName, value.value)
+        setTeacher(value.value, courseName)
             .then(() => log.debug("Successfully set teacher"))
             .catch(error => log.error(error.message))
         // Pass this component's state to parent component, forcing a re-render

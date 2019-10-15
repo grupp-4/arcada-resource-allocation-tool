@@ -1,6 +1,6 @@
 import makeStyles from "@material-ui/core/styles/makeStyles"
 
-import red from "@material-ui/core/colors/red"
+import {red, green, blue} from "@material-ui/core/colors"
 
 import params from "../../theme/custom-parameters"
 
@@ -16,8 +16,19 @@ function styles(theme) {
             "& input": {
                 color: red[400],
                 borderBottom: "1px solid " + red[400],
-                fontWeight: "bold"
-            }
+                fontWeight: "bold",
+                textAlign: "center"
+            },
+            '& strong': {
+                color: red[400],
+            },
+            '& p': {
+                color: red[400],
+            },
+            color: red[400],
+        },
+        teacherWarning: {
+            border: "2px solid" + red[400],
         },
         nestedElements: {
             "& th": {
@@ -79,9 +90,8 @@ function styles(theme) {
         },
         inputBase: {
             "& input": {
-                borderBottom: "1px solid black",
-                padding: 0,
-                textAlign: "left"
+                borderBottom: "1px solid",
+                textAlign: "center"
             }
         }
     }

@@ -1,6 +1,6 @@
 import {withLogging} from "gillog"
 
-import {Fragment} from "react"
+import {Fragment, useState} from "react"
 
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
@@ -12,12 +12,16 @@ import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+import {CardActions} from "@material-ui/core"
 
 import AddCourse from "./add-course"
 
 import useCtStyles from "styles/courses-teachers"
 import useStyles from "./styles"
-import {CardActions} from "@material-ui/core"
+
+import numbersOnly from 'numbers-only';
+import warning from "utility/warning.js";
+
 
 function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data, mobile, strings}) {
 
@@ -29,6 +33,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
     // ====== HOOKS ======>
     const ctStyles = useCtStyles()
     const styles = useStyles()
+    const [inputValue, setInputValue] = useState(null)
 
     // ====== FUNCTIONS ======>
     function calcTotalHours(arr) {
@@ -39,6 +44,7 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
         event.persist()
         const index = data.courses.findIndex(course => course.name === courseName)
         const hours = parseInt(event.target.value)
+        setInputValue(hours)
         // Updates the targeted course with new hour
         setHours(courseName, period, hours)
             .then(() => log.debug("Successfully set hours"))
@@ -55,110 +61,117 @@ function Teacher({log, setHours, setTeacher, invalidate, teacher, courses, data,
                 className={styles.cardHeader}
                 avatar={(
                     <Avatar>
-                        {`${teacher.firstName.slice(0,1).toUpperCase()}${teacher.lastName.slice(0, 1).toUpperCase()}`}
+                        {`${teacher.firstName.slice(0, 1).toUpperCase()}${teacher.lastName.slice(0, 1).toUpperCase()}`}
                     </Avatar>
                 )}
-                title={teacherFullName}/>
+                title={teacherFullName} />
             <CardContent className={ctStyles.cardContent}>
                 <Table
                     className={`${styles.table} ${styles.nestedElements}`}
                     key={teacherFullName + "-table"}
                     classes={{root: styles.table.root, label: styles.table.label}}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell className={styles.tableCell}>{strings.course}</TableCell>
-                                <TableCell>{strings.period1}</TableCell>
-                                <TableCell>{strings.period2}</TableCell>
-                                <TableCell>{strings.period3}</TableCell>
-                                <TableCell>{strings.period4}</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {assignedCourses.map((course, index) => {
-                                periodTotalHours[0] += course.hours.p1
-                                periodTotalHours[1] += course.hours.p2
-                                periodTotalHours[2] += course.hours.p3
-                                periodTotalHours[3] += course.hours.p4
-                                return (
-                                    <Fragment key={index}>
-                                        <TableRow key={course.name + "-courseRow"} className={styles.tableRow}>
-                                            <TableCell
-                                                key={course.name + "-cell1"}
-                                                className={`${styles.tableCell} ${styles.thCustomWidth}`}
-                                                component={"th"}
-                                                scope={"row"}>
-                                                    {course.name}<br/>{course.courseCode}
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell2"}>
-                                                <InputBase
-                                                    type="number"
-                                                    key={course.name + "-input1"}
-                                                    className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p1")}
-                                                    defaultValue={course.hours.p1}
-                                                    margin={"dense"}
-                                                    inputProps={{"aria-label": "naked"}}/>
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell3"}>
-                                                <InputBase
-                                                    type="number"
-                                                    key={course.name + "-input2"}
-                                                    className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p2")}
-                                                    defaultValue={course.hours.p2}
-                                                    margin={"dense"}
-                                                    inputProps={{"aria-label": "naked"}}/>
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell4"}>
-                                                <InputBase
-                                                    type="number"
-                                                    key={course.name + "-input3"}
-                                                    className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p3")}
-                                                    defaultValue={course.hours.p3}
-                                                    margin={"dense"}
-                                                    inputProps={{"aria-label": "naked"}}/>
-                                            </TableCell>
-                                            <TableCell align="right" key={course.name + "-cell5"}>
-                                                <InputBase
-                                                    type="number"
-                                                    key={course.name + "-input4"}
-                                                    className={styles.inputBase}
-                                                    onChange={event => modifyHours(event, course.name, "p4")}
-                                                    defaultValue={course.hours.p4}
-                                                    margin={"dense"}
-                                                    inputProps={{"aria-label": "naked"}}/>
-                                            </TableCell>
-                                        </TableRow>
-                                    </Fragment>
-                                )
-                            })}
-                            <TableRow
-                                key={teacherFullName + "-periodHoursRow"}
-                                className={styles.tableRow}>
-                                    <TableCell
-                                        key={teacherFullName + "-cell1"}
-                                        className={`${styles.tableCell} ${styles.thCustomWidth}`}
-                                        component={"th"}
-                                        scope={"row"}>
-                                            <strong>{`${strings.totalHours} ${calcTotalHours(periodTotalHours)}`}</strong>
-                                    </TableCell>
-                                    <TableCell>{periodTotalHours[0]}</TableCell>
-                                    <TableCell>{periodTotalHours[1]}</TableCell>
-                                    <TableCell>{periodTotalHours[2]}</TableCell>
-                                    <TableCell>{periodTotalHours[3]}</TableCell>
-                            </TableRow>
-                        </TableBody>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className={styles.tableCell}>{strings.course}</TableCell>
+                            <TableCell>{strings.period1}</TableCell>
+                            <TableCell>{strings.period2}</TableCell>
+                            <TableCell>{strings.period3}</TableCell>
+                            <TableCell>{strings.period4}</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {assignedCourses.map((course, index) => {
+                            periodTotalHours[0] += course.hours.p1
+                            periodTotalHours[1] += course.hours.p2
+                            periodTotalHours[2] += course.hours.p3
+                            periodTotalHours[3] += course.hours.p4
+                            return (
+                                <Fragment key={index}>
+                                    <TableRow key={course.name + "-courseRow"} className={styles.tableRow}>
+                                        <TableCell
+                                            key={course.name + "-cell1"}
+                                            className={`${styles.tableCell} ${styles.thCustomWidth}`}
+                                            component={"th"}
+                                            scope={"row"}>
+                                            {course.name}<br />{course.courseCode}
+                                        </TableCell>
+                                        <TableCell align="right" key={course.name + "-cell2"}>
+                                            <InputBase
+                                                type="number"
+                                                key={course.name + "-input1"}
+                                                className={warning("period", "p1", course) ? `${styles.warning}` : `${styles.inputBase}`}
+                                                onChange={event => modifyHours(event, course.name, "p1")}
+                                                onKeyDown={numbersOnly}
+                                                defaultValue={course.hours.p1}
+                                                margin={"dense"}
+                                                inputProps={{"aria-label": "naked"}} />
+                                        </TableCell>
+                                        <TableCell align="right" key={course.name + "-cell3"}>
+                                            <InputBase
+                                                type="number"
+                                                key={course.name + "-input2"}
+                                                className={warning("period", "p2", course) ? `${styles.warning}` : `${styles.inputBase}`}
+                                                onChange={event => modifyHours(event, course.name, "p2")}
+                                                onKeyDown={numbersOnly}
+                                                defaultValue={course.hours.p2}
+                                                margin={"dense"}
+                                                inputProps={{"aria-label": "naked"}} />
+                                        </TableCell>
+                                        <TableCell align="right" key={course.name + "-cell4"}>
+                                            <InputBase
+                                                type="number"
+                                                key={course.name + "-input3"}
+                                                className={warning("period", "p3", course) ? `${styles.inputBase} ${styles.warning}` : `${styles.inputBase}`}
+                                                onChange={event => modifyHours(event, course.name, "p3")}
+                                                onKeyDown={numbersOnly}
+                                                defaultValue={course.hours.p3}
+                                                margin={"dense"}
+                                                inputProps={{"aria-label": "naked"}} />
+                                        </TableCell>
+                                        <TableCell align="right" key={course.name + "-cell5"}>
+                                            <InputBase
+                                                type="number"
+                                                key={course.name + "-input4"}
+                                                className={warning("period", "p4", course) ? `${styles.warning}` : `${styles.inputBase}`}
+                                                onChange={event => modifyHours(event, course.name, "p4")}
+                                                onKeyDown={numbersOnly}
+                                                defaultValue={course.hours.p4}
+                                                margin={"dense"}
+                                                inputProps={{"aria-label": "naked"}} />
+                                        </TableCell>
+                                    </TableRow>
+                                </Fragment>
+                            )
+                        })}
+                        <TableRow
+                            key={teacherFullName + "-periodHoursRow"}
+                            className={styles.tableRow}>
+                            <TableCell
+                                key={teacherFullName + "-cell1"}
+                                className={warning("totalHours", null, calcTotalHours(periodTotalHours)) ? `${styles.warning}` : (`${styles.tableCell} ${styles.thCustomWidth}`)}
+                                component={"th"}
+                                scope={"row"}>
+                                <strong>{`${strings.totalHours} ${calcTotalHours(periodTotalHours)}`}</strong>
+                            </TableCell>
+                            <TableCell>{periodTotalHours[0]}</TableCell>
+                            <TableCell>{periodTotalHours[1]}</TableCell>
+                            <TableCell>{periodTotalHours[2]}</TableCell>
+                            <TableCell>{periodTotalHours[3]}</TableCell>
+                        </TableRow>
+                    </TableBody>
                 </Table>
             </CardContent>
-            <CardActions className={ctStyles.cardActions}>
-                <AddCourse
-                    setTeacher={setTeacher}
-                    addCourse={invalidate}
-                    teacher={teacherFullName}
-                    dropdownList={courses}
-                    strings={strings}/>
-            </CardActions>
+            {/*            <div className={warning("teacherCourses", null, assignedCourses) ? `${styles.teacherWarning}` : null}> */}
+            <span className={warning("teacherCourses", null, assignedCourses) ? `${styles.warning} ${styles.thCustomWidth}` : null}>
+                <CardActions className={ctStyles.cardActions}>
+                    <AddCourse
+                        setTeacher={setTeacher}
+                        addCourse={invalidate}
+                        teacher={teacherFullName}
+                        dropdownList={courses}
+                        strings={strings} />
+                </CardActions>
+            </span>
         </Card>
     )
 }
