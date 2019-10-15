@@ -34,7 +34,7 @@ function styles(theme) {
             }
         },
         footerMobile: {
-            backgroundColor: Color(theme.palette.background.paper).alpha(params.footerMobileOpacity).rgb().string(),
+            background: Color(theme.palette.background.paper).alpha(params.footerMobileOpacity).rgb().string(),
             backdropFilter: `blur(${params.footerMobileBlurIntensity}px)`,
             boxShadow: theme.shadows[params.footerMobileElevation],
             bottom: 0,
@@ -43,7 +43,7 @@ function styles(theme) {
             position: "fixed"
         },
         lastUpdatedContainer: {
-            contentAlign: "middle"
+            overflow: "visible"
         },
         syncButton: {
             marginLeft: theme.spacing(params.spacing / 2),

@@ -95,7 +95,7 @@ const main = {
 const footer = {
     lastUpdated: "Viimeksi päivitetty:",
     date(time) {
-        return new Date(time).toLocaleDateString("fi-FI", {dateStyle: "medium", timeStyle: "short"})
+        return new Date(time).toLocaleTimeString("fi-FI", {timeStyle: "short"})
     },
     calculating: "laskee...",
     undo: "peru",

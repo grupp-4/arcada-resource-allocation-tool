@@ -77,6 +77,20 @@ const main = {
         totalHours: "Totala timmar:",
         assignCourse: "Tilldela en kurs till denna lärare"
     },
+    about: {
+        createdBy: "Skapad av",
+        creatorLinkTitle(name) {
+            return `${name}s GitHub sida`
+        },
+        poweredBy: "Bygger på",
+        reportABug: "Rapportera en bugg",
+        suggestAFeature: "Föreslå en funktion",
+        getSupport: "Ställ en fråga",
+        giveFeedback: "Ge feedback",
+        license1: "Det här projektet är licensierat under ",
+        license2: "MIT licensen",
+        license3: "."
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },
@@ -95,7 +109,7 @@ const main = {
 const footer = {
     lastUpdated: "Senast uppdaterad:",
     date(time) {
-        return new Date(time).toLocaleDateString("se-FI", {dateStyle: "medium", timeStyle: "short"})
+        return new Date(time).toLocaleTimeString("se-FI", {timeStyle: "short"})
     },
     calculating: "beräknar...",
     undo: "ångra",

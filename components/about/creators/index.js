@@ -11,8 +11,6 @@ import Link from "@material-ui/core/Link"
 
 import useStyles from "./styles"
 
-import themeParams from "theme/custom-parameters"
-
 function Creators({log, strings}) {
 
     // ====== INITIAL LOGIC ======>
@@ -53,25 +51,6 @@ function Creators({log, strings}) {
     const styles = useStyles()
     const theme = useTheme()
     const wrap = useMediaQuery(theme.breakpoints.down(theme.breakpoints.values.sm * 0.8), {defaultMatches: true})
-
-    // ====== FUNCTIONS ======>
-    function creatorsMobile(creators) {
-        return creators.reduce((line, creator, index) => {
-            log.debug("Creator:", creator.name)
-            if (index) line += "<br>"
-            line += (
-                <Link href={creator.href}>
-                    <a title={strings.creatorAnchorTitle(creator.name)}>
-                        {creator.name}
-                    </a>
-                </Link>
-            )
-            return line
-        }, "")
-    }
-    function creatorsDesktop(creators) {
-        return
-    }
 
     // ====== RENDER ======>
     return (

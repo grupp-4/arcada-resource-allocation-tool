@@ -6,9 +6,12 @@ import Typography from "@material-ui/core/Typography"
 
 import useStyles from "./styles"
 
-function Title({log, strings}) {
+function Title({log}) {
 
     // ====== INITIAL LOGIC ======>
+    const appTitle = "Resource Allocation Tool"
+
+    // ====== HOOKS ======>
     const styles = useStyles()
 
     // ====== RENDER ======>
@@ -58,7 +61,7 @@ function Title({log, strings}) {
                     component={Typography}
                     item
                     variant={"h2"}>
-                        {strings.appTitle}
+                        {appTitle}
                 </Grid>
         </Grid>
     )

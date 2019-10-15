@@ -78,12 +78,18 @@ const main = {
         assignCourse: "Assign a course to this teacher"
     },
     about: {
-        appTitle: "Resource Allocation Tool",
         createdBy: "Created by",
         creatorLinkTitle(name) {
             return `${name}'s GitHub page`
         },
-        poweredBy: "Powered by"
+        poweredBy: "Powered by",
+        reportABug: "Report a bug",
+        suggestAFeature: "Suggest a feature",
+        getSupport: "Get support",
+        giveFeedback: "Give feedback",
+        license1: "This project is licensed under the terms of the ",
+        license2: "MIT License",
+        license3: "."
     },
     get eventsFeedTabName() {
         return cap(this._global.events)
@@ -103,7 +109,7 @@ const main = {
 const footer = {
     lastUpdated: "Last updated:",
     date(time) {
-        return new Date(time).toLocaleDateString("en-GB", {dateStyle: "medium", timeStyle: "short"})
+        return new Date(time).toLocaleTimeString("en-GB", {timeStyle: "short"})
     },
     calculating: "calculating...",
     undo: "undo",

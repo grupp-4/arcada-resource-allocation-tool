@@ -25,7 +25,7 @@ function styles(theme) {
             textAlign: "center"
         },
         cardDesktop: {
-            background: params.darkMode ? theme.palette.background.default : "initial",
+            backgroundColor: params.darkMode ? theme.palette.background.default : "initial",
             margin: theme.spacing(params.spacing)
         },
         cardMobile: {

@@ -78,7 +78,7 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                                     type="number"
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, 0)}
-                                                    defaultValue={course.hours[0]}
+                                                    defaultValue={teacher.hours[0]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -87,7 +87,7 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                                     type="number"
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, 1)}
-                                                    defaultValue={course.hours[1]}
+                                                    defaultValue={teacher.hours[1]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -96,7 +96,7 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                                     type="number"
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, 2)}
-                                                    defaultValue={course.hours[2]}
+                                                    defaultValue={teacher.hours[2]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>
@@ -105,7 +105,7 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                                     type="number"
                                                     className={styles.inputBase}
                                                     onChange={event => modifyHours(event, course.name, 3)}
-                                                    defaultValue={course.hours[3]}
+                                                    defaultValue={teacher.hours[3]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
                                             </TableCell>

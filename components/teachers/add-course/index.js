@@ -6,7 +6,6 @@ import Select from "components/select"
 
 import useStyles from "styles/add-course-teacher"
 
-// TODO: get snackbar working
 function AddCourse({log, setTeacher, teacher, dropdownList, strings}) {
 
     // ====== HOOKS ======>

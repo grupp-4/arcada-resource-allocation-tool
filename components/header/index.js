@@ -59,52 +59,51 @@ function Header({log, preferences, setLang, setTheme, mobile, strings}) {
     return (
         <>
             <AppBar className={styles.appBar} position={"fixed"}>
-                <Container className={styles.container} maxWidth={themeParams.maxWidth}>
-                    <Toolbar classes={{regular: styles.toolBarRegular, dense: styles.toolBarDense}} variant={mobile ? "regular" : "dense"}>
+                <Container className={styles.toolBar} component={Toolbar} maxWidth={themeParams.maxWidth}>
+                    <IconButton
+                        className={styles.navigationMenuButton}
+                        onClick={openNavigationMenu}
+                        color={"inherit"}
+                        edge={"start"}
+                        aria-controls={"navigation-menu"}
+                        aria-haspopup={"true"}
+                        aria-label={"navigation"}
+                        style={{display: mobile ? "initial" : "none"}}>
+                            <MenuIcon/>
+                    </IconButton>
+                    <Link href={{pathname: "/"}} passHref replace shallow>
+                        <Typography className={styles.appNameContainer} variant={"h6"} variantMapping={{h6: "h1"}}>
+                            <a className={styles.appNameAnchor}>{strings.appName}</a>
+                        </Typography>
+                    </Link>
+                    <IconButton
+                        onClick={openLanguagesMenu}
+                        color={"inherit"}
+                        size={mobile ? "medium" : "small"}
+                        aria-controls={"languages-menu"}
+                        aria-haspopup={"true"}
+                        aria-label={"languages"}>
+                            <TranslateRoundedIcon/>
+                    </IconButton>
+                    <Link href={{pathname: "/about"}} passHref>
                         <IconButton
-                            className={styles.navigationMenuButton}
-                            onClick={openNavigationMenu}
-                            color={"inherit"}
-                            edge={"start"}
-                            aria-controls={"navigation-menu"}
-                            aria-haspopup={"true"}
-                            aria-label={"navigation"}
-                            style={{display: mobile ? "initial" : "none"}}>
-                                <MenuIcon/>
-                        </IconButton>
-                        <Link href={{pathname: "/"}} passHref replace shallow>
-                            <Typography className={styles.appNameContainer} variant={"h6"} variantMapping={{h6: "h1"}}>
-                                <a className={styles.appNameAnchor}>{strings.appName}</a>
-                            </Typography>
-                        </Link>
-                        <IconButton
-                            onClick={openLanguagesMenu}
-                            color={"inherit"}
-                            size={mobile ? "medium" : "small"}
-                            aria-controls={"languages-menu"}
-                            aria-haspopup={"true"}
-                            aria-label={"languages"}>
-                                <TranslateRoundedIcon/>
-                        </IconButton>
-                        <Link href={{pathname: "/about"}} passHref>
-                            <IconButton
-                                component={"a"}
-                                color={"inherit"}
-                                size={mobile ? "medium" : "small"}
-                                aria-label={"about"}>
-                                    <InfoRoundedIcon/>
-                            </IconButton>
-                        </Link>
-                        <IconButton
-                            onClick={openPreferencesMenu}
+                            component={"a"}
                             color={"inherit"}
                             size={mobile ? "medium" : "small"}
-                            aria-controls={"preferences-menu"}
-                            aria-haspopup={"true"}
-                            aria-label={"preferences"}>
-                                <MoreVertIcon/>
+                            aria-label={"about"}>
+                                <InfoRoundedIcon/>
                         </IconButton>
-                    </Toolbar>
+                    </Link>
+                    <IconButton
+                        className={styles.preferencesMenuButton}
+                        onClick={openPreferencesMenu}
+                        color={"inherit"}
+                        size={mobile ? "medium" : "small"}
+                        aria-controls={"preferences-menu"}
+                        aria-haspopup={"true"}
+                        aria-label={"preferences"}>
+                            <MoreVertIcon/>
+                    </IconButton>
                 </Container>
             </AppBar>
             <Navigation

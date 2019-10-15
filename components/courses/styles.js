@@ -46,7 +46,7 @@ function styles(theme) {
         // This is still not working
         table: {
             root: {
-                background: "red"
+                backgroundColor: "red"
             },
             minWidth: 0
         },

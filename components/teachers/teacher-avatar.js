@@ -5,7 +5,7 @@ import Avatar from "@material-ui/core/Avatar"
 function TeacherAvatar({log, teacher}) {
 
     // ====== FUNCTIONS ======>
-    function extractInitials() {
+    function extractInitials(name) {
         // TODO: implement initials extraction for teacher "Avatars"
         return "AA"
     }
@@ -13,7 +13,7 @@ function TeacherAvatar({log, teacher}) {
     // ====== RENDER ======>
     return (
         <Avatar>
-            {extractInitials()}
+            {extractInitials(teacher.name)}
         </Avatar>
     )
 }

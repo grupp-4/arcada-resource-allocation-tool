@@ -19,40 +19,43 @@ function Main({log, cs, mobile, strings, children}) {
     const router = useRouter()
 
     // ====== MISC. LOGIC ======>
-    const pageWithoutFooter = router.pathname === "/_error" || router.pathname === "/about"
+    const error = router.pathname === "/_error"
+    const aboutPage = router.pathname === "/about"
 
     // ====== RENDER ======>
     return (
         <>
-            <Grid
-                className={`${styles.container} ${mobile ? styles.containerMobile : null}`}
-                component={"main"}
-                container
-                alignContent={"flex-start"}
-                spacing={mobile ? 0 : themeParams.spacing}>
-                {pageWithoutFooter || mobile ? children[0] /* Main content: events feed, courses, teachers, or the error component */ : (
-                    <>
-                        <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
-                            <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                <EventsFeedTabView
-                                    cs={cs}
-                                    strings={strings}
-                                    loglevel={log.getLevel()}/>
-                            </Paper>
-                        </Grid>
-                        <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
-                            <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
-                                <CoursesTeachersTabView
-                                    strings={strings}
-                                    loglevel={log.getLevel()}>
-                                    {children}
-                                </CoursesTeachersTabView>
-                            </Paper>
-                        </Grid>
-                    </>
-                )}
-            </Grid>
-            {!pageWithoutFooter && mobile ? children[1] : null}
+            {aboutPage ? children[0] : (
+                <Grid
+                    className={`${styles.container} ${mobile ? styles.containerMobile : null}`}
+                    component={"main"}
+                    container
+                    alignContent={"flex-start"}
+                    spacing={mobile ? 0 : themeParams.spacing}>
+                    {error || mobile ? children[0] /* Main content: events feed, courses, teachers, or the error component */ : (
+                        <>
+                            <Grid className={styles.gridItem} item xs={themeParams.eventsFeedFraction}>
+                                <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
+                                    <EventsFeedTabView
+                                        cs={cs}
+                                        strings={strings}
+                                        loglevel={log.getLevel()}/>
+                                </Paper>
+                            </Grid>
+                            <Grid className={styles.gridItem} item xs={themeParams.coursesTeachersFraction}>
+                                <Paper className={styles.paper} elevation={themeParams.mainPapersElevation}>
+                                    <CoursesTeachersTabView
+                                        strings={strings}
+                                        loglevel={log.getLevel()}>
+                                        {children}
+                                    </CoursesTeachersTabView>
+                                </Paper>
+                            </Grid>
+                        </>
+                    )}
+                </Grid>
+            )}
+            {!(error|| aboutPage) && mobile ? children[1] : null}
         </>
     )
 }

@@ -18,7 +18,7 @@ function Error({code}) {
 
     // ====== RENDER ======>
     return (
-        <Grid className={typographyStyles.typography} component={Typography} variant={"body1"} xs={12}>
+        <Grid className={typographyStyles.typography} component={Typography} item variant={"body1"} xs={12}>
             {code && message[code]
             ? `${code} | ${message[code]}`
             : code

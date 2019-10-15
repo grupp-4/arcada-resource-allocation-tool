@@ -95,7 +95,7 @@ const main = {
 const footer = {
     lastUpdated: "最近更新时间：",
     date(time) {
-        return new Date(time).toLocaleDateString("zh-CN", {dateStyle: "medium", timeStyle: "short"})
+        return new Date(time).toLocaleTimeString("zh-CN", {timeStyle: "short"})
     },
     calculating: "计算...",
     undo: "撤消",
