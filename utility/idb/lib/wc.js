@@ -19,12 +19,17 @@ export default function wcLib(wc) {
             return await wc["teachers"].toArray()
         },
         async setHours(courseName, period, hours) {
-            // TODO: this function
-            throw new Error("Function not implemented!")
+            const path = `hours.${period}`;
+            wc.courses.update(courseName, {[path]: hours}).then(updated => {
+                if (updated) log.debug('Updated course hours');
+                else log.debug('setHours failed!');
+            })
         },
-        async setTeacher(courseName, teacherName) {
-            // TODO: this function
-            throw new Error("Function not implemented!")
+        async setTeacher(teacherName, courseName) {
+            wc.courses.update(courseName, {teacher: teacherName}).then(updated => {
+                if (updated) log.debug("Updated course teacher", teacherName, courseName)
+                else log.debug("setTeacher failed!")
+            })
         },
         async populate(fetchedData) {
             await teachersCoursesPopulate(fetchedData, wc, log)

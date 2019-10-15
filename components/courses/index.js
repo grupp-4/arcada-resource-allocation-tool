@@ -26,18 +26,7 @@ function Courses({log, db, mobile, strings}) {
     function listCourses(data) {
         // Creates array of all teachers' names, which gets sent to the AddTeacher component
         const teacherNames = data.teachers.map(({firstName, lastName}) => `${firstName} ${lastName}`)
-        // If localStorage data exists it renders with that (this allows you to switch between tabs and not lose data)
-        // TODO: deprecate usage of localStorage, integrate the IDB library
-        let storageData = window.localStorage.data
-        if (storageData) {
-            storageData = JSON.parse(storageData)
-            log.debug("localStorage data exists", storageData)
-        } else {
-            window.localStorage.setItem("data", JSON.stringify(data))
-            storageData = data
-            log.debug("localStorage data doesn't exist. Putting following data in there:", storageData)
-        }
-        return storageData.courses.map((course, index) => (
+        return data.courses.map((course, index) => (
             <Course
                 key={index}
                 setHours={db.setHours}
@@ -45,7 +34,7 @@ function Courses({log, db, mobile, strings}) {
                 invalidate={invalidate}
                 course={course}
                 teachers={teacherNames}
-                data={storageData}
+                data={data}
                 mobile={mobile}
                 strings={strings.course}/>
         ))

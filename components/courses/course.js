@@ -34,9 +34,6 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
             .catch(error => log.error(error.message))
         data.courses[index].hours[period] = hours
         log.debug("data.courses[index].hours[period]:", data.courses[index].hours[period])
-        // Creates/overrides localStorage "data" key with the updated data
-        window.localStorage.setItem("data", JSON.stringify(data))
-        log.debug("localStorage.data (new):", JSON.parse(window.localStorage.data))
     }
 
     // ====== RENDER ======>

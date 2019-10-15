@@ -20,19 +20,10 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
     function addTeacherToCourse(value, courseName) {
         setSingle(value)
         log.debug("addTeacherToCourse() value:", value.value)
-        let storageData = JSON.parse(window.localStorage.getItem("data"))
-        // Finds position of the modified course
-        let index = storageData.courses.findIndex(course => course.name === courseName)
-        log.debug("index:", index)
         // Updates the targeted course with new teacher
         setTeacher(courseName, value.value)
             .then(() => log.debug("Successfully set teacher"))
             .catch(error => log.error(error.message))
-        storageData.courses[index].teacher = value.value
-        log.debug("storageData.courses[index].teacher:", storageData.courses[index].teacher)
-        // Creates/overrides localstorage "data" key with the updated storageData
-        window.localStorage.setItem("data", JSON.stringify(storageData))
-        log.debug("localStorage.data (new):", JSON.parse(window.localStorage.data))
         // Pass this component's state to parent component, forcing a re-render
         addTeacher(value.value)
         // This state tells the snackbar to be rendered
