@@ -3,7 +3,7 @@ import {withLogging} from "gillog"
 import {useState} from "react"
 
 import Select from "components/select"
-import Snacky from "components/snacky"
+import Snack from "components/snack"
 
 import useStyles from "styles/add-course-teacher"
 
@@ -13,7 +13,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
     // ====== HOOKS ======>
     const styles = useStyles()
     const [single, setSingle] = useState(teacher ? {value: teacher, label: teacher} : null)
-    const [doIt, setDoIt] = useState(false)
+    const [open, setOpen] = useState(false);
 
     // ====== FUNCTIONS ======>
     // Triggered on change, updates the state
@@ -27,7 +27,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
         // Pass this component's state to parent component, forcing a re-render
         addTeacher(value.value)
         // This state tells the snackbar to be rendered
-        setDoIt(true)
+        setOpen(true)
     }
 
     // ====== RENDER ======>
@@ -38,7 +38,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
                 options={dropdownList}
                 value={single}
                 onChange={event => addTeacherToCourse(event, course)}/>
-            {/*doIt ? <Snacky message="Teacher Added" resetState={() => setDoIt(false)}/> : ""*/""}
+                <Snack setOpen={setOpen} open={open} message="Teacher Added"/>
         </div>
     )
 }

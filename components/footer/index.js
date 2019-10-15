@@ -13,7 +13,7 @@ import Fab from "@material-ui/core/Fab"
 import SaveIcon from "@material-ui/icons/Save"
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded"
 
-import Snacky from "components/snacky"
+import Snack from "components/snack"
 
 import useStyles from "./styles"
 
@@ -29,6 +29,7 @@ function Footer({log, mobile, strings}) {
         changes: true, // TODO: "actually implement change tracker
         snackbar: ""
     })
+    const [open, setOpen] = useState(false);
 
     // ====== EVENT HANDLERS ======>
     function submitChanges() {
@@ -44,6 +45,7 @@ function Footer({log, mobile, strings}) {
                     message="Saved changes"/>
             )
         }))*/
+        setOpen(true)
     }
     function discardChanges() {
         // TODO: implement discarding changes
@@ -146,6 +148,7 @@ function Footer({log, mobile, strings}) {
                     </Grid>
             </Grid>
             {state.snackbar}
+                <Snack setOpen={setOpen} open={open} message="Submitted Changes"/>
         </Grid>
     )
 }
