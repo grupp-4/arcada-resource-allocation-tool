@@ -84,10 +84,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                             className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
                             classes={{focused: styles.menuLegendFocused}}
                             component={"legend"}>
-                                <span className={!mobile ? styles.menuLegendSpan : null}>{strings.theme.label}</span>
+                                <span className={!mobile ? `${styles.menuLegendSpan} ${styles.menuLegendChild}` : styles.menuLegendChild}>{strings.theme.label}</span>
                                 {state.theme !== "auto"
                                     ? (
-                                        <Link component={"button"} onClick={resetTheme} variant={"caption"}>
+                                        <Link className={styles.menuLegendChild} component={"button"} onClick={resetTheme} variant={"caption"}>
                                             {strings.reset}
                                         </Link>
                                     ) : null}

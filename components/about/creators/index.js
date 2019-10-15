@@ -1,13 +1,19 @@
 import {withLogging} from "gillog"
 
+import {Fragment} from "react"
+
+import useTheme from "@material-ui/core/styles/useTheme"
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery"
+
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import Link from "@material-ui/core/Link"
 
 import useStyles from "./styles"
-import {Fragment} from "react"
 
-function Creators({log, mobile, strings}) {
+import themeParams from "theme/custom-parameters"
+
+function Creators({log, strings}) {
 
     // ====== INITIAL LOGIC ======>
     const creators = [
@@ -45,6 +51,8 @@ function Creators({log, mobile, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
+    const theme = useTheme()
+    const wrap = useMediaQuery(theme.breakpoints.down(theme.breakpoints.values.sm * 0.8), {defaultMatches: true})
 
     // ====== FUNCTIONS ======>
     function creatorsMobile(creators) {
@@ -68,10 +76,10 @@ function Creators({log, mobile, strings}) {
     // ====== RENDER ======>
     return (
         <Grid
+            className={styles.container}
             container
             direction={"column"}
-            item
-            justify={"center"}>
+            item>
                 <Grid
                     component={Typography}
                     align={"center"}
@@ -85,7 +93,7 @@ function Creators({log, mobile, strings}) {
                     align={"center"}
                     item
                     variant={"body1"}>
-                        {mobile ? creators.map((creator, index) => (
+                        {wrap ? creators.map((creator, index) => (
                             <Fragment key={creator.slug}>
                                 {index ? <br/> : ""}
                                 <Link

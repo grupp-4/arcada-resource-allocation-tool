@@ -82,7 +82,8 @@ const main = {
         createdBy: "Created by",
         creatorLinkTitle(name) {
             return `${name}'s GitHub page`
-        }
+        },
+        poweredBy: "Powered by"
     },
     get eventsFeedTabName() {
         return cap(this._global.events)

@@ -14,7 +14,9 @@ function styles(theme) {
         },
         arcadaLogoContainer: {
             color: "inherit",
+            display: "flex",
             paddingRight: theme.spacing(params.spacing),
+            transition: theme.transitions.create("color"),
             "&:visited": {
                 color: "inherit"
             },

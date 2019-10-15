@@ -2,6 +2,7 @@ import {withLogging} from "gillog"
 
 import Title from "components/about/title"
 import Creators from "components/about/creators"
+import Powerers from "components/about/powerers"
 
 function About({log, mobile, strings: {about: strings}}) {
 
@@ -9,7 +10,8 @@ function About({log, mobile, strings: {about: strings}}) {
     return (
         <>
             <Title strings={strings}/>
-            <Creators mobile={mobile} strings={strings}/>
+            <Creators strings={strings}/>
+            <Powerers strings={strings}/>
         </>
     )
 }

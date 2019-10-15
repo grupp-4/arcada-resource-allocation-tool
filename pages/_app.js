@@ -59,6 +59,7 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Dropping databases (just during development, when databases are changed a lot)
+
         drop()
             .then(() => {
                 log.debug("Successfully dropped all databases")
