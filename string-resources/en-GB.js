@@ -82,6 +82,7 @@ const main = {
         creatorLinkTitle(name) {
             return `${name}'s GitHub page`
         },
+        goToGitHub: "Checkout repository at GitHub",
         poweredBy: "Powered by",
         reportABug: "Report a bug",
         suggestAFeature: "Suggest a feature",

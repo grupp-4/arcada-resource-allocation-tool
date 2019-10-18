@@ -82,6 +82,7 @@ const main = {
         creatorLinkTitle(name) {
             return `${name}s GitHub sida`
         },
+        goToGitHub: "Kolla repositoriet på GitHub",
         poweredBy: "Bygger på",
         reportABug: "Rapportera en bugg",
         suggestAFeature: "Föreslå en funktion",

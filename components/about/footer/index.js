@@ -1,6 +1,5 @@
 import {withLogging} from "gillog"
 
-import useTheme from "@material-ui/core/styles/useTheme"
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery"
 
 import Grid from "@material-ui/core/Grid"
@@ -14,7 +13,6 @@ function Footer({log, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const theme = useTheme()
     const hover = useMediaQuery("@media (hover: hover)", {defaultMatches: false})
 
     // ====== MISC. LOGIC ======>
