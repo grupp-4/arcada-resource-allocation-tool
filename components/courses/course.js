@@ -17,8 +17,8 @@ import AddTeacher from "./add-teacher"
 
 import useCtStyles from "styles/courses-teachers"
 import useStyles from "./styles"
-import numbersOnly from 'numbers-only';
-import warning from "utility/warning.js";
+import numbersOnly from "numbers-only"
+import warning from "utility/warning"
 
 function Course({log, setHours, setTeacher, invalidate, course, teachers, data, mobile, strings}) {
 
@@ -47,7 +47,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
         <Card className={mobile ? ctStyles.cardMobile : ctStyles.cardDesktop}>
             <CardHeader
                 title={course.name}
-                subheader={course.courseCode} />
+                subheader={course.courseCode}/>
             <CardContent className={ctStyles.cardContent}>
                 <Table
                     className={`${styles.table} ${styles.nestedElements}`}
@@ -73,7 +73,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                             </TableCell>
                             <TableCell align={"right"} key={course.name + "-cell2"}>
                                 <InputBase
-                                    type="number"
+                                    type={"number"}
                                     key={course.name + "-input1"}
                                     className={warning("period", "p1", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                     onChange={event => modifyHours(event, course.name, "p1")}
@@ -84,7 +84,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                             </TableCell>
                             <TableCell align={"right"} key={course.name + "-cell3"}>
                                 <InputBase
-                                    type="number"
+                                    type={"number"}
                                     key={course.name + "-input2"}
                                     className={warning("period", "p2", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                     onChange={event => modifyHours(event, course.name, "p2")}
@@ -95,7 +95,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                             </TableCell>
                             <TableCell align={"right"} key={course.name + "-cell4"}>
                                 <InputBase
-                                    type="number"
+                                    type={"number"}
                                     key={course.name + "-input3"}
                                     className={warning("period", "p3", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                     onChange={event => modifyHours(event, course.name, "p3")}
@@ -106,7 +106,7 @@ function Course({log, setHours, setTeacher, invalidate, course, teachers, data, 
                             </TableCell>
                             <TableCell align={"right"} key={course.name + "-cell5"}>
                                 <InputBase
-                                    type="number"
+                                    type={"number"}
                                     key={course.name + "-input4"}
                                     className={warning("period", "p4", course) ? `${styles.warning}` : `${styles.inputBase}`}
                                     onChange={event => modifyHours(event, course.name, "p4")}

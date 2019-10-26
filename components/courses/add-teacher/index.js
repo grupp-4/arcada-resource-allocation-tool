@@ -13,7 +13,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
     // ====== HOOKS ======>
     const styles = useStyles()
     const [single, setSingle] = useState(teacher ? {value: teacher, label: teacher} : null)
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     // ====== FUNCTIONS ======>
     // Triggered on change, updates the state
@@ -21,7 +21,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
         setSingle(value)
         log.debug("addTeacherToCourse() value:", value.value)
         // Updates the targeted course with new teacher
-        setTeacher(value.value, courseName)
+        setTeacher(courseName, value.value)
             .then(() => log.debug("Successfully set teacher"))
             .catch(error => log.error(error.message))
         // Pass this component's state to parent component, forcing a re-render
@@ -38,7 +38,7 @@ function AddTeacher({log, setTeacher, addTeacher, teacher, course, dropdownList,
                 options={dropdownList}
                 value={single}
                 onChange={event => addTeacherToCourse(event, course)}/>
-                <Snack setOpen={setOpen} open={open} message="Teacher Added"/>
+            <Snack setOpen={setOpen} open={open} message={"Teacher Added"}/>
         </div>
     )
 }

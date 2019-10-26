@@ -148,7 +148,7 @@ function Footer({log, mobile, strings}) {
                     </Grid>
             </Grid>
             {state.snackbar}
-                <Snack setOpen={setOpen} open={open} message="Submitted Changes"/>
+            <Snack setOpen={setOpen} open={open} message={"Submitted Changes"}/>
         </Grid>
     )
 }

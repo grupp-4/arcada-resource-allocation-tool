@@ -38,7 +38,7 @@ function AddCourse({log, setTeacher, addCourse, teacher, dropdownList, strings})
                 options={dropdownList}
                 value={single}
                 onChange={event => addCourseToTeacher(event, teacher)}/>
-                <Snack setOpen={setOpen} open={open} message="Course Added"/>
+            <Snack setOpen={setOpen} open={open} message={"Course Added"}/>
         </div>
     )
 }

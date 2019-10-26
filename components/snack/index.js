@@ -1,5 +1,5 @@
 import {withLogging} from "gillog"
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from "@material-ui/core/Snackbar"
 
 function Snack({log, message, setOpen, open}) {
 
@@ -13,17 +13,17 @@ function Snack({log, message, setOpen, open}) {
     return (
         <Snackbar
             anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
             }}
             open={open}
             onExited={handleClose}
             autoHideDuration={1500}
             onClose={handleClose}
             ContentProps={{
-                'aria-describedby': 'message-id',
+                "aria-describedby": "message-id"
             }}
-            message={<span id="message-id">{message}</span>}
+            message={<span id={"message-id"}>{message}</span>}
         />
     )
 }

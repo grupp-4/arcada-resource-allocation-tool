@@ -25,7 +25,7 @@ export default function wcLib(wc) {
                 else log.debug('setHours failed!');
             })
         },
-        async setTeacher(teacherName, courseName) {
+        async setTeacher(courseName, teacherName) {
             wc.courses.update(courseName, {teacher: teacherName}).then(updated => {
                 if (updated) log.debug("Updated course teacher", teacherName, courseName)
                 else log.debug("setTeacher failed!")
