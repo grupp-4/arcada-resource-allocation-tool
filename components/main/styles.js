@@ -15,33 +15,29 @@ function styles(theme) {
     return {
         container: {
             flexGrow: 1,
+            width: "100%",
+            maxWidth: theme.breakpoints.values[params.maxWidth],
             marginTop: theme.mixins.toolbar.minHeight + theme.spacing(params.spacing),
+            marginLeft: "auto",
+            marginRight: "auto",
             paddingLeft: theme.spacing(params.spacing),
+            paddingBottom: theme.spacing(params.spacing),
             paddingRight: theme.spacing(params.spacing),
-            "@media (min-width:600px)": {
+            "@media (min-width: 600px)": {
                 marginTop: theme.mixins.toolbar["@media (min-width:600px)"].minHeight + theme.spacing(params.spacing)
             },
-            [`@media (min-width:${getMinWidth()}px)`]: {
+            [`@media (min-width: ${getMinWidth()}px)`]: {
                 marginTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight + theme.spacing(params.spacing)
-            }
-        },
-        containerMobile: {
-            marginBottom: theme.mixins.toolbar.minHeight,
-            "@media (min-width:600px)": {
-                marginBottom: theme.mixins.toolbar["@media (min-width:600px)"].minHeight
             },
-            [`@media (min-width:${getMinWidth()}px)`]: {
-                marginBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
-            }
-        },
-        main: {
-            height: "100%",
             [`@media (min-width: ${getMinWidth()}px) and (min-height: ${params.mainMaxHeight}px)`]: {
                 maxHeight: params.mainMaxHeight
             }
         },
-        gridContainer: {
-            height: "100%"
+        containerMobile: {
+            paddingBottom: theme.mixins.toolbar.minHeight,
+            [`@media (min-width: ${getMinWidth()}px)`]: {
+                paddingBottom: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight
+            }
         },
         gridItem: {
             display: "flex",

@@ -64,8 +64,9 @@ const main = {
         period2: "Period 2",
         period3: "Period 3",
         period4: "Period 4",
+        totalHours: "Totala timmar:",
         notAssigned: "Inte tilldelad",
-        assignTeacher: "Allokera en lärare i denna kurs"
+        assignTeacher: "Tilldela en lärare till denna kurs"
     },
     teacher: {
         course: "Kurs",
@@ -73,8 +74,23 @@ const main = {
         period2: "Period 2",
         period3: "Period 3",
         period4: "Period 4",
-        totalHours: "Totalt:",
+        totalHours: "Totala timmar:",
         assignCourse: "Tilldela en kurs till denna lärare"
+    },
+    about: {
+        createdBy: "Skapad av",
+        creatorLinkTitle(name) {
+            return `${name}s GitHub sida`
+        },
+        goToGitHub: "Kolla repositoriet på GitHub",
+        poweredBy: "Bygger på",
+        reportABug: "Rapportera en bugg",
+        suggestAFeature: "Föreslå en funktion",
+        getSupport: "Ställ en fråga",
+        giveFeedback: "Ge feedback",
+        license1: "Det här projektet är licensierat under ",
+        license2: "MIT licensen",
+        license3: "."
     },
     get eventsFeedTabName() {
         return cap(this._global.events)
@@ -85,14 +101,22 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "Det skulle finnas händelser att visa, men tyvärr har visning av händelser inte implementerats ännu.",
+    noEvents: "Det finns inga händelser att visa.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Senast uppdaterad:",
-    minutesAgo: "minuter sedan",
-    rightNow: "just nu"
+    date(time) {
+        return new Date(time).toLocaleTimeString("se-FI", {timeStyle: "short"})
+    },
+    calculating: "beräknar...",
+    undo: "ångra",
+    submitted: "Skickade ändringar",
+    discarded: "Raderade ändringar",
+    synced: "Synkning färdig"
 }
 
 export default {code, global, header, main, footer}

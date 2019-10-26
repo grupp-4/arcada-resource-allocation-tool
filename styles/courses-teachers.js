@@ -20,14 +20,12 @@ import params from "../theme/custom-parameters"
  */
 function styles(theme) {
     return {
-        root: {
+        circularProgress: {
+            marginTop: theme.spacing(params.spacing * 2),
             textAlign: "center"
         },
-        circularProgress: {
-            marginTop: theme.spacing(params.spacing * 2)
-        },
         cardDesktop: {
-            background: params.darkMode ? theme.palette.background.default : "initial",
+            backgroundColor: params.darkMode ? theme.palette.background.default : "initial",
             margin: theme.spacing(params.spacing)
         },
         cardMobile: {

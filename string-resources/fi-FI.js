@@ -58,6 +58,25 @@ const header = {
 
 // ====== MAIN ======>
 const main = {
+    course: {
+        heldBy: "Opettaja",
+        period1: "1. jakso",
+        period2: "2. jakso",
+        period3: "3. jakso",
+        period4: "4. jakso",
+        totalHours: "Tunnit yhteensä:",
+        notAssigned: "Ei määritetty",
+        assignTeacher: "Valitse opettaja tälle kursille"
+    },
+    teacher: {
+        course: "Kurssi",
+        period1: "1. jakso",
+        period2: "2. jakso",
+        period3: "3. jakso",
+        period4: "4. jakso",
+        totalHours: "Tunnit yhteensä:",
+        assignCourse: "Valitse kurssi tälle opettajalle"
+    },
     get eventsFeedTabName() {
         return cap(this._global.events)
     },
@@ -67,14 +86,22 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "Näytettäviä tapahtumia olisi, mutta valitettavasti tapahtumien näyttämistä ei ole vielä toteutettu.",
+    noEvents: "Ei ole näytettäviä tapahtumia.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Viimeksi päivitetty:",
-    minutesAgo: "minuuttia sitten",
-    rightNow: "juuri nyt"
+    date(time) {
+        return new Date(time).toLocaleTimeString("fi-FI", {timeStyle: "short"})
+    },
+    calculating: "laskee...",
+    undo: "peru",
+    submitted: "Muutokset lähetetty",
+    discarded: "Muutokset poistettu",
+    synced: "Synkronisointi valmis"
 }
 
 export default {code, global, header, main, footer}

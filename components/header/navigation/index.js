@@ -15,16 +15,18 @@ import useStyles from "./styles"
 
 function Navigation({log, open, onClose, landingPage, strings}) {
 
-    // ====== HOOKS ======>
-    const styles = useStyles()
-    const router = useRouter()
-
     // ====== INITIAL LOGIC ======>
     const definitions = [
         {key: "events-feed", icon: <EventNoteRoundedIcon/>, label: strings.eventsFeed},
         {key: "courses", icon: <MenuBookRoundedIcon/>, label: strings.courses},
         {key: "teachers", icon: <GroupRoundedIcon/>, label: strings.teachers}
     ]
+
+    // ====== HOOKS ======>
+    const styles = useStyles()
+    const router = useRouter()
+
+    // ====== MISC. LOGIC ======>
     let initialSelectedItem = router.query.page || landingPage || "events-feed"
 
     // ====== EVENT HANDLERS ======>

@@ -20,7 +20,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
 
     // ====== HOOKS ======>
     const styles = useStyles()
-    const [{theme, landingPage, landingPageMobile}, setState] = useState(preferences)
+    const [state, setState] = useState(preferences)
     const router = useRouter()
 
     // ====== EVENT HANDLERS ======>
@@ -69,15 +69,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
         log.info("Resetting landing page to courses")
         log.info("Resetting landing page on mobile to events-feed")
     }
-    function goToAboutPage() {
-        log.info("Navigating to: about")
-        router.push(
-            {pathname: "/about"},
-            {pathname: "/about"}
-        ).catch(error => {
-            log.error(error.stack)
-        })
-    }
 
     // ====== RENDER ======>
     return (
@@ -93,10 +84,10 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                             className={`${styles.menuLegend} ${mobile ? styles.menuLegendMobile : styles.menuLegendDesktop}`}
                             classes={{focused: styles.menuLegendFocused}}
                             component={"legend"}>
-                                <span className={!mobile ? styles.menuLegendSpan : null}>{strings.theme.label}</span>
-                                {theme !== "auto"
+                                <span className={!mobile ? `${styles.menuLegendSpan} ${styles.menuLegendChild}` : styles.menuLegendChild}>{strings.theme.label}</span>
+                                {state.theme !== "auto"
                                     ? (
-                                        <Link component={"button"} onClick={resetTheme} variant={"caption"}>
+                                        <Link className={styles.menuLegendChild} component={"button"} onClick={resetTheme} variant={"caption"}>
                                             {strings.reset}
                                         </Link>
                                     ) : null}
@@ -104,7 +95,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeTheme}
                             row={!mobile}
-                            value={theme}
+                            value={state.theme}
                             aria-label={"theme"}>
                                 <FormControlLabel
                                     value={"auto"}
@@ -128,7 +119,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                             classes={{focused: styles.menuLegendFocused}}
                             component={"legend"}>
                                 <span className={!mobile ? styles.menuLegendSpan : null}>{strings.landingPage.label}</span>
-                                {landingPage || landingPageMobile
+                                {state.landingPage || state.landingPageMobile
                                     ? (
                                         <Link component={"button"} onClick={resetLandingPages} variant={"caption"}>
                                             {strings.reset}
@@ -141,7 +132,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeLandingPage}
                             row={!mobile}
-                            value={landingPage ? landingPage : "courses"}
+                            value={state.landingPage ? state.landingPage : "courses"}
                             aria-label={"landing-page-desktop"}>
                                 <FormControlLabel
                                     value={"courses"}
@@ -158,7 +149,7 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         <RadioGroup
                             onChange={changeLandingPageMobile}
                             row={!mobile}
-                            value={landingPageMobile ? landingPageMobile : "events-feed"}
+                            value={state.landingPageMobile ? state.landingPageMobile : "events-feed"}
                             aria-label={"landing-page-mobile"}>
                                 <FormControlLabel
                                     value={"events-feed"}
@@ -175,7 +166,6 @@ function Preferences({log, anchorEl, onClose, preferences, setTheme, mobile, str
                         </RadioGroup>
                     </FormControl>
                 </MenuItem>
-                <MenuItem onClick={goToAboutPage}>{strings.about}</MenuItem>
         </Menu>
     )
 }

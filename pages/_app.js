@@ -10,8 +10,9 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider"
 import CssBaseline from "@material-ui/core/CssBaseline"
 
 import PersistentLayoutController from "components/persistent-layout-controller"
-import Header from "../components/header"
-import Main from "../components/main"
+import Header from "components/header"
+import Main from "components/main"
+import Footer from "components/footer"
 
 import initIDB from "utility/idb"
 import drop from "utility/idb/drop"
@@ -41,7 +42,15 @@ class _app extends __app {
         // Preparing initial state
         const theme = createTheme(log)
         const strings = createStrings(log)
-        this.state = {db: null, theme: theme, mobile: true, strings: strings}
+        this.state = {
+            cs: null,
+            rc: null,
+            wc: null,
+            modifications: null,
+            theme: theme,
+            mobile: true,
+            strings: strings
+        }
     }
 
     // ====== COMPONENT DID MOUNT ======>
@@ -50,6 +59,7 @@ class _app extends __app {
         const jssStyles = document.querySelector('#jss-server-side')
         if (jssStyles) jssStyles.parentNode.removeChild(jssStyles)
         // Dropping databases (just during development, when databases are changed a lot)
+
         drop()
             .then(() => {
                 log.debug("Successfully dropped all databases")
@@ -63,14 +73,18 @@ class _app extends __app {
             .then(data => {
                 log.debug("Loaded data (raw):", data)
                 // Processing data
-                const processedData = processData(data)
+                return processData(data)
+            })
+            .then(processedData => {
+                // If processing data failed (`processedData` is undefined), throw error
+                if(!processedData) throw new Error("processData failed. See above error for more details.")
                 log.debug("Loaded data (processed):", processedData)
                 // Initializing IDB
                 return initIDB(processedData)
             })
             .then(([cs, rc, wc]) => {
                 // Getting all data from working copy
-                this.setState({db: wc})
+                this.setState({cs, rc, wc, modifications: []})
             })
             .catch(error => log.error(error.stack))
     }
@@ -118,7 +132,15 @@ class _app extends __app {
     render() {
 
         // ====== Preparatory logic ======>
-        const {db, theme, mobile, strings} = this.state
+        const {
+            cs,
+            rc,
+            wc,
+            modifications,
+            theme,
+            mobile,
+            strings
+        } = this.state
         const preferences = {
             theme: this.state.theme.preference,
             landingPage: this.landingPage,
@@ -145,16 +167,22 @@ class _app extends __app {
                                 setTheme={this.setTheme.bind(this)}
                                 strings={strings.header}/>
                             <Main
+                                cs={cs}
                                 mobile={mobile}
-                                strings={strings.main}
-                                footerStrings={strings.footer}>
+                                strings={strings.main}>
                                     <Component
                                         landingPage={preferences.landingPage}
                                         landingPageMobile={preferences.landingPageMobile}
-                                        db={db}
+                                        cs={cs}
+                                        wc={wc}
                                         mobile={mobile}
                                         strings={strings.main}
                                         {...pageProps}/>
+                                    <Footer
+                                        getLatestTimestamp={cs ? cs.getLatestTimestamp : null}
+                                        modifications={modifications}
+                                        mobile={mobile}
+                                        strings={strings.footer}/>
                             </Main>
                     </PersistentLayoutController>
                 </ThemeProvider>

@@ -4,7 +4,8 @@ import {teachersCoursesPopulate} from "./static"
 
 const log = clientSide.getLogger("WorkingCopyDB")
 
-export default function wcLib(wc) {
+export default function wcLib(wc, options) {
+    if (options && options.loglevel) log.setLevel(options.loglevel)
     return {
         async getEverything() {
             return {

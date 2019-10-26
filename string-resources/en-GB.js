@@ -64,8 +64,9 @@ const main = {
         period2: "Period 2",
         period3: "Period 3",
         period4: "Period 4",
+        totalHours: "Total hours:",
         notAssigned: "Not assigned",
-        assignTeacher: "Assign teacher to this course"
+        assignTeacher: "Assign a teacher to this course"
     },
     teacher: {
         course: "Course",
@@ -74,7 +75,22 @@ const main = {
         period3: "Period 3",
         period4: "Period 4",
         totalHours: "Total hours:",
-        assignCourse: "Assign to course to this teacher"
+        assignCourse: "Assign a course to this teacher"
+    },
+    about: {
+        createdBy: "Created by",
+        creatorLinkTitle(name) {
+            return `${name}'s GitHub page`
+        },
+        goToGitHub: "Checkout repository at GitHub",
+        poweredBy: "Powered by",
+        reportABug: "Report a bug",
+        suggestAFeature: "Suggest a feature",
+        getSupport: "Get support",
+        giveFeedback: "Give feedback",
+        license1: "This project is licensed under the terms of the ",
+        license2: "MIT License",
+        license3: "."
     },
     get eventsFeedTabName() {
         return cap(this._global.events)
@@ -85,14 +101,22 @@ const main = {
     get teachersTabName() {
         return cap(this._global.teachers)
     },
+    eventsFeedDisclaimer: "There would be events to display, but unfortunately displaying events isn't implemented yet.",
+    noEvents: "There are no events to display.",
     _global: global
 }
 
 // ====== FOOTER ======>
 const footer = {
     lastUpdated: "Last updated:",
-    minutesAgo: "minutes ago",
-    rightNow: "right now"
+    date(time) {
+        return new Date(time).toLocaleTimeString("en-GB", {timeStyle: "short"})
+    },
+    calculating: "calculating...",
+    undo: "undo",
+    submitted: "Submitted changes",
+    discarded: "Discarded changes",
+    synced: "Sync complete"
 }
 
 export default {code, global, header, main, footer}

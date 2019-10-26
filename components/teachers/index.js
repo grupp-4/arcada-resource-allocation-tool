@@ -2,6 +2,7 @@ import {withLogging} from "gillog"
 
 import {useState, useEffect} from "react"
 
+import Grid from "@material-ui/core/Grid"
 import CircularProgress from "@material-ui/core/CircularProgress"
 
 import Teacher from "./teacher"
@@ -9,7 +10,7 @@ import Teacher from "./teacher"
 import useCtStyles from "styles/courses-teachers"
 
 // TODO: implement search, sort and filter functions
-function Teachers({log, db, mobile, strings}) {
+function Teachers({log, wc, mobile, strings}) {
 
     // ====== HOOKS ======>
     const ctStyles = useCtStyles()
@@ -17,10 +18,10 @@ function Teachers({log, db, mobile, strings}) {
         data: null
     })
     useEffect(() => {
-        if (db) {
-            db.getEverything().then(data => setState({...state, data}))
+        if (wc) {
+            wc.getEverything().then(data => setState(prevState => ({...prevState, data})))
         }
-    }, [db])
+    }, [wc])
 
     // ====== FUNCTIONS ======>
     function listTeachers(data) {
@@ -29,28 +30,24 @@ function Teachers({log, db, mobile, strings}) {
         return data.teachers.map((teacher, index) => (
             <Teacher
                 key={index}
-                setHours={db.setHours}
-                setTeacher={db.setTeacher}
-                invalidate={invalidate}
+                setHours={wc.setHours}
+                setTeacher={wc.setTeacher}
                 teacher={teacher}
                 courses={courseNames}
-                data={data}
                 mobile={mobile}
-                strings={strings.teacher}/>
+                strings={strings.teacher}
+                loglevel={log.getLevel()}/>
         ))
-    }
-    function invalidate() {
-        db.getEverything().then(data => setState({...state, data}))
     }
 
     // ====== RENDER ======>
     return (
-        <div className={ctStyles.root}>
+        <>
             {state.data
                 ? listTeachers(state.data)
-                : <div className={ctStyles.circularProgress}><CircularProgress/></div>
+                : <Grid className={ctStyles.circularProgress} item xs={12}><CircularProgress/></Grid>
             }
-        </div>
+        </>
     )
 }
 

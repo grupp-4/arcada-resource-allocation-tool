@@ -14,31 +14,33 @@ import wcLib from "./lib/wc"
 
 const log = clientSide.getLogger("initIDB")
 
-export default async function initIDB(fetchedData) {
+export default async function initIDB(fetchedData, options) {
 
-    const csDB = new Dexie(structure.cs.name)
-    const rcDB = new Dexie(structure.rc.name)
-    const wcDB = new Dexie(structure.wc.name)
+    if (options && options.loglevel) log.setLevel(options.loglevel)
 
-    const cs = csLib(csDB)
-    const rc = rcLib(rcDB)
-    const wc = wcLib(wcDB)
+    const changeSetsDB = new Dexie(structure.cs.name)
+    const remoteCopyDB = new Dexie(structure.rc.name)
+    const workingCopyDB = new Dexie(structure.wc.name)
 
-    createStores(csDB, structure.cs, log)
-    createStores(rcDB, structure.rc, log)
-    createStores(wcDB, structure.wc, log)
+    const changeSets = csLib(changeSetsDB, {loglevel: log.getLevel()})
+    const remoteCopy = rcLib(remoteCopyDB, {loglevel: log.getLevel()})
+    const workingCopy = wcLib(workingCopyDB, {loglevel: log.getLevel()})
 
-    onPopulate(csDB, () => cs.populate(fetchedData), log)
-    onPopulate(rcDB, () => rc.populate(fetchedData), log)
-    onPopulate(wcDB, () => wc.populate(fetchedData), log)
+    createStores(changeSetsDB, structure.cs, log)
+    createStores(remoteCopyDB, structure.rc, log)
+    createStores(workingCopyDB, structure.wc, log)
 
-    await csDB.open()
-    await rcDB.open()
-    await wcDB.open()
+    onPopulate(changeSetsDB, () => changeSets.populate(fetchedData), log)
+    onPopulate(remoteCopyDB, () => remoteCopy.populate(fetchedData), log)
+    onPopulate(workingCopyDB, () => workingCopy.populate(fetchedData), log)
+
+    await changeSetsDB.open()
+    await remoteCopyDB.open()
+    await workingCopyDB.open()
 
     log.debug("Initialized databases")
 
-    await rc.sync(fetchedData, SHA1(fetchedData).toString(), await cs.getLatestChecksum())
+    await remoteCopy.sync(fetchedData, SHA1(fetchedData).toString(), await changeSets.getLatestChecksum())
 
-    return [cs, rc, wc]
+    return [changeSets, remoteCopy, workingCopy]
 }

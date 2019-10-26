@@ -1,6 +1,6 @@
 import {withLogging} from "gillog"
 
-import PropTypes from "prop-types"
+// import PropTypes from "prop-types"
 
 import useTheme from "@material-ui/core/styles/useTheme"
 

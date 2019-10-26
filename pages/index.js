@@ -6,7 +6,7 @@ import Courses from "components/courses"
 import Teachers from "components/teachers"
 import EventsFeed from "components/events-feed"
 
-function Index({log, landingPage, landingPageMobile, db, mobile, strings}) {
+function Index({log, landingPage, landingPageMobile, cs, wc, mobile, strings}) {
 
     // ====== HOOKS ======>
     const router = useRouter()
@@ -17,14 +17,14 @@ function Index({log, landingPage, landingPageMobile, db, mobile, strings}) {
         switch (page) {
             case "courses":
                 log.info("Loading page", page)
-                return <Courses db={db} mobile={mobile} strings={strings}/>
+                return <Courses wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
             case "teachers":
                 log.info("Loading page", page)
-                return <Teachers db={db} mobile={mobile} strings={strings}/>
+                return <Teachers wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
             case "events-feed":
                 if (mobile) {
                     log.info("Loading page", page)
-                    return <EventsFeed db={db} mobile={mobile} strings={strings}/>
+                    return <EventsFeed cs={cs} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
                 }
                 break
             default:
@@ -34,21 +34,21 @@ function Index({log, landingPage, landingPageMobile, db, mobile, strings}) {
         switch (landingPageMobile) {
             case "courses":
                 log.info("Landing on page \"courses\" based on preference for landing page on mobile")
-                return <Courses db={db} mobile={mobile} strings={strings}/>
+                return <Courses wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
             case "teachers":
                 log.info("Landing on page \"teachers\" based on preference for landing page on mobile")
-                return <Teachers db={db} mobile={mobile} strings={strings}/>
+                return <Teachers wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
             default:
                 log.info("Landing on default landing page on mobile: events-feed")
-                return <EventsFeed db={db} mobile={mobile} strings={strings}/>
+                return <EventsFeed cs={cs} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
         }
     } else {
         if (landingPage === "teachers") {
             log.info("Landing on page \"teachers\" based on preference for landing page")
-            return <Teachers db={db} mobile={mobile} strings={strings}/>
+            return <Teachers wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
         } else {
             log.info("Landing on default landing page: courses")
-            return <Courses db={db} mobile={mobile} strings={strings}/>
+            return <Courses wc={wc} mobile={mobile} strings={strings} loglevel={log.getLevel()}/>
         }
     }
 }

@@ -21,11 +21,13 @@ function styles(theme) {
         },
         menuLegendMobile: {
             alignItems: "flex-start",
-            display: "flex",
-            flexDirection: "column",
+            flexDirection: "column"
         },
         menuLegendFocused: {
             color: `${theme.palette.text.primary} !important`
+        },
+        menuLegendChild: {
+            display: "flex"
         },
         menuLegendSpan: {
             paddingBottom: theme.spacing(1 / 2)

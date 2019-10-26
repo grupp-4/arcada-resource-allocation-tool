@@ -7,11 +7,9 @@ import {useRouter} from "next/router"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 
-import Footer from "components/footer"
-
 import useStyles from "./styles"
 
-function CoursesTeachersTabView({log, strings, footerStrings, children}) {
+function CoursesTeachersTabView({log, strings, children}) {
 
     // ====== INITIAL LOGIC ======>
     // definitions: Array of information about tabs to render.
@@ -23,7 +21,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     ]
     // Gets the index of the "definition" that has the key that matches
     // the client's landing page preference.
-    let currentTab = definitions.findIndex(definition => definition.key === children.props.landingPage)
+    let currentTab = definitions.findIndex(definition => definition.key === children[0].props.landingPage)
     // If no match is found, currentTab defaults to the first index (0).
     if (currentTab === -1) currentTab = 0
 
@@ -38,7 +36,7 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
     }, [])
     useEffect(() => {
         const page = router.query.page
-        if (page) {
+        if (page && page !== "events-feed") {
             // Gets the index of the "definition" that has a key that matches page query.
             currentTab = definitions.findIndex(definition => definition.key === page)
             log.info(`Loading tab view with pre-selected tab: ${definitions[currentTab].key}`)
@@ -83,9 +81,9 @@ function CoursesTeachersTabView({log, strings, footerStrings, children}) {
                 role="tabpanel"
                 id={`tabpanel-${state.currentTab}`}
                 aria-labelledby={`tab-${state.currentTab}`}>
-                    {children}
+                    {children[0] /* Tab panel: courses/teachers */}
             </div>
-            <Footer strings={footerStrings}/>
+            {children[1] /* Footer */}
         </>
     )
 }
