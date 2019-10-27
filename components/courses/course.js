@@ -1,21 +1,24 @@
 import {withLogging} from "gillog"
 
+import {useState} from "react"
 import Grid from "@material-ui/core/Grid"
 import Card from "@material-ui/core/Card"
 import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
-import CardActions from "@material-ui/core/CardActions"
 import InputBase from "@material-ui/core/InputBase"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
+import {CardActions} from "@material-ui/core"
 
 import AddTeacher from "./add-teacher"
 
 import useCtStyles from "styles/courses-teachers"
 import useStyles from "./styles"
+import numbersOnly from "numbers-only"
+import warning from "utility/warning"
 
 function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) {
 
@@ -25,10 +28,12 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
     // ====== HOOKS ======>
     const ctStyles = useCtStyles()
     const styles = useStyles()
+    const [inputValue, setInputValue] = useState(null)
 
     // ====== FUNCTIONS ======>
     function modifyHours(event, courseName, period) {
         const hours = parseInt(event.target.value)
+        setInputValue(hours)
         // Updates the targeted course with new hour
         setHours(courseName, period, hours)
             .then(() => log.debug("Successfully set hours"))
@@ -76,8 +81,9 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                             <TableCell align={"right"}>
                                                 <InputBase
                                                     type="number"
-                                                    className={styles.inputBase}
+                                                    className={warning("period", 0, teacher) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     onChange={event => modifyHours(event, course.name, 0)}
+                                                    onKeyDown={numbersOnly}
                                                     defaultValue={teacher.hours[0]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
@@ -85,8 +91,9 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                             <TableCell align={"right"}>
                                                 <InputBase
                                                     type="number"
-                                                    className={styles.inputBase}
+                                                    className={warning("period", 1, teacher) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     onChange={event => modifyHours(event, course.name, 1)}
+                                                    onKeyDown={numbersOnly}
                                                     defaultValue={teacher.hours[1]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
@@ -94,8 +101,9 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                             <TableCell align={"right"}>
                                                 <InputBase
                                                     type="number"
-                                                    className={styles.inputBase}
+                                                    className={warning("period", 2, teacher) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     onChange={event => modifyHours(event, course.name, 2)}
+                                                    onKeyDown={numbersOnly}
                                                     defaultValue={teacher.hours[2]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
@@ -103,8 +111,9 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                             <TableCell align={"right"}>
                                                 <InputBase
                                                     type="number"
-                                                    className={styles.inputBase}
+                                                    className={warning("period", 3, teacher) ? `${styles.warning}` : `${styles.inputBase}`}
                                                     onChange={event => modifyHours(event, course.name, 3)}
+                                                    onKeyDown={numbersOnly}
                                                     defaultValue={teacher.hours[3]}
                                                     margin={"dense"}
                                                     inputProps={{"aria-label": "naked"}}/>
@@ -114,25 +123,32 @@ function Course({log, setHours, setTeacher, course, teachers, mobile, strings}) 
                                 })}
                                 <TableRow className={styles.tableRow}>
                                     <TableCell
-                                        className={`${styles.tableCell} ${styles.thCustomWidth}`}
+                                        className={warning("courseTotalHours", null, totalHoursPerPeriod.reduce((total, hours) => total + hours)) ? `${styles.thCustomWidth} ${styles.warning}` : (`${styles.tableCell} ${styles.thCustomWidth}`)}
                                         component={"th"}
                                         scope={"row"}>
                                         <b>{`${strings.totalHours} ${totalHoursPerPeriod.reduce((total, hours) => total + hours)}`}</b>
                                     </TableCell>
-                                    {totalHoursPerPeriod.map((hours, index) => <TableCell key={index + 1}>{hours.toString()}</TableCell>)}
+                                    {totalHoursPerPeriod.map((hours, index) => 
+                                    <TableCell 
+                                    className={warning("coursePeriodTotal", null, hours) ? `${styles.warning}` : null}
+                                    key={index + 1}>
+                                    {hours.toString()}
+                                    </TableCell>)}
                                 </TableRow>
                             </TableBody>
                     </Table>
                 </CardContent>
-                <CardActions className={ctStyles.cardActions}>
-                    <AddTeacher
-                        setTeacher={setTeacher}
-                        teacher={course.teacher}
-                        course={course.name}
-                        dropdownList={teachers}
-                        strings={strings}
-                        loglevel={log.getLevel()}/>
-                </CardActions>
+                <span className={warning("teacherCourses", null, course.teachers) ? `${styles.warning}` : null}>
+                    <CardActions className={ctStyles.cardActions}>
+                        <AddTeacher
+                            setTeacher={setTeacher}
+                            teacher={course.teacher}
+                            course={course.name}
+                            dropdownList={teachers}
+                            strings={strings}
+                            loglevel={log.getLevel()}/>
+                     </CardActions>
+                </span>
         </Grid>
     )
 }
