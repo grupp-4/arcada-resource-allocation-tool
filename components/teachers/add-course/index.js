@@ -22,8 +22,6 @@ function AddCourse({log, setTeacher, teacher, dropdownList, strings}) {
         setTeacher(teacherName, value.value)
             .then(() => log.debug("Successfully set teacher"))
             .catch(error => log.error(error.message))
-        // Pass this component's state to parent component, forcing a re-render
-        addCourse(value.value)
         // This state tells the snackbar to be rendered
         setOpen(true)
     }

@@ -22,14 +22,14 @@ export default function wcLib(wc, options) {
         async setHours(courseName, period, hours) {
             const path = `hours.${period}`;
             wc.courses.update(courseName, {[path]: hours}).then(updated => {
-                if (updated) log.debug('Updated course hours');
-                else log.debug('setHours failed!');
+                if (updated) log.debug('Updated course hours')
+                else {log.debug("setHours() failed!"); return false}
             })
         },
         async setTeacher(courseName, teacherName) {
             wc.courses.update(courseName, {teacher: teacherName}).then(updated => {
                 if (updated) log.debug("Updated course teacher", teacherName, courseName)
-                else log.debug("setTeacher failed!")
+                else {log.debug("setTeacher() failed!"); return false}
             })
         },
         async populate(fetchedData) {

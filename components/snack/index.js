@@ -3,11 +3,6 @@ import Snackbar from "@material-ui/core/Snackbar"
 
 function Snack({log, message, setOpen, open}) {
 
-    // ====== HOOKS ======>
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     // ====== RENDER ======>
     return (
@@ -17,9 +12,9 @@ function Snack({log, message, setOpen, open}) {
                 horizontal: "left",
             }}
             open={open}
-            onExited={handleClose}
+            onExited={() => setOpen(false)}
             autoHideDuration={1500}
-            onClose={handleClose}
+            onClose={() => setOpen(false)}
             ContentProps={{
                 "aria-describedby": "message-id"
             }}

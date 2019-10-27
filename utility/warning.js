@@ -5,24 +5,39 @@
 
 export default function warning(type, position, value) {
 
-    if (type == "period") {
-        let hour = parseInt(value.hours[position], 10);
-        if (hour >= 200 || hour <= 50) return true
-        else return false
-    }
-    else if (type == "totalHours") {
-        if (value >= 1600 || value <= 800) return true
-        else return false
-    }
-    else if (type == "periodTotal") {
-        if (value[position] >= 500 || value[position] <= 200) return true
-        else return false
-    }
-    else if (type == "teacherCourses") {
-        if (value.length <= 0) return true
-        else return false
-    }
-    else {
-        return false
+    let hour
+
+    switch (type) {
+        case "period":
+            hour = parseInt(value.hours[position], 10)
+            if (hour > 200 || hour < 50) return true
+            break
+
+        case "totalHours":
+            hour = parseInt(value, 10)
+            if (hour > 1600 || hour < 800) return true
+            break
+
+        case "periodTotal":
+            hour = parseInt(value, 10)
+            if (hour > 500 || hour < 200) return true
+            break
+
+        case "coursePeriodTotal":
+            hour = parseInt(value, 10)
+            if (hour > 400 || hour < 100) return true
+            break
+
+        case "courseTotalHours":
+            hour = parseInt(value, 10)
+            if (hour > 800 || hour < 100) return true
+            break
+
+        case "teacherCourses":
+            if (value.length <= 0) return true
+            break
+
+        default:
+            return false
     }
 }
