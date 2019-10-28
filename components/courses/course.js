@@ -143,7 +143,7 @@ function Course({log, setHoursForCourse, setTeacherForCourse, course, teachers, 
                         <AddTeacher
                             setTeacherForCourse={setTeacherForCourse}
                             teacher={course.teacher}
-                            course={course.name}
+                            course={course}
                             dropdownList={teachers}
                             strings={strings}
                             loglevel={log.getLevel()}/>

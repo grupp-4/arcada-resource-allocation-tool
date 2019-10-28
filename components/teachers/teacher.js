@@ -140,11 +140,11 @@ function Teacher({log, setHoursForTeacher, setCourseForTeacher, teacher, courses
                             </TableBody>
                     </Table>
                 </CardContent>
-                <span className={warning("teacherCourses", null, teacher.courses) ? styles.warning : null}>
+                <span className={warning("teacherCourses", teacher.courses) ? styles.warning : null}>
                     <CardActions className={ctStyles.cardActions}>
                         <AddCourse
                             setCourseForTeacher={setCourseForTeacher}
-                            teacher={teacher.name}
+                            teacher={teacher}
                             dropdownList={courses}
                             strings={strings}
                             loglevel={log.getLevel()}/>

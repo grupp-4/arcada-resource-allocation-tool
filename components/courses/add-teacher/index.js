@@ -16,9 +16,9 @@ function AddTeacher({log, setTeacherForCourse, teacher, course, dropdownList, st
 
     // ====== FUNCTIONS ======>
     // Triggered on change, updates the state
-    function addTeacherToCourse(value, courseName) {
+    function addTeacherToCourse(value, course) {
         // Updates the targeted course with new teacher
-        setTeacherForCourse(courseName, value.value, course.teachers.length).catch(error => log.error(error.message))
+        setTeacherForCourse(course.name, value.value, course.teachers.length).catch(error => log.error(error.message))
         // This state tells the snackbar to be rendered
         setSingle(value)
         setOpen(true)
