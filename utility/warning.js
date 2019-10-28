@@ -1,42 +1,23 @@
-// type is for the function to know "what" it's handling, 
-// position is for something like position in an array or object property
-// value is an object/array/integer
-
-
-export default function warning(type, position, value) {
-
+export default function warning(type, value) {
     let hour
-
     switch (type) {
         case "period":
-            hour = parseInt(value.hours[position], 10)
-            if (hour > 200 || hour < 50) return true
-            break
-
+            hour = parseInt(value)
+            return hour > 200 || hour < 50
         case "totalHours":
-            hour = parseInt(value, 10)
-            if (hour > 1600 || hour < 800) return true
-            break
-
+            hour = parseInt(value)
+            return hour > 1600 || hour < 800
         case "periodTotal":
-            hour = parseInt(value, 10)
-            if (hour > 500 || hour < 200) return true
-            break
-
+            hour = parseInt(value)
+            return hour > 500 || hour < 200
         case "coursePeriodTotal":
-            hour = parseInt(value, 10)
-            if (hour > 400 || hour < 100) return true
-            break
-
+            hour = parseInt(value)
+            return hour > 400 || hour < 100
         case "courseTotalHours":
-            hour = parseInt(value, 10)
-            if (hour > 800 || hour < 100) return true
-            break
-
+            hour = parseInt(value)
+            return hour > 800 || hour < 100
         case "teacherCourses":
-            if (value.length <= 0) return true
-            break
-
+            return value.length <= 0
         default:
             return false
     }

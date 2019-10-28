@@ -30,8 +30,8 @@ function Courses({log, wc, mobile, strings}) {
         return data.courses.map((course, index) => (
             <Course
                 key={index}
-                setHours={wc.setHours}
-                setTeacher={wc.setTeacher}
+                setHoursForCourse={wc.setHoursForCourse}
+                setTeacherForCourse={wc.setTeacherForCourse}
                 course={course}
                 teachers={teacherNames}
                 mobile={mobile}

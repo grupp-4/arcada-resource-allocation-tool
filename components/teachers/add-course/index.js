@@ -7,7 +7,7 @@ import Snack from "components/snack"
 
 import useStyles from "styles/add-course-teacher"
 
-function AddCourse({log, setTeacher, teacher, dropdownList, strings}) {
+function AddCourse({log, setCourseForTeacher, teacher, dropdownList, strings}) {
 
     // ====== HOOKS ======>
     const styles = useStyles()
@@ -17,12 +17,10 @@ function AddCourse({log, setTeacher, teacher, dropdownList, strings}) {
     // ====== FUNCTIONS ======>
     // Triggered on change, updates the state
     function addCourseToTeacher(value, teacherName) {
-        setSingle(value)
         // Updates the targeted course with new teacher
-        setTeacher(teacherName, value.value)
-            .then(() => log.debug("Successfully set teacher"))
-            .catch(error => log.error(error.message))
+        setCourseForTeacher(teacherName, value.value, teacher.courses.length).catch(error => log.error(error.message))
         // This state tells the snackbar to be rendered
+        setSingle(value)
         setOpen(true)
     }
 
