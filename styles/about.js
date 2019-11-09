@@ -22,6 +22,9 @@ function styles(theme) {
             [`@media (min-width: ${getMinWidth()}px)`]: {
                 paddingTop: theme.mixins.toolbar["@media (min-width:0px) and (orientation: landscape)"].minHeight + theme.spacing(params.spacing)
             }
+        },
+        marginBottom: {
+            marginBottom: theme.spacing(params.spacing * 4)
         }
     }
 }

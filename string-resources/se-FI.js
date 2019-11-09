@@ -78,6 +78,57 @@ const main = {
         assignCourse: "Tilldela en kurs till denna lärare"
     },
     about: {
+        featuresHeading: "Egenskaper",
+        expand: "Visa",
+        collapse: "Göm",
+        features: [
+            [
+                {
+                    heading: "Händelser",
+                    description: "Meddelar dig då det sker ändringar i resursallokeringar."
+                },
+                {
+                    heading: "Två perspektiv",
+                    description: "Två skräddarsydda vyer, så att du kan använda verktyget från det perspektiv som du upplever som mest praktiskt i stunden."
+                },
+                {
+                    heading: "Editering",
+                    description: "Njut av en intuitiv editeringsupplevelse, med förslag, autokomplettering och hjälpsam färgkodning."
+                }
+            ],
+            [
+                {
+                    heading: "Responsiv",
+                    description: "Skräddarsydd för mobil- samt skrivbordsplattformer med tillägnad hänsyn till både pekskärmar och tangentbord + mus."
+                },
+                {
+                    heading: "Ljust/mörkt tema",
+                    description: "Stöd för ljust och mörkt tema, en mycket efterfrågad funktion, nyligen tillagd i Windows, macOS, iOS och Android."
+                },
+                {
+                    heading: "Språk",
+                    description: "Finns i flera språk: engelska, svenska, finska och kinesiska."
+                },
+                {
+                    heading: "Tillgänglighet",
+                    description: "Mycket tillgänglig tack vare semantisk HTML, ARIA och stöd för navigering med tangentbordet."
+                }
+            ],
+            [
+                {
+                    heading: "Fungerar offline",
+                    description: "Appen tar elegant hand om avbrott i kommunikationen med nätverket."
+                },
+                {
+                    heading: "Statisk webbsida",
+                    description: "Kan laddas upp som en statisk webbsida. Inget behov av en anpassad backend-konfiguration."
+                },
+                {
+                    heading: "Blixtsnabb",
+                    description: "Optimerad paketering samt förladdning och \"lat laddning\" av länkar resulterar i att sidorna laddar snabbt och användaren får omedelbar feedback på interaktion."
+                }
+            ]
+        ],
         createdBy: "Skapad av",
         creatorLinkTitle(name) {
             return `${name}s GitHub sida`

@@ -78,6 +78,57 @@ const main = {
         assignCourse: "Assign a course to this teacher"
     },
     about: {
+        featuresHeading: "Features",
+        expand: "Expand",
+        collapse: "Collapse",
+        features: [
+            [
+                {
+                    heading: "Events",
+                    description: "Notifies you about changes in resource allocations"
+                },
+                {
+                    heading: "Two perspectives",
+                    description: "Two tailored views, so that you can use the tool from your preferred perspective."
+                },
+                {
+                    heading: "Editing",
+                    description: "Enjoy an intuitive editing experience thanks to suggestions, autocomplete and helpful color coding."
+                }
+            ],
+            [
+                {
+                    heading: "Responsive",
+                    description: "Tailored for mobile and desktop platforms with dedicated consideration for both touch screen and keyboard + mouse."
+                },
+                {
+                    heading: "Light/dark mode",
+                    description: "Supports light and dark UI theme, a much requested feature recently added in Windows, macOS, iOS and Android."
+                },
+                {
+                    heading: "Languages",
+                    description: "Comes in multiple languages: English, Swedish, Finnish, Chinese."
+                },
+                {
+                    heading: "Accessibility",
+                    description: "Highly accessible thanks to semantic HTML, ARIA and support for keyboard navigation."
+                }
+            ],
+            [
+                {
+                    heading: "Works offline",
+                    description: "The app elegantly handles interrupted network connectivity."
+                },
+                {
+                    heading: "Statically deployable",
+                    description: "Deployable as a static website. No need for a custom backend configuration."
+                },
+                {
+                    heading: "Blazing fast",
+                    description: "Optimized bundles, link preloading and \"lazy loading\" result in quick page load times and instantaneous feedback on user interaction."
+                }
+            ]
+        ],
         createdBy: "Created by",
         creatorLinkTitle(name) {
             return `${name}'s GitHub page`

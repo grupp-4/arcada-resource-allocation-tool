@@ -11,6 +11,10 @@ export default {
     footerMobileOpacity: 0.54, // Opacity of the Footer component on mobile devices (currently set to 0.54, which is the default for secondary items, e.g. secondary text)
     footerMobileBlurIntensity: 8, // Intensity of the backdrop blur effect of the Footer component on mobile devices
     footerMobileElevation: 4, // The elevation (material design terminology for how much drop shadow) of the Footer component on mobile devices (currently set to 4, which is the default for Navbars)
+    featureMobileWidth1: 160, // The width of a feature "card" in the About -page on mobile devices
+    featureMobileWidth2: 180, // The width of a feature "card" in the About -page on mobile devices
+    featureDesktopWidth: 240, // The width of a feature "card" in the About -page on desktop devices
+    featureIconFontSize: "2.5rem", // The font size of an icon in a feature "card" in the About -page (currently set to 2.5 rem, which is 3x the default font size for "h4" -tags)
     powererOpacity: 0.54, // Opacity of a "powered by" link icon in the About -page (currently set to 0.54, which is the default for secondary items, e.g. secondary text)
     powererExtraOpacity: 0.78, // Extra opacity applied on some "powered by" link icons in the About -page (currently set to 0.78, which is the default for primary items, e.g. primary text)
     powererWidth: 128, // The width of a "powered by" link icon in the About -page
